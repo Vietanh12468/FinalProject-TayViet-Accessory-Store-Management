@@ -1,0 +1,6 @@
+@FinalProject_TayViet_Accessory_Store_Management.Server_HostAddress = http://localhost:5264
+
+GET {{FinalProject_TayViet_Accessory_Store_Management.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
