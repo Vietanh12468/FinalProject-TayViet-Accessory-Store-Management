@@ -1,4 +1,12 @@
+using FinalProject_TayViet_Accessory_Store_Management.Models;
+using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
+using MongoDB.Driver;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<DBSettings>(builder.Configuration.GetSection("MongoDB"));
+builder.Services.AddSingleton<AccountDatabaseServices>();
+builder.Services.AddSingleton<DatabaseServices<User>>();
 
 // Add services to the container.
 
