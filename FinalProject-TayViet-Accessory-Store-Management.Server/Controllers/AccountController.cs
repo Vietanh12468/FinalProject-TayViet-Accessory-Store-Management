@@ -8,7 +8,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Controllers
     [Route("api/[controller]")]
     public class AccountController : Controller
     {
-        private readonly AccountDatabaseServices _accountDatabaseServices;
+/*        private readonly AccountDatabaseServices _accountDatabaseServices;
         public AccountController(AccountDatabaseServices accountDatabaseServices) => _accountDatabaseServices = accountDatabaseServices;
 
         [HttpGet]
@@ -37,6 +37,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Controllers
             return NoContent();
         }
 
-
+*/
     }
 }

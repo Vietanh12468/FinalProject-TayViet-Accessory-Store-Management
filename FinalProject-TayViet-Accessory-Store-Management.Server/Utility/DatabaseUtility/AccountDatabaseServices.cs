@@ -10,9 +10,9 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
     {
         public AccountDatabaseServices(IOptions<DBSettings> dbSettings)
         {
-            MongoClient client = new MongoClient(dbSettings.Value.ConnectionURI);
+/*            MongoClient client = new MongoClient(dbSettings.Value.ConnectionURI);
             IMongoDatabase mongoDatabase = client.GetDatabase(dbSettings.Value.DatabaseName);
-            _collection = mongoDatabase.GetCollection<User>(dbSettings.Value.CollectionName);
+            _collection = mongoDatabase.GetCollection<User>(dbSettings.Value.CollectionName);*/
         }
     }
 }
