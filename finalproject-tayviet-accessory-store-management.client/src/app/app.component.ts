@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
-interface WeatherForecast {
+export interface WeatherForecast {
   date: string;
   temperatureC: number;
   temperatureF: number;
@@ -22,6 +22,10 @@ export class AppComponent implements OnInit {
     this.getForecasts();
   }
 
+  public messageBox = true;
+  public focus = true;
+  public message = 'message details';
+
   getForecasts() {
     this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
       (result) => {
@@ -33,5 +37,14 @@ export class AppComponent implements OnInit {
     );
   }
 
+  TriggerMessage() {
+    this.messageBox = !this.messageBox;
+    this.focus = !this.focus;
+  }
+
+  close() {
+    this.messageBox = !this.messageBox;
+    this.focus = !this.focus;
+  }
   title = 'finalproject-tayviet-accessory-store-management.client';
 }
