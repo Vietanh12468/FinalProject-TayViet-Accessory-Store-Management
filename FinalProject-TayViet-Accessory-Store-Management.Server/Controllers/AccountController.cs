@@ -35,6 +35,8 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Controllers
         {
             await _accountDatabaseServices.DeleteAsync("id", id);
             return NoContent();
-        }*/
+        }
+
+*/
     }
 }
