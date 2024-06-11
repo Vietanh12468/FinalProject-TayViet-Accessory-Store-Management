@@ -1,0 +1,15 @@
+.message-component {
+  background-color: #ccc;
+  width: 500px;
+  height: 200px;
+  margin:0 20%;
+}
+.outer-div {
+  z-index: 2;
+}
+.focusMode {
+  background-color: #ccc;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
