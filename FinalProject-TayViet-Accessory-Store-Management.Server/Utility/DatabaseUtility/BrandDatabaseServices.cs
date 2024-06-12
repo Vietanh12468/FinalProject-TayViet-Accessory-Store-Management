@@ -1,4 +1,4 @@
-﻿using FinalProject_TayViet_Accessory_Store_Management.Models;
+﻿using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 

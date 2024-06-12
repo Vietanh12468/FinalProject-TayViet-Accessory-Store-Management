@@ -1,4 +1,4 @@
-﻿using FinalProject_TayViet_Accessory_Store_Management.Models;
+﻿using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Utility.DatabaseMigration
 {
@@ -9,7 +9,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Utility.Databas
         public void CheckForUpdate()
         {
             _migration.CheckForUpdate<Brand>("Brand");
-            _migration.CheckForUpdate<User>("User");
         }
     }
 }

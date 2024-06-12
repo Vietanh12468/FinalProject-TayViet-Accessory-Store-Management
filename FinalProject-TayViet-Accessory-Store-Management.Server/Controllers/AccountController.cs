@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
-using FinalProject_TayViet_Accessory_Store_Management.Server.Models.Account;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
+using FinalProject_TayViet_Accessory_Store_Management.Models.ExceptionModels;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Controllers
 {
@@ -8,25 +9,25 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Controllers
     [Route("api/[controller]")]
     public class AccountController : Controller
     {
-/*        private readonly AccountDatabaseServices _accountDatabaseServices;
-        public AccountController(AccountDatabaseServices accountDatabaseServices) => _accountDatabaseServices = accountDatabaseServices;
+        private readonly AccountDatabaseServices<Account> _accountDatabaseServices;
+        public AccountController(AccountDatabaseServices<Account> accountDatabaseServices) => _accountDatabaseServices = accountDatabaseServices;
 
         [HttpGet]
-        public async Task<List<User>> Get()
+        public async Task<List<Account>> Get()
         {
             return await _accountDatabaseServices.ReadAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<User> Get(string id)
+        public async Task<Account> Get(string id)
         {
             return await _accountDatabaseServices.ReadAsync("id", id);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] User user)
+        public async Task<IActionResult> Post([FromBody] Account account)
         {
-            await _accountDatabaseServices.CreateAsync(user);
+            await _accountDatabaseServices.CreateAsync(account);
             return Ok();
         }
 
@@ -37,6 +38,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Controllers
             return NoContent();
         }
 
-*/
+
     }
 }

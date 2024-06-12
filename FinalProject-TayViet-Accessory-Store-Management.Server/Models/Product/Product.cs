@@ -1,174 +1,176 @@
-using Microsoft.AspNetCore.Mvc.ViewEngines;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
-using System.Collections.Generic;
-
-public class Product
+using FinalProject_TayViet_Accessory_Store_Management.Server.States;
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
-    // Product ID
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string? id { get; set; }
-
-    // Name of the product
-    public string Name { get; set; }
-
-    // List of categories
-    public List<Category> ListCategory { get; set; }
-
-    // Description of the product
-    public string Description { get; set; }
-
-    // Image URL of the product
-    public string Image { get; set; }
-
-    // List of sub-products
-    public List<SubProduct> InStockList { get; set; }
-
-    // Brand of the product
-    public Brand Brand { get; set; }
-
-    // State of the product
-    public IState State { get; set; }
-
-    // List of reviews
-    public List<Review> ListReview { get; set; }
-
-    // Constructor
-    public Product(string name, List<Category> listCategory, string description, string image, List<SubProduct> inStockList, Brand brand, IState state)
+    public class Product
     {
-        Name = name;
-        ListCategory = listCategory;
-        Description = description;
-        Image = image;
-        InStockList = inStockList;
-        Brand = brand;
-        State = state;
-        ListReview = new List<Review>();
-    }
+        // Product ID
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? id { get; set; }
 
-    // Get Product ID
-    public string GetProductID()
-    {
-        return id;
-    }
+        // Name of the product
+        public string Name { get; set; }
 
-    // Get Name
-    public string GetName()
-    {
-        return Name;
-    }
+        // List of categories
+        public List<Category> ListCategory { get; set; }
 
-    // Get List of Categories
-    public List<Category> GetListCategory()
-    {
-        return ListCategory;
-    }
+        // Description of the product
+        public string Description { get; set; }
 
-    // Get Description
-    public string GetDescription()
-    {
-        return Description;
-    }
+        // Image URL of the product
+        public string Image { get; set; }
 
-    // Get Image
-    public string GetImage()
-    {
-        return Image;
-    }
+        // List of sub-products
+        public List<SubProduct> InStockList { get; set; }
 
-    // Get List of Sub-products
-    public List<SubProduct> GetInStockList()
-    {
-        return InStockList;
-    }
+        // Brand of the product
+        public Brand Brand { get; set; }
 
-    // Get Brand
-    public Brand GetBrand()
-    {
-        return Brand;
-    }
+        // State of the product
+        public IState State { get; set; }
 
-    // Get State
-    public IState GetState()
-    {
-        return State;
-    }
+        // List of reviews
+        public List<Review> ListReview { get; set; }
 
-    // Get List of Reviews
-    public List<Review> GetListReview()
-    {
-        return ListReview;
-    }
+        // Constructor
+        public Product(string name, List<Category> listCategory, string description, string image, List<SubProduct> inStockList, Brand brand, IState state)
+        {
+            Name = name;
+            ListCategory = listCategory;
+            Description = description;
+            Image = image;
+            InStockList = inStockList;
+            Brand = brand;
+            State = state;
+            ListReview = new List<Review>();
+        }
 
-    // Set Name
-    public void SetName(string name)
-    {
-        Name = name;
-    }
+        // Get Product ID
+        public string GetProductID()
+        {
+            return id;
+        }
 
-    // Set Description
-    public void SetDescription(string description)
-    {
-        Description = description;
-    }
+        // Get Name
+        public string GetName()
+        {
+            return Name;
+        }
 
-    // Set Image
-    public void SetImage(string image)
-    {
-        Image = image;
-    }
+        // Get List of Categories
+        public List<Category> GetListCategory()
+        {
+            return ListCategory;
+        }
 
-    // Set Brand
-    public void SetBrand(Brand brand)
-    {
-        Brand = brand;
-    }
+        // Get Description
+        public string GetDescription()
+        {
+            return Description;
+        }
 
-    // Add Sub-product
-    public void AddSubProduct(SubProduct subProduct)
-    {
-        InStockList.Add(subProduct);
-    }
+        // Get Image
+        public string GetImage()
+        {
+            return Image;
+        }
 
-    // Remove Sub-product
-    public void RemoveSubProduct(int index)
-    {
-        InStockList.RemoveAt(index);
-    }
+        // Get List of Sub-products
+        public List<SubProduct> GetInStockList()
+        {
+            return InStockList;
+        }
 
-    // Set State
-    public void SetState(IState state)
-    {
-        State = state;
-    }
+        // Get Brand
+        public Brand GetBrand()
+        {
+            return Brand;
+        }
 
-    // Add Review
-    public void AddReview(Review review)
-    {
-        ListReview.Add(review);
-    }
+        // Get State
+        public IState GetState()
+        {
+            return State;
+        }
 
-    // Remove Review
-    public void RemoveReview(int index)
-    {
-        ListReview.RemoveAt(index);
-    }
+        // Get List of Reviews
+        public List<Review> GetListReview()
+        {
+            return ListReview;
+        }
 
-    // Buy product
-    public void Buy(int quantity)
-    {
-        State.Buy(this, quantity);
-    }
+        // Set Name
+        public void SetName(string name)
+        {
+            Name = name;
+        }
 
-    // Restock product
-    public void Restock(int newStock)
-    {
-        State.Restock(this, newStock);
-    }
+        // Set Description
+        public void SetDescription(string description)
+        {
+            Description = description;
+        }
 
-    public override string ToString()
-    {
-        return State.ToString();
+        // Set Image
+        public void SetImage(string image)
+        {
+            Image = image;
+        }
+
+        // Set Brand
+        public void SetBrand(Brand brand)
+        {
+            Brand = brand;
+        }
+
+        // Add Sub-product
+        public void AddSubProduct(SubProduct subProduct)
+        {
+            InStockList.Add(subProduct);
+        }
+
+        // Remove Sub-product
+        public void RemoveSubProduct(int index)
+        {
+            InStockList.RemoveAt(index);
+        }
+
+        // Set State
+        public void SetState(IState state)
+        {
+            State = state;
+        }
+
+        // Add Review
+        public void AddReview(Review review)
+        {
+            ListReview.Add(review);
+        }
+
+        // Remove Review
+        public void RemoveReview(int index)
+        {
+            ListReview.RemoveAt(index);
+        }
+
+        //This Code is Error Pls Fix it NOW!
+/*        // Buy product
+        public void Buy(int quantity)
+        {
+            State.Buy(this, quantity);
+        }
+
+        // Restock product
+        public void Restock(int newStock)
+        {
+            State.Restock(this, newStock);
+        }*/
+
+        public override string ToString()
+        {
+            return State.ToString();
+        }
     }
 }

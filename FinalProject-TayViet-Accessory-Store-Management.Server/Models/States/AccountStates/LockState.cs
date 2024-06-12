@@ -1,17 +1,21 @@
-﻿public class LockState : IAccountState
+﻿using FinalProject_TayViet_Accessory_Store_Management.Server.States;
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
-    public void Login(Account account)
+    public class LockState : IAccountState
     {
-        Console.WriteLine("Cannot login. Account is locked.");
-    }
+        public void Login(Account account)
+        {
+            Console.WriteLine("Cannot login. Account is locked.");
+        }
 
-    public void Logout(Account account)
-    {
-        Console.WriteLine("Cannot logout. Account is locked.");
-    }
+        public void Logout(Account account)
+        {
+            Console.WriteLine("Cannot logout. Account is locked.");
+        }
 
-    public override string ToString()
-    {
-        return "Locked";
+        public override string ToString()
+        {
+            return "Locked";
+        }
     }
 }

@@ -1,82 +1,30 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
-
-public class Brand
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    private string? brandID;
-
-    // Brand name
-    private string Name;
-
-    // Description of the brand
-    private string Description;
-
-    // Image URL of the brand
-    private string Image;
-
-    // Constructor
-    public Brand(string name, string description, string image)
+    public class Brand
     {
-        Name = name;
-        Description = description;
-        Image = image;
-    }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? id { get; set; }
+        public string name { get; set; } = null!;
+        public string phone { get; set; } = null!;
+        public string email { get; set; } = null!;
+        public string image { get; set; } = null!;
+        public string description { get; set; } = null!;
 
-    // Get Brand ID
-    public string GetBrandID()
-    {
-        return brandID;
-    }
+        // Get Total Spend
+        public float GetTotalSpend()
+        {
+            // Return Total Spend
+            return 0f;
+        }
 
-    // Get Name
-    public string GetName()
-    {
-        return Name;
-    }
-
-    // Get Description
-    public string GetDescription()
-    {
-        return Description;
-    }
-
-    // Get Image
-    public string GetImage()
-    {
-        return Image;
-    }
-
-    // Set Name
-    public void SetName(string name)
-    {
-        Name = name;
-    }
-
-    // Set Description
-    public void SetDescription(string description)
-    {
-        Description = description;
-    }
-
-    // Set Image
-    public void SetImage(string image)
-    {
-        Image = image;
-    }
-    
-    // Get Total Spend
-    public float GetTotalSpend()
-    {
-        // Return Total Spend
-        return 0f;
-    }
-
-    // Get Total Purchase
-    public int GetTotalPurchase()
-    {
-        //Return TotalPurchase
-        return 0;
+        // Get Total Purchase
+        public int GetTotalPurchase()
+        {
+            //Return TotalPurchase
+            return 0;
+        }
     }
 }

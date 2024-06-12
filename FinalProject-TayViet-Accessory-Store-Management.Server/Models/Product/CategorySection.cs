@@ -1,47 +1,49 @@
-using System.Collections.Generic;
-
-public class CategorySection
+using FinalProject_TayViet_Accessory_Store_Management.Server.States;
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
-    // Name of the category section
-    public string Name { get; set; }
-
-    // List of categories
-    public List<Category> ListCategory { get; set; }
-
-    // Constructor
-    public CategorySection(string name)
+    public class CategorySection
     {
-        Name = name;
-        ListCategory = new List<Category>();
-    }
+        // Name of the category section
+        public string Name { get; set; }
 
-    // Add Category
-    public void AddCategory(Category category)
-    {
-        ListCategory.Add(category);
-    }
+        // List of categories
+        public List<Category> ListCategory { get; set; }
 
-    // Remove Category
-    public void RemoveCategory(int index)
-    {
-        ListCategory.RemoveAt(index);
-    }
+        // Constructor
+        public CategorySection(string name)
+        {
+            Name = name;
+            ListCategory = new List<Category>();
+        }
 
-    // Get Name
-    public string GetName()
-    {
-        return Name;
-    }
+        // Add Category
+        public void AddCategory(Category category)
+        {
+            ListCategory.Add(category);
+        }
 
-    // Set Name
-    public void SetName(string name)
-    {
-        Name = name;
-    }
+        // Remove Category
+        public void RemoveCategory(int index)
+        {
+            ListCategory.RemoveAt(index);
+        }
 
-    // Get List of Categories
-    public List<Category> GetListCategory()
-    {
-        return ListCategory;
+        // Get Name
+        public string GetName()
+        {
+            return Name;
+        }
+
+        // Set Name
+        public void SetName(string name)
+        {
+            Name = name;
+        }
+
+        // Get List of Categories
+        public List<Category> GetListCategory()
+        {
+            return ListCategory;
+        }
     }
 }

@@ -1,17 +1,21 @@
-﻿public class UnlockState : IAccountState
+﻿using FinalProject_TayViet_Accessory_Store_Management.Server.States;
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
-    public void Login(Account account)
+    public class UnlockState : IAccountState
     {
-        Console.WriteLine("Account unlocked and logged in.");
-    }
+        public void Login(Account account)
+        {
+            Console.WriteLine("Account unlocked and logged in.");
+        }
 
-    public void Logout(Account account)
-    {
-        Console.WriteLine("Account unlocked and logged out.");
-    }
+        public void Logout(Account account)
+        {
+            Console.WriteLine("Account unlocked and logged out.");
+        }
 
-    public override string ToString()
-    {
-        return "Unlocked";
+        public override string ToString()
+        {
+            return "Unlocked";
+        }
     }
 }

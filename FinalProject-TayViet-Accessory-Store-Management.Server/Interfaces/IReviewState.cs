@@ -1,7 +1,9 @@
-
-public interface IReviewState
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.States
 {
-    int GetReviewScore();
-    string GetReviewDescription();
-    string ToString();
+    public interface IReviewState
+    {
+        int GetReviewScore();
+        string GetReviewDescription();
+        string ToString();
+    }
 }

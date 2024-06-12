@@ -1,29 +1,30 @@
-using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
-
-public class Category
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
-    // Name of the category
- 
-    public string Name { get; set; }
+    public class Category
+    {
+        // Name of the category
 
-    // Constructor
-    public Category(string name)
-    {
-        Name = name;
+        public string Name { get; set; }
+
+        // Constructor
+        public Category(string name)
+        {
+            Name = name;
+        }
+
+        // Get Name
+        public string GetName()
+        {
+            return Name;
+        }
+
+        // Set Name
+        public void SetName(string name)
+        {
+            Name = name;
+        }
+
+
     }
 
-    // Get Name
-    public string GetName()
-    {
-        return Name;
-    }
-    
-    // Set Name
-    public void SetName(string name)
-    {
-        Name = name;
-    }
-  
-    
 }

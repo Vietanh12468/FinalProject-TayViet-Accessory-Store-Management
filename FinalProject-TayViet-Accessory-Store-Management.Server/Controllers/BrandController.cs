@@ -1,4 +1,4 @@
-﻿using FinalProject_TayViet_Accessory_Store_Management.Models;
+﻿using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
 using FinalProject_TayViet_Accessory_Store_Management.Models.ExceptionModels;
 using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
 using Microsoft.AspNetCore.Mvc;

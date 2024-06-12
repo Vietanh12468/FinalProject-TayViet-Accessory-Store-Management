@@ -1,7 +1,9 @@
-
-public interface IProductState : IState
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.States
 {
-    new string ToString();
-    new void Buy(int quantity);
-    new void Restock(int newStock);
+    public interface IProductState : IState
+    {
+        new string ToString();
+        new void Buy(int quantity);
+        new void Restock(int newStock);
+    }
 }

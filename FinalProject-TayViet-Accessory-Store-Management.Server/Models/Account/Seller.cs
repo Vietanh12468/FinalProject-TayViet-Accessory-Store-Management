@@ -1,31 +1,34 @@
-﻿namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models;
-public class Seller : Account
+﻿using FinalProject_TayViet_Accessory_Store_Management.Server.States;
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
-    // List of products sold by the seller
-    public List<Product> ProductList { get; set; }
-
-    // Constructor to initialize the seller
-    public Seller(string userID, string username, string password, string fullName, string email, string phoneNumber, IAccountState state, List<Product> productList)
-        : base(username, password, fullName, email, phoneNumber, state)
+    public class Seller : Account
     {
-        ProductList = productList;
-    }
+        // List of products sold by the seller
+        public List<Product> ProductList { get; set; }
 
-    // Get Product List
-    public List<Product> GetProductList()
-    {
-        return ProductList;
-    }
+        // Constructor to initialize the seller
+/*        public Seller(string userID, string username, string password, string fullName, string email, string phoneNumber, IAccountState state, List<Product> productList)
+            : base(username, password, fullName, email, phoneNumber, state)
+        {
+            ProductList = productList;
+        }*/
 
-    // Add new product
-    public void AddProduct(Product product)
-    {
-        ProductList.Add(product);
-    }
+        // Get Product List
+        public List<Product> GetProductList()
+        {
+            return ProductList;
+        }
 
-    // Remove product
-    public void RemoveProduct(Product product)
-    {
-        ProductList.Remove(product);
+        // Add new product
+        public void AddProduct(Product product)
+        {
+            ProductList.Add(product);
+        }
+
+        // Remove product
+        public void RemoveProduct(Product product)
+        {
+            ProductList.Remove(product);
+        }
     }
 }

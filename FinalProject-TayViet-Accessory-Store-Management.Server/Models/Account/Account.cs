@@ -1,120 +1,50 @@
-﻿namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models;
+﻿using FinalProject_TayViet_Accessory_Store_Management.Server.States;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
-
-public class Account
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string? id { get; set; }
-    public string name { get; set; } = null!;
-    public string email { get; set; } = null!;
-    public string password { get; set; } = null!;
-    public string phoneNumber { get; set; } = null!;
-    public string Username { get; set; }
-
-    // Current state of the account
-    public IAccountState State { get; set; }
-
-    // Constructor to initialize the account
-    public Account(string username, string password, string fullName, string email, string phoneNumber, IAccountState state)
+    public class Account
     {
-        
-        Username = username;
-        this.password = password;
-        this.name = fullName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        State = state;
-    }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? id { get; set; }
+        public string name { get; set; } = null!;
+        public string email { get; set; } = null!;
+        public string password { get; set; } = null!;
+        public string phoneNumber { get; set; } = null!;
+        public string Username { get; set; } = null!;
+        public string state { get; set; } = null!;
 
-    // Get User ID
-    public string GetUserID()
-    {
-        return this.id;
-    }
+        /*        // Current state of the account
+                *//*        public IAccountState? State { get; set; }*//*
 
-    // Get Username
-    public string GetUsername()
-    {
-        return Username;
-    }
+                // Constructor to initialize the account*/
 
-    // Get Password
-    public string GetPassword()
-    {
-        return this.password;
-    }
 
-    // Get Full Name
-    public string GetFullName()
-    {
-        return this.name;
-    }
 
-    // Get Email
-    public string GetEmail()
-    {
-        return this.email;
-    }
+        // Get State
+/*        public IAccountState GetState()
+        {
+*//*            return State;*//*
+        }*/
 
-    // Get Phone Number
-    public string GetPhoneNumber()
-    {
-        return this.phoneNumber;
-    }
 
-    // Get State
-    public IAccountState GetState()
-    {
-        return State;
-    }
+        // Set State
+        public void SetState(IAccountState state)
+        {
+/*            State = state;*/
+        }
 
-    // Set Username
-    public void SetUsername(string username)
-    {
-        Username = username;
-    }
+        // Login method
+        public void Login()
+        {
+/*            State.Login(this);*/
+        }
 
-    // Set Password
-    public void SetPassword(string password)
-    {
-        this.password = password;
-    }
-
-    // Set Full Name
-    public void SetFullName(string fullName)
-    {
-        this.name = fullName;
-    }
-
-    // Set Email
-    public void SetEmail(string email)
-    {
-        this.email = email;
-    }
-
-    // Set Phone Number
-    public void SetPhoneNumber(string phoneNumber)
-    {
-        this.phoneNumber = phoneNumber;
-    }
-
-    // Set State
-    public void SetState(IAccountState state)
-    {
-        State = state;
-    }
-
-    // Login method
-    public void Login()
-    {
-        State.Login(this);
-    }
-
-    // Logout method
-    public void Logout()
-    {
-        State.Logout(this);
+        // Logout method
+        public void Logout()
+        {
+/*            State.Logout(this);*/
+        }
     }
 }

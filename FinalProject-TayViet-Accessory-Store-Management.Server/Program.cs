@@ -1,5 +1,4 @@
-using FinalProject_TayViet_Accessory_Store_Management.Models;
-using FinalProject_TayViet_Accessory_Store_Management.Server.Models.Account;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
 using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Utility.DatabaseMigration;
 
@@ -7,7 +6,10 @@ using FinalProject_TayViet_Accessory_Store_Management.Server.Utility.DatabaseMig
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<DBSettings>(builder.Configuration.GetSection("MongoDB"));
-builder.Services.AddSingleton<AccountDatabaseServices>();
+builder.Services.AddSingleton<AccountDatabaseServices<Account>>();
+builder.Services.AddSingleton<AccountDatabaseServices<Customer>>();
+builder.Services.AddSingleton<AccountDatabaseServices<Admin>>();
+builder.Services.AddSingleton<AccountDatabaseServices<Seller>>();
 builder.Services.AddSingleton<BrandDatabaseServices>();
 builder.Services.AddSingleton<MainMigration>();
 
