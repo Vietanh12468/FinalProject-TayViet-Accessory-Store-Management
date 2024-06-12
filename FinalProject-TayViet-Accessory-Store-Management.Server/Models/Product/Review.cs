@@ -3,10 +3,6 @@ using MongoDB.Bson;
 
 public class Review
 {
-    // Product ID
-    private string ProductID { get; set; }
-
-    // Customer ID
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     private string? CustomerID { get; set; }

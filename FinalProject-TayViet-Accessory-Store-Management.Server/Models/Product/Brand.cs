@@ -5,16 +5,16 @@ public class Brand
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    private string? brandID { get; set; }
+    private string? brandID;
 
     // Brand name
-    private string Name { get; set; }
+    private string Name;
 
     // Description of the brand
-    private string Description { get; set; }
+    private string Description;
 
     // Image URL of the brand
-    private string Image { get; set; }
+    private string Image;
 
     // Constructor
     public Brand(string name, string description, string image)

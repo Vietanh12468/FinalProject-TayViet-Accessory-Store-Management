@@ -1,4 +1,5 @@
-﻿public class Admin : Account
+﻿namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models;
+public class Admin : Account
 {
     // Constructor to initialize the admin
     public Admin(string userID, string username, string password, string fullName, string email, string phoneNumber, IAccountState state)

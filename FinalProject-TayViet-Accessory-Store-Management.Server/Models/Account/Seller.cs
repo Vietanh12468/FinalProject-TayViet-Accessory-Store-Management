@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-
+﻿namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models;
 public class Seller : Account
 {
     // List of products sold by the seller

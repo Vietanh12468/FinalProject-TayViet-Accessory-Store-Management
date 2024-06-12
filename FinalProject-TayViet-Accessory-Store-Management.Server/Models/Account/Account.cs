@@ -1,9 +1,16 @@
-﻿using FinalProject_TayViet_Accessory_Store_Management.Server.Models.Account;
-using System;
+﻿namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 
-public class Account : User
+public class Account
 {
-
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? id { get; set; }
+    public string name { get; set; } = null!;
+    public string email { get; set; } = null!;
+    public string password { get; set; } = null!;
+    public string phoneNumber { get; set; } = null!;
     public string Username { get; set; }
 
     // Current state of the account

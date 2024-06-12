@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
-using System.Runtime.CompilerServices;
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models;
 
 public class BankCard
 {

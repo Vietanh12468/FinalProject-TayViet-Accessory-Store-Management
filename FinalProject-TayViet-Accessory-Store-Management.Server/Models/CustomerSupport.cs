@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models;
 
 public class CustomerSupport
 {
-    // Support ID
-    public string SupportID { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? id { get; set; }
 
     // Customer supported by this support agent
     public Customer Customer { get; set; }
@@ -15,7 +17,7 @@ public class CustomerSupport
     // Constructor to initialize customer support
     public CustomerSupport(string supportID, Customer customer, List<CustomerSupportMessage> messageList)
     {
-        SupportID = supportID;
+        id = supportID;
         Customer = customer;
         MessageList = messageList;
     }
@@ -23,7 +25,7 @@ public class CustomerSupport
     // Get Support ID
     public string GetSupportID()
     {
-        return SupportID;
+        return id;
     }
 
     // Get Customer

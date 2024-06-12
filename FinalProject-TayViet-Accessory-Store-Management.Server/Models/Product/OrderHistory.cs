@@ -1,10 +1,13 @@
-﻿using System;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 
 public class OrderHistory
 {
-    // Order ID
-    public string OrderID { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? OrderID { get; set; }
 
     // List of sub-products
     public List<SubProduct> SubProductList { get; set; }
