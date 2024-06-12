@@ -11,7 +11,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
         {
             MongoClient client = new MongoClient(dbSettings.Value.ConnectionURI);
             IMongoDatabase mongoDatabase = client.GetDatabase(dbSettings.Value.DatabaseName);
-            _collection = mongoDatabase.GetCollection<Brand>(dbSettings.Value.Collections.BrandCollection);
+            _collection = mongoDatabase.GetCollection<Brand>(dbSettings.Value.Collections[0].nameCollection);
         }
     }
 }

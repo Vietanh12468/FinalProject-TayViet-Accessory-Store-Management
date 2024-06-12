@@ -1,18 +1,25 @@
-﻿namespace FinalProject_TayViet_Accessory_Store_Management.Models
+﻿using DnsClient;
+
+namespace FinalProject_TayViet_Accessory_Store_Management.Models
 {
     public class DBSettings
     {
         public string ConnectionURI { get; set; } = null!;
         public string DatabaseName { get; set; } = null!;
-        public Collections Collections { get; set; } = null!;
+        public readonly List<Collection> Collections = [
+            new Collection("Brand", typeof(Brand))
+        ];
     }
 
-    public class Collections
+    public class Collection
     {
-        public string AccountCollection { get; set; } = null!;
-        public string BrandCollection { get; set; } = null!;
-        public string CategorySectionCollection { get; set; } = null!;
-        public string OrderHistoryCollection { get; set; } = null!;
-        public string ProductCollection { get; set; } = null!;
+        public string nameCollection { get; set; }
+        public Type classType { get; set; }
+
+        public Collection(string nameCollection, Type classType)
+        {
+            this.nameCollection = nameCollection;
+            this.classType = classType;
+        }
     }
 }

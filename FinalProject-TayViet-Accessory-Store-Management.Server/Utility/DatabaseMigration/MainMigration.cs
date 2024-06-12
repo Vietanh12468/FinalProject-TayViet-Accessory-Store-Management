@@ -6,44 +6,40 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Utility.Databas
 {
     public class MainMigration
     {
-        private readonly IMongoDatabase _database;
-        private IEnumerable<string> collectionsName = [];
+        private readonly IMongoDatabase database;
+        private static int version = 1;
+        private static int previousVersion;
 
         public MainMigration(IOptions<DBSettings> dbSettings)
         {
             MongoClient client = new MongoClient(dbSettings.Value.ConnectionURI);
-            _database = client.GetDatabase(dbSettings.Value.DatabaseName);
-            collectionsName = [
-                dbSettings.Value.Collections.AccountCollection,
-                dbSettings.Value.Collections.BrandCollection,
-                dbSettings.Value.Collections.CategorySectionCollection,
-                dbSettings.Value.Collections.OrderHistoryCollection,
-                dbSettings.Value.Collections.ProductCollection,
-            ];
+            database = client.GetDatabase(dbSettings.Value.DatabaseName);
         }
 
         public void CreateCollection(string collectionName)
         {
-            _database.CreateCollection(collectionName);
+            database.CreateCollection(collectionName);
         }
 
         public void DropCollection(string collectionName)
         {
-            _database.DropCollection(collectionName);
+            database.DropCollection(collectionName);
         }
 
-        public void CheckForUpdate<T>(string collectionNameCheck)
+        public void CheckForUpdate<T>(string collectionName)
         {
-            IMongoCollection<T> collectionCheck = _database.GetCollection<T>(collectionNameCheck);
+            IMongoCollection<T> collectionCheck = database.GetCollection<T>(collectionName);
             if (collectionCheck == null)
             {
-                _database.CreateCollection(collectionNameCheck);
+                database.CreateCollection(collectionName);
             }
+
             //this code will be use for future update, assume that colletion need update
-            else
+            else if (version > previousVersion)
             {
-                _database.DropCollection(collectionNameCheck);
-                _database.CreateCollection(collectionNameCheck);
+                previousVersion = version;
+                database.DropCollection(collectionName);
+                database.CreateCollection(collectionName);
             }
         }
     }
