@@ -1,42 +1,46 @@
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 using System.Collections.Generic;
 
 public class SubProduct
 {
     // Sub-product ID
-    public string SubProductID { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    private string? subProductID { get; set; }
 
     // Product ID
-    public string ProductID { get; set; }
+    private string ProductID { get; set; }
 
     // Name of the sub-product
-    public string Name { get; set; }
+    private string Name { get; set; }
 
     // List of images
-    public List<string> ListImage { get; set; }
+    private List<string> ListImage { get; set; }
 
     // Stock quantity
-    public int InStock { get; set; }
+    private int InStock { get; set; }
 
     // State of the product
-    public IState State { get; set; }
+    private IState State { get; set; }
 
     // Buy cost
-    public int BuyCost { get; set; }
+    private int BuyCost { get; set; }
 
     // Sell cost
-    public int SellCost { get; set; }
+    private int SellCost { get; set; }
 
     // Sale percentage
-    public int Sale { get; set; }
+    private int Sale { get; set; }
 
     // Total purchase
-    public int TotalPurchase { get; set; }
+    private int TotalPurchase { get; set; }
 
     // Constructor
     public SubProduct(string productID, string subProductID, string name, List<string> listImage, int inStock, int buyCost, int sellCost, int sale)
     {
         ProductID = productID;
-        SubProductID = subProductID;
+        subProductID = subProductID;
         Name = name;
         ListImage = listImage;
         InStock = inStock;
@@ -54,7 +58,7 @@ public class SubProduct
     // Get Sub-product ID
     public string GetSubProductID()
     {
-        return SubProductID;
+        return subProductID;
     }
 
     // Get Name

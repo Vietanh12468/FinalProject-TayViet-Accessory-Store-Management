@@ -1,16 +1,20 @@
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+
 public class Brand
 {
-    // Brand ID
-    public string BrandID { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    private string? brandID { get; set; }
 
     // Brand name
-    public string Name { get; set; }
+    private string Name { get; set; }
 
     // Description of the brand
-    public string Description { get; set; }
+    private string Description { get; set; }
 
     // Image URL of the brand
-    public string Image { get; set; }
+    private string Image { get; set; }
 
     // Constructor
     public Brand(string name, string description, string image)
@@ -23,7 +27,7 @@ public class Brand
     // Get Brand ID
     public string GetBrandID()
     {
-        return BrandID;
+        return brandID;
     }
 
     // Get Name
@@ -65,14 +69,14 @@ public class Brand
     // Get Total Spend
     public float GetTotalSpend()
     {
-        // Implement the logic
+        // Return Total Spend
         return 0f;
     }
 
     // Get Total Purchase
     public int GetTotalPurchase()
     {
-        // Implement the logic
+        //Return TotalPurchase
         return 0;
     }
 }

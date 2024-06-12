@@ -15,7 +15,7 @@ public class OutOfStockState : IState
 
     public void Restock(Product product, int newStock)
     {
-        product.InStockList[0].InStock += newStock;
+        product.InStockList[0].SetInStock(product.InStockList[0].GetInStock() + newStock);
         product.SetState(new AvailableState());
         Console.WriteLine("Product restocked and is now available. Current stock: " + newStock);
     }

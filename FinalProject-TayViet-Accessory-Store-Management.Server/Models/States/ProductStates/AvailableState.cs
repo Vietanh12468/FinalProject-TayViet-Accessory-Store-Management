@@ -12,7 +12,7 @@ public class AvailableState : IState
         int totalStock = 0;
         foreach (var subProduct in product.InStockList)
         {
-            totalStock += subProduct.InStock;
+            totalStock += subProduct.GetInStock();
         }
 
         if (totalStock >= quantity)
@@ -21,16 +21,16 @@ public class AvailableState : IState
             int remainingQuantity = quantity;
             foreach (var subProduct in product.InStockList)
             {
-                if (subProduct.InStock >= remainingQuantity)
+                if (subProduct.GetInStock() >= remainingQuantity)
                 {
-                    subProduct.InStock -= remainingQuantity;
+                    subProduct.SetInStock(subProduct.GetInStock() - remainingQuantity);
                     remainingQuantity = 0;
                     break;
                 }
                 else
                 {
-                    remainingQuantity -= subProduct.InStock;
-                    subProduct.InStock = 0;
+                    remainingQuantity -= subProduct.GetInStock();
+                    subProduct.SetInStock(0);
                 }
             }
 
@@ -49,7 +49,7 @@ public class AvailableState : IState
     public void Restock(Product product, int newStock)
     {
         // Assume restocking the first sub-product for simplicity
-        product.InStockList[0].InStock += newStock;
+        product.InStockList[0].SetInStock(product.InStockList[0].GetInStock() + newStock);
         Console.Write("Product restocked. Current stock: " + newStock);
     }
 }

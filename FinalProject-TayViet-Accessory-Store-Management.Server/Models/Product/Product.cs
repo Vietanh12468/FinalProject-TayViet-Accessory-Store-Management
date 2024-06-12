@@ -1,10 +1,14 @@
 using Microsoft.AspNetCore.Mvc.ViewEngines;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
 using System.Collections.Generic;
 
 public class Product
 {
     // Product ID
-    public string ProductID { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? id { get; set; }
 
     // Name of the product
     public string Name { get; set; }
@@ -46,7 +50,7 @@ public class Product
     // Get Product ID
     public string GetProductID()
     {
-        return ProductID;
+        return id;
     }
 
     // Get Name

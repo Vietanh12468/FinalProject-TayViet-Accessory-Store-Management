@@ -1,19 +1,24 @@
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+
 public class Review
 {
     // Product ID
-    public string ProductID { get; set; }
+    private string ProductID { get; set; }
 
     // Customer ID
-    public string CustomerID { get; set; }
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    private string? CustomerID { get; set; }
 
     // Rated score
-    public int RatedScore { get; set; }
+    private int RatedScore { get; set; }
 
     // Review description
-    public string ReviewDescription { get; set; }
+    private string ReviewDescription { get; set; }
 
     // State of the review
-    public IReviewState State { get; set; }
+    private IReviewState State { get; set; }
 
     // Constructor
     public Review(string customerID, string productID, int ratedScore, string reviewDescription, IReviewState state)
