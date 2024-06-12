@@ -1,0 +1,22 @@
+using System.Diagnostics;
+
+public class OutOfStockState : IState
+{
+    public string ToString()
+    {
+        return "Out of Stock";
+    }
+
+    public void Buy(Product product, int quantity)
+    {
+        // Cannot buy when out of stock
+        Console.WriteLine("Product is out of stock.");
+    }
+
+    public void Restock(Product product, int newStock)
+    {
+        product.InStockList[0].InStock += newStock;
+        product.SetState(new AvailableState());
+        Console.WriteLine("Product restocked and is now available. Current stock: " + newStock);
+    }
+}
