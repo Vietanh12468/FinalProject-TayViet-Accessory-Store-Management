@@ -1,6 +1,7 @@
 ﻿using FinalProject_TayViet_Accessory_Store_Management.Models;
 using MongoDB.Driver;
 using Microsoft.Extensions.Options;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Models.Account;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility
 {

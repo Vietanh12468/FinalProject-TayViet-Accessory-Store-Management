@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 
-namespace FinalProject_TayViet_Accessory_Store_Management.Models
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models;
 {
     public class Brand
     {

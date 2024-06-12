@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using FinalProject_TayViet_Accessory_Store_Management.Models;
 using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Models.Account;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Controllers
 {
