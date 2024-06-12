@@ -1,5 +1,6 @@
 using FinalProject_TayViet_Accessory_Store_Management.Models;
 using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Utility.DatabaseMigration;
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
