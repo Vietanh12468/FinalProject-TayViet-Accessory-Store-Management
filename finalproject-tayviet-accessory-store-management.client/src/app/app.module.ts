@@ -8,12 +8,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
+import { TableListComponent } from './table-list/table-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlertBoxComponent
-    MessageBoxComponent
+    AlertBoxComponent,
+    MessageBoxComponent,
+    TableListComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

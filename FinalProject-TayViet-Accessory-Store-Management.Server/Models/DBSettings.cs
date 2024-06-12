@@ -12,7 +12,7 @@
         public string AccountCollection { get; set; } = null!;
         public string BrandCollection { get; set; } = null!;
         public string CategorySectionCollection { get; set; } = null!;
-        public string OrderHistoryColletion { get; set; } = null!;
+        public string OrderHistoryCollection { get; set; } = null!;
         public string ProductCollection { get; set; } = null!;
     }
 }
