@@ -2,7 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 
 
-namespace FinalProject_TayViet_Accessory_Store_Management.Models
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models.Account
 {
     public class User
     {
@@ -12,5 +12,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Models
         public string name { get; set; } = null!;
         public string email { get; set; } = null!;
         public string password { get; set; } = null!;
+        public string phoneNumber { get; set; } = null!;
     }
 }
