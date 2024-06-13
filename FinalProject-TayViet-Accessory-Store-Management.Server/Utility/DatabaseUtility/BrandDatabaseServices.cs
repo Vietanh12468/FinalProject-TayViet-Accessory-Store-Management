@@ -7,11 +7,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
     // This class is used to set brand collection and model for this databaseServices. To use method inside this class, check the DatabaseServices.cs
     public class BrandDatabaseServices : DatabaseServices<Brand>
     {
-        public BrandDatabaseServices(IOptions<DBSettings> dbSettings)
-        {
-            MongoClient client = new MongoClient(dbSettings.Value.ConnectionURI);
-            IMongoDatabase mongoDatabase = client.GetDatabase(dbSettings.Value.DatabaseName);
-            _collection = mongoDatabase.GetCollection<Brand>(dbSettings.Value.Collections[0].nameCollection);
-        }
+        public BrandDatabaseServices(IOptions<DBSettings> dbSettings, int index_collection = 1) : base(dbSettings, index_collection) { }
+
     }
 }

@@ -7,11 +7,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
     // This class is used to set account collection and model for this databaseServices. To use method inside this class, check the DatabaseServices.cs
     public class AccountDatabaseServices<T> : DatabaseServices<T>
     {
-        public AccountDatabaseServices(IOptions<DBSettings> dbSettings)
-        {
-            MongoClient client = new MongoClient(dbSettings.Value.ConnectionURI);
-            IMongoDatabase mongoDatabase = client.GetDatabase(dbSettings.Value.DatabaseName);
-            _collection = mongoDatabase.GetCollection<T>(dbSettings.Value.Collections[1].nameCollection);
-        }
+        public AccountDatabaseServices(IOptions<DBSettings> dbSettings, int index_collection = 0) : base(dbSettings, index_collection) { }
     }
 }

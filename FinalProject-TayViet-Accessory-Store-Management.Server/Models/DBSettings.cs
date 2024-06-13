@@ -4,21 +4,8 @@
     {
         public string ConnectionURI { get; set; } = null!;
         public string DatabaseName { get; set; } = null!;
-        public readonly List<Collection> Collections = [
-            new Collection("Brand", typeof(Brand)),
-            new Collection("Account", typeof(Account))
+        public List<String> Collections = [
+            "Account", "Brand", "CategorySection", "OrderHistory", "Product"
         ];
-    }
-
-    public class Collection
-    {
-        public string nameCollection { get; set; }
-        public Type classType { get; set; }
-
-        public Collection(string nameCollection, Type classType)
-        {
-            this.nameCollection = nameCollection;
-            this.classType = classType;
-        }
     }
 }

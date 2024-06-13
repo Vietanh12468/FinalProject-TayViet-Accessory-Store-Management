@@ -7,7 +7,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string? OrderID { get; set; }
+        public string? id { get; set; }
 
         // List of sub-products
         public List<SubProduct> SubProductList { get; set; }
@@ -19,12 +19,12 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public IOrderState State { get; set; }
 
         // List of OrderHistoryMomento for memento pattern
-        private List<OrderHistoryMomento> history;
+        public List<OrderHistoryMomento> history;
 
         // Constructor to initialize the order history
         public OrderHistory(string orderID, List<SubProduct> subProductList, DateTime orderTime, IOrderState state)
         {
-            OrderID = orderID;
+            id = orderID;
             SubProductList = subProductList;
             OrderTime = orderTime;
             State = state;
@@ -34,7 +34,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         // Get Order ID
         public string GetOrderID()
         {
-            return OrderID;
+            return id;
         }
 
         // Get Sub-products
@@ -65,14 +65,14 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         // Save state to history
         private void SaveStateToHistory()
         {
-            history.Add(new OrderHistoryMomento(OrderID, SubProductList, OrderTime, State));
+            history.Add(new OrderHistoryMomento(id, SubProductList, OrderTime, State));
         }
 
         // Restore state from history
         public void RestoreStateFromHistory(int index)
         {
             var momento = history[index];
-            OrderID = momento.OrderID;
+            id = momento.OrderID;
             SubProductList = momento.SubProductList;
             OrderTime = momento.OrderTime;
             State = momento.State;

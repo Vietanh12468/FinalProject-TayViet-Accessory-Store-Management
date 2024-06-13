@@ -1,4 +1,6 @@
 ﻿using FinalProject_TayViet_Accessory_Store_Management.Models.ExceptionModels;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility
@@ -9,6 +11,12 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
     {
         // Abstact colletion, can be used for any colletion
         protected IMongoCollection<T> _collection;
+        public DatabaseServices(IOptions<DBSettings> dbSettings, int index_collection)
+        {
+            MongoClient client = new MongoClient(dbSettings.Value.ConnectionURI);
+            IMongoDatabase mongoDatabase = client.GetDatabase(dbSettings.Value.DatabaseName);
+            _collection = mongoDatabase.GetCollection<T>(dbSettings.Value.Collections[index_collection]);
+        }
 
         public async Task<List<T>> ReadAsync()
         {

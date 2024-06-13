@@ -8,7 +8,11 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Utility.Databas
         public MigrationService(MainMigration migration) => _migration = migration; 
         public void CheckForUpdate()
         {
+            _migration.CheckForUpdate<Account>("Account");
             _migration.CheckForUpdate<Brand>("Brand");
+            _migration.CheckForUpdate<CategorySection>("CategorySection");
+            _migration.CheckForUpdate<OrderHistory>("OrderHistory");
+            _migration.CheckForUpdate<Product>("Product");
         }
     }
 }
