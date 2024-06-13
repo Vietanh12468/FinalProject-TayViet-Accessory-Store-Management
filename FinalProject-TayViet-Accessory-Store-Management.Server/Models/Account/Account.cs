@@ -15,6 +15,8 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public string Username { get; set; } = null!;
         public string state { get; set; } = null!;
 
+        public string Role { get; set; } = null!;
+
         /*        // Current state of the account
                 *//*        public IAccountState? State { get; set; }*//*
 
