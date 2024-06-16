@@ -3,11 +3,13 @@
     <thead>
       <tr class="table-primary">
         <th *ngFor="let column of columns">{{ column }}</th>
+        <th> Action </th>
       </tr>
     </thead>
     <tbody>
       <tr class="table-secondary" *ngFor="let row of data">
         <td *ngFor="let column of columns">{{ row[column] }}</td>
+        <td> <button (click)="viewDetail(row['id'])">Trigger</button> </td>
       </tr>
     </tbody>
   </table>
