@@ -13,32 +13,22 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
     {
         public AdminController(AccountDatabaseServices<Admin> accountDatabaseServices) : base(databaseServices: accountDatabaseServices) { }
 
-        // Override the Get method to return only admins
+        // Override the Get method to include pagination
         [HttpGet]
-        public override async Task<ActionResult<List<Admin>>> Get()
+        public override async Task<ActionResult<List<Admin>>> Get([FromQuery] int page = 1)
         {
-            try
-            {
-                var records = await _databaseServices.ReadAsync("role", "Admin");
-                var totalRecords = await _databaseServices.GetTotalRecord();
-                return Ok(new { Records = records, TotalRecords = totalRecords });
-            }
-            catch (NotFoundException) { return NotFound("No Admins Found"); }
-            catch (Exception) { throw new UnknownException(); }
+            var result = await _databaseServices.ReadAsync(page);
+            var totalRecords = await _databaseServices.GetTotalRecord();
+            Response.Headers.Add("X-Total-Count", totalRecords.ToString());
+            return result;
         }
 
-        // Override the Get method to return a specific page of admins
-        [HttpGet("{page}")]
-        public override async Task<ActionResult<List<Admin>>> Get(int page)
+        // Additional methods with unique routes
+        [HttpGet("role")]
+        public async Task<ActionResult<List<Admin>>> GetByRole()
         {
-            try
-            {
-                var records = await _databaseServices.ReadAsync(page);
-                var totalRecords = await _databaseServices.GetTotalRecord();
-                return Ok(new { Records = records, TotalRecords = totalRecords });
-            }
-            catch (NotFoundException) { return NotFound("No Admins Found"); }
-            catch (Exception) { throw new UnknownException(); }
+            var result = await _databaseServices.ReadAsync(1); // or whatever logic to get by role
+            return result;
         }
     }
 }
