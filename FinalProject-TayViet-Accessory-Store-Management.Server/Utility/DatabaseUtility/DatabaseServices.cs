@@ -10,7 +10,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
     public class DatabaseServices<T>
     {
         // Abstact colletion, can be used for any colletion
-        protected IMongoCollection<T> _collection;
+        public IMongoCollection<T> _collection;
         public DatabaseServices(IOptions<DBSettings> dbSettings, int index_collection)
         {
             MongoClient client = new MongoClient(dbSettings.Value.ConnectionURI);
@@ -55,6 +55,23 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
         {
             var filter = Builders<T>.Filter.Eq(attribute, value);
             await _collection.DeleteOneAsync(filter);
+        }
+        public async Task<long> GetTotalRecordAsync()
+        {
+            return await _collection.CountDocumentsAsync(_ => true);
+        }
+
+        // Modify ReadAsync to handle pagination
+        public async Task<List<T>> ReadAsync(int skip = 0, int limit = 20)
+        {
+            return await _collection.Find(_ => true).Skip(skip).Limit(limit).ToListAsync();
+        }
+
+        // New method for reading by role
+        public async Task<List<T>> ReadByRoleAsync(string role)
+        {
+            var filter = Builders<T>.Filter.Eq("Role", role);
+            return await _collection.Find(filter).ToListAsync();
         }
     }
 
