@@ -24,5 +24,4 @@ export class TableListComponent {
     console.log(this.getMessage(id));
     this.message.emit(this.getMessage(id))
   }
-
 }

@@ -18,5 +18,4 @@ export class MessageBoxComponent {
   closeAction() {
     this.close.emit();
   }
-
 }

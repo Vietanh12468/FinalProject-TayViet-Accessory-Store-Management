@@ -49,5 +49,10 @@ export class AppComponent implements OnInit {
     this.messageBox = !this.messageBox;
     this.focus = !this.focus;
   }
+
+  handleMessage(message: string) {
+    this.message = message;
+    this.TriggerMessage();
+  }
   title = 'finalproject-tayviet-accessory-store-management.client';
 }

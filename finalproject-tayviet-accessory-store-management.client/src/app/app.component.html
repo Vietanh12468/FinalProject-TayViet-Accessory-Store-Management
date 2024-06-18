@@ -75,7 +75,7 @@
 </table>
 
 <app-alert-box></app-alert-box>
-<app-table-list></app-table-list>
+<app-table-list (message)="handleMessage($event)"> </app-table-list>
 
 <button (click)="TriggerMessage()">Trigger</button>
 
