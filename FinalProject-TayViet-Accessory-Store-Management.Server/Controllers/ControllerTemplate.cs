@@ -6,35 +6,66 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
 {
     public class ControllerTemplate<T> : Controller
     {
-        private readonly DatabaseServices<T> _databaseServices;
+        protected readonly DatabaseServices<T> _databaseServices;
+
+        // Constructor to initialize the database service
         public ControllerTemplate(DatabaseServices<T> databaseServices) => _databaseServices = databaseServices;
 
-        // Get all brands Api
+        // Get first 20 records
         [HttpGet]
-        public async Task<ActionResult<List<T>>> Get()
+        public virtual async Task<ActionResult<List<T>>> Get()
         {
             try
             {
-                return await _databaseServices.ReadAsync();
+                // Fetch first 20 records
+                var result = await _databaseServices.ReadAsync();
+                // Get total record count
+                var totalRecords = await _databaseServices.GetTotalRecordAsync();
+                // Add total record count to response headers
+                Response.Headers.Add("X-Total-Count", totalRecords.ToString());
+                return result;
             }
             catch (NotFoundException) { return NotFound("The List Is Empty"); }
             catch (Exception) { throw new UnknownException(); }
         }
 
-        // Get brand by id
+        // Get records for the specified page (20 records per page)
+        [HttpGet("{page:int}")]
+        public virtual async Task<ActionResult<List<T>>> Get(int page)
+        {
+            try
+            {
+                // Fetch records for the specified page
+                var result = await _databaseServices.ReadAsync(page);
+                // Get total record count
+                var totalRecords = await _databaseServices.GetTotalRecordAsync();
+                // Add total record count to response headers
+                Response.Headers.Add("X-Total-Count", totalRecords.ToString());
+                return result;
+            }
+            catch (NotFoundException) { return NotFound("The List Is Empty"); }
+            catch (Exception) { throw new UnknownException(); }
+        }
+
+        // Get record by id
         [HttpGet("{id}")]
         public async Task<ActionResult<T>> Get(string id)
         {
             try
             {
-                return await _databaseServices.ReadAsync("id", id);
+                var result = await _databaseServices.ReadAsync("id", id);
+                if (result == null)
+                {
+                    return NotFound("Item Not Found Or Deleted");
+                }
+                return Ok(result);
             }
             catch (FormatException) { return BadRequest("Invalid Id"); }
             catch (NotFoundException) { return NotFound("Item Not Found Or Deleted"); }
             catch (Exception) { throw new UnknownException(); }
         }
 
-        // Update brand by id
+        // Update record by id
         [HttpPut]
         public async Task<ActionResult> UpdateAccount([FromBody] T obj)
         {
@@ -50,7 +81,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             catch (Exception) { throw new UnknownException(); }
         }
 
-        // Create brand
+        // Create record
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] T obj)
         {
@@ -58,7 +89,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             return Ok();
         }
 
-        // Delete brand
+        // Delete record
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
