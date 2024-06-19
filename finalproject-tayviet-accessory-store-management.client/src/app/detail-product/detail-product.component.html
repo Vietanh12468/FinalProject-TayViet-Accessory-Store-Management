@@ -1,0 +1,39 @@
+<div class="container-fluid w-50">
+  <div class="div-2 text-bg-light">
+    <img loading="lazy" [src]="account.image" alt="Preview Image" class="rounded-circle img my-5" />
+    <h3>John Doe</h3>
+    <table class="table table-secondary table-light">
+      <tbody>
+        <tr>
+          <td>Email</td>
+          <td>
+            <ng-container *ngIf="mode === 'display'">
+              {{ account.email }}
+            </ng-container>
+          </td>
+        </tr>
+        <tr>
+          <td>Phone</td>
+          <td>{{account.phone}}</td>
+        </tr>
+        <tr>
+          <td>Address</td>
+          <td>{{account.address}}</td>
+        </tr>
+        <tr>
+          <td>Bank Account</td>
+          <td>{{account.bankAccount}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="div-16">
+      <button class="btn btn-primary rounded-pill">
+        Edit User
+      </button>
+
+      <button class="btn btn-danger rounded-pill">
+        Reset Password
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import {trigger, state, transition, style, animate} from '@angular/animations';
 
 export interface WeatherForecast {
   date: string;
@@ -17,6 +16,7 @@ export interface WeatherForecast {
   ]
 })
 export class AppComponent implements OnInit {
+
   public forecasts: WeatherForecast[] = [];
 
   constructor(private http: HttpClient) {}
@@ -55,4 +55,5 @@ export class AppComponent implements OnInit {
     this.TriggerMessage();
   }
   title = 'finalproject-tayviet-accessory-store-management.client';
+
 }

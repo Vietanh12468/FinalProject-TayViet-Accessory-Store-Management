@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
 import { TableListComponent } from './table-list/table-list.component';
+import { DetailProductComponent } from './detail-product/detail-product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AlertBoxComponent,
     MessageBoxComponent,
-    TableListComponent
+    TableListComponent,
+    DetailProductComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
