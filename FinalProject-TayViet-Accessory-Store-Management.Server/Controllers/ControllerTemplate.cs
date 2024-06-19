@@ -26,7 +26,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
         }
 
         [HttpGet("{page:int}")]
-        public async Task<ActionResult<Dictionary<string, object>>> Get(int page)
+        public virtual async Task<ActionResult<Dictionary<string, object>>> Get(int page)
         {
             try
             {

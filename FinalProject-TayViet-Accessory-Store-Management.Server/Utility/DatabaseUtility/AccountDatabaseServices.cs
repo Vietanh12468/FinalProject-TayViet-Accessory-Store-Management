@@ -7,9 +7,18 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
 {
     public class AccountDatabaseServices<T> : DatabaseServices<T>
     {
-        public AccountDatabaseServices(IOptions<DBSettings> dbSettings, int index_collection)
-            : base(dbSettings, index_collection)
+        public AccountDatabaseServices(IOptions<DBSettings> dbSettings)
+            : base(dbSettings, GetCollectionIndex<T>())
         {
+        }
+
+        private static int GetCollectionIndex<T>()
+        {
+            if (typeof(T) == typeof(Account)) return 0;
+            if (typeof(T) == typeof(Customer)) return 1;
+            if (typeof(T) == typeof(Admin)) return 2;
+            if (typeof(T) == typeof(Seller)) return 3;
+            throw new ArgumentException("Unknown account type");
         }
 
         public async Task<List<T>> ReadByRoleAsync(string role)

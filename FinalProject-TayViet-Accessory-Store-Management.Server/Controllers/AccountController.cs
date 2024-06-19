@@ -43,27 +43,27 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Controllers
     [Route("api/[controller]")]
     public class AccountController : ControllerTemplate<Account>
     {
-        public AccountController(AccountDatabaseServices<Account> accountDatabaseServices) : base(databaseServices: accountDatabaseServices) { }
+        public AccountController(AccountDatabaseServices<Account> accountDatabaseServices) : base(accountDatabaseServices) { }
     }
 
     [ApiController]
     [Route("api/[controller]")]
     public class SellerController : ControllerTemplate<Seller>
     {
-        public SellerController(AccountDatabaseServices<Seller> accountDatabaseServices) : base(databaseServices: accountDatabaseServices) { }
+        public SellerController(AccountDatabaseServices<Seller> accountDatabaseServices) : base(accountDatabaseServices) { }
     }
 
     [ApiController]
     [Route("api/[controller]")]
     public class AdminController : ControllerTemplate<Admin>
     {
-        public AdminController(AccountDatabaseServices<Admin> accountDatabaseServices) : base(databaseServices: accountDatabaseServices) { }
+        public AdminController(AccountDatabaseServices<Admin> accountDatabaseServices) : base(accountDatabaseServices) { }
     }
 
     [ApiController]
     [Route("api/[controller]")]
     public class CustomerController : ControllerTemplate<Customer>
     {
-        public CustomerController(AccountDatabaseServices<Customer> accountDatabaseServices) : base(databaseServices: accountDatabaseServices) { }
+        public CustomerController(AccountDatabaseServices<Customer> accountDatabaseServices) : base(accountDatabaseServices) { }
     }
 }
