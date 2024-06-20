@@ -35,12 +35,12 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Utility.Databas
             }
 
             //this code will be use for future update, assume that colletion need update
-            else if (version > previousVersion)
+/*            else if (version > previousVersion)
             {
                 previousVersion = version;
                 database.DropCollection(collectionName);
                 database.CreateCollection(collectionName);
-            }
+            }*/
         }
     }
 }

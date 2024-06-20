@@ -10,6 +10,7 @@ import { MessageBoxComponent } from './message-box/message-box.component';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
 import { TableListComponent } from './table-list/table-list.component';
 import { UserInfoBoxComponent } from './user-info-box/user-info-box.component';
+import { DetailProductComponent } from './detail-product/detail-product.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,8 @@ import { UserInfoBoxComponent } from './user-info-box/user-info-box.component';
     MessageBoxComponent,
     TableListComponent,
     UserInfoBoxComponent
+    TableListComponent,
+    DetailProductComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
