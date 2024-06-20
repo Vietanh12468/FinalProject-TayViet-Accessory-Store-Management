@@ -1,252 +1,35 @@
-:host {
-  display: contents;
+.table {
+  text-align: left;
 }
 
-.div {
+.div-2 {
   background-color: #fff;
   display: flex;
-  max-width: 756px;
+  margin-top: 128px;
+  width: 100%;
   flex-direction: column;
   align-items: center;
-  padding: 32px 31px;
+  padding: 0 29px 73px;
 }
 
 @media (max-width: 991px) {
-  .div {
+  .div-2 {
+    max-width: 100%;
+    margin-top: 40px;
     padding: 0 20px;
   }
 }
 
 .img {
   aspect-ratio: 1;
-  object-fit: auto;
-  object-position: center;
-  width: 345px;
+  width: 250px;
+  z-index: 10;
   max-width: 100%;
-}
-
-.default-font {
-  font-size: 16px;
-}
-
-.div-3 {
-  border-radius: 3px;
-  background-color: #fff;
-  align-self: stretch;
-  display: flex;
-  margin-top: 25px;
-  padding-bottom: 14px;
-  flex-direction: column;
-}
-
-@media (max-width: 991px) {
-  .div-3 {
-    max-width: 100%;
-  }
-}
-
-.div-4 {
-  display: flex;
-  width: 204px;
-  max-width: 100%;
-  gap: 20px;
-  font-size: 16px;
-  color: #000;
-  font-weight: 400;
-  white-space: nowrap;
-  justify-content: space-between;
-  margin: 13px 0 0 29px;
-}
-
-@media (max-width: 991px) {
-  .div-4 {
-    margin-left: 10px;
-    white-space: initial;
-  }
-}
-
-.div-5 {
-  font-family: Poppins, sans-serif;
-}
-
-.div-6 {
-  font-family: Poppins, sans-serif;
-}
-
-.div-7 {
-  display: flex;
-  margin-top: 17px;
-  width: 100%;
-  gap: 20px;
-  font-size: 16px;
-  color: #000;
-  font-weight: 400;
-  white-space: nowrap;
-  padding: 12px 80px 5px 31px;
-}
-
-@media (max-width: 991px) {
-  .div-7 {
-    max-width: 100%;
-    flex-wrap: wrap;
-    white-space: initial;
-    padding: 0 20px;
-  }
-}
-
-.div-8 {
-  font-family: Poppins, sans-serif;
-  align-self: start;
-}
-
-.div-9 {
-  display: flex;
-  gap: 10px;
-}
-
-@media (max-width: 991px) {
-  .div-9 {
-    white-space: initial;
-  }
-}
-
-.div-10 {
-  font-family: Poppins, sans-serif;
-  border-radius: 90px;
-  background-color: rgba(173, 167, 167, 1);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  justify-content: center;
-  padding: 11px 8px;
-}
-
-@media (max-width: 991px) {
-  .div-10 {
-    white-space: initial;
-  }
-}
-
-.div-11 {
-  font-family: Poppins, sans-serif;
-  border-radius: 90px;
-  background-color: rgba(173, 167, 167, 1);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  justify-content: center;
-  padding: 11px 0;
-}
-
-@media (max-width: 991px) {
-  .div-11 {
-    white-space: initial;
-  }
-}
-
-.div-12 {
-  font-family: Poppins, sans-serif;
-  border-radius: 90px;
-  background-color: rgba(173, 167, 167, 1);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  padding: 12px 8px 6px;
-}
-
-@media (max-width: 991px) {
-  .div-12 {
-    white-space: initial;
-  }
-}
-
-.div-13 {
-  margin-top: 10px;
-  padding: 14px 31px 8px;
-}
-
-@media (max-width: 991px) {
-  .div-13 {
-    max-width: 100%;
-    padding: 0 20px;
-  }
-}
-
-.div-14 {
-  gap: 20px;
-  display: flex;
-}
-
-@media (max-width: 991px) {
-  .div-14 {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0px;
-  }
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  line-height: normal;
-  width: 16%;
-  margin-left: 0px;
-}
-
-@media (max-width: 991px) {
-  .column {
-    width: 100%;
-  }
-}
-
-.div-15 {
-  color: #000;
-  font: 400 16px Poppins, sans-serif;
-}
-
-@media (max-width: 991px) {
-  .div-15 {
-    margin-top: 40px;
-  }
-}
-
-.column-2 {
-  display: flex;
-  flex-direction: column;
-  line-height: normal;
-  width: 84%;
-  margin-left: 20px;
-}
-
-@media (max-width: 991px) {
-  .column-2 {
-    width: 100%;
-  }
 }
 
 .div-16 {
-  color: #000;
-  font: 400 16px Poppins, sans-serif;
-}
-
-@media (max-width: 991px) {
-  .div-16 {
-    max-width: 100%;
-    margin-top: 40px;
-  }
-}
-
-.div-17 {
-  border-radius: 90px;
-  background-color: rgba(11, 99, 248, 1);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  margin-top: 20px;
-  width: 82px;
-  align-items: start;
+  display: flex;
+  gap: 20px;
   color: #fff;
-  white-space: nowrap;
-  justify-content: center;
-  padding: 11px 28px;
-  font: 400 16px Poppins, sans-serif;
-}
-
-@media (max-width: 991px) {
-  .div-17 {
-    white-space: initial;
-    padding: 0 20px;
-  }
+  justify-content: space-between;
 }

@@ -18,8 +18,7 @@ import { DetailProductComponent } from './detail-product/detail-product.componen
     AlertBoxComponent,
     MessageBoxComponent,
     TableListComponent,
-    UserInfoBoxComponent
-    TableListComponent,
+    UserInfoBoxComponent,
     DetailProductComponent
   ],
   imports: [
