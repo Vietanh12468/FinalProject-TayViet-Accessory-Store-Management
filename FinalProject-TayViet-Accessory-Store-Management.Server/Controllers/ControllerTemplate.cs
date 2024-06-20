@@ -6,7 +6,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
 {
     public class ControllerTemplate<T> : Controller
     {
-        private readonly DatabaseServices<T> _databaseServices;
+        protected readonly DatabaseServices<T> _databaseServices;
         public ControllerTemplate(DatabaseServices<T> databaseServices) => _databaseServices = databaseServices;
 
         // Get all brands Api

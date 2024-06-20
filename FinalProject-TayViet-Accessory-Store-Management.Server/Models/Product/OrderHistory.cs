@@ -9,107 +9,137 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string? id { get; set; }
 
-        // List of sub-products
-        public List<SubProduct> SubProductList { get; set; }
+        public string customerID { get; set; } = null!;
 
-        // Time of the order
-        public DateTime OrderTime { get; set; }
+        public string shipLocation { get; set; } = null!;
 
-        // Current state of the order
-        public IOrderState State { get; set; }
+        public List<ProductInCart> cart { get; set; } = null!;
 
-        // List of OrderHistoryMomento for memento pattern
-        public List<OrderHistoryMomento> history;
+        public Stack<OrderHistoryMomento> history { get; set; } = null!;
 
-        // Constructor to initialize the order history
-        public OrderHistory(string orderID, List<SubProduct> subProductList, DateTime orderTime, IOrderState state)
-        {
-            id = orderID;
-            SubProductList = subProductList;
-            OrderTime = orderTime;
-            State = state;
-            history = new List<OrderHistoryMomento>();
-        }
-
-        // Get Order ID
-        public string GetOrderID()
-        {
-            return id;
-        }
-
-        // Get Sub-products
-        public List<SubProduct> GetSubProductList()
-        {
-            return SubProductList;
-        }
-
-        // Get Order Time
-        public DateTime GetOrderTime()
-        {
-            return OrderTime;
-        }
-
-        // Get State
+        // Return the latest state in the history above
         public IOrderState GetState()
         {
-            return State;
+            //example
+            switch (history.Peek().state)
+            {
+                case "Ordered":
+                    return new OrderPlacedState();
+                //add more states here
+                default:
+                    throw new Exception("Invalid State");
+            }
         }
 
-        // Set State and save to history
-        public void SetState(IOrderState state)
+        public void UpdateState(string state)
         {
-            State = state;
-            SaveStateToHistory();
+            IOrderState currentState = GetState();
+            currentState.UpdateOrderState(this, state);
         }
 
-        // Save state to history
-        private void SaveStateToHistory()
-        {
-            history.Add(new OrderHistoryMomento(id, SubProductList, OrderTime, State));
-        }
-
-        // Restore state from history
-        public void RestoreStateFromHistory(int index)
-        {
-            var momento = history[index];
-            id = momento.OrderID;
-            SubProductList = momento.SubProductList;
-            OrderTime = momento.OrderTime;
-            State = momento.State;
-        }
-
-/*        // Request refund //This Code also bugs
         public void RequestRefund()
         {
-            State.RequestRefund(this);
+            IOrderState currentState = GetState();
+            currentState.RequestRefund(this);
         }
 
-        // Update order status
-        public void UpdateOrderStatus()
-        {
-            State.UpdateOrderStatus(this);
-        }
-
-        // Handle order
         public void HandleOrder()
         {
-            State.HandleOrder(this);
-        }*/
-    }
+            IOrderState currentState = GetState();
+            currentState.HandleOrder(this);
+        }
 
+        public double GetTotalCost()
+        {
+            // Perform Calulation from the cart here
+            return 1;
+        }
+
+    }
     public class OrderHistoryMomento
     {
-        public string OrderID { get; set; }
-        public List<SubProduct> SubProductList { get; set; }
-        public DateTime OrderTime { get; set; }
-        public IOrderState State { get; set; }
+        public string state { get; set; } = null!;
+        public DateTime? orderTime { get; set; } = DateTime.Now;
 
-        public OrderHistoryMomento(string orderID, List<SubProduct> subProductList, DateTime orderTime, IOrderState state)
+        public OrderHistoryMomento(string state)
         {
-            OrderID = orderID;
-            SubProductList = subProductList;
-            OrderTime = orderTime;
-            State = state;
+            this.state = state;
         }
     }
+
+    public class ProductInCart
+    {
+        public string productID { get; set; } = null!;
+        public List<SubProductInCart> subProductList { get; set; } = null!;
+    }
+
+    public class SubProductInCart
+    {
+        public string subProductName { get; set; } = null!;
+
+        public int cost { get; set; }
+
+        public int sale { get; set; }
+
+        public int quantity { get; set; }
+    }
+
+    /*        // Get Sub-products
+            public List<SubProduct> GetSubProductList()
+            {
+                return SubProductList;
+            }
+
+            // Get Order Time
+            public DateTime GetOrderTime()
+            {
+                return OrderTime;
+            }
+
+            // Get State
+            public IOrderState GetState()
+            {
+                return State;
+            }
+
+            // Set State and save to history
+            public void SetState(IOrderState state)
+            {
+                State = state;
+                SaveStateToHistory();
+            }
+
+            // Save state to history
+            private void SaveStateToHistory()
+            {
+                history.Add(new OrderHistoryMomento(id, SubProductList, OrderTime, State));
+            }
+    */
+    /*        // Restore state from history
+            public void RestoreStateFromHistory(int index)
+            {
+                var momento = history[index];
+                id = momento.OrderID;
+                SubProductList = momento.SubProductList;
+                OrderTime = momento.OrderTime;
+                State = momento.State;
+            }*/
+
+    /*        // Request refund //This Code also bugs
+            public void RequestRefund()
+            {
+                State.RequestRefund(this);
+            }
+
+            // Update order status
+            public void UpdateOrderStatus()
+            {
+                State.UpdateOrderStatus(this);
+            }
+
+            // Handle order
+            public void HandleOrder()
+            {
+                State.HandleOrder(this);
+            }*/
 }
