@@ -1,0 +1,84 @@
+:host,
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  flex-shrink: 0;
+  text-decoration: none;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+:host,
+:not(span, a, ul, ol, li, p) {
+  display: flex;
+}
+
+ul,
+ol {
+  text-indent: 0;
+  padding-inline-start: 1.5em;
+}
+
+p:empty::before {
+  content: '';
+  display: inline-block;
+}
+
+img {
+  object-fit: contain;
+}
+
+svg {
+  overflow: visible;
+}
+
+:host {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.rectangle1076 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+.notificationBing {
+  position: absolute;
+  left: 26.9231%;
+  right: 26.9231%;
+  top: 26.9231%;
+  bottom: 26.9231%;
+  overflow: visible;
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ellipse1 {
+  position: absolute;
+  left: 90.3846%;
+  right: -9.6154%;
+  top: -5.9683%;
+  bottom: 86.7375%;
+  overflow: visible;
+}
+
+.icon2 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

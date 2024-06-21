@@ -1,0 +1,40 @@
+.rectangle6643 {
+  position: absolute;
+  left: 270px;
+  top: 342px;
+  width: 1130px;
+  height: 774px;
+  border-radius: 3px;
+  background-color: #fff;
+}
+.frame6 {
+  position: absolute;
+  left: 270px;
+  top: 366px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+  .frame6 .child {
+    width: 50%; /* Adjust based on your needs */
+    display: flex;
+    justify-content: flex-start; /* Aligns child elements to the start */
+  }
+.group47733 {
+  position: relative;
+  width: 1130px;
+  height: 48px;
+}
+.frame5 {
+  position: absolute;
+  left: 270px;
+  top: 212px;
+  width: 1130px;
+  height: min-content;
+  justify-content: space-between;
+  align-items: center;
+  gap: 22px;
+}
+
