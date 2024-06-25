@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
-using FinalProject_TayViet_Accessory_Store_Management.Server.Controllers;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
 
-namespace FinalProject_TayViet_Accessory_Store_Management.Controllers
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
 {
     /*    [Controller]
         [Route("api/[controller]")]
@@ -39,31 +39,13 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Controllers
                 return NoContent();
             }*/
     /*    }*/
+
     [ApiController]
     [Route("api/[controller]")]
     public class AccountController : ControllerTemplate<Account>
     {
-        public AccountController(AccountDatabaseServices<Account> accountDatabaseServices) : base(databaseServices: accountDatabaseServices) { }
+        private new readonly AccountDatabaseServices<Account> _databaseServices;
+        public AccountController(AccountDatabaseServices<Account> accountDatabaseServices) : base(accountDatabaseServices) => _databaseServices = accountDatabaseServices;
     }
 
-    [ApiController]
-    [Route("api/[controller]")]
-    public class SellerController : ControllerTemplate<Seller>
-    {
-        public SellerController(AccountDatabaseServices<Seller> accountDatabaseServices) : base(databaseServices: accountDatabaseServices) { }
-    }
-
-    [ApiController]
-    [Route("api/[controller]")]
-    public class AdminController : ControllerTemplate<Admin>
-    {
-        public AdminController(AccountDatabaseServices<Admin> accountDatabaseServices) : base(databaseServices: accountDatabaseServices) { }
-    }
-
-    [ApiController]
-    [Route("api/[controller]")]
-    public class CustomerController : ControllerTemplate<Customer>
-    {
-        public CustomerController(AccountDatabaseServices<Customer> accountDatabaseServices) : base(databaseServices: accountDatabaseServices) { }
-    }
 }

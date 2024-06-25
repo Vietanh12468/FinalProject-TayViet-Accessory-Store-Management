@@ -1,5 +1,6 @@
 ﻿using FinalProject_TayViet_Accessory_Store_Management.Models.ExceptionModels;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -7,7 +8,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
 {
     // This class provided general CRUD services for collections in database.
     // It can be used to create new object database services by declare object model in <T> and collection in _collection
-    public class DatabaseServices<T>
+    public class DatabaseServices<T> : IDatabaseServices<T>
     {
         // Abstact colletion, can be used for any colletion
         protected IMongoCollection<T> _collection;
@@ -18,7 +19,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
             _collection = mongoDatabase.GetCollection<T>(dbSettings.Value.Collections[index_collection]);
         }
 
-        public async Task<List<T>> ReadAsync()
+        public virtual async Task<List<T>> ReadAsync()
         {
             List<T> result = await _collection.Find(_ => true).ToListAsync();
 
@@ -55,6 +56,16 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
         {
             var filter = Builders<T>.Filter.Eq(attribute, value);
             await _collection.DeleteOneAsync(filter);
+        }
+
+        public async Task<long> GetTotalRecordAsync()
+        {
+            return await _collection.CountDocumentsAsync(_ => true);
+        }
+
+        public async Task<List<T>> ReadAsync(int skip = 0, int limit = 20)
+        {
+            return await _collection.Find(_ => true).Skip(skip).Limit(limit).ToListAsync();
         }
     }
 

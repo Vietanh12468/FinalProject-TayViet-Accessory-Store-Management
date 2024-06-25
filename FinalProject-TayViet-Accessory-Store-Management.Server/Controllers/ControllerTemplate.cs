@@ -1,21 +1,28 @@
 ﻿using FinalProject_TayViet_Accessory_Store_Management.Models.ExceptionModels;
 using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
 {
     public class ControllerTemplate<T> : Controller
     {
-        protected readonly DatabaseServices<T> _databaseServices;
-        public ControllerTemplate(DatabaseServices<T> databaseServices) => _databaseServices = databaseServices;
+        protected IDatabaseServices<T> _databaseServices;
+        public ControllerTemplate(IDatabaseServices<T> databaseServices) => _databaseServices = databaseServices;
 
         // Get all brands Api
         [HttpGet]
-        public async Task<ActionResult<List<T>>> Get()
+        public virtual async Task<ActionResult<Dictionary<string, object>>> Get()
         {
             try
             {
-                return await _databaseServices.ReadAsync();
+                long totalRecords = await _databaseServices.GetTotalRecordAsync();
+                var response = new Dictionary<string, object>
+            {
+                { "data", await _databaseServices.ReadAsync()},
+                { "total", totalRecords}
+            };
+                return response;
             }
             catch (NotFoundException) { return NotFound("The List Is Empty"); }
             catch (Exception) { throw new UnknownException(); }
@@ -64,6 +71,18 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
         {
             await _databaseServices.DeleteAsync("id", id);
             return NoContent();
+        }
+
+        // Get brand by name
+        [HttpGet("name/{name}")]
+        public async Task<ActionResult<T>> GetByName(string name)
+        {
+            try
+            {
+                return await _databaseServices.ReadAsync("name", name);
+            }
+            catch (NotFoundException) { return NotFound("Item Not Found Or Deleted"); }
+            catch (Exception) { throw new UnknownException(); }
         }
     }
 }
