@@ -2,6 +2,8 @@
 using MongoDB.Driver;
 using Microsoft.Extensions.Options;
 using FinalProject_TayViet_Accessory_Store_Management.Models.ExceptionModels;
+using System.Collections.Generic;
+using System.Data;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility
 {
@@ -10,11 +12,18 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
     {
         public AccountDatabaseServices(IOptions<DBSettings> dbSettings, int index_collection = 0) : base(dbSettings, index_collection) { }
 
-        public async Task<List<T>> ReadAsync(string role)
+        public override async Task<List<T>> ReadAsync()
         {
-
-            var filter = Builders<T>.Filter.Eq("role", role);
-            List<T> result = await _collection.Find(filter).ToListAsync();
+            List<T> result;
+            if (typeof(T).Name == "Account")
+            {
+                result = await _collection.Find(_ => true).ToListAsync();
+            }
+            else
+            {
+                var filter = Builders<T>.Filter.Eq("role", typeof(T).Name);
+                result = await _collection.Find(filter).ToListAsync();
+            }
 
             if (result == null)
             {
@@ -22,6 +31,19 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
             }
 
             return result;
+        }
+
+        public override async Task<long> GetTotalRecordAsync()
+        {
+            if (typeof(T).Name == "Account")
+            {
+                return await _collection.CountDocumentsAsync(_ => true);
+            }
+            else
+            {
+                var filter = Builders<T>.Filter.Eq("role", typeof(T).Name);
+                return await _collection.CountDocumentsAsync(filter);
+            }
         }
     }
 }

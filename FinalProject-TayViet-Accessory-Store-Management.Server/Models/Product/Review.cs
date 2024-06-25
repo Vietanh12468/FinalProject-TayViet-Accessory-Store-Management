@@ -5,50 +5,41 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
     public class Review
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        private string? CustomerID { get; set; }
+        public string customerID { get; set; } = null!;
+        public int ratedScore { get; set; } = 0;
+        public string reviewDescription { get; set; } = null!;
+        public string? state { get; set; } = "Hide";
 
-        // Rated score
-        private int RatedScore { get; set; }
-
-        // Review description
-        private string ReviewDescription { get; set; }
-
-        // State of the review
-        private IReviewState State { get; set; }
-
-        // Constructor
-        public Review(string customerID, int ratedScore, string reviewDescription, IReviewState state)
+        public IReviewState GetState()
         {
-            CustomerID = customerID;
-            RatedScore = ratedScore;
-            ReviewDescription = reviewDescription;
-            State = state;
+            switch (state)
+            {
+                case "Hide":
+                    return new HideState();
+                case "View":
+                    return new ViewState();
+                default:
+                    throw new Exception("Invalid State");
+            }
         }
 
-        // Get Customer ID
-        public string GetCustomerID()
+        public void GetReviewScore()
         {
-            return CustomerID;
+            GetState().GetReviewScore(this);
         }
 
-        // Get Review Description
-        public string GetReviewDescription()
+        public void GetReviewDescription()
         {
-            return ReviewDescription;
+            GetState().GetReviewDescription(this);
         }
 
-        // Get Rated Score
-        public int GetRatedScore()
-        {
-            return RatedScore;
-        }
+        /*        // State of the review
+                public IReviewState state { get; set; } = null!;*/
 
-        // Set State
-        public void SetState(IReviewState state)
-        {
-            State = state;
-        }
+        /*        // Set State
+                public void SetState(IReviewState state)
+                {
+                    State = state;
+                }*/
     }
 }

@@ -1,24 +1,20 @@
 using FinalProject_TayViet_Accessory_Store_Management.Server.States;
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
-    public class UnAvailableState : IState
+    public class UnavailableState : IProductState
     {
-        public string ToString()
+        public override string ToString()
         {
             return "Unavailable";
         }
-
-        public void Buy(Product product, int quantity)
+        public void Buy(SubProduct product, int quantity)
         {
-            // Cannot buy when product is unavailable
-            Console.WriteLine("Product is currently unavailable.");
+            throw new NotImplementedException();
         }
 
-        public void Restock(Product product, int newStock)
+        public void Restock(SubProduct product, int quantity)
         {
-            product.InStockList[0].SetInStock(product.InStockList[0].GetInStock() + newStock);
-            product.SetState(new AvailableState());
-            Console.WriteLine("Product restocked and is now available. Current stock: " + newStock);
+            throw new NotImplementedException();
         }
     }
 }

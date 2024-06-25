@@ -9,150 +9,39 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string? id { get; set; }
-
-        // Name of the product
-        public string Name { get; set; }
-
-        // List of categories
-        public List<Category> ListCategory { get; set; }
-
-        // Description of the product
-        public string Description { get; set; }
-
-        // Image URL of the product
-        public string Image { get; set; }
-
+        public string name { get; set; } = null!;
+        public string description { get; set; } = null!;
+        public string image { get; set; } = null!;
+        public List<string> categoryList { get; set; } = null!;
         // List of sub-products
-        public List<SubProduct> InStockList { get; set; }
-
+        public List<SubProduct> subProductList { get; set; } = null!;
         // Brand of the product
-        public Brand Brand { get; set; }
-
-        // State of the product
-        public IState State { get; set; }
-
+        public string brandID { get; set; } = null!;
         // List of reviews
-        public List<Review> ListReview { get; set; }
-
-        // Constructor
-        public Product(string name, List<Category> listCategory, string description, string image, List<SubProduct> inStockList, Brand brand, IState state)
-        {
-            Name = name;
-            ListCategory = listCategory;
-            Description = description;
-            Image = image;
-            InStockList = inStockList;
-            Brand = brand;
-            State = state;
-            ListReview = new List<Review>();
-        }
-
-        // Get Product ID
-        public string GetProductID()
-        {
-            return id;
-        }
-
-        // Get Name
-        public string GetName()
-        {
-            return Name;
-        }
-
-        // Get List of Categories
-        public List<Category> GetListCategory()
-        {
-            return ListCategory;
-        }
-
-        // Get Description
-        public string GetDescription()
-        {
-            return Description;
-        }
-
-        // Get Image
-        public string GetImage()
-        {
-            return Image;
-        }
-
-        // Get List of Sub-products
-        public List<SubProduct> GetInStockList()
-        {
-            return InStockList;
-        }
-
-        // Get Brand
-        public Brand GetBrand()
-        {
-            return Brand;
-        }
-
-        // Get State
-        public IState GetState()
-        {
-            return State;
-        }
-
-        // Get List of Reviews
-        public List<Review> GetListReview()
-        {
-            return ListReview;
-        }
-
-        // Set Name
-        public void SetName(string name)
-        {
-            Name = name;
-        }
-
-        // Set Description
-        public void SetDescription(string description)
-        {
-            Description = description;
-        }
-
-        // Set Image
-        public void SetImage(string image)
-        {
-            Image = image;
-        }
-
-        // Set Brand
-        public void SetBrand(Brand brand)
-        {
-            Brand = brand;
-        }
+        public List<Review> reviewList { get; set; } = null!;
 
         // Add Sub-product
         public void AddSubProduct(SubProduct subProduct)
         {
-            InStockList.Add(subProduct);
+            subProductList.Add(subProduct);
         }
 
         // Remove Sub-product
         public void RemoveSubProduct(int index)
         {
-            InStockList.RemoveAt(index);
-        }
-
-        // Set State
-        public void SetState(IState state)
-        {
-            State = state;
+            subProductList.RemoveAt(index);
         }
 
         // Add Review
         public void AddReview(Review review)
         {
-            ListReview.Add(review);
+            reviewList.Add(review);
         }
 
         // Remove Review
         public void RemoveReview(int index)
         {
-            ListReview.RemoveAt(index);
+            reviewList.RemoveAt(index);
         }
 
         //This Code is Error Pls Fix it NOW!
@@ -167,10 +56,5 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         {
             State.Restock(this, newStock);
         }*/
-
-        public override string ToString()
-        {
-            return State.ToString();
-        }
     }
 }

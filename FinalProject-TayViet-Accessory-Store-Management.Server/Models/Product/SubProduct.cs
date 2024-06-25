@@ -5,151 +5,51 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
     public class SubProduct
     {
-        // Sub-product ID
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        private string? subProductID { get; set; }
+        public string name { get; set; } = null!;
+        public string description { get; set; } = null!;
+        public List<string> listImage { get; set; } = null!;
+        public int inStock { get; set; } = 0;
+        public string? state { get; set; } = "Unavailable";
+        public int buyCost { get; set; } = 0;
+        public int sellCost { get; set; } = 0;
+        public int discount { get; set; } = 0;
 
-        // Product ID
-        private string ProductID { get; set; }
+/*        public int TotalPurchase { get; set; }*/
 
-        // Name of the sub-product
-        private string Name { get; set; }
 
-        // List of images
-        private List<string> ListImage { get; set; }
-
-        // Stock quantity
-        private int InStock { get; set; }
-
-        // State of the product
-        private IState State { get; set; }
-
-        // Buy cost
-        private int BuyCost { get; set; }
-
-        // Sell cost
-        private int SellCost { get; set; }
-
-        // Sale percentage
-        private int Sale { get; set; }
-
-        // Total purchase
-        private int TotalPurchase { get; set; }
-
-        // Constructor
-        public SubProduct(string productID, string subProductID, string name, List<string> listImage, int inStock, int buyCost, int sellCost, int sale)
-        {
-            ProductID = productID;
-            subProductID = subProductID;
-            Name = name;
-            ListImage = listImage;
-            InStock = inStock;
-            BuyCost = buyCost;
-            SellCost = sellCost;
-            Sale = sale;
-        }
 
         // Get Product ID
-        public string GetProductID()
+        public IProductState GetState()
         {
-            return ProductID;
+            switch(state){
+                case "Available":
+                    return new AvailableState();
+                case "Unavailable":
+                    return new UnavailableState();
+                case "Out of Stock":
+                    return new OutOfStockState();
+                case "Limited":
+                    return new LimitState();
+                default:
+                    throw new Exception("Invalid State");
+            }
         }
 
-        // Get Sub-product ID
-        public string GetSubProductID()
-        {
-            return subProductID;
-        }
-
-        // Get Name
-        public string GetName()
-        {
-            return Name;
-        }
-
-        // Get List of Images
-        public List<string> GetListImage()
-        {
-            return ListImage;
-        }
-
-        // Get In Stock Quantity
-        public int GetInStock()
-        {
-            return InStock;
-        }
-
-        // Get Buy Cost
-        public int GetBuyCost()
-        {
-            return BuyCost;
-        }
-
-        // Get Sell Cost
-        public int GetSellCost()
-        {
-            return SellCost;
-        }
-
-        // Get Sale Percentage
-        public int GetSale()
-        {
-            return Sale;
-        }
-
-        // Get Total Purchase
+/*        // Get Total Purchase
         public int GetTotalPurchase()
         {
             return TotalPurchase;
+        }*/
+
+        public void Restock(int newStock)
+        {
+            GetState().Restock(this, newStock);
         }
 
         // Set State
-        public void SetState(IState state)
+        public void Buy(int quantity)
         {
-            State = state;
-        }
-
-        // Add Image
-        public void AddImage(string image)
-        {
-            ListImage.Add(image);
-        }
-
-        // Remove Image
-        public void RemoveImage(int index)
-        {
-            ListImage.RemoveAt(index);
-        }
-
-        // Set In Stock Quantity
-        public void SetInStock(int inStock)
-        {
-            InStock = inStock;
-        }
-
-        // Set Buy Cost
-        public void SetBuyCost(int buyCost)
-        {
-            BuyCost = buyCost;
-        }
-
-        // Set Sell Cost
-        public void SetSellCost(int sellCost)
-        {
-            SellCost = sellCost;
-        }
-
-        // Set Sale Percentage
-        public void SetSale(int sale)
-        {
-            Sale = sale;
-        }
-
-        // Set Total Purchase
-        public void SetTotalPurchase(int totalPurchase)
-        {
-            TotalPurchase = totalPurchase;
+            GetState().Buy(this, quantity);
         }
     }
 }

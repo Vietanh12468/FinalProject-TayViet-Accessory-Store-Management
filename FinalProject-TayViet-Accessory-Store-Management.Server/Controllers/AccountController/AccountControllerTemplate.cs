@@ -52,7 +52,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             long totalRecords = await _databaseServices.GetTotalRecordAsync();
             var response = new Dictionary<string, object>
             {
-                { "data", await _databaseServices.ReadAsync(typeof(T).Name)},
+                { "data", await _databaseServices.ReadAsync()},
                 { "total", totalRecords}
             };
             return response;

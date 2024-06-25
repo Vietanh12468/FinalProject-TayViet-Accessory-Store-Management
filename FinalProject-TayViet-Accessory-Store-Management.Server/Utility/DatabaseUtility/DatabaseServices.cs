@@ -58,7 +58,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
             await _collection.DeleteOneAsync(filter);
         }
 
-        public async Task<long> GetTotalRecordAsync()
+        public virtual async Task<long> GetTotalRecordAsync()
         {
             return await _collection.CountDocumentsAsync(_ => true);
         }

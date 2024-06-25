@@ -44,7 +44,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
     [Route("api/[controller]")]
     public class AccountController : ControllerTemplate<Account>
     {
-        private new readonly AccountDatabaseServices<Account> _databaseServices;
         public AccountController(AccountDatabaseServices<Account> accountDatabaseServices) : base(accountDatabaseServices) => _databaseServices = accountDatabaseServices;
     }
 
