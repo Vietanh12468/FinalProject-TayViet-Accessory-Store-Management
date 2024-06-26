@@ -10,7 +10,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         }*/
 
         // Method to lock a user account
-        public void LockUserAccount(Account account)
+/*        public void LockUserAccount(Account account)
         {
             account.SetState(new LockState());
         }
@@ -19,6 +19,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public void UnlockUserAccount(Account account)
         {
             account.SetState(new UnlockState());
-        }
+        }*/
     }
 }

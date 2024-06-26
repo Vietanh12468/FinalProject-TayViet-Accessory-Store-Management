@@ -13,40 +13,38 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public string email { get; set; } = null!;
         public string password { get; set; } = null!;
         public string phoneNumber { get; set; } = null!;
-        public string Username { get; set; } = null!;
+        public string username { get; set; } = null!;
         public string state { get; set; } = null!;
         public string role { get; set; } = null!;
 
-        /*        // Current state of the account
-                *//*        public IAccountState? State { get; set; }*//*
-
-                // Constructor to initialize the account*/
-
-
-
-        // Get State
-        /*        public IAccountState GetState()
-                {
-        *//*            return State;*//*
-                }*/
-
-
-        // Set State
-        public void SetState(IAccountState state)
+        // get State
+        public IAccountState State()
         {
-/*            State = state;*/
+            switch (state)
+            {
+                case "Active":
+                    return new ActiveState();
+                case "Inactive":
+                    return new InactiveState();
+                case "Locked":
+                    return new LockState();
+                case "Unlocked":
+                    return new UnlockState();
+                default:
+                    throw new Exception("Invalid State");
+            }
         }
 
         // Login method
         public void Login()
         {
-/*            State.Login(this);*/
+            State().Login(this);
         }
 
         // Logout method
         public void Logout()
         {
-/*            State.Logout(this);*/
+            State().Logout(this);
         }
     }
 }
