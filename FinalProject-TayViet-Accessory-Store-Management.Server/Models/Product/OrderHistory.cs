@@ -17,6 +17,16 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 
         public Stack<OrderHistoryMomento> history { get; set; } = null!;
 
+        public OrderHistory(string customerID, string shipLocation, List<ProductInCart> cart)
+        {
+            this.customerID = customerID;
+            this.shipLocation = shipLocation;
+            this.cart = cart;
+            OrderHistoryMomento orderHistoryMomento = new OrderHistoryMomento("Ordered");
+            history = new Stack<OrderHistoryMomento>();
+            history.Push(orderHistoryMomento);
+        }
+
         // Return the latest state in the history above
         public IOrderState GetState()
         {
@@ -71,6 +81,12 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
     {
         public string productID { get; set; } = null!;
         public List<SubProductInCart> subProductList { get; set; } = null!;
+
+        public ProductInCart(string productID, List<SubProductInCart> subProductList)
+        {
+            this.productID = productID;
+            this.subProductList = subProductList;
+        }
     }
 
     public class SubProductInCart
@@ -82,6 +98,14 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public int sale { get; set; }
 
         public int quantity { get; set; }
+
+        public SubProductInCart(string subProductName, int cost, int sale, int quantity)
+        {
+            this.subProductName = subProductName;
+            this.cost = cost;
+            this.sale = sale;
+            this.quantity = quantity;
+        }
     }
 
     /*        // Get Sub-products
