@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 using FinalProject_TayViet_Accessory_Store_Management.Server.States;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Models.States.OrderStates;
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
     public class OrderHistory

@@ -1,11 +1,10 @@
 ﻿using FinalProject_TayViet_Accessory_Store_Management.Server.States;
 
-namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models.States
+namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models.States.OrderStates
 {
-    public class OutForDeliveryState : IOrderState
+    public class OrderPlacedState : IOrderState
     {
-        private static readonly string[] ALLOW_TO_UPDATE_STATE = { "Delivered", "Cancelled" };
-
+        private static readonly string[] ALLOW_TO_UPDATE_STATE = { "Processing", "Cancelled" };
         public void RequestRefund(OrderHistory order)
         {
             throw new Exception("Cannot request refund yet");
@@ -24,7 +23,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models.States
 
         public void HandleOrder(OrderHistory order)
         {
-            OrderHistoryMomento newOrderHistoryMomento = new OrderHistoryMomento("Delivered");
+            OrderHistoryMomento newOrderHistoryMomento = new OrderHistoryMomento("Processing");
             order.history.Push(newOrderHistoryMomento);
         }
     }
