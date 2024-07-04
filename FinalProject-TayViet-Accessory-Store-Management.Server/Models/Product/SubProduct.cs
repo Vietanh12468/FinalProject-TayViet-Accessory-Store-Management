@@ -1,6 +1,5 @@
-using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
 using FinalProject_TayViet_Accessory_Store_Management.Server.States;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Utility.ValidateState;
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
     public class SubProduct
@@ -14,32 +13,41 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public int sellCost { get; set; } = 0;
         public int discount { get; set; } = 0;
 
-/*        public int TotalPurchase { get; set; }*/
-
-
+        public SubProduct(string name, string description, List<string> listImage, int inStock, string state, int buyCost, int sellCost, int discount)
+        {
+            this.name = name;
+            this.description = description;
+            this.listImage = listImage;
+            this.inStock = inStock;
+            this.state = state;
+            this.buyCost = buyCost;
+            this.sellCost = sellCost;
+            this.discount = discount;
+        }
 
         // Get Product ID
         public IProductState GetState()
         {
-            switch(state){
-                case "Available":
-                    return new AvailableState();
-                case "Unavailable":
-                    return new UnavailableState();
-                case "Out of Stock":
-                    return new OutOfStockState();
-                case "Limited":
-                    return new LimitState();
-                default:
-                    throw new Exception("Invalid State");
+            if (ProductValidateState.PRODUCT_STATE_DICTIONARY.ContainsKey(state))
+            {
+                return ProductValidateState.PRODUCT_STATE_DICTIONARY[state];
             }
+
+            // Handle the case when the state is not found
+            throw new ArgumentException($"Invalid state: {state}");
         }
 
-/*        // Get Total Purchase
-        public int GetTotalPurchase()
+        public void SetState(string state)
         {
-            return TotalPurchase;
-        }*/
+            if (ProductValidateState.PRODUCT_STATE_DICTIONARY.ContainsKey(state))
+            {
+                this.state = state;
+                return;
+            }
+
+            // Handle the case when the state is not found
+            throw new ArgumentException($"Invalid state: {state}");
+        }
 
         public void Restock(int newStock)
         {

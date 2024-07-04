@@ -17,8 +17,16 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public List<SubProduct> subProductList { get; set; } = null!;
         // Brand of the product
         public string brandID { get; set; } = null!;
-        // List of reviews
-        public List<Review> reviewList { get; set; } = null!;
+
+        public Product(string name, string description, string image, List<string> categoryList, List<SubProduct> subProductList, string brandID)
+        {
+            this.name = name;
+            this.description = description;
+            this.image = image;
+            this.categoryList = categoryList;
+            this.subProductList = subProductList;
+            this.brandID = brandID;
+        }
 
         // Add Sub-product
         public void AddSubProduct(SubProduct subProduct)
@@ -32,6 +40,9 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
             subProductList.RemoveAt(index);
         }
 
+/*        // List of reviews
+        public List<Review> reviewList { get; set; } = null!;
+
         // Add Review
         public void AddReview(Review review)
         {
@@ -42,7 +53,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public void RemoveReview(int index)
         {
             reviewList.RemoveAt(index);
-        }
+        }*/
 
         //This Code is Error Pls Fix it NOW!
 /*        // Buy product

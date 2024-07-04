@@ -7,7 +7,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public List<string> AddressList { get; set; }
 
         // Current Cart list
-        public List<CartItem> CartList { get; set; }
+        public List<SubProductInCart> CartList { get; set; }
 
         // List of bank cards
         public List<BankCard> BankCardList { get; set; }
@@ -28,7 +28,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         }
 
         // Get Cart List
-        public List<CartItem> GetCartList()
+        public List<SubProductInCart> GetCartList()
         {
             return CartList;
         }
@@ -46,7 +46,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         }
 
         // Add item to cart
-        public void AddToCart(CartItem cartItem)
+        public void AddToCart(SubProductInCart cartItem)
         {
             CartList.Add(cartItem);
         }
