@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\finalproject-tayviet-accessory-store-management.client\finalproject-tayviet-accessory-store-management.client.esproj">
+    <ProjectReference Include="..\finalproject-tayviet-accessory-store-management.client\finalproject-tayviet-accessory-store-management.admin.esproj">
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>

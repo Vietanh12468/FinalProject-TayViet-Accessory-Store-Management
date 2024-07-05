@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
+import { ApiService } from './api.service';
 
 import { NotificationComponent } from './notification/notification.component';
 import { SalesInformationComponent } from './sales-information/sales-information.component';
@@ -13,12 +13,19 @@ import { SalesInformationComponent } from './sales-information/sales-information
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'sellerstaticview';
-  searchTerm: string = '';
+  items: any[] = [];
 
-  performSearch() {
+  constructor(private apiService: ApiService) { }
 
-    console.log('Performing search for:', this.searchTerm);
-
+  ngOnInit(): void {
+    this.loadItems();
   }
+
+  loadItems(): void {
+    this.apiService.getItems().subscribe(data => {
+      this.items = data;
+    });
+  }
+
 }
+  

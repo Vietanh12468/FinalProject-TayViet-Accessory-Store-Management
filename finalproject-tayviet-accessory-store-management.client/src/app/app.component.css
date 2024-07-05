@@ -2238,3 +2238,21 @@ svg {
   white-space: nowrap;
   flex-direction: column;
 }
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+  li:last-child {
+    border-bottom: none;
+  }
+
+p {
+  font-size: 18px;
+  color: #888;
+}
