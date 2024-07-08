@@ -1,49 +1,3 @@
-:host,
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  background: none;
-  border: none;
-  flex-shrink: 0;
-  text-decoration: none;
-  min-width: 0;
-  overflow-wrap: anywhere;
-}
-
-:host,
-:not(span, a, ul, ol, li, p) {
-  display: flex;
-}
-
-ul,
-ol {
-  text-indent: 0;
-  padding-inline-start: 1.5em;
-}
-
-p:empty::before {
-  content: '';
-  display: inline-block;
-}
-
-img {
-  object-fit: contain;
-}
-
-svg {
-  overflow: visible;
-}
-
-:host {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  flex-direction: column;
-  align-items: flex-start;
-  background-color: #f8f8f8;
-  overflow: hidden;
-}
 
 .sIdebar {
   position: absolute;
@@ -438,7 +392,8 @@ svg {
   justify-content: flex-start; /* Align the search bar to the left */
   padding: 20px; /* Add some padding to the container */
 }
-  .rectangle1072 {
+
+.rectangle1072 {
   position: absolute;
   left: 0;
   right: 0;
@@ -577,7 +532,6 @@ svg {
   position: relative;
   width: 266px;
   height: 90px;
-
 }
 
 .button2 {

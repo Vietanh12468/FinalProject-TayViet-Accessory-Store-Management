@@ -1,37 +1,31 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { ApiService } from './api.service';
 
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
-}
+import { NotificationComponent } from './notification/notification.component';
+import { SalesInformationComponent } from './sales-information/sales-information.component';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [NotificationComponent, SalesInformationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
-  public forecasts: WeatherForecast[] = [];
+export class AppComponent {
+  items: any[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private apiService: ApiService) { }
 
-  ngOnInit() {
-    this.getForecasts();
+  ngOnInit(): void {
+    this.loadItems();
   }
 
-  getForecasts() {
-    this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
-      (result) => {
-        this.forecasts = result;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+  loadItems(): void {
+    this.apiService.getItems().subscribe(data => {
+      this.items = data;
+    });
   }
 
-  title = 'finalproject-tayviet-accessory-store-management.client';
 }
+  

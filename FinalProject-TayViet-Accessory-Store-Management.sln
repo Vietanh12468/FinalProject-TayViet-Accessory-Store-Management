@@ -5,7 +5,7 @@ VisualStudioVersion = 17.9.34902.65
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalProject-TayViet-Accessory-Store-Management.Server", "FinalProject-TayViet-Accessory-Store-Management.Server\FinalProject-TayViet-Accessory-Store-Management.Server.csproj", "{7D419D3F-6B7E-4545-93A5-3C5916CBB509}"
 EndProject
-Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "finalproject-tayviet-accessory-store-management.client", "finalproject-tayviet-accessory-store-management.client\finalproject-tayviet-accessory-store-management.client.esproj", "{83BC31E2-5B6C-49D7-B03E-A8A10D9B8AA3}"
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "finalproject-tayviet-accessory-store-management.admin", "finalproject-tayviet-accessory-store-management.client\finalproject-tayviet-accessory-store-management.admin.esproj", "{83BC31E2-5B6C-49D7-B03E-A8A10D9B8AA3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TayViet-Accessory-Store-Test", "TayViet-Accessory-Store-Test\TayViet-Accessory-Store-Test.csproj", "{901E380E-2378-4EC9-AE14-3C8FE1F691A5}"
 EndProject
