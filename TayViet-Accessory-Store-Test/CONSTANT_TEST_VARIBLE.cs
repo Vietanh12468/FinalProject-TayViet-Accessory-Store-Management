@@ -32,5 +32,9 @@ namespace TayViet_Accessory_Store_Test
             },
             "Brand 1"
         );
+
+        public static Admin sampleAdmin = new Admin("Admin 1", "Admin@123a.com", "123@123a", "9092013421", "Admin 1");
+        public static Customer sampleCustomer = new Customer("Customer 1", "User@123a.com", "123@123a", "902313421", "Customer 1");
+        public static Seller sampleSeller = new Seller("Seller 1", "User@123a.com", "123@123a", "902313421", "Seller 1");
     }
 }

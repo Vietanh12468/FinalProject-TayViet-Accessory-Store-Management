@@ -10,5 +10,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
     public class CustomerController : AccountControllerTemplate<Customer>
     {
         public CustomerController(AccountDatabaseServices<Customer> accountDatabaseServices) : base(accountDatabaseServices) => _databaseServices = accountDatabaseServices;
+
     }
 }

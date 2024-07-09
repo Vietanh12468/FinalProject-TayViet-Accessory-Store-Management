@@ -2,6 +2,7 @@
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Utility.ValidateState;
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
     public class Account : IAccount
@@ -14,37 +15,52 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public string password { get; set; } = null!;
         public string phoneNumber { get; set; } = null!;
         public string username { get; set; } = null!;
-        public string state { get; set; } = null!;
-        public string role { get; set; } = null!;
+        public string? state { get; set; } = "Inactive";
+        public string? role { get; set; } = "Customer";
+
+        public Account(string name, string email, string password, string phoneNumber, string username) { 
+            this.name = name;
+            this.email = email;
+            this.password = password;
+            this.phoneNumber = phoneNumber;
+            this.username = username;
+        }
 
         // get State
-        public IAccountState State()
+        public IAccountState GetState()
         {
-            switch (state)
+            if (AccountValidateState.CheckState(state))
             {
-                case "Active":
-                    return new ActiveState();
-                case "Inactive":
-                    return new InactiveState();
-                case "Locked":
-                    return new LockState();
-                case "Unlocked":
-                    return new UnlockState();
-                default:
-                    throw new Exception("Invalid State");
+                return AccountValidateState.STATE_DICTIONARY[state];
             }
+
+            // Handle the case when the state is not found
+            throw new ArgumentException($"Invalid state: {state}");
+        }
+
+        // Set State
+        public void SetState(string state)
+        {
+            if (AccountValidateState.CheckState(state))
+            {
+                this.state = state;
+                return;
+            }
+
+            // Handle the case when the state is not found
+            throw new ArgumentException($"Invalid state: {state}");
         }
 
         // Login method
         public void Login()
         {
-            State().Login(this);
+            GetState().Login(this);
         }
 
         // Logout method
         public void Logout()
         {
-            State().Logout(this);
+            GetState().Logout(this);
         }
     }
 }
