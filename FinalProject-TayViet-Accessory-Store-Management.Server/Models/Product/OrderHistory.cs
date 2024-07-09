@@ -106,6 +106,13 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
             this.sale = sale;
             this.quantity = quantity;
         }
+
+        public SubProductInCart(SubProduct subProduct, int? quantity) {
+            subProductName = subProduct.name;
+            cost = subProduct.sellCost;
+            sale = subProduct.discount;
+            this.quantity = quantity ?? 1;
+        }
     }
 
     /*        // Get Sub-products
