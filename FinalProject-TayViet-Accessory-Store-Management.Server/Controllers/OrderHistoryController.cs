@@ -34,6 +34,5 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
 
             return Ok();
         }
-
     }
 }

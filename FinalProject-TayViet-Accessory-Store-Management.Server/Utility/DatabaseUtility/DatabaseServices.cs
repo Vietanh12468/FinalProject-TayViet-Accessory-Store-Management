@@ -3,6 +3,8 @@ using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using MongoDB.Bson;
+using MongoDB.Driver.Linq;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility
 {
@@ -31,7 +33,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
             return result;
         }
 
-        public async Task<T> ReadAsync<TT>(string attribute, TT value)
+        public virtual async Task<T> ReadAsync<TT>(string attribute, TT value)
         {
             var filter = Builders<T>.Filter.Eq(attribute, value);
             T result = await _collection.Find(filter).FirstOrDefaultAsync();
@@ -65,7 +67,23 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
 
         public async Task<List<T>> ReadAsync(int skip = 0, int limit = 20)
         {
-            return await _collection.Find(_ => true).Skip(skip).Limit(limit).ToListAsync();
+            IMongoQueryable<T> queryableCollection = _collection.AsQueryable();
+            return await queryableCollection.Skip(skip).Take(limit).ToListAsync();
+
+/*            return await _collection.Find(_ => true).Skip(skip).Limit(limit).ToListAsync();*/
+        }
+        public async Task<List<T>> SearchAsync(string attribute, string value, int? skip = 1, int limit = 20)
+        {
+            var pattern = new BsonRegularExpression(value, "i"); 
+            var filter = Builders<T>.Filter.Regex(attribute, pattern); 
+            return await _collection.Find(filter).Skip(skip-1).Limit(limit).ToListAsync();
+        }
+
+        public async Task<long> GetTotalSearchRecordAsync(string attribute, string value)
+        {
+            var pattern = new BsonRegularExpression(value, "i"); 
+            var filter = Builders<T>.Filter.Regex(attribute, pattern); 
+            return await _collection.CountDocumentsAsync(filter);
         }
     }
 

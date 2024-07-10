@@ -1,5 +1,4 @@
 ﻿using FinalProject_TayViet_Accessory_Store_Management.Models.ExceptionModels;
-using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,10 +17,10 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             {
                 long totalRecords = await _databaseServices.GetTotalRecordAsync();
                 var response = new Dictionary<string, object>
-            {
-                { "data", await _databaseServices.ReadAsync()},
-                { "total", totalRecords}
-            };
+                {
+                    { "data", await _databaseServices.ReadAsync()},
+                    { "total", totalRecords}
+                };
                 return response;
             }
             catch (NotFoundException) { return NotFound("The List Is Empty"); }
@@ -43,7 +42,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
 
         // Update brand by id
         [HttpPut]
-        public async Task<ActionResult> UpdateAccount([FromBody] T obj)
+        public async Task<ActionResult> Update([FromBody] T obj)
         {
             try
             {
@@ -100,6 +99,33 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
                     { "totalRecords", totalRecords }
                 };
 
+                return Ok(response);
+            }
+            catch (NotFoundException) { return NotFound("The List Is Empty"); }
+            catch (Exception) { throw new UnknownException(); }
+        }
+
+        [HttpGet("search/{attribute}&&{key}&&{page:int}")]
+        public async Task<ActionResult<Dictionary<string, object>>> Search(string attribute, string key, int? page = 1)
+        {
+            try
+            {
+                // Check if attribute is valid
+                var property = typeof(T).GetProperty(attribute);
+                if (property == null)
+                {
+                    return BadRequest("Invalid attribute");
+                }
+
+                // perform search call from database service
+                var result = await _databaseServices.SearchAsync(attribute, key, page);
+                long totalRecords = await _databaseServices.GetTotalSearchRecordAsync(attribute, key);
+
+                var response = new Dictionary<string, object>
+                {
+                    { "data", result },
+                    { "totalRecords", totalRecords }
+                };
                 return Ok(response);
             }
             catch (NotFoundException) { return NotFound("The List Is Empty"); }

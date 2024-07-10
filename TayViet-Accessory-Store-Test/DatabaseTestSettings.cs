@@ -1,5 +1,4 @@
-﻿using FinalProject_TayViet_Accessory_Store_Management.Models.ExceptionModels;
-using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
+﻿using FinalProject_TayViet_Accessory_Store_Management.Server.Utility.DatabaseUtility.AccountDatabaseUtility;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
 using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
 using Microsoft.Extensions.Options;
@@ -43,7 +42,7 @@ namespace TayViet_Accessory_Store_Test
 
 /*        public AccountDatabaseServices<IAccount> accountDatabaseServices = new AccountDatabaseServices<IAccount>(dbSettings, 0);*/
 
-        public AccountDatabaseServices<Account> accountDatabaseServices = new AccountDatabaseServices<Account>(dbSettings, 0);
+        public AccountDatabaseServices accountDatabaseServices = new AccountDatabaseServices(dbSettings, 0);
 
         public BrandDatabaseServices brandDatabaseServices = new BrandDatabaseServices(dbSettings, 1);
         public CategorySectionDatabaseService categorySectionDatabaseServices = new CategorySectionDatabaseService(dbSettings, 2);

@@ -80,7 +80,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
     public class ProductInCart
     {
         public string productID { get; set; } = null!;
-        public List<SubProductInCart> subProductList { get; set; } = null!;
+        public List<SubProductInCart>? subProductList { get; set; } = new List<SubProductInCart>();
 
         public ProductInCart(string productID, List<SubProductInCart> subProductList)
         {

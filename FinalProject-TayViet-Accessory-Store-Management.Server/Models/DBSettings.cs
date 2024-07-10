@@ -4,8 +4,8 @@
     {
         public string ConnectionURI { get; set; } = null!;
         public string DatabaseName { get; set; } = null!;
-        public List<String> Collections = [
-            "Account", "Brand", "CategorySection", "OrderHistory", "Product"
+        public List<string> Collections = [
+            "Customer", "Seller", "Admin", "Brand", "CategorySection", "OrderHistory", "Product"
         ];
     }
 }
