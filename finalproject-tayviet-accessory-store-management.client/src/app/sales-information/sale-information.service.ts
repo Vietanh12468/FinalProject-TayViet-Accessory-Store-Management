@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private baseUrl = 'https://localhost:7297';
+  private baseUrl = 'https://localhost:7297/api/OrderHistory';
 
   constructor(private http: HttpClient) { }
 
@@ -19,4 +19,3 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/orderhistory/${id}`);
   }
 }
-
