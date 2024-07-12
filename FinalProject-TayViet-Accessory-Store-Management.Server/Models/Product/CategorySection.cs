@@ -4,46 +4,37 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
     public class CategorySection
     {
         // Name of the category section
-        public string Name { get; set; }
+        public string name { get; set; }
 
         // List of categories
-        public List<Category> ListCategory { get; set; }
+        public List<string> listCategory { get; set; }
 
         // Constructor
-        public CategorySection(string name)
+        public CategorySection(string name, List<string> listCategory)
         {
-            Name = name;
-            ListCategory = new List<Category>();
+            this.name = name;
+            this.listCategory = listCategory;
         }
 
         // Add Category
-        public void AddCategory(Category category)
+        public void AddCategory(string category)
         {
-            ListCategory.Add(category);
+            if (listCategory.Contains(category)) {
+                throw new Exception("Category already exists");
+            }
+
+            listCategory.Add(category);
         }
 
         // Remove Category
-        public void RemoveCategory(int index)
+        public void RemoveCategory(string category)
         {
-            ListCategory.RemoveAt(index);
-        }
+            if (!listCategory.Contains(category))
+            {
+                throw new Exception("Category not found");
+            }
 
-        // Get Name
-        public string GetName()
-        {
-            return Name;
-        }
-
-        // Set Name
-        public void SetName(string name)
-        {
-            Name = name;
-        }
-
-        // Get List of Categories
-        public List<Category> GetListCategory()
-        {
-            return ListCategory;
+            listCategory.Remove(category);
         }
     }
 }

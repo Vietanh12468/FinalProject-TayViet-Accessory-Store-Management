@@ -13,18 +13,13 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public string image { get; set; } = null!;
         public string description { get; set; } = null!;
 
-        // Get Total Spend
-        public float GetTotalSpend()
+        public Brand(string name, string phone, string email, string image, string description)
         {
-            // Return Total Spend
-            return 0f;
-        }
-
-        // Get Total Purchase
-        public int GetTotalPurchase()
-        {
-            //Return TotalPurchase
-            return 0;
+            this.name = name;
+            this.phone = phone;
+            this.email = email;
+            this.image = image;
+            this.description = description;
         }
     }
 }

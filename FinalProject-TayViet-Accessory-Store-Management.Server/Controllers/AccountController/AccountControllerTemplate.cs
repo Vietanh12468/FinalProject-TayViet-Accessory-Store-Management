@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
-using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Utility.DatabaseUtility.AccountDatabaseUtility;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
@@ -44,8 +43,8 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
     [Route("api/[controller]")]
     public class AccountControllerTemplate<T> : ControllerTemplate<T> where T : IAccount
     {
-        private new readonly AccountDatabaseServices<T> _databaseServices;
-        public AccountControllerTemplate(AccountDatabaseServices<T> accountDatabaseServices) : base(databaseServices: accountDatabaseServices) => _databaseServices = accountDatabaseServices;
+        private new readonly AccountDatabaseServiceTemplate<T> _databaseServices;
+        public AccountControllerTemplate(AccountDatabaseServiceTemplate<T> accountDatabaseServices) : base(databaseServices: accountDatabaseServices) => _databaseServices = accountDatabaseServices;
 
         public override async Task<ActionResult<Dictionary<string, object>>> Get()
         {
@@ -57,6 +56,8 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             };
             return response;
         }
+
+
     }
 
 }

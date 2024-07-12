@@ -1,3 +1,4 @@
+using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
 using FinalProject_TayViet_Accessory_Store_Management.Server.States;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Utility.ValidateState;
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
@@ -28,9 +29,9 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         // Get Product ID
         public IProductState GetState()
         {
-            if (ProductValidateState.PRODUCT_STATE_DICTIONARY.ContainsKey(state))
+            if (ProductValidateState.CheckState(state))
             {
-                return ProductValidateState.PRODUCT_STATE_DICTIONARY[state];
+                return ProductValidateState.STATE_DICTIONARY[state];
             }
 
             // Handle the case when the state is not found
@@ -39,7 +40,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 
         public void SetState(string state)
         {
-            if (ProductValidateState.PRODUCT_STATE_DICTIONARY.ContainsKey(state))
+            if (ProductValidateState.CheckState(state))
             {
                 this.state = state;
                 return;

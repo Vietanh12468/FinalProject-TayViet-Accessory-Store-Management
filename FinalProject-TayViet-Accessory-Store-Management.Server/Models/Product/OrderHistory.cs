@@ -80,7 +80,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
     public class ProductInCart
     {
         public string productID { get; set; } = null!;
-        public List<SubProductInCart> subProductList { get; set; } = null!;
+        public List<SubProductInCart>? subProductList { get; set; } = new List<SubProductInCart>();
 
         public ProductInCart(string productID, List<SubProductInCart> subProductList)
         {
@@ -105,6 +105,13 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
             this.cost = cost;
             this.sale = sale;
             this.quantity = quantity;
+        }
+
+        public SubProductInCart(SubProduct subProduct, int? quantity) {
+            subProductName = subProduct.name;
+            cost = subProduct.sellCost;
+            sale = subProduct.discount;
+            this.quantity = quantity ?? 1;
         }
     }
 
