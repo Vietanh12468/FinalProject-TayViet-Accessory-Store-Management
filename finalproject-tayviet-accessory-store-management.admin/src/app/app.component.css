@@ -20,3 +20,7 @@ th, td {
 table {
     margin: 0 auto;
 }
+
+.main-div {
+  background: #f8f8f8;
+}
