@@ -9,6 +9,8 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "finalproject-tayviet-access
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TayViet-Accessory-Store-Test", "TayViet-Accessory-Store-Test\TayViet-Accessory-Store-Test.csproj", "{901E380E-2378-4EC9-AE14-3C8FE1F691A5}"
 EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "finalproject-tayviet-accessory-store-management.admin", "finalproject-tayviet-accessory-store-management.admin\finalproject-tayviet-accessory-store-management.admin.esproj", "{51AB24E3-95E0-4954-9534-A07D24A99882}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,12 @@ Global
 		{901E380E-2378-4EC9-AE14-3C8FE1F691A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{901E380E-2378-4EC9-AE14-3C8FE1F691A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{901E380E-2378-4EC9-AE14-3C8FE1F691A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51AB24E3-95E0-4954-9534-A07D24A99882}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51AB24E3-95E0-4954-9534-A07D24A99882}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51AB24E3-95E0-4954-9534-A07D24A99882}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{51AB24E3-95E0-4954-9534-A07D24A99882}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51AB24E3-95E0-4954-9534-A07D24A99882}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51AB24E3-95E0-4954-9534-A07D24A99882}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

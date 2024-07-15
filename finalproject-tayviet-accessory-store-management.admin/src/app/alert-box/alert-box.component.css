@@ -1,0 +1,19 @@
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+.container-fluid {
+  position: relative;
+}
+
+.open-close-container {
+  position: absolute;
+  top: -150%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #dddddd;
+  margin-top: 1em;
+  color: #000000;
+  font-weight: bold;
+  font-size: 20px;
+}
