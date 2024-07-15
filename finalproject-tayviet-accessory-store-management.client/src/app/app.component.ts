@@ -7,6 +7,13 @@ interface WeatherForecast {
   temperatureF: number;
   summary: string;
 }
+interface Data {
+  id: string;
+  customerID: string;
+  shipLocation: string;
+  cart: Document[];
+  history: Document[];
+}
 
 @Component({
   selector: 'app-root',
@@ -15,17 +22,31 @@ interface WeatherForecast {
 })
 export class AppComponent implements OnInit {
   public forecasts: WeatherForecast[] = [];
+  public data: Data[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.getForecasts();
+    this.getData();
   }
 
   getForecasts() {
     this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
       (result) => {
         this.forecasts = result;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  getData() {
+    this.http.get<Data[]>('/api/data').subscribe(
+      (result) => {
+        this.data = result;
+        console.log(result);
       },
       (error) => {
         console.error(error);
