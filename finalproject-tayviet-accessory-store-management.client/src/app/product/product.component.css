@@ -1,0 +1,39 @@
+.product-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff3f3;
+  font-size: 20px;
+  color: #000;
+  font-weight: 400;
+  letter-spacing: -0.4px;
+  padding: 8px 16px;
+}
+
+.nav-container {
+  display: flex;
+  width: 100%;
+  max-width: 989px;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.nav-item {
+  font-family: Poppins, sans-serif;
+}
+
+.nav-item-highlight {
+  font-weight: 700;
+}
+
+@media (max-width: 991px) {
+  .product-nav {
+    padding: 0 20px;
+  }
+
+  .nav-container {
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+}
+
