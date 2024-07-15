@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^18.0.0",
     "@angular/platform-browser-dynamic": "^18.0.0",
     "@angular/router": "^18.0.0",
+    "assets": "^3.0.1",
     "boo": "^2.0.0",
     "bootstrap": "^5.3.3",
     "jest-editor-support": "*",

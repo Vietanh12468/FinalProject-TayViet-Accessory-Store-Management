@@ -1,0 +1,198 @@
+<style>
+  .footer {
+    background-color: #fff;
+    display: flex;
+    padding-bottom: 25px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-top {
+    background: linear-gradient(90deg, #1cd8d2 0%, #93edc7 100%);
+    box-shadow: 0 4px 6px -4px rgba(24, 39, 75, 0.12), 0 8px 8px -4px rgba(24, 39, 75, 0.08);
+    align-self: stretch;
+    display: flex;
+    width: 100%;
+    gap: 20px;
+    justify-content: space-between;
+    padding: 28px 80px 28px 32px;
+  }
+
+  @media (max-width: 991px) {
+    .footer-top {
+      max-width: 100%;
+      flex-wrap: wrap;
+      padding: 0 20px;
+    }
+  }
+
+  .social-section {
+    align-self: start;
+    display: flex;
+    margin-top: 7px;
+    flex-direction: column;
+    font: 700 18px Roboto, sans-serif;
+    color: #37383c;
+    text-align: center;
+  }
+
+  .social-icons {
+    aspect-ratio: 9.09;
+    object-fit: auto;
+    object-position: center;
+    width: 278px;
+    align-self: center;
+    margin-top: 28px;
+  }
+
+  .contact-section {
+    display: flex;
+    gap: 20px;
+  }
+
+  @media (max-width: 991px) {
+    .contact-section {
+      flex-wrap: wrap;
+    }
+  }
+
+  .divider {
+    border: 1px solid #e5e7eb;
+    width: 1px;
+    height: 104px;
+  }
+
+  .contact-form-wrapper {
+    align-self: start;
+    display: flex;
+    margin-top: 6px;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 0;
+    width: fit-content;
+  }
+
+  @media (max-width: 991px) {
+    .contact-form-wrapper {
+      max-width: 100%;
+    }
+  }
+
+  .contact-title {
+    color: #37383c;
+    text-align: center;
+    font: 700 18px Roboto, sans-serif;
+  }
+
+  @media (max-width: 991px) {
+    .contact-title {
+      max-width: 100%;
+    }
+  }
+
+  .contact-form {
+    box-shadow: 0 6px 12px -6px rgba(255, 255, 255, 0.12), 0 8px 24px -4px rgba(255, 255, 255, 0.08);
+    background-color: #e5e7eb;
+    display: flex;
+    margin-top: 24px;
+    gap: 20px;
+    font-weight: 400;
+    padding: 3px 3px 3px 11px;
+  }
+
+  @media (max-width: 991px) {
+    .contact-form {
+      max-width: 100%;
+      flex-wrap: wrap;
+    }
+  }
+
+  .contact-input {
+    color: #b1b5bb;
+    flex-grow: 1;
+    flex-basis: auto;
+    margin: auto 0;
+    font: 12px Roboto, sans-serif;
+    border: none;
+    background: transparent;
+  }
+
+  .submit-button {
+    justify-content: center;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    padding: 4px 26px;
+    font: 14px Roboto, sans-serif;
+    border: none;
+    cursor: pointer;
+  }
+
+  @media (max-width: 991px) {
+    .submit-button {
+      padding: 0 20px;
+    }
+  }
+
+  .footer-links {
+    display: flex;
+    margin-top: 32px;
+    padding-right: 20px;
+    gap: 20px;
+    font: 400 14px Roboto, sans-serif;
+    color: #000;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 991px) {
+    .footer-links {
+      flex-wrap: wrap;
+    }
+  }
+
+  .copyright {
+    color: #000;
+    margin-top: 27px;
+    font: 300 12px Roboto, sans-serif;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+</style>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="social-section">
+      <p>Follow Us</p>
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/6bb6de4d3905b14ca7bfc344b40bba8744b14979e7935b85b34971e49e3181a8?apiKey=1badbc3564ac4e7182b84891783ee2cd&" class="social-icons" alt="Social media icons" />
+    </div>
+    <div class="contact-section">
+      <div class="divider"></div>
+      <div class="contact-form-wrapper">
+        <h2 class="contact-title">Leave support contact information</h2>
+        <form class="contact-form">
+          <label for="contactInput" class="visually-hidden">Enter your phone number or address</label>
+          <input id="contactInput" type="text" class="contact-input" placeholder="Enter your phone number or address" aria-label="Enter your phone number or address" />
+          <button type="submit" class="submit-button">Send now</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <nav class="footer-links">
+    <a href="#privacy">Privacy Policy</a>
+    <a href="#terms">Terms of Use</a>
+    <a href="#sales">Sales and Refunds</a>
+    <a href="#legal">Legal</a>
+    <a href="#sitemap">Site Map</a>
+  </nav>
+  <p class="copyright">© 2024 All Rights Reserved</p>
+</footer>
