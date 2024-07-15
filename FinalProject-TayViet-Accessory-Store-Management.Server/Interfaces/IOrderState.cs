@@ -2,7 +2,7 @@
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.States
 {
 
-    public interface IOrderState
+    public interface IOrderState : IState
     {
         //use for customer want to refund
         void RequestRefund(OrderHistory order);

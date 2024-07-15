@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using FinalProject_TayViet_Accessory_Store_Management.Server.States;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Models.States.OrderStates;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Utility;
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
     public class OrderHistory
@@ -31,15 +32,15 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         // Return the latest state in the history above
         public IOrderState GetState()
         {
-            //example
-            switch (history.Peek().state)
+            string state = history.Peek().state;
+
+            if (OrderValidateState.CheckState(state))
             {
-                case "Ordered":
-                    return new OrderPlacedState();
-                //add more states here
-                default:
-                    throw new Exception("Invalid State");
+                return OrderValidateState.STATE_DICTIONARY[state];
             }
+
+            // Handle the case when the state is not found
+            throw new ArgumentException($"Invalid state: {state}");
         }
 
         public void UpdateState(string state)

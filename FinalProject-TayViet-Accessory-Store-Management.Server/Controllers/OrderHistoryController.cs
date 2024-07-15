@@ -10,13 +10,12 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
     [Route("api/[controller]")]
     public class OrderHistoryController : ControllerTemplate<OrderHistory>
     {
-        private readonly OrderValidateState orderValidateState = new OrderValidateState();
         public OrderHistoryController(OrderHistoryDatabaseService orderHistoryDatabaseService) : base(databaseServices: orderHistoryDatabaseService) {}
 
         [HttpPut("{id}, {newState}")]
         public async Task<IActionResult> UpdateOrderHistory(string id, string newState)
         {
-            if (!orderValidateState.CheckState(newState))
+            if (!OrderValidateState.CheckState(newState))
             {
                 return BadRequest("Invalid state");
             }
