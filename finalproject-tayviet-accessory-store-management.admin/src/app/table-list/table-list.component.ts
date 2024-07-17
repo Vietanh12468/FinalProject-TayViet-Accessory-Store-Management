@@ -17,6 +17,7 @@ export class TableListComponent implements OnChanges, OnInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.readDataAttributesCheck) {
       this.readDataAttributes();
+      this.renderImage();
     }
   }
   columns: string[] = []
@@ -27,10 +28,18 @@ export class TableListComponent implements OnChanges, OnInit {
     for (const key in sample) {
       if (sample.hasOwnProperty(key)) {
         this.columns.push(key);
-        console.log(`${key}: ${sample[key]}`);
       }
     }
     this.readDataAttributesCheck = true
+  }
+
+  renderImage() {
+    for (let index = 0; index < this.data.length; index++) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.data[index].image = reader.result;
+      };
+    }
   }
 
   getMessage(id: number) {

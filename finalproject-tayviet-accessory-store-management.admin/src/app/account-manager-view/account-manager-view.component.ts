@@ -8,7 +8,7 @@ import { IAccount } from '../Interface/iaccount';
   styleUrl: './account-manager-view.component.css'
 })
 export class AccountManagerViewComponent implements OnInit {
-  public data: any[] = [];
+  public data: IAccount[] = [];
   ngOnInit() {
     this.getAllCustomers();
   }

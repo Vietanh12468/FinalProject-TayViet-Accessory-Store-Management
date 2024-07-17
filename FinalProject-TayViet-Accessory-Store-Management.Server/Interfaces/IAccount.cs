@@ -10,6 +10,6 @@
         string username { get; set; }
         string? state { get; set; }
         string? role { get; set; }
-
+        string? image { get; set; }
     }
 }

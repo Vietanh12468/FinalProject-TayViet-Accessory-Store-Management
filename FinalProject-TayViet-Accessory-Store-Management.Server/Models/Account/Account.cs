@@ -17,6 +17,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public string username { get; set; } = null!;
         public string? state { get; set; } = "Inactive";
         public string? role { get; set; } = "Customer";
+        public string? image { get; set; } = "";
 
         public Account(string name, string email, string password, string phoneNumber, string username) { 
             this.name = name;
@@ -34,6 +35,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
             phoneNumber = account.phoneNumber;
             username = account.username;
             role = account.role;
+            image = account.image;
         }
 
         // get State

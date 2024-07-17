@@ -12,6 +12,9 @@ import { TableListComponent } from './table-list/table-list.component';
 import { UserInfoBoxComponent } from './user-info-box/user-info-box.component';
 import { DetailProductComponent } from './detail-product/detail-product.component';
 import { AccountManagerViewComponent } from './account-manager-view/account-manager-view.component';
+import { DetailAccountViewComponent } from './detail-account-view/detail-account-view.component';
+import { ButtonComponent } from './button/button.component';
+import { CategoryTagComponent } from './category-tag/category-tag.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { AccountManagerViewComponent } from './account-manager-view/account-mana
     UserInfoBoxComponent,
     DetailProductComponent,
     AccountManagerViewComponent,
+    DetailAccountViewComponent,
+    ButtonComponent,
+    CategoryTagComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
@@ -30,4 +36,6 @@ import { AccountManagerViewComponent } from './account-manager-view/account-mana
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}

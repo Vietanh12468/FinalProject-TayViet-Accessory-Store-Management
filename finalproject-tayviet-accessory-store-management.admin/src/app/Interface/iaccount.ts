@@ -7,4 +7,5 @@ export interface IAccount {
   username: string;
   state: string;
   role: string;
+  image: string | ArrayBuffer | null;
 }

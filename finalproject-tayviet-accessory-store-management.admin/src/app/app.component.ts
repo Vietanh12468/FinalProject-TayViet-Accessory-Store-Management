@@ -16,7 +16,7 @@ export interface WeatherForecast {
   ]
 })
 export class AppComponent implements OnInit {
-
+  id: string = '669764ba2e75b8c4f2ac2b2c';
   public forecasts: WeatherForecast[] = [];
 
   constructor(private http: HttpClient) {}

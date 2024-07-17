@@ -1,0 +1,22 @@
+<div class="container-fluid w-50">
+  <div class="div-2 text-bg-light">
+    <img loading="lazy" [src]="account.image" alt="Preview Image" class="rounded-circle img my-5" />
+    <h3>{{ account['name']}}</h3>
+    <table class="table table-secondary table-light">
+      <tbody>
+        <tr *ngFor="let attribute of attributes">
+          <ng-container *ngIf="attribute !== 'name' && attribute !== 'image'">
+            <td>{{ attribute }}</td>
+            <td>{{ account[attribute] }}</td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+    <div class="div-16">
+      <app-button color="red" label="Reset Password" (buttonClick)="onResetPasswordClick()"></app-button>
+      <app-button color="blue" label="Edit User" (buttonClick)="onEditUserClick()"></app-button>
+      <app-button color="green" label="Back" (buttonClick)="onBackClick()"></app-button>
+    </div>
+  </div>
+</div>
+
