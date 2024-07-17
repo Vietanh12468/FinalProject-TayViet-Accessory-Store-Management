@@ -11,6 +11,7 @@ import { AlertBoxComponent } from './alert-box/alert-box.component';
 import { TableListComponent } from './table-list/table-list.component';
 import { UserInfoBoxComponent } from './user-info-box/user-info-box.component';
 import { DetailProductComponent } from './detail-product/detail-product.component';
+import { AccountManagerViewComponent } from './account-manager-view/account-manager-view.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { DetailProductComponent } from './detail-product/detail-product.componen
     MessageBoxComponent,
     TableListComponent,
     UserInfoBoxComponent,
-    DetailProductComponent
+    DetailProductComponent,
+    AccountManagerViewComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,

@@ -1,19 +1,37 @@
-import { Component, EventEmitter, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, SimpleChanges, Output, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-table-list',
   templateUrl: './table-list.component.html',
   styleUrl: './table-list.component.css'
 })
-export class TableListComponent {
-  @Output() message = new EventEmitter();
-  data: any[] = [
+export class TableListComponent implements OnChanges, OnInit {
+  @Input() data: any[] = [
     { id: 1, name: 'John Doe', age: 25 },
-    { id: 2, name: 'Jane Smith', age: 30 },
-    { id: 3, name: 'Bob Johnson', age: 28 },
-  // Add more rows as needed
   ]
-  columns = ['id', 'name', 'age']
+
+  ngOnInit(): void {
+    this.readDataAttributesCheck = false
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!this.readDataAttributesCheck) {
+      this.readDataAttributes();
+    }
+  }
+  columns: string[] = []
+  readDataAttributesCheck: boolean = false
+
+  readDataAttributes() {
+    const sample: any = this.data[0];
+    for (const key in sample) {
+      if (sample.hasOwnProperty(key)) {
+        this.columns.push(key);
+        console.log(`${key}: ${sample[key]}`);
+      }
+    }
+    this.readDataAttributesCheck = true
+  }
 
   getMessage(id: number) {
     return `The ID is ${id}`
@@ -22,6 +40,5 @@ export class TableListComponent {
   // add method view detail with variable id
   viewDetail(id: number) {
     console.log(this.getMessage(id));
-    this.message.emit(this.getMessage(id))
   }
 }

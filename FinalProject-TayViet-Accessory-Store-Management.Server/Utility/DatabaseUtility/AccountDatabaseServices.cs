@@ -48,17 +48,17 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
             result = await ReadFromCollection(attribute, value, _customerCollection);
             if (result != null)
             {
-                return result;
+                return new Account(result);
             }
             result = await ReadFromCollection(attribute, value, _sellerCollection);
             if (result != null)
             {
-                return result;
+                return new Account(result);
             }
             result = await ReadFromCollection(attribute, value, _adminCollection);
             if (result != null)
             {
-                return result;
+                return new Account(result);
             }
             /*            // Iterate over each collection
                         var filter = Builders<Customer>.Filter.Eq(attribute, value);

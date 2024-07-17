@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
-import { IAccount } from '../iaccount';
-
+import { IAccount } from '../Interface/iaccount';
 @Component({
   selector: 'app-user-info-box',
   templateUrl: './user-info-box.component.html',
   styleUrl: './user-info-box.component.css'
 })
 export class UserInfoBoxComponent {
-  account: IAccount = {
+/*  account: IAccount = {
     id: '',
     username: 'John Doe',
     email: 'JohnDoeexample.com',
-    phone: '123',
+    phoneNumber: '123',
     address: '1515 W Main St, Artesia, New York',
     password: '123',
     bankAccount: '231421232121412321',
@@ -26,5 +25,5 @@ export class UserInfoBoxComponent {
       this.account.image = reader.result;
       console.log(this.account.image);
     };
-  }
+  }*/
 }

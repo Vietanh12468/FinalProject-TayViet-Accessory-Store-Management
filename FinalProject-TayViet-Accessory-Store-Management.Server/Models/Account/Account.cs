@@ -26,6 +26,16 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
             this.username = username;
         }
 
+        public Account(IAccount account) { 
+            id = account.id;
+            name = account.name;
+            email = account.email;
+            password = account.password;
+            phoneNumber = account.phoneNumber;
+            username = account.username;
+            role = account.role;
+        }
+
         // get State
         public IAccountState GetState()
         {
