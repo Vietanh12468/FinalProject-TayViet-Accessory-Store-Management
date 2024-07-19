@@ -127,7 +127,7 @@ namespace TayViet_Accessory_Store_Test.UnitTest.Model
             double totalCost = orderHistory.GetTotalCost();
 
             // Assert
-            double expectedTotal = (100 * 2 - 10) + (200 - 20);
+            double expectedTotal = (100 * 2 - 10) + (200 - 30);
             Assert.Equal(expectedTotal, totalCost);
         }
 

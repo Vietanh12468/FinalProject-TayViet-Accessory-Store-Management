@@ -39,6 +39,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         {
             subProductList.RemoveAt(index);
         }
+        
 
 /*        // List of reviews
         public List<Review> reviewList { get; set; } = null!;

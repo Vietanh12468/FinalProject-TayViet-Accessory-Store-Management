@@ -63,8 +63,17 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 
         public double GetTotalCost()
         {
-            // Perform Calulation from the cart here
-            return 1;
+            double totalCost = 0;
+
+            foreach (var product in cart)
+            {
+                foreach (var subProduct in product.subProductList)
+                {
+                    totalCost += (subProduct.cost - subProduct.sale) * subProduct.quantity;
+                }
+            }
+
+            return totalCost;
         }
 
     }

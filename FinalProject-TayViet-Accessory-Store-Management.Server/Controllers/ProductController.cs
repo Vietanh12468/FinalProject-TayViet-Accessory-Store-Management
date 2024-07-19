@@ -9,5 +9,9 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
     public class ProductController : ControllerTemplate<Product>
     {
         public ProductController(ProductDatabaseService productDatabaseService) : base(databaseServices: productDatabaseService) { }
+        public void Buy(Product product) 
+        { 
+        
+        }
     }
 }
