@@ -1,22 +1,41 @@
 <div class="container-fluid w-50">
   <div class="div-2 text-bg-light">
-    <img loading="lazy" [src]="account.image" alt="Preview Image" class="rounded-circle img my-5" />
-    <h3>{{ account['name']}}</h3>
+    <div class="position-relative">
+      <img loading="lazy" class="rounded-circle img my-5" [src]="account.image" alt="Preview Image" [ngClass]="{'opacity-50': mode !== 'view'}" />
+      <app-button *ngIf="mode !== 'view'" class="g-col-6 position-absolute start-50 top-50 translate-middle" color="blue" label="Change" (buttonClick)="openFileInput()"></app-button>
+      <input class="form-control" type="file" #fileInput style="display: none" (change)="handleFileInput(fileInput)">
+    </div>
+    <h3>{{ account['username']}}</h3>
     <table class="table table-secondary table-light">
       <tbody>
         <tr *ngFor="let attribute of attributes">
-          <ng-container *ngIf="attribute !== 'name' && attribute !== 'image'">
-            <td>{{ attribute }}</td>
-            <td>{{ account[attribute] }}</td>
+          <ng-container *ngIf="attribute !== 'username' && attribute !== 'image'">
+            <td>
+              <label class="col-sm-2 col-form-label">{{ attribute }}</label>
+            </td>
+            <td>
+              <input type="text" [ngClass]="{'form-control': mode === 'change', 'form-control-plaintext': mode === 'view'}" [readonly]="mode === 'view'" [value]="account[attribute]" [(ngModel)]="account[attribute]">
+            </td>
           </ng-container>
         </tr>
       </tbody>
     </table>
-    <div class="div-16">
-      <app-button color="red" label="Reset Password" (buttonClick)="onResetPasswordClick()"></app-button>
-      <app-button color="blue" label="Edit User" (buttonClick)="onEditUserClick()"></app-button>
-      <app-button color="green" label="Back" (buttonClick)="onBackClick()"></app-button>
+    <div class="div-16 justify-content-center">
+      <ng-container *ngIf="mode === 'view'">
+        <app-button class="g-col-6" color="blue" label="Edit User" (buttonClick)="onEditUserClick()"></app-button>
+      </ng-container>
+      <ng-container *ngIf="mode === 'change'">
+        <app-button class="g-col-6" color="red" label="Reset Password" (buttonClick)="onResetPasswordClick()"></app-button>
+        <app-button class="g-col-6" color="blue" label="Back" (buttonClick)="onBackClick()"></app-button>
+        <app-button class="g-col-6" color="green" label="{{ mode }}" (buttonClick)="onSubmit()"></app-button>
+      </ng-container>
     </div>
+
+
+<!--    <input type="text" [value]="account.name" [(ngModel)]="account.name">
+    <input type="text" [value]="account.password" [(ngModel)]="account.password">
+    <app-button class="g-col-6" color="blue" label="Back" (buttonClick)="ConfirmClick()"></app-button>-->
+
   </div>
 </div>
 
