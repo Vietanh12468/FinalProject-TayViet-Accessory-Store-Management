@@ -5,8 +5,12 @@
       <app-button *ngIf="mode !== 'view'" class="g-col-6 position-absolute start-50 top-50 translate-middle" color="blue" label="Change" (buttonClick)="openFileInput()"></app-button>
       <input class="form-control" type="file" #fileInput style="display: none" (change)="handleFileInput(fileInput)">
     </div>
-    <h3>{{ account['username']}}</h3>
-    <table class="table table-secondary table-light">
+    <h3 *ngIf="mode !== 'create'">{{ account['username']}}</h3>
+    <div class="form-floating mb-3" *ngIf="mode === 'create'">
+      <input class="form-control" id="username" type="text" [(ngModel)]="account['username']" placeholder="Username">
+      <label for="username">Username</label>
+    </div>
+    <table class="table table-secondary table-light align-middle">
       <tbody>
         <tr *ngFor="let attribute of attributes">
           <ng-container *ngIf="attribute !== 'username' && attribute !== 'image'">
@@ -14,28 +18,24 @@
               <label class="col-sm-2 col-form-label">{{ attribute }}</label>
             </td>
             <td>
-              <input type="text" [ngClass]="{'form-control': mode === 'change', 'form-control-plaintext': mode === 'view'}" [readonly]="mode === 'view'" [value]="account[attribute]" [(ngModel)]="account[attribute]">
+              <div class="form-floating">
+                <input id="{{ attribute }}" [ngClass]="{'form-control': mode !== 'view', 'form-control-plaintext pt-2' : mode === 'view'}" type="text" [readonly]="mode === 'view' || attribute === 'id'" [value]="account[attribute]" [(ngModel)]="account[attribute]" placeholder="Username">
+                <label *ngIf="mode !== 'view'" for="{{ attribute }}">{{ attribute }}</label>
+              </div>
             </td>
           </ng-container>
         </tr>
       </tbody>
     </table>
     <div class="div-16 justify-content-center">
-      <ng-container *ngIf="mode === 'view'">
-        <app-button class="g-col-6" color="blue" label="Edit User" (buttonClick)="onEditUserClick()"></app-button>
-      </ng-container>
+      <app-button *ngIf="mode === 'view'" class="g-col-6" color="blue" label="Edit User" (buttonClick)="onEditUserClick()"></app-button>
       <ng-container *ngIf="mode === 'change'">
         <app-button class="g-col-6" color="red" label="Reset Password" (buttonClick)="onResetPasswordClick()"></app-button>
         <app-button class="g-col-6" color="blue" label="Back" (buttonClick)="onBackClick()"></app-button>
         <app-button class="g-col-6" color="green" label="{{ mode }}" (buttonClick)="onSubmit()"></app-button>
       </ng-container>
+      <app-button *ngIf="mode === 'create'" class="g-col-6" color="green" label="{{ mode }}" (buttonClick)="onSubmit()"></app-button>
     </div>
-
-
-<!--    <input type="text" [value]="account.name" [(ngModel)]="account.name">
-    <input type="text" [value]="account.password" [(ngModel)]="account.password">
-    <app-button class="g-col-6" color="blue" label="Back" (buttonClick)="ConfirmClick()"></app-button>-->
-
   </div>
 </div>
 
