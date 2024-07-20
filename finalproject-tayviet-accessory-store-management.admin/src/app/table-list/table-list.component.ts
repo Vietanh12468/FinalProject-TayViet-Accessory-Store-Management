@@ -11,26 +11,21 @@ export class TableListComponent implements OnChanges, OnInit {
   ]
 
   ngOnInit(): void {
-    this.readDataAttributesCheck = false
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!this.readDataAttributesCheck) {
-      this.readDataAttributes();
-      this.renderImage();
-    }
+    this.readDataAttributes();
+    this.renderImage();
   }
   columns: string[] = []
-  readDataAttributesCheck: boolean = false
 
   readDataAttributes() {
     const sample: any = this.data[0];
     for (const key in sample) {
-      if (sample.hasOwnProperty(key)) {
+      if (sample.hasOwnProperty(key) && !this.columns.includes(key)) {
         this.columns.push(key);
       }
     }
-    this.readDataAttributesCheck = true
   }
 
   renderImage() {

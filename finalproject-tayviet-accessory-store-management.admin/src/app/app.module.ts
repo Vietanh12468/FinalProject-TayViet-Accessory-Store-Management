@@ -16,6 +16,7 @@ import { AccountManagerViewComponent } from './account-manager-view/account-mana
 import { DetailAccountViewComponent } from './detail-account-view/detail-account-view.component';
 import { ButtonComponent } from './button/button.component';
 import { CategoryTagComponent } from './category-tag/category-tag.component';
+import { InfoComponent } from './info/info.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CategoryTagComponent } from './category-tag/category-tag.component';
     DetailAccountViewComponent,
     ButtonComponent,
     CategoryTagComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,
