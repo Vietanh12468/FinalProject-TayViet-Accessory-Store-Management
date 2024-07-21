@@ -1,0 +1,47 @@
+<div class="position-relative">
+  <img loading="lazy" class="rounded-circle img my-5" [src]="object.image" alt="Preview Image" [ngClass]="{'opacity-50': mode !== 'view'}" />
+  <app-button *ngIf="mode !== 'view'" class="g-col-6 position-absolute start-50 top-50 translate-middle" color="blue" label="Change" (buttonClick)="openFileInput()"></app-button>
+  <input class="form-control" type="file" #fileInput style="display: none" (change)="handleFileInput(fileInput)">
+</div>
+<div class="form-floating mb-4 w-50 mx-auto">
+  <h3 *ngIf="mode !== 'create'">{{ object['username']}}</h3>
+  <input [ngClass]="{'is-invalid': checkValidAttribute('username') === false}" *ngIf="mode === 'create'" class="form-control" id="username" type="text" [(ngModel)]="object['username']" placeholder="Username">
+  <label *ngIf="mode === 'create'" for="username">Username</label>
+  <div class="position-absolute top-50 start-100 translate-middle-y badge rounded-pill text-bg-danger" *ngIf="checkValidAttribute('username') === false">
+    invalid username
+  </div>
+</div>
+<table class="table align-middle shadow">
+  <tbody>
+    <tr *ngFor="let attribute of attributes">
+      <ng-container *ngIf="attribute !== 'username' && attribute !== 'image' && attribute !== 'state'">
+        <th class="col-3">
+          <label class="col-sm-2 col-form-label mx-3 text-capitalize">{{ attribute }}:</label>
+        </th>
+        <td class="col-9">
+          <div class="form-floating">
+            <input id="{{ attribute }}" [ngClass]="{'form-control': mode !== 'view', 'form-control-plaintext pt-2' : mode === 'view', 'is-invalid': checkValidAttribute(attribute) === false}" type="text" [readonly]="mode === 'view' || attribute === 'id'" [value]="object[attribute]" [(ngModel)]="object[attribute]" placeholder="">
+            <label *ngIf="mode !== 'view'" for="{{ attribute }}">{{ attribute }}</label>
+            <div class="position-absolute top-50 start-100 translate-middle-y badge rounded-pill text-bg-danger" *ngIf="checkValidAttribute(attribute) === false">
+              invalid {{ attribute }}
+            </div>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container *ngIf="attribute === 'state'">
+        <th class="col-3">
+          <label class="col-sm-2 col-form-label mx-3 text-capitalize">{{ attribute }}:</label>
+        </th>
+        <td class="col-9">
+          <div class="form-floating">
+            <select *ngIf="mode !== 'view'" class="form-select text-capitalize" [(ngModel)]="object['state']">
+              <option *ngFor="let option of stateOptions" [value]="option">{{ option }}</option>
+            </select>
+            <label *ngIf="mode !== 'view'" for="{{ attribute }}">{{ attribute }}</label>
+            <input *ngIf="mode === 'view'" id="state" class="form-control-plaintext pt-2" [ngClass]="{'is-invalid': checkValidAttribute(attribute) === false}" type="text" readonly [value]="object['state']" [(ngModel)]="object['state']" placeholder="">
+          </div>
+        </td>
+      </ng-container>
+    </tr>
+  </tbody>
+</table>

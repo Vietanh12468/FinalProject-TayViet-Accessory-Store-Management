@@ -10,7 +10,7 @@
       <tr class="table-secondary" *ngFor="let row of data">
         <td *ngFor="let column of columns">
           <ng-container *ngIf="column === 'image'; else otherContent">
-            <img loading="lazy" [src]="row.image" alt="Preview Image" class="w-50"/>
+            <img loading="lazy" [src]="row.image" alt="Preview Image" class="w-50" />
           </ng-container>
           <ng-template #otherContent>
             {{ row[column] }}

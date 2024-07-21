@@ -96,7 +96,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
                 var response = new Dictionary<string, object>
                 {
                     { "data", result },
-                    { "totalRecords", totalRecords }
+                    { "total", totalRecords }
                 };
 
                 return Ok(response);
@@ -124,7 +124,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
                 var response = new Dictionary<string, object>
                 {
                     { "data", result },
-                    { "totalRecords", totalRecords }
+                    { "total", totalRecords }
                 };
                 return Ok(response);
             }

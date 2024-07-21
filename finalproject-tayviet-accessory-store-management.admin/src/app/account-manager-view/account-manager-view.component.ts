@@ -9,17 +9,20 @@ import { IAccount } from '../Interface/iaccount';
 })
 export class AccountManagerViewComponent implements OnInit {
   public data: IAccount[] = [];
+  public total: number = 0;
+
   ngOnInit() {
-    this.getAllCustomers();
+    this.getCustomers();
   }
   constructor(private http: HttpClient) { }
 
   CustomerList: IAccount[] = [];
 
-  getAllCustomers() {
-    this.http.get<any>('/api/Account').subscribe(
+  getCustomers(page: number = 1) {
+    this.http.get<any>(`/api/Account/page/${page}`).subscribe(
       (result) => {
         this.data = result.data;
+        this.total = result.total;
         console.log(result);
       },
       (error) => {

@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, SimpleChanges, Output, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-table-list',
-  templateUrl: './table-list.component.html',
-  styleUrl: './table-list.component.css'
+  selector: 'app-table',
+  templateUrl: './table.component.html',
+  styleUrl: './table.component.css'
 })
-export class TableListComponent implements OnChanges, OnInit {
+export class TableComponent implements OnChanges, OnInit {
   @Input() data: any[] = [
     { id: 1, name: 'John Doe', age: 25 },
   ]

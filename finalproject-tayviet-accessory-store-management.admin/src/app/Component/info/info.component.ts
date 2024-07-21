@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges, OnInit, OnChanges, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IAccount } from '../Interface/iaccount';
+import { IAccount, Account } from '../../Interface/iaccount';
 
 @Component({
   selector: 'app-info',
@@ -22,6 +22,7 @@ export class InfoComponent implements OnChanges, OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.readDataAttributes();
+    this.getStateOptions();
   }
 
   openFileInput() {
@@ -48,6 +49,32 @@ export class InfoComponent implements OnChanges, OnInit {
     for (const key in this.object) {
       if (this.object.hasOwnProperty(key) && !this.attributes.includes(key)) {
         this.attributes.push(key);
+      }
+    }
+  }
+
+  invalidAttributes: string[] = [];
+
+  handleInvalidAttributes(invalidAttribute: string[]) {
+    this.invalidAttributes = invalidAttribute;
+  }
+
+  checkValidAttribute(attribute: string) {
+    if (this.invalidAttributes.includes(attribute)) {
+      return false;
+    } else {
+      return true;
+    }
+
+  }
+  stateOptions: string[] = [];
+  getStateOptions() {
+    // Get the property names of the target class
+    const accountProps = new Account();
+    // Check if the object has all the target class properties
+    for (const key in this.attributes) {
+      if (accountProps.hasOwnProperty('name')) {
+        this.stateOptions = ['Active', 'Inactive', 'Locked', 'Unlocked'];
       }
     }
   }
