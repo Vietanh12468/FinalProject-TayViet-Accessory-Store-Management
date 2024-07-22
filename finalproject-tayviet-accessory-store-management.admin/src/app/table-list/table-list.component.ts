@@ -11,6 +11,7 @@ export class TableListComponent {
     { id: 1, name: 'John Doe', age: 25 },
     { id: 2, name: 'Jane Smith', age: 30 },
     { id: 3, name: 'Bob Johnson', age: 28 },
+    { id: 4, name: 'Bob Johnson', age: 38 },
   // Add more rows as needed
   ]
   columns = ['id', 'name', 'age']
