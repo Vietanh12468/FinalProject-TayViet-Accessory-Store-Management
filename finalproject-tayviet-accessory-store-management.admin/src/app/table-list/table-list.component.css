@@ -1,0 +1,63 @@
+/* Bootstrap overrides and custom styles */
+.container-sm {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+  .table thead th {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+  }
+
+  .table thead th, .table tbody td {
+    vertical-align: middle;
+  }
+
+  .table tbody tr:nth-of-type(even) {
+    background-color: #f2f2f2;
+  }
+
+  .table tbody tr:hover {
+    background-color: #e9ecef;
+  }
+
+  .table tbody td {
+    text-align: center;
+  }
+
+  .table tbody button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+    .table tbody button:hover {
+      background-color: #0056b3;
+    }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container-sm {
+    padding: 10px;
+  }
+
+  .table tbody td, .table thead th {
+    padding: 10px 5px;
+  }
+
+  .table tbody button {
+    padding: 3px 7px;
+  }
+}
