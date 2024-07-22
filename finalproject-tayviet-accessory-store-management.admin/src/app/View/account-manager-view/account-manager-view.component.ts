@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { IAccount } from '../Interface/iaccount';
+import { IAccount } from '../../Interface/iaccount';
 
 @Component({
   selector: 'app-account-manager-view',

@@ -13,6 +13,8 @@ export class InfoComponent implements OnChanges, OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef;
   @Output() returnData = new EventEmitter<any>();
 
+  ignoredAttributes = ['username', 'image', 'state', 'subProductList', 'categoryList', 'orderList', 'description', 'brandID'];
+
   getInfo() {
     this.returnData.emit(this.object);
   }
@@ -22,7 +24,7 @@ export class InfoComponent implements OnChanges, OnInit {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.readDataAttributes();
-    this.getStateOptions();
+    this.getObjectType()
   }
 
   openFileInput() {
@@ -65,17 +67,22 @@ export class InfoComponent implements OnChanges, OnInit {
     } else {
       return true;
     }
-
   }
+  keyAttributes: string = '';
   stateOptions: string[] = [];
-  getStateOptions() {
-    // Get the property names of the target class
+  getObjectType() {
     const accountProps = new Account();
-    // Check if the object has all the target class properties
-    for (const key in this.attributes) {
-      if (accountProps.hasOwnProperty('name')) {
-        this.stateOptions = ['Active', 'Inactive', 'Locked', 'Unlocked'];
+    let isAccount = true;
+    for (const key of this.attributes) {
+      if (!accountProps.hasOwnProperty(key)) {
+        isAccount = false;
+        break;
       }
+    }
+
+    if (isAccount === true) {
+      this.stateOptions = ['Active', 'Inactive', 'Locked', 'Unlocked'];
+      this.keyAttributes = 'username';
     }
   }
 }

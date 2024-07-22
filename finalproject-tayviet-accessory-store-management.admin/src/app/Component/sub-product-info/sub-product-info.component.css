@@ -35,8 +35,8 @@
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-.btn-label:hover {
-  color: #fff;
-  background-color: #0069d9;
-  border-color: #0062cc;
-}
+  .btn-label:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }

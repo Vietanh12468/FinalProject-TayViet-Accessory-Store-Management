@@ -1,7 +1,7 @@
 import { Component, Input, SimpleChanges, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IAccount } from '../Interface/iaccount';
-import { InfoComponent } from '../Component/info/info.component';
+import { IAccount } from '../../Interface/iaccount';
+import { InfoComponent } from '../../Component/info/info.component';
 
 @Component({
   selector: 'app-detail-account-view',
@@ -51,7 +51,6 @@ export class DetailAccountViewComponent implements OnInit {
       this.http.put('/api/Admin', this.account).subscribe(
         response => {
           console.log('PUT request successful', response);
-          console.log(this.account);
         },
         error => {
           console.error('Error occurred', error);

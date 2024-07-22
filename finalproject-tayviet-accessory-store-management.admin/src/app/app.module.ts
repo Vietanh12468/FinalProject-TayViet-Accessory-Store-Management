@@ -11,13 +11,15 @@ import { MessageBoxComponent } from './message-box/message-box.component';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
 import { UserInfoBoxComponent } from './user-info-box/user-info-box.component';
 import { DetailProductComponent } from './detail-product/detail-product.component';
-import { AccountManagerViewComponent } from './account-manager-view/account-manager-view.component';
-import { DetailAccountViewComponent } from './detail-account-view/detail-account-view.component';
+import { AccountManagerViewComponent } from './View/account-manager-view/account-manager-view.component';
+import { DetailAccountViewComponent } from './View/detail-account-view/detail-account-view.component';
 import { ButtonComponent } from './Component/button/button.component';
 import { CategoryTagComponent } from './Component/category-tag/category-tag.component';
 import { InfoComponent } from './Component/info/info.component';
 import { PaginationComponent } from './Component/pagination/pagination.component';
 import { TableComponent } from './Component/table/table.component';
+import { DetailProductViewComponent } from './View/detail-product-view/detail-product-view.component';
+import { SubProductInfoComponent } from './Component/sub-product-info/sub-product-info.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { TableComponent } from './Component/table/table.component';
     InfoComponent,
     PaginationComponent,
     TableComponent,
+    DetailProductViewComponent,
+    SubProductInfoComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,
