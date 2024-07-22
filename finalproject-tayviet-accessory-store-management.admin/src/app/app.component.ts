@@ -7,7 +7,13 @@ export interface WeatherForecast {
   temperatureF: number;
   summary: string;
 }
-
+export interface OrderHistory {
+  id: string;
+  customerID: string;
+  shipLocation: string;
+  cart: Document[];
+  history: Document[];
+}
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,11 +24,13 @@ export interface WeatherForecast {
 export class AppComponent implements OnInit {
 
   public forecasts: WeatherForecast[] = [];
+  public orderHistory: OrderHistory[] = [];
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.getForecasts();
+    this.getOrderHistory();
   }
 
   public messageBox = true;
@@ -33,6 +41,16 @@ export class AppComponent implements OnInit {
     this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
       (result) => {
         this.forecasts = result;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+  getOrderHistory() {
+    this.http.get<OrderHistory[]>('/api/orderHistory').subscribe(
+      (result) => {
+        this.orderHistory = result;
       },
       (error) => {
         console.error(error);

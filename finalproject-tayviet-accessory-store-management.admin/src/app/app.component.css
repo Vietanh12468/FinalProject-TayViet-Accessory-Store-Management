@@ -1,26 +1,123 @@
-:host {
-    max-width: 1280px;
-    padding: 2rem;
-    text-align: center;
+/* General container settings */
+.container-fluid.d-flex {
+  height: 100vh;
 }
 
-tr:nth-child(even) {
-    background: #F2F2F2;
-}
-
-tr:nth-child(odd) {
-    background: #FFF;
-}
-
-th, td {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-
-table {
-    margin: 0 auto;
+.d-flex.flex-column.col-md-2 {
+  background-color: #f8f9fa;
+  border-right: 1px solid #dee2e6;
 }
 
 .main-div {
-  background: #f8f8f8;
+  padding: 20px;
+  background-color: #ffffff;
+  overflow-y: auto;
 }
+
+/* Sidebar styles */
+.d-flex.flex-column.col-md-2 .nav-link {
+  color: #333;
+}
+
+  .d-flex.flex-column.col-md-2 .nav-link.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .d-flex.flex-column.col-md-2 .nav-link:hover {
+    background-color: #e9ecef;
+  }
+
+.d-flex.flex-column.col-md-2 .dropdown-menu {
+  width: 100%;
+}
+
+.d-flex.flex-column.col-md-2 .dropdown-toggle::after {
+  margin-left: .255em;
+}
+
+.d-flex.flex-column.col-md-2 .dropdown-item {
+  color: #333;
+}
+
+  .d-flex.flex-column.col-md-2 .dropdown-item:hover {
+    background-color: #e9ecef;
+  }
+
+.d-flex.flex-column.col-md-2 .link-dark {
+  color: #333;
+}
+
+  .d-flex.flex-column.col-md-2 .link-dark:hover {
+    color: #007bff;
+  }
+
+/* Main content area styles */
+.main-div table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.main-div table,
+.main-div th,
+.main-div td {
+  border: 1px solid #dee2e6;
+}
+
+.main-div th,
+.main-div td {
+  padding: 8px;
+  text-align: center;
+}
+
+.main-div th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.main-div tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* Search form styles */
+.search-form {
+  max-width: 1500px;
+}
+
+  .search-form input[type="search"] {
+    border-radius: 0;
+  }
+
+  .search-form button {
+    border-radius: 0;
+  }
+
+/* Dropdown container styles */
+.dropdown-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.dropdown-container {
+  flex: 1;
+  max-width: 200px;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: .5rem;
+}
+
+.dropdown-menu {
+  min-width: 150px;
+}
+
+  .dropdown-menu .dropdown-item {
+    color: #333;
+  }
+
+    .dropdown-menu .dropdown-item:hover {
+      background-color: #e9ecef;
+    }
