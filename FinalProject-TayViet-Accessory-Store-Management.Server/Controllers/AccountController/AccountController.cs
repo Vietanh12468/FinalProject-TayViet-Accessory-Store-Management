@@ -1,15 +1,17 @@
 ﻿using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AccountController : ControllerBase
+    public class AccountController : ControllerTemplate<Account>
     {
         private readonly IAccountService _accountService;
 
-        public AccountController(IAccountService accountService)
+        public AccountController(IAccountService accountService, IDatabaseServices<Account> databaseServices)
+            : base(databaseServices)
         {
             _accountService = accountService;
         }

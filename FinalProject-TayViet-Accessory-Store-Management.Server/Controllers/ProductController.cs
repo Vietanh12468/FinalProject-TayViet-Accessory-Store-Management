@@ -1,15 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
+using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProductController : ControllerBase
+    public class ProductController : ControllerTemplate<Product>
     {
         private readonly IProductService _productService;
 
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, IDatabaseServices<Product> databaseServices)
+            : base(databaseServices)
         {
             _productService = productService;
         }
