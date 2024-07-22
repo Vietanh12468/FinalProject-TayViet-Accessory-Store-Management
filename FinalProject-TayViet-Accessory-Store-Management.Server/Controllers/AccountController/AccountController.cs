@@ -1,5 +1,6 @@
 ﻿using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
+using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
@@ -8,55 +9,8 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
     [Route("api/[controller]")]
     public class AccountController : ControllerTemplate<Account>
     {
-        private readonly IAccountService _accountService;
-
-        public AccountController(IAccountService accountService, IDatabaseServices<Account> databaseServices)
-            : base(databaseServices)
+        public AccountController(AccountDatabaseServices accountDatabaseService) : base(databaseServices: accountDatabaseService)
         {
-            _accountService = accountService;
         }
-
-        [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginRequest request)
-        {
-            try
-            {
-                _accountService.Login(request.Username, request.Password);
-                return Ok("Login successful.");
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return Unauthorized(ex.Message);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpPost("logout")]
-        public IActionResult Logout([FromBody] LogoutRequest request)
-        {
-            try
-            {
-                _accountService.Logout(request.Username);
-                return Ok("Logout successful.");
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-    }
-
-    public class LoginRequest
-    {
-        public string Username { get; set; }
-        public string Password { get; set; }
-    }
-
-    public class LogoutRequest
-    {
-        public string Username { get; set; }
     }
 }

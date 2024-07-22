@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Utility.DatabaseUtility.AccountDatabaseUtility;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
+using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
 {
@@ -57,7 +58,60 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             return response;
         }
 
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        {
+            try
+            {
+                T result = await _databaseServices.ReadAsync("username", request.Username);
 
+                if(result == null)
+                {
+                    return NotFound();
+                }
+                if (result.password != request.Password)
+                {
+                    return Unauthorized();
+                }
+                result.Login();
+                return Ok("Login successful.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout([FromBody] LogoutRequest request)
+        {
+            try
+            {
+                T result = await _databaseServices.ReadAsync("username", request.Username);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                result.Logout();
+                return Ok("Login successful.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+    }
+
+    public class LoginRequest
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+
+    public class LogoutRequest
+    {
+        public string Username { get; set; }
     }
 
 }

@@ -1,5 +1,4 @@
 using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
-using FinalProject_TayViet_Accessory_Store_Management.Server.Services;
 using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Utility.DatabaseMigration;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Utility.DatabaseUtility.AccountDatabaseUtility;
@@ -21,8 +20,6 @@ builder.Services.AddSingleton<BrandDatabaseServices>();
 builder.Services.AddSingleton<ProductDatabaseService>();
 builder.Services.AddSingleton<OrderHistoryDatabaseService>();
 builder.Services.AddSingleton<MainMigration>();
-
-builder.Services.AddSingleton<IProductService, ProductService>();
 
 MigrationService migrationService = new MigrationService(builder.Services.BuildServiceProvider().GetService<MainMigration>());
 migrationService.CheckForUpdate();

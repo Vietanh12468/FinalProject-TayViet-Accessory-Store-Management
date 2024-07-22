@@ -10,7 +10,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
     [Route("api/[controller]")]
     public class OrderHistoryController : ControllerTemplate<OrderHistory>
     {
-        public OrderHistoryController(OrderHistoryDatabaseService orderHistoryDatabaseService) : base(databaseServices: orderHistoryDatabaseService) {}
+        public OrderHistoryController(OrderHistoryDatabaseService orderHistoryDatabaseService) : base(databaseServices: orderHistoryDatabaseService) { }
 
         [HttpPut("{id}, {newState}")]
         public async Task<IActionResult> UpdateOrderHistory(string id, string newState)
@@ -33,6 +33,5 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
 
             return Ok();
         }
-
     }
 }

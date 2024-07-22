@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
+using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
 {
@@ -8,20 +9,19 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
     [Route("api/[controller]")]
     public class ProductController : ControllerTemplate<Product>
     {
-        private readonly IProductService _productService;
-
-        public ProductController(IProductService productService, IDatabaseServices<Product> databaseServices)
-            : base(databaseServices)
-        {
-            _productService = productService;
+        private new readonly ProductDatabaseService _databaseServices;
+        public ProductController(ProductDatabaseService productDatabaseService) : base(databaseServices: productDatabaseService) { 
+            _databaseServices = productDatabaseService;
         }
 
-        [HttpPut("buy/{productId}/{subProductId}")]
-        public IActionResult Buy(string productId, string subProductId, [FromBody] int quantity)
+        [HttpGet("Buy/{productId}, {subProductIndex}, {quantity}")]
+        public async Task<IActionResult> Buy(string productId, int subProductIndex, int quantity)
         {
             try
             {
-                _productService.Buy(productId, subProductId, quantity);
+                Product product = await _databaseServices.ReadAsync("id", productId);
+                product.subProductList[subProductIndex].Buy(quantity);
+                await _databaseServices.UpdateAsync(product, "subProductList", product.subProductList);
                 return Ok("Purchase successful.");
             }
             catch (Exception ex)
@@ -30,12 +30,13 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             }
         }
 
-        [HttpPut("restock/{productId}/{subProductId}")]
-        public IActionResult Restock(string productId, string subProductId, [FromBody] int quantity)
+        [HttpGet("restock/{productId}/{subProductId}/{quantity}")]
+        public async Task<IActionResult> Restock(string productId, int subProductIndex, int quantity)
         {
             try
             {
-                _productService.Restock(productId, subProductId, quantity);
+                Product product = await _databaseServices.ReadAsync("id", productId);
+                product.subProductList[subProductIndex].Restock(quantity);
                 return Ok("Restock successful.");
             }
             catch (Exception ex)
