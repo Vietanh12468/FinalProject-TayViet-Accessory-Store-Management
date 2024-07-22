@@ -1,0 +1,15 @@
+<div class="container-fluid w-50">
+  <div class="div-2">
+    <app-info [mode]="mode" [object]="account" #infoComponent (returnData)="handleData($event)">></app-info>
+    <div class="div-16 justify-content-center mt-4">
+      <app-button *ngIf="mode === 'view'" class="g-col-6" color="blue" label="Edit User" (buttonClick)="onEditUserClick()"></app-button>
+      <ng-container *ngIf="mode === 'change'">
+        <app-button class="g-col-6" color="red" label="Reset Password" (buttonClick)="onResetPasswordClick()"></app-button>
+        <app-button class="g-col-6" color="blue" label="Back" (buttonClick)="onBackClick()"></app-button>
+        <app-button class="g-col-6" color="green" label="{{ mode }}" (buttonClick)="onSubmit()"></app-button>
+      </ng-container>
+      <app-button *ngIf="mode === 'create'" class="g-col-6" color="green" label="{{ mode }}" (buttonClick)="onSubmit()"></app-button>
+    </div>
+  </div>
+</div>
+

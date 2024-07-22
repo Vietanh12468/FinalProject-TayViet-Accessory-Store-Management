@@ -1,0 +1,42 @@
+:host {
+  width: 80%;
+  padding: 2rem;
+  text-align: center;
+}
+
+.textarea {
+  height: 200px;
+}
+
+.table {
+  text-align: left;
+}
+
+.img {
+  aspect-ratio: 1;
+  width: 250px;
+  max-width: 100%;
+}
+
+.btn-label {
+  display: inline-block;
+  padding: .5rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.25;
+  color: #212529;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: .25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-label:hover {
+  color: #fff;
+  background-color: #0069d9;
+  border-color: #0062cc;
+}

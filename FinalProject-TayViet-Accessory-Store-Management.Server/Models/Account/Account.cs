@@ -18,6 +18,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public string username { get; set; } = null!;
         public string? state { get; set; } = "Inactive";
         public string? role { get; set; } = "Customer";
+        public string? image { get; set; } = "";
 
         public Account(string name, string email, string password, string phoneNumber, string username)
         {
@@ -28,6 +29,18 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
             this.username = username;
         }
 
+        public Account(IAccount account) { 
+            id = account.id;
+            name = account.name;
+            email = account.email;
+            password = account.password;
+            phoneNumber = account.phoneNumber;
+            username = account.username;
+            role = account.role;
+            image = account.image;
+        }
+
+        // get State
         public IAccountState GetState()
         {
             if (AccountValidateState.CheckState(state))

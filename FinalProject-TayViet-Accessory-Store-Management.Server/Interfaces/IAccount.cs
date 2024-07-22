@@ -2,7 +2,7 @@
 {
     public interface IAccount
     {
-        string id { get; set; }
+        string? id { get; set; }
         string name { get; set; }
         string email { get; set; }
         string password { get; set; }
@@ -10,8 +10,6 @@
         string username { get; set; }
         string? state { get; set; }
         string? role { get; set; }
-
-        void Login();
-        void Logout();
+        string? image { get; set; }
     }
 }

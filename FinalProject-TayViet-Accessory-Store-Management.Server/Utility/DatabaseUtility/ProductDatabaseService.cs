@@ -8,7 +8,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
     // This class is used to set product collection and model for this databaseServices. To use method inside this class, check the DatabaseServices.cs
     public class ProductDatabaseService : DatabaseServices<Product>
     {
-        public ProductDatabaseService(IOptions<DBSettings> dbSettings, int index_collection = 4) : base(dbSettings, index_collection) { }
+        public ProductDatabaseService(IOptions<DBSettings> dbSettings, int index_collection = 6) : base(dbSettings, index_collection) { }
 
         public async Task<SubProduct> GetSubProduct(string productId, string subProductName, int? quanity = 0)
         {

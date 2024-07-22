@@ -49,7 +49,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
                 var objectId = obj.GetType().GetProperty("id")?.GetValue(obj)?.ToString();
                 var objChange = await _databaseServices.ReadAsync("id", objectId);
                 await _databaseServices.UpdateAsync(obj, "id", objectId);
-                return Ok("Item Updated Successfully");
+                return Ok();
             }
             catch (FormatException) { return BadRequest("Invalid Id"); }
             catch (NotFoundException) { return NotFound("Item Not Found Or Deleted"); }
@@ -96,7 +96,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
                 var response = new Dictionary<string, object>
                 {
                     { "data", result },
-                    { "totalRecords", totalRecords }
+                    { "total", totalRecords }
                 };
 
                 return Ok(response);
@@ -124,7 +124,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
                 var response = new Dictionary<string, object>
                 {
                     { "data", result },
-                    { "totalRecords", totalRecords }
+                    { "total", totalRecords }
                 };
                 return Ok(response);
             }

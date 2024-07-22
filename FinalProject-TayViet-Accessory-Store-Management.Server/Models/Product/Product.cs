@@ -5,7 +5,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
     public class Product
     {
-        // Product ID
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string? id { get; set; }
@@ -13,9 +12,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public string description { get; set; } = null!;
         public string image { get; set; } = null!;
         public List<string> categoryList { get; set; } = null!;
-        // List of sub-products
         public List<SubProduct> subProductList { get; set; } = null!;
-        // Brand of the product
         public string brandID { get; set; } = null!;
 
         public Product(string name, string description, string image, List<string> categoryList, List<SubProduct> subProductList, string brandID)
@@ -28,13 +25,11 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
             this.brandID = brandID;
         }
 
-        // Add Sub-product
         public void AddSubProduct(SubProduct subProduct)
         {
             subProductList.Add(subProduct);
         }
 
-        // Remove Sub-product
         public void RemoveSubProduct(int index)
         {
             subProductList.RemoveAt(index);

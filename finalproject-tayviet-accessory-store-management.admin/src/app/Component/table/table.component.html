@@ -8,7 +8,15 @@
     </thead>
     <tbody>
       <tr class="table-secondary" *ngFor="let row of data">
-        <td *ngFor="let column of columns">{{ row[column] }}</td>
+        <td *ngFor="let column of columns">
+          <ng-container *ngIf="column === 'image'; else otherContent">
+            <img loading="lazy" [src]="row.image" alt="Preview Image" class="w-50" />
+          </ng-container>
+          <ng-template #otherContent>
+            {{ row[column] }}
+          </ng-template>
+
+        </td>
         <td> <button (click)="viewDetail(row['id'])">Trigger</button> </td>
       </tr>
     </tbody>
