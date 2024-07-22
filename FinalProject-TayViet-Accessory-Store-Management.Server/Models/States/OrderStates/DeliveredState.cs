@@ -9,10 +9,9 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models.States.O
         public void HandleOrder(OrderHistory order)
         {
             bool hasPaid = false;
-            OrderHistoryMomento tempOrderHistoryMomento = new OrderHistoryMomento("Complete Payment");
             foreach (var i in order.history)
             {
-                if (i == tempOrderHistoryMomento)
+                if (i.state == "Complete Payment")
                 {
                     hasPaid = true;
                     break;
@@ -20,12 +19,12 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models.States.O
             }
             if (hasPaid)
             {
-                OrderHistoryMomento newOrderHistoryMomento = new OrderHistoryMomento("Compelete Order");
+                OrderHistoryMomento newOrderHistoryMomento = new OrderHistoryMomento("Complete Order");
                 order.history.Push(newOrderHistoryMomento);
             }
             else
             {
-                //Logic if payment haven't done
+                //Logic if payment hasn't been done
             }
         }
 

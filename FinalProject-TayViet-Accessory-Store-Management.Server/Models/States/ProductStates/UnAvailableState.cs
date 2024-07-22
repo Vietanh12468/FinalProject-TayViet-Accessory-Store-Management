@@ -3,18 +3,19 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
     public class UnavailableState : IProductState
     {
-        public override string ToString()
+        public void Buy(SubProduct subProduct, int quantity)
         {
-            return "Unavailable";
-        }
-        public void Buy(SubProduct product, int quantity)
-        {
-            throw new NotImplementedException();
+            throw new InvalidOperationException("Product is unavailable.");
         }
 
-        public void Restock(SubProduct product, int quantity)
+        public void Restock(SubProduct subProduct, int quantity)
         {
-            throw new NotImplementedException();
+            subProduct.inStock += quantity;
+            if (subProduct.inStock > 0)
+            {
+                subProduct.SetState("Available");
+            }
         }
     }
+
 }

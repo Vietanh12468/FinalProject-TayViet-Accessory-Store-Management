@@ -1,8 +1,9 @@
-﻿using FinalProject_TayViet_Accessory_Store_Management.Server.States;
-using MongoDB.Bson.Serialization.Attributes;
-using MongoDB.Bson;
+﻿using MongoDB.Bson.Serialization.Attributes;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Utility.ValidateState;
+using FinalProject_TayViet_Accessory_Store_Management.Server.States;
+using MongoDB.Bson;
+
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
     public class Account : IAccount
@@ -18,7 +19,8 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public string? state { get; set; } = "Inactive";
         public string? role { get; set; } = "Customer";
 
-        public Account(string name, string email, string password, string phoneNumber, string username) { 
+        public Account(string name, string email, string password, string phoneNumber, string username)
+        {
             this.name = name;
             this.email = email;
             this.password = password;
@@ -26,7 +28,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
             this.username = username;
         }
 
-        // get State
         public IAccountState GetState()
         {
             if (AccountValidateState.CheckState(state))
@@ -34,11 +35,9 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
                 return AccountValidateState.STATE_DICTIONARY[state];
             }
 
-            // Handle the case when the state is not found
             throw new ArgumentException($"Invalid state: {state}");
         }
 
-        // Set State
         public void SetState(string state)
         {
             if (AccountValidateState.CheckState(state))
@@ -47,17 +46,14 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
                 return;
             }
 
-            // Handle the case when the state is not found
             throw new ArgumentException($"Invalid state: {state}");
         }
 
-        // Login method
         public void Login()
         {
             GetState().Login(this);
         }
 
-        // Logout method
         public void Logout()
         {
             GetState().Logout(this);

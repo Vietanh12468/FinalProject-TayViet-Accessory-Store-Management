@@ -1,6 +1,7 @@
 using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
 using FinalProject_TayViet_Accessory_Store_Management.Server.States;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Utility.ValidateState;
+
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
     public class SubProduct
@@ -26,7 +27,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
             this.discount = discount;
         }
 
-        // Get Product ID
         public IProductState GetState()
         {
             if (ProductValidateState.CheckState(state))
@@ -34,7 +34,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
                 return ProductValidateState.STATE_DICTIONARY[state];
             }
 
-            // Handle the case when the state is not found
             throw new ArgumentException($"Invalid state: {state}");
         }
 
@@ -46,7 +45,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
                 return;
             }
 
-            // Handle the case when the state is not found
             throw new ArgumentException($"Invalid state: {state}");
         }
 
@@ -55,7 +53,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
             GetState().Restock(this, newStock);
         }
 
-        // Set State
         public void Buy(int quantity)
         {
             GetState().Buy(this, quantity);

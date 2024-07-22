@@ -5,17 +5,12 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
     {
         public void Login(Account account)
         {
-            Console.WriteLine("Cannot login. Account is inactive.");
+            account.SetState("Active");
         }
 
         public void Logout(Account account)
         {
-            Console.WriteLine("Cannot logout. Account is inactive.");
-        }
-
-        public override string ToString()
-        {
-            return "Inactive";
+            throw new InvalidOperationException("Account is already logged out.");
         }
     }
 }

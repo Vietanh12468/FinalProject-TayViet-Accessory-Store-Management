@@ -3,14 +3,16 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
     public class LockState : IAccountState
     {
+        
         public void Login(Account account)
         {
-            Console.WriteLine("Cannot login. Account is locked.");
+            account.SetState(ToString());
+            throw new InvalidOperationException("Account is locked, login request failed");
         }
 
         public void Logout(Account account)
         {
-            Console.WriteLine("Cannot logout. Account is locked.");
+            throw new NotImplementedException();
         }
 
         public override string ToString()

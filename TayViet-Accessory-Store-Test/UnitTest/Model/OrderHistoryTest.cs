@@ -41,18 +41,20 @@ namespace TayViet_Accessory_Store_Test.UnitTest.Model
             Assert.Throws<Exception>(() => orderPlacedState.RequestRefund(orderHistory));
         }
         [Fact]
+        
         public void DeliveredState_HandleOrder_ShouldAddCompleteOrderIfPaid()
         {
             // Arrange
+            var order = CreateSampleOrder();
+            order.history.Push(new OrderHistoryMomento("Ordered"));
+            order.history.Push(new OrderHistoryMomento("Complete Payment"));
             var deliveredState = new DeliveredState();
-            var orderHistory = CreateSampleOrder();
-            orderHistory.history.Push(new OrderHistoryMomento("Complete Payment"));
 
             // Act
-            deliveredState.HandleOrder(orderHistory);
+            deliveredState.HandleOrder(order);
 
             // Assert
-            Assert.Contains(orderHistory.history, x => x.state == "Complete Order");
+            Assert.Contains(order.history, h => h.state == "Complete Order");
         }
 
         [Fact]
@@ -147,7 +149,15 @@ namespace TayViet_Accessory_Store_Test.UnitTest.Model
         [Fact]
         public void RequestRefund_OrderHistory_Fail()
         {
-            Assert.Throws<Exception>(() => sampleObject.RequestRefund());
+            // Arrange
+            var order = new OrderHistory("customerID", "shipLocation", new List<ProductInCart>());
+            var deliveredState = new DeliveredState();
+            order.history.Push(new OrderHistoryMomento("Ordered"));
+            order.history.Push(new OrderHistoryMomento("Complete Payment"));
+            order.UpdateState("Refund request is being made");
+
+            // Act & Assert
+            Assert.Throws<NotImplementedException>(() => order.RequestRefund());
         }
 
         [Fact]

@@ -1,22 +1,18 @@
 ﻿using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
 using FinalProject_TayViet_Accessory_Store_Management.Server.States;
 
-namespace FinalProject_TayViet_Accessory_Store_Management.Server.Utility.ValidateState
+public static class ProductValidateState
 {
-    public class ProductValidateState 
+    public static readonly Dictionary<string, IProductState> STATE_DICTIONARY = new Dictionary<string, IProductState>
     {
-        public static new readonly Dictionary<string, IProductState> STATE_DICTIONARY = new Dictionary<string, IProductState>(){
-            { "Available", new AvailableState() },
-            { "Unavailable", new UnavailableState() },
-            { "Out of Stock", new OutOfStockState() },
-            { "Limited", new LimitState() }
-        };
+        { "Available", new AvailableState() },
+        { "Unavailable", new UnavailableState() },
+        { "Limit", new LimitState() },
+        { "OutOfStock", new OutOfStockState() }
+    };
 
-        public static bool CheckState(string state)
-        {
-            if (ValidateStateTemplate<IProductState>.CheckState(state, STATE_DICTIONARY))
-                return true;
-            return false;
-        }
+    public static bool CheckState(string? state)
+    {
+        return STATE_DICTIONARY.ContainsKey(state);
     }
 }

@@ -1,5 +1,8 @@
 ﻿using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
 using FinalProject_TayViet_Accessory_Store_Management.Server.States;
+using Xunit;
+using System;
+using System.Collections.Generic;
 
 namespace TayViet_Accessory_Store_Test.UnitTest.Model
 {
@@ -44,8 +47,8 @@ namespace TayViet_Accessory_Store_Test.UnitTest.Model
         {
             yield return new object[] { 0, typeof(UnavailableState), "Unavailable" };
             yield return new object[] { 0, typeof(AvailableState), "Available" };
-            yield return new object[] { 0, typeof(OutOfStockState), "Out of Stock" };
-            yield return new object[] { 0, typeof(LimitState), "Limited" };
+            yield return new object[] { 0, typeof(OutOfStockState), "OutOfStock" }; // Corrected state name
+            yield return new object[] { 0, typeof(LimitState), "Limit" }; // Corrected state name
         }
 
         [Theory]
@@ -57,7 +60,71 @@ namespace TayViet_Accessory_Store_Test.UnitTest.Model
             Assert.IsType(stateTypeChange, state);
         }
 
+        [Fact]
+        public void Buy_SubProductAvailable_ShouldReduceQuantity()
+        {
+            var subProduct = new SubProduct("Test SubProduct", "Description", new List<string> { "image1.jpg" }, 10, "Available", 100, 150, 10);
+            subProduct.Buy(3);
+            Assert.Equal(7, subProduct.inStock);
+            Assert.Equal("Available", subProduct.state);
+        }
+
+        [Fact]
+        public void Buy_SubProductUnavailable_ShouldThrowException()
+        {
+            var subProduct = new SubProduct("Test SubProduct", "Description", new List<string> { "image1.jpg" }, 0, "Unavailable", 100, 150, 10);
+            Assert.Throws<InvalidOperationException>(() => subProduct.Buy(1));
+        }
+
+        [Fact]
+        public void Restock_SubProductUnavailable_ShouldChangeStateToAvailable()
+        {
+            var subProduct = new SubProduct("Test SubProduct", "Description", new List<string> { "image1.jpg" }, 0, "Unavailable", 100, 150, 10);
+            subProduct.Restock(5);
+            Assert.Equal(5, subProduct.inStock);
+            Assert.Equal("Available", subProduct.state);
+        }
+
+        [Fact]
+        public void Restock_SubProductAvailable_ShouldIncreaseQuantity()
+        {
+            var subProduct = new SubProduct("Test SubProduct", "Description", new List<string> { "image1.jpg" }, 10, "Available", 100, 150, 10);
+            subProduct.Restock(5);
+            Assert.Equal(15, subProduct.inStock);
+        }
+
+        [Fact]
+        public void Buy_SubProductOutOfStock_ShouldThrowException()
+        {
+            var subProduct = new SubProduct("Test SubProduct", "Description", new List<string> { "image1.jpg" }, 0, "OutOfStock", 100, 150, 10);
+            Assert.Throws<InvalidOperationException>(() => subProduct.Buy(1));
+        }
+
+        [Fact]
+        public void Restock_SubProductOutOfStock_ShouldChangeStateToAvailable()
+        {
+            var subProduct = new SubProduct("Test SubProduct", "Description", new List<string> { "image1.jpg" }, 0, "OutOfStock", 100, 150, 10);
+            subProduct.Restock(5);
+            Assert.Equal(5, subProduct.inStock);
+            Assert.Equal("Available", subProduct.state);
+        }
+
+        [Fact]
+        public void Buy_SubProductLimit_ShouldChangeStateToOutOfStock()
+        {
+            var subProduct = new SubProduct("Test SubProduct", "Description", new List<string> { "image1.jpg" }, 3, "Limit", 100, 150, 10);
+            subProduct.Buy(3);
+            Assert.Equal(0, subProduct.inStock);
+            Assert.Equal("OutOfStock", subProduct.state);
+        }
+
+        [Fact]
+        public void Restock_SubProductLimit_ShouldChangeStateToAvailable()
+        {
+            var subProduct = new SubProduct("Test SubProduct", "Description", new List<string> { "image1.jpg" }, 3, "Limit", 100, 150, 10);
+            subProduct.Restock(5);
+            Assert.Equal(8, subProduct.inStock);
+            Assert.Equal("Available", subProduct.state);
+        }
     }
-
 }
-
