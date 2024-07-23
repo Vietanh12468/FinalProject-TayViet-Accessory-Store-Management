@@ -73,7 +73,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
                 {
                     return Unauthorized();
                 }
-                result.Login();
+                result.login();
                 return Ok("Login successful.");
             }
             catch (Exception ex)
@@ -93,8 +93,8 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
                 {
                     return NotFound();
                 }
-                result.Logout();
-                return Ok("Login successful.");
+                result.logout();
+                return Ok("Logout successful.");
             }
             catch (Exception ex)
             {

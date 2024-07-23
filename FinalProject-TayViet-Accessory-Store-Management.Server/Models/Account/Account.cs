@@ -62,14 +62,15 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
             throw new ArgumentException($"Invalid state: {state}");
         }
 
-        public void Login()
+        public void login()
         {
             GetState().Login(this);
         }
 
-        public void Logout()
+        public void logout()
         {
             GetState().Logout(this);
         }
+
     }
 }

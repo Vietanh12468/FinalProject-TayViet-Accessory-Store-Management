@@ -90,16 +90,13 @@
           <tr>
             <th class="col-12" colspan="4">
               <label class="d-block col-sm-2 col-form-label mx-3 text-capitalize">Image:</label>
-              <ng-container *ngFor="let image of subProduct['listImage']">
-                <div class="d-inline-flex">
-                  <img class="col-4 ratio-1x1 d-inline" loading="lazy" style="width: 100px; height: 100px" [src]="image" alt="Preview Image" [ngClass]="{'opacity-50': mode !== 'view'}" />
-                  <img class="col-4 ratio-1x1 d-inline" loading="lazy" style="width: 100px; height: 100px" [src]="image" alt="Preview Image" [ngClass]="{'opacity-50': mode !== 'view'}" />
-
-                  <img class="col-4 ratio-1x1 d-inline" loading="lazy" style="width: 100px; height: 100px" [src]="image" alt="Preview Image" [ngClass]="{'opacity-50': mode !== 'view'}" />
-                  <img class="col-4 ratio-1x1 d-inline" loading="lazy" style="width: 100px; height: 100px" [src]="image" alt="Preview Image" [ngClass]="{'opacity-50': mode !== 'view'}" />
-
+              <div class="container text-center ms-2">
+                <div class="row row-cols-auto">
+                  <ng-container *ngFor="let image of subProduct['listImage']">
+                    <app-small-img class="col" [img]="image"></app-small-img>
+                  </ng-container>
                 </div>
-              </ng-container>
+              </div>
             </th>
           </tr>
         </tbody>

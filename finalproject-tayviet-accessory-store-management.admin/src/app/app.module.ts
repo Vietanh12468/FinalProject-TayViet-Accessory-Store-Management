@@ -20,7 +20,8 @@ import { PaginationComponent } from './Component/pagination/pagination.component
 import { TableComponent } from './Component/table/table.component';
 import { DetailProductViewComponent } from './View/detail-product-view/detail-product-view.component';
 import { SubProductInfoComponent } from './Component/sub-product-info/sub-product-info.component';
-import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { SmallImgComponent } from './Component/small-img/small-img.component';
+import { LoginViewComponent } from './View/login-view/login-view.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +39,8 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
     TableComponent,
     DetailProductViewComponent,
     SubProductInfoComponent,
-    DetailProductComponent,
-    AdminLoginComponent
+    SmallImgComponent,
+    LoginViewComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

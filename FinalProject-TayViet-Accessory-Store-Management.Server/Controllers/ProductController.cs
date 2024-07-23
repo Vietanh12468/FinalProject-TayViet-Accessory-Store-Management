@@ -21,7 +21,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             {
                 Product product = await _databaseServices.ReadAsync("id", productId);
                 product.subProductList[subProductIndex].Buy(quantity);
-                await _databaseServices.UpdateAsync(product, "subProductList", product.subProductList);
+                await _databaseServices.UpdateAsync(product, "id", productId);
                 return Ok("Purchase successful.");
             }
             catch (Exception ex)
@@ -30,13 +30,14 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             }
         }
 
-        [HttpGet("restock/{productId}/{subProductId}/{quantity}")]
+        [HttpGet("Restock/{productId}/{subProductIndex}/{quantity}")]
         public async Task<IActionResult> Restock(string productId, int subProductIndex, int quantity)
         {
             try
             {
                 Product product = await _databaseServices.ReadAsync("id", productId);
                 product.subProductList[subProductIndex].Restock(quantity);
+                await _databaseServices.UpdateAsync(product, "id", productId);
                 return Ok("Restock successful.");
             }
             catch (Exception ex)

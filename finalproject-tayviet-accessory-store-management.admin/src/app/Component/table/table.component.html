@@ -1,4 +1,4 @@
-<div class="container-sm">
+<div class="container-sm d-flex container-fluid main-div">
   <table class="table table-striped table-hover table-bordered border-primary table-sm">
     <thead>
       <tr class="table-primary">
@@ -10,7 +10,7 @@
       <tr class="table-secondary" *ngFor="let row of data">
         <td *ngFor="let column of columns">
           <ng-container *ngIf="column === 'image'; else otherContent">
-            <img loading="lazy" [src]="row.image" alt="Preview Image" class="w-50" />
+            <app-small-img [img]="row.image"></app-small-img>
           </ng-container>
           <ng-template #otherContent>
             {{ row[column] }}

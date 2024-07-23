@@ -2,13 +2,15 @@ import { Component, Input, SimpleChanges, OnInit, ViewChild, ElementRef } from '
 import { HttpClient } from '@angular/common/http';
 import { IProduct } from '../../Interface/iproduct';
 import { InfoComponent } from '../../Component/info/info.component';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-detail-product-view',
   templateUrl: './detail-product-view.component.html',
   styleUrl: './detail-product-view.component.css'
 })
 export class DetailProductViewComponent implements OnInit {
-  @Input() id: string = '';
+  @Input() id: string|null = '';
   @Input() mode: string = 'view';
   @ViewChild('infoComponent') infoComponent!: InfoComponent;
 
@@ -61,8 +63,10 @@ export class DetailProductViewComponent implements OnInit {
     ],
     "brandID": "string"
   };
+  constructor(private http: HttpClient, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get('id');
     if (this.mode === 'create') {
       for (const key in this.product) {
         this.product[key] = null;
@@ -73,8 +77,6 @@ export class DetailProductViewComponent implements OnInit {
       this.getDetailProduct();
     }
   }
-
-  constructor(private http: HttpClient) { }
   getDetailProduct() {
     this.http.get<IProduct>(`/api/Product/${this.id}`).subscribe(
       (result) => {

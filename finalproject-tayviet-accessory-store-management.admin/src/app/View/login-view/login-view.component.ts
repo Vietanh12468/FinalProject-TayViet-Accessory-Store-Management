@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-admin-login',
-  templateUrl: './admin-login.component.html',
-  styleUrl: './admin-login.component.css'
+  selector: 'app-login-view',
+  templateUrl: './login-view.component.html',
+  styleUrl: './login-view.component.css'
 })
-export class AdminLoginComponent {
+export class LoginViewComponent {
   email: string = '';
   password: string = '';
 
@@ -17,4 +17,3 @@ export class AdminLoginComponent {
     // Add your authentication logic here
   }
 }
-
