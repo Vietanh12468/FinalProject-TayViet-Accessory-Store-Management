@@ -11,7 +11,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces
         Task DeleteAsync<TT>(string attribute, TT value);
         Task<long> GetTotalRecordAsync();
         Task<List<T>> ReadAsync(int skip = 0, int limit = 20);
-        Task<List<T>> SearchAsync(string attribute, string value, int? skip = 1, int limit = 20);
+        Task<List<T>> SearchAsync(string attribute, string value, int skip = 1, int limit = 20);
         Task<long> GetTotalSearchRecordAsync(string attribute, string value);
     }
 }

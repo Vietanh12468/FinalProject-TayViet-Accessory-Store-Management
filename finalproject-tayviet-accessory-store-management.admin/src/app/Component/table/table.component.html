@@ -17,7 +17,7 @@
           </ng-template>
 
         </td>
-        <td> <button (click)="viewDetail(row['id'])">Trigger</button> </td>
+        <td> <button routerLink="/account-manager/{{row.id}}">Trigger</button> </td>
       </tr>
     </tbody>
   </table>

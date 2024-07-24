@@ -72,14 +72,14 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
 
 /*            return await _collection.Find(_ => true).Skip(skip).Limit(limit).ToListAsync();*/
         }
-        public virtual async Task<List<T>> SearchAsync(string attribute, string value, int? skip = 1, int limit = 20)
+        public virtual async Task<List<T>> SearchAsync(string attribute, string value, int skip = 0, int limit = 20)
         {
             var pattern = new BsonRegularExpression(value, "i"); 
             var filter = Builders<T>.Filter.Regex(attribute, pattern); 
-            return await _collection.Find(filter).Skip(skip-1).Limit(limit).ToListAsync();
+            return await _collection.Find(filter).Skip(skip).Limit(limit).ToListAsync();
         }
 
-        public async Task<long> GetTotalSearchRecordAsync(string attribute, string value)
+        public virtual async Task<long> GetTotalSearchRecordAsync(string attribute, string value)
         {
             var pattern = new BsonRegularExpression(value, "i"); 
             var filter = Builders<T>.Filter.Regex(attribute, pattern); 

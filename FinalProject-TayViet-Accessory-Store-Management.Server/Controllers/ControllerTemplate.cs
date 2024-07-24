@@ -106,7 +106,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
         }
 
         [HttpGet("search/{attribute}&&{key}&&{page:int}")]
-        public async Task<ActionResult<Dictionary<string, object>>> Search(string attribute, string key, int? page = 1)
+        public async Task<ActionResult<Dictionary<string, object>>> Search(string attribute, string key, int page = 1)
         {
             try
             {
@@ -117,8 +117,8 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
                     return BadRequest("Invalid attribute");
                 }
 
-                // perform search call from database service
-                var result = await _databaseServices.SearchAsync(attribute, key, page);
+                int skip = (page - 1) * 20;
+                var result = await _databaseServices.SearchAsync(attribute, key, skip);
                 long totalRecords = await _databaseServices.GetTotalSearchRecordAsync(attribute, key);
 
                 var response = new Dictionary<string, object>

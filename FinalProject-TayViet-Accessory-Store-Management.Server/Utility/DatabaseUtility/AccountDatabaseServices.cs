@@ -3,6 +3,8 @@ using MongoDB.Driver;
 using Microsoft.Extensions.Options;
 using FinalProject_TayViet_Accessory_Store_Management.Models.ExceptionModels;
 using MongoDB.Driver.Linq;
+using MongoDB.Bson;
+using System.Linq;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility
 {
@@ -95,15 +97,44 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
             {
                 throw new NotFoundException();
             }
-            result = result.OrderBy(obj => obj.id).ToList();
-            // Skip
-            result = result.Skip(skip).Take(limit).ToList();
+            result = result.OrderBy(obj => obj.id).Skip(skip).Take(limit).ToList();
+            return result;
+        }
+
+        public override async Task<List<Account>> SearchAsync(string attribute, string value, int skip = 0, int limit = 20)
+        {
+            List<Account> customerResult = await SearchFromCollection(attribute, value, _customerCollection);
+            List<Account> sellerResult = await SearchFromCollection(attribute, value, _sellerCollection);
+            List<Account> adminResult = await SearchFromCollection(attribute, value, _adminCollection);
+            List<Account> result = customerResult.Cast<Account>().Concat(sellerResult.Cast<Account>()).Concat(adminResult.Cast<Account>()).ToList();
             if (result == null)
             {
                 throw new NotFoundException();
             }
-
+            result = result.OrderBy(obj => obj.id).Skip(skip).Take(limit).ToList();
             return result;
+        }
+
+        public async Task<List<Account>> SearchFromCollection<T>(string attribute, string value, IMongoCollection<T> collection)
+        {
+            var pattern = new BsonRegularExpression(value, "i");
+            var filter = Builders<T>.Filter.Regex(attribute, pattern);
+            List<T> collectionResult = await collection.Find(filter).ToListAsync();
+            List<Account> result = collectionResult.Cast<Account>().ToList();
+            return result;
+        }
+
+        public override async Task<long> GetTotalSearchRecordAsync(string attribute, string value)
+        {
+            List<Account> customerResult = await SearchFromCollection(attribute, value, _customerCollection);
+            List<Account> sellerResult = await SearchFromCollection(attribute, value, _sellerCollection);
+            List<Account> adminResult = await SearchFromCollection(attribute, value, _adminCollection);
+            List<Account> result = customerResult.Cast<Account>().Concat(sellerResult.Cast<Account>()).Concat(adminResult.Cast<Account>()).ToList();
+            if (result == null)
+            {
+                throw new NotFoundException();
+            }
+            return result.Count;
         }
     }
 }

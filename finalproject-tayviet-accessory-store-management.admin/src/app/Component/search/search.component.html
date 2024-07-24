@@ -1,0 +1,30 @@
+
+<div class="w-100 d-flex">
+  <div class="vstack mb-3 col-4 p-2">
+    <label for="searchInput" class="form-label">Search Input</label>
+    <div class="d-flex" id="searchInput">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="outputSearch.searchString">
+      <button class="btn btn-outline-success" (click)="searchSubmit()">Search</button>
+    </div>
+  </div>
+  <div class="p-2 flex-fill">
+    <div class="dropdown-row mb-3">
+      <div class="dropdown-container" *ngFor="let selectOption of selectOptions">
+        <label for="{{selectOption['nameOption']}}" class="form-label">{{selectOption['nameOption']}}</label>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="{{selectOption['nameOption']}}" data-bs-toggle="dropdown" aria-expanded="false">
+            <ng-container *ngIf="getOptionChoose(selectOption.nameOption) !== ''; else otherContent">
+              {{ getOptionChoose(selectOption.nameOption) }}
+            </ng-container>
+            <ng-template #otherContent>
+              Select {{ selectOption.nameOption }}
+            </ng-template>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownCustomerButton">
+            <li class="dropdown-item" *ngFor="let option of selectOption['options']" (click)="setOption(option, selectOption['nameOption'])">{{option}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

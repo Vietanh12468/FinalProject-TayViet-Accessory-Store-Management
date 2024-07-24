@@ -1,2 +1,3 @@
+<app-search [selectOptions]="selectOptions" (searchSubmitEvent)="searchSubmit($event)"></app-search>
 <app-table [data]="data"></app-table>
 <app-pagination [total]="total" (onPageChange)="getCustomers($event)"></app-pagination>

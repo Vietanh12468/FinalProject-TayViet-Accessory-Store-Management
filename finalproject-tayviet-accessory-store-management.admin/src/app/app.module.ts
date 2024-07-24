@@ -22,6 +22,7 @@ import { DetailProductViewComponent } from './View/detail-product-view/detail-pr
 import { SubProductInfoComponent } from './Component/sub-product-info/sub-product-info.component';
 import { SmallImgComponent } from './Component/small-img/small-img.component';
 import { LoginViewComponent } from './View/login-view/login-view.component';
+import { SearchComponent } from './Component/search/search.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { LoginViewComponent } from './View/login-view/login-view.component';
     DetailProductViewComponent,
     SubProductInfoComponent,
     SmallImgComponent,
-    LoginViewComponent
+    LoginViewComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
