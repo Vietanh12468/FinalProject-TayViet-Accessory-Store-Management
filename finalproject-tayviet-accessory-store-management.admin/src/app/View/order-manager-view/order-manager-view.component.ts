@@ -1,54 +1,40 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IAccount } from '../../Interface/iaccount';
+import { IOrderHistory } from '../../Interface/iorder-history';
 import { SelectOption } from '../../Interface/iselect-option';
 import { OutputSearch } from '../../Interface/ioutput-search';
 import { TableComponent } from '../../Component/table/table.component';
 
+
 @Component({
-  selector: 'app-account-manager-view',
-  templateUrl: './account-manager-view.component.html',
-  styleUrl: './account-manager-view.component.css'
+  selector: 'app-order-manager-view',
+  templateUrl: './order-manager-view.component.html',
+  styleUrl: './order-manager-view.component.css'
 })
-export class AccountManagerViewComponent implements OnInit {
+export class OrderManagerViewComponent implements OnInit {
   @ViewChild('tableComponent') tableComponent!: TableComponent;
-  data: IAccount[] = [];
+  data: IOrderHistory[] = [];
   total: number = 0;
   selectOptions: SelectOption[] = [
     {
-      nameOption: 'AccountType',
+      nameOption: 'OrderState',
       options: [
-        'admin',
-        'customer',
-        'employee'
-      ]
-    },
-    {
-      nameOption: 'State',
-      options: [
-        'active',
-        'inactive'
-      ]
-    },
-    {
-      nameOption: 'OrderBy',
-      options: [
-        'asc',
-        'desc'
+        'Processing',
+        'Delivering',
+        'Completed'
       ]
     }
   ]
-
-  ignoredAttributes: string[] = ['password'];
+  ignoredAttributes: string[] = [];
   ngOnInit() {
     this.getCustomers();
   }
   constructor(private http: HttpClient) { }
 
-  CustomerList: IAccount[] = [];
+  CustomerList: IOrderHistory[] = [];
 
   getCustomers(page: number = 1) {
-    this.http.get<any>(`/api/Account/page/${page}`).subscribe(
+    this.http.get<any>(`/api/OrderHistory/page/${page}`).subscribe(
       (result) => {
         this.data = result.data;
         this.total = result.total;
@@ -61,7 +47,7 @@ export class AccountManagerViewComponent implements OnInit {
   }
 
   searchSubmit(searchInfo: OutputSearch) {
-    this.http.get<any>(`/api/Account/search/username&&${searchInfo.searchString}&&${0}`).subscribe(
+    this.http.get<any>(`/api/OrderHistory/search/username&&${searchInfo.searchString}&&${0}`).subscribe(
       (result) => {
         this.data = result.data;
         this.total = result.total;

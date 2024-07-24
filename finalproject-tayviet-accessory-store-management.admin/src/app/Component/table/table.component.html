@@ -2,22 +2,27 @@
   <table class="table table-striped table-hover table-bordered border-primary table-sm">
     <thead>
       <tr class="table-primary">
-        <th *ngFor="let column of columns">{{ column }}</th>
+        <ng-container *ngFor="let column of columns">
+          <th *ngIf="!ignoredAttributes.includes(column)">
+            {{ column }}
+          </th>
+        </ng-container>
         <th> Action </th>
       </tr>
     </thead>
     <tbody>
       <tr class="table-secondary" *ngFor="let row of data">
-        <td *ngFor="let column of columns">
-          <ng-container *ngIf="column === 'image'; else otherContent">
-            <app-small-img [img]="row.image"></app-small-img>
-          </ng-container>
-          <ng-template #otherContent>
-            {{ row[column] }}
-          </ng-template>
-
-        </td>
-        <td> <button routerLink="/account-manager/{{row.id}}">Trigger</button> </td>
+        <ng-container *ngFor="let column of columns">
+          <td *ngIf="!ignoredAttributes.includes(column)">
+            <ng-container *ngIf="column === 'image'; else otherContent">
+              <app-small-img [img]="row.image"></app-small-img>
+            </ng-container>
+            <ng-template #otherContent>
+              {{ row[column] }}
+            </ng-template>
+          </td>
+        </ng-container>
+        <td> <button routerLink="/detail-account/{{row.id}}" [queryParams]="{ mode: 'view' }">Trigger</button> </td>
       </tr>
     </tbody>
   </table>

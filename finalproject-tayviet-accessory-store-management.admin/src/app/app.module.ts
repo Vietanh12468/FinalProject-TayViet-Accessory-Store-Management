@@ -23,6 +23,8 @@ import { SubProductInfoComponent } from './Component/sub-product-info/sub-produc
 import { SmallImgComponent } from './Component/small-img/small-img.component';
 import { LoginViewComponent } from './View/login-view/login-view.component';
 import { SearchComponent } from './Component/search/search.component';
+import { ProductManagerViewComponent } from './View/product-manager-view/product-manager-view.component';
+import { OrderManagerViewComponent } from './View/order-manager-view/order-manager-view.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { SearchComponent } from './Component/search/search.component';
     SubProductInfoComponent,
     SmallImgComponent,
     LoginViewComponent,
-    SearchComponent
+    SearchComponent,
+    ProductManagerViewComponent,
+    OrderManagerViewComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
