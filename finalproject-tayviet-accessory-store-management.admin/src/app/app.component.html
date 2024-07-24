@@ -93,9 +93,8 @@
                         Select ID
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownCustomerButton">
-                        <li><a class="dropdown-item" href="#">ID 1</a></li>
-                        <li><a class="dropdown-item" href="#">ID 2</a></li>
-                        <li><a class="dropdown-item" href="#">ID 3</a></li>
+                        <li><a class="dropdown-item" href="#">highest to lowest</a></li>
+                        <li><a class="dropdown-item" href="#">Lowest to highest</a></li>
                     </ul>
                 </div>
             </div>
@@ -119,9 +118,9 @@
                         Select Category
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownProductButton">
-                        <li><a class="dropdown-item" href="#">Electronics</a></li>
-                        <li><a class="dropdown-item" href="#">Clothing</a></li>
-                        <li><a class="dropdown-item" href="#">Home Goods</a></li>
+                        <li><a class="dropdown-item" href="#">Ring</a></li>
+                        <li><a class="dropdown-item" href="#">Ear ring</a></li>
+                        <li><a class="dropdown-item" href="#">Necklace</a></li>
                     </ul>
                 </div>
             </div>
@@ -155,4 +154,13 @@
 <app-table-list (message)="handleMessage($event)"> </app-table-list>
 <app-user-info-box></app-user-info-box>
 <app-detail-product></app-detail-product>
-<app-message-box [message]="message" (click)="TriggerMessage()" (close)="close()"></app-message-box>
+<app-message-box (yes)="onYes()"
+                 (no)="onNo()">
+</app-message-box>
+<app-message-box-close (close)="onClose()">
+</app-message-box-close>
+
+<app-message-box-cancel (cancel)="onCancel()">
+</app-message-box-cancel>
+
+

@@ -1,5 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MessageBoxComponent } from './message-box/message-box.component';
+import { MessageBoxCloseComponent } from './message-box-close/message-box-close.component';
+import { MessageBoxCancelComponent } from './message-box-cancel/message-box-cancel.component';
 
 export interface WeatherForecast {
   date: string;
@@ -22,6 +25,9 @@ export interface OrderHistory {
   ]
 })
 export class AppComponent implements OnInit {
+  @ViewChild(MessageBoxComponent) yesNoBox!: MessageBoxComponent;
+  @ViewChild(MessageBoxCloseComponent) closeBox!: MessageBoxCloseComponent;
+  @ViewChild(MessageBoxCancelComponent) cancelBox!: MessageBoxCancelComponent;
 
   public forecasts: WeatherForecast[] = [];
   public orderHistory: OrderHistory[] = [];
@@ -67,7 +73,35 @@ export class AppComponent implements OnInit {
     this.messageBox = !this.messageBox;
     this.focus = !this.focus;
   }
+  
 
+  openYesNoModal() {
+    this.yesNoBox.openModal('Do you want to proceed?');
+  }
+
+  onYes() {
+    console.log('Yes clicked');
+  }
+
+  onNo() {
+    console.log('No clicked');
+  }
+
+  openCloseModal() {
+    this.closeBox.openModal('Action completed!');
+  }
+
+  onClose() {
+    console.log('Close clicked');
+  }
+
+  openCancelModal() {
+    this.cancelBox.openModal('Cannot be done!');
+  }
+
+  onCancel() {
+    console.log('Cancel clicked');
+  }
   handleMessage(message: string) {
     this.message = message;
     this.TriggerMessage();

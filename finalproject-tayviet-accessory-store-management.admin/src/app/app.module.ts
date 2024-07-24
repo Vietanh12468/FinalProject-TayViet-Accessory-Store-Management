@@ -12,6 +12,8 @@ import { TableListComponent } from './table-list/table-list.component';
 import { UserInfoBoxComponent } from './user-info-box/user-info-box.component';
 import { DetailProductComponent } from './detail-product/detail-product.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { MessageBoxCloseComponent } from './message-box-close/message-box-close.component';
+import { MessageBoxCancelComponent } from './message-box-cancel/message-box-cancel.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
     TableListComponent,
     UserInfoBoxComponent,
     DetailProductComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    MessageBoxCloseComponent,
+    MessageBoxCancelComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

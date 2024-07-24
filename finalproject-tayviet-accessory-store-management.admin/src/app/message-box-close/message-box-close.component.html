@@ -1,6 +1,6 @@
 <!-- Trigger Button -->
-<button type="button" (click)="openModal('Do you want to proceed?')">
-    Launch Yes/No Modal
+<button type="button" (click)="openModal('Action completed!')">
+    Launch Close Modal
 </button>
 
 <!-- Modal -->
@@ -8,15 +8,14 @@
     <div class="modal-dialog" (click)="$event.stopPropagation()">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title">Confirmation</h1>
+                <h1 class="modal-title">Notification</h1>
                 <button type="button" class="close" (click)="closeModal()">&times;</button>
             </div>
             <div class="modal-body">
                 {{ message }}
             </div>
             <div class="modal-footer">
-                <button type="button" class="no" (click)="handleNo()">No</button>
-                <button type="button" class="yes" (click)="handleYes()">Yes</button>
+                <button type="button" class="close-modal" (click)="closeModal()">Close</button>
             </div>
         </div>
     </div>
