@@ -58,32 +58,30 @@
     </ul>
     <hr>
     <div class="dropdown">
-      <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>mdo</strong>
+      <a href="#" class="d-flex align-items-center link-dark text-decoration-none">
+        <svg class="bi me-2" width="16" height="16"><use xlink:href="#home" /></svg>
+        Help
       </a>
-      <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
-      </ul>
     </div>
   </div>
   <div class="container-fluid main-div">
     <ul class="nav justify-content-end mb-3">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">Active</a>
+      <li class="nav-item" *ngIf="userInfo === null">
+        <a class="nav-link active" routerLink="/login">Login</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+      <li class="nav-item" *ngIf="userInfo !== null">
+        <div class="dropdown">
+          <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+            <img [src]="userInfo.image" alt="profile pic" width="32" height="32" class="rounded-circle me-2">
+            <strong>{{userInfo.username}}</strong>
+          </a>
+          <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" (click)="signOut()">Sign out</a></li>
+          </ul>
+        </div>
       </li>
     </ul>
     <div class="container-fluid main-div">

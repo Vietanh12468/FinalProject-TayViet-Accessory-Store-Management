@@ -2,6 +2,8 @@
 using FinalProject_TayViet_Accessory_Store_Management.Server.Utility.DatabaseUtility.AccountDatabaseUtility;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
 using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
+using FinalProject_TayViet_Accessory_Store_Management.Models.ExceptionModels;
+using System.Security.Authentication;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
 {
@@ -59,26 +61,31 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        public async Task<T> Login([FromBody] LoginRequest request)
         {
             try
             {
                 T result = await _databaseServices.ReadAsync("username", request.Username);
 
-                if(result == null)
+                if (result == null)
                 {
-                    return NotFound();
+                    throw new NotFoundException();
                 }
+
                 if (result.password != request.Password)
                 {
-                    return Unauthorized();
+                    throw new AuthenticationException();
                 }
+
+                // Assuming login() is a method in the result object
                 result.login();
-                return Ok();
+
+                // Assuming id is a property of the result object
+                return result;
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                throw ex;
             }
         }
 

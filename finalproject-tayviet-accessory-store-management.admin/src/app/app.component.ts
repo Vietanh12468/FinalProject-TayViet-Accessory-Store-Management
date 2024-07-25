@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
+import { AuthenticationService } from './Service/authentication.service';
+import { IAccount } from './Interface/iaccount';
 
 export interface WeatherForecast {
   date: string;
@@ -21,36 +23,27 @@ export interface OrderHistory {
   animations: [
   ]
 })
-export class AppComponent implements OnInit {
-  id: string = '669764ba2e75b8c4f2ac2b2c';
-  public forecasts: WeatherForecast[] = [];
-  public orderHistory: OrderHistory[] = [];
+export class AppComponent implements OnInit, OnChanges {
 
-  constructor(private http: HttpClient) {}
+  userInfo: any = null;
+
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
-    this.getForecasts();
-    this.getOrderHistory();
+    if (this.authenticationService.isLoggedIn() === true) {
+      this.getUserInfo();
+    }
   }
 
-  public messageBox = true;
-  public focus = true;
-  public message = 'message details';
-
-  getForecasts() {
-    this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
-      (result) => {
-        this.forecasts = result;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+  ngOnChanges() {
   }
-  getOrderHistory() {
-    this.http.get<OrderHistory[]>('/api/orderHistory').subscribe(
+
+  getUserInfo() {
+    const token = this.authenticationService.getToken();
+    this.http.get<IAccount>(`/api/Admin/${token.userID}`).subscribe(
       (result) => {
-        this.orderHistory = result;
+        this.userInfo = result;
+        console.log(result);
       },
       (error) => {
         console.error(error);
@@ -58,20 +51,11 @@ export class AppComponent implements OnInit {
     );
   }
 
-  TriggerMessage() {
-    this.messageBox = !this.messageBox;
-    this.focus = !this.focus;
-  }
-
-  close() {
-    this.messageBox = !this.messageBox;
-    this.focus = !this.focus;
-  }
-
-  handleMessage(message: string) {
-    this.message = message;
-    this.TriggerMessage();
-  }
   title = 'finalproject-tayviet-accessory-store-management.client';
 
+  signOut() {
+    this.authenticationService.removeToken();
+    this.userInfo = null;
+    window.location.reload();
+  }
 }

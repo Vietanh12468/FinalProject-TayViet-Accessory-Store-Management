@@ -1,33 +1,30 @@
 import { Injectable } from '@angular/core';
-
+import { IAccount } from '../Interface/iaccount';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private userIDKey = 'none';
-  private userRoleKey = 'none';
+  private userID = 'none';
 
   constructor() { }
 
-  setToken(userID: string, role: string): void {
-    localStorage.setItem(this.userIDKey, userID);
-    localStorage.setItem(this.userRoleKey, role);
+  setToken(user : IAccount): void {
+    localStorage.setItem(this.userID, user.id);
   }
 
   getToken(): any | null {
-    if (localStorage.getItem(this.userIDKey) === 'none' || localStorage.getItem(this.userRoleKey) === 'none') {
+    if (localStorage.getItem(this.userID) === 'none') {
       return null;
     }
-    return { userID: localStorage.getItem(this.userIDKey), role: localStorage.getItem(this.userRoleKey) } 
+    return { userID: localStorage.getItem(this.userID) } 
   }
 
   removeToken(): void {
-    localStorage.setItem(this.userIDKey, 'none');
-    localStorage.setItem(this.userRoleKey, 'none');
+    localStorage.setItem(this.userID, 'none');
   }
 
   isLoggedIn(): boolean {
-    if (localStorage.getItem(this.userIDKey) === 'none' || localStorage.getItem(this.userRoleKey) === 'none') {
+    if (localStorage.getItem(this.userID) === 'none' ){
       return false;
     }
     return true;
