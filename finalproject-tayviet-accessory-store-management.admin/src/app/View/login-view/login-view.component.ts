@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from '../../Service/authentication.service';
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-login-view',
@@ -6,14 +9,26 @@ import { Component } from '@angular/core';
   styleUrl: './login-view.component.css'
 })
 export class LoginViewComponent {
-  email: string = '';
+  username: string = '';
   password: string = '';
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService, private http: HttpClient) { }
 
   onSubmit() {
-    console.log('Email:', this.email);
-    console.log('Password:', this.password);
-    // Add your authentication logic here
+    const loginData: any = { username: this.username, password: this.password };
+    this.loginRequest(loginData);
+  }
+
+  loginRequest(loginData: any) {
+    this.http.post(`/api/Admin/login`, loginData).subscribe(
+      (response) => {
+        console.log('POST request successful', response);
+        this.authenticationService.setToken(this.username, this.password);
+        console.log('Token:', this.authenticationService.getToken());
+      },
+      (error) => {
+        console.error('Error occurred', error);
+      }
+    );
   }
 }

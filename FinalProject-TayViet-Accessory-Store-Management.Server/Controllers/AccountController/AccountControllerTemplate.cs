@@ -74,7 +74,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
                     return Unauthorized();
                 }
                 result.login();
-                return Ok("Login successful.");
+                return Ok();
             }
             catch (Exception ex)
             {

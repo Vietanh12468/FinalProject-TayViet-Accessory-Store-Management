@@ -14,15 +14,23 @@
       <tr class="table-secondary" *ngFor="let row of data">
         <ng-container *ngFor="let column of columns">
           <td *ngIf="!ignoredAttributes.includes(column)">
-            <ng-container *ngIf="column === 'image'; else otherContent">
-              <app-small-img [img]="row.image"></app-small-img>
+            <ng-container [ngSwitch]="column">
+              <ng-container *ngSwitchCase="'image'">
+                <app-small-img [img]="row.image"></app-small-img>
+              </ng-container>
+              <ng-container *ngSwitchCase="'cart'">
+                <!-- Button content here -->
+              </ng-container>
+              <ng-container *ngSwitchCase="'history'">
+                <!-- Description content here -->
+              </ng-container>
+              <ng-container *ngSwitchDefault>
+                {{ row[column] }}
+              </ng-container>
             </ng-container>
-            <ng-template #otherContent>
-              {{ row[column] }}
-            </ng-template>
           </td>
         </ng-container>
-        <td> <button routerLink="/detail-account/{{row.id}}" [queryParams]="{ mode: 'view' }">Trigger</button> </td>
+        <td> <button routerLink="/{{detailLink}}/{{row.id}}" [queryParams]="{ mode: 'view' }">Trigger</button> </td>
       </tr>
     </tbody>
   </table>

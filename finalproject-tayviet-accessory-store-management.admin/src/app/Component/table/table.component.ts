@@ -10,6 +10,7 @@ export class TableComponent implements OnChanges, OnInit {
     { id: 1, name: 'John Doe', age: 25 },
   ]
   @Input() ignoredAttributes: string[] = [];
+  @Input() detailLink: string = '';
 
   ngOnInit(): void {
   }

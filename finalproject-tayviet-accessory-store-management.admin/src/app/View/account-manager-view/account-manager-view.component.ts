@@ -40,6 +40,7 @@ export class AccountManagerViewComponent implements OnInit {
   ]
 
   ignoredAttributes: string[] = ['password'];
+  detailLink = 'account-detail';
   ngOnInit() {
     this.getCustomers();
   }

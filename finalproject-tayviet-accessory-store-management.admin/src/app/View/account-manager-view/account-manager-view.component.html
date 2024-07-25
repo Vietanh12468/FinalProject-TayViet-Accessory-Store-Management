@@ -4,5 +4,5 @@
     <app-button color="green" label="Create"></app-button>
   </div>
 </div>
-<app-table [data]="data" [ignoredAttributes]="ignoredAttributes"></app-table>
+<app-table [data]="data" [ignoredAttributes]="ignoredAttributes" [detailLink]="detailLink"></app-table>
 <app-pagination [total]="total" (onPageChange)="getCustomers($event)"></app-pagination>
