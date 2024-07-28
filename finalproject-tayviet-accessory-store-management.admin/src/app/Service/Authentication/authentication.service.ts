@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IAccount } from '../Interface/iaccount';
+import { IAccount } from '../../Interface/iaccount';
 @Injectable({
   providedIn: 'root'
 })

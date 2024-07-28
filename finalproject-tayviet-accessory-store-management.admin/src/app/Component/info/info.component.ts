@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, SimpleChanges, OnInit, OnChanges, ViewChild, ElementRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { IAccount, Account } from '../../Interface/iaccount';
+import { Product } from '../../Interface/iproduct';
 
 @Component({
   selector: 'app-info',
@@ -73,9 +73,15 @@ export class InfoComponent implements OnChanges, OnInit {
   getObjectType() {
     const accountProps = new Account();
     let isAccount = true;
+    const productProps = new Product();
+    let isProduct = true;
     for (const key of this.attributes) {
       if (!accountProps.hasOwnProperty(key)) {
         isAccount = false;
+        break;
+      }
+      if (!productProps.hasOwnProperty(key)) {
+        isProduct = false;
         break;
       }
     }
@@ -83,6 +89,9 @@ export class InfoComponent implements OnChanges, OnInit {
     if (isAccount === true) {
       this.stateOptions = ['Active', 'Inactive', 'Locked', 'Unlocked'];
       this.keyAttributes = 'username';
+    }
+    if (isAccount === true) {
+      this.keyAttributes = 'name';
     }
   }
 }

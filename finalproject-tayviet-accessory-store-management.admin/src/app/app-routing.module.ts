@@ -7,14 +7,16 @@ import { LoginViewComponent } from './View/login-view/login-view.component';
 import { ProductManagerViewComponent } from './View/product-manager-view/product-manager-view.component';
 import { OrderManagerViewComponent } from './View/order-manager-view/order-manager-view.component';
 
-import { AuthenticationGuardService } from './Service/authentication-guard.service';
-import { UnAuthenticationGuardService } from './Service/un-authentication-guard.service';
+import { AuthenticationGuardService } from './Service/Authentication/authentication-guard.service';
+import { UnAuthenticationGuardService } from './Service/Authentication/un-authentication-guard.service';
 const routes: Routes = [
   { path: 'account-manager', component: AccountManagerViewComponent, canActivate: [AuthenticationGuardService] },
-  { path: 'account-detail/:id', component: DetailAccountViewComponent },
-  { path: 'product-manager/:id', component: DetailProductViewComponent },
+  { path: 'account-manager/create', component: DetailAccountViewComponent, canActivate: [AuthenticationGuardService], data: { some_data: 'some value' } },
+  { path: 'account-detail/:id', component: DetailAccountViewComponent, canActivate: [AuthenticationGuardService], }, 
   { path: 'product-manager', component: ProductManagerViewComponent, canActivate: [AuthenticationGuardService] },
-  { path: 'order-manager', component: OrderManagerViewComponent },
+  { path: 'product-manager/create', component: DetailProductViewComponent, canActivate: [AuthenticationGuardService] },
+  { path: 'product-detail/:id', component: DetailProductViewComponent, canActivate: [AuthenticationGuardService], },
+  { path: 'order-manager', component: OrderManagerViewComponent, canActivate: [AuthenticationGuardService], },
   { path: 'login', component: LoginViewComponent, canActivate: [UnAuthenticationGuardService] },
 ];
 

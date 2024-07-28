@@ -38,4 +38,25 @@ export class SubProductInfoComponent implements OnInit, OnChanges {
     }
   }
 
+  handleImg(imgData: any) {
+    this.subProducts[imgData.x].listImage[imgData.y] = imgData.img;
+  }
+
+  addSubProduct() {
+    this.subProducts.push({
+      "name": "string",
+      "description": "string",
+      "listImage": [
+        "string"
+      ],
+      "inStock": 0,
+      "state": 'null',
+      "buyCost": 0,
+      "sellCost": 0,
+      "discount": 0
+    });
+  }
+  addImageSubProduct(x: number) {
+    this.subProducts[x].listImage.push('');
+  }
 }

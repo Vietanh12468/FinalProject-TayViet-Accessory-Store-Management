@@ -23,7 +23,6 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   calculateTotalPages() {
     this.totalPages = Math.ceil(this.total / 20);
-    console.log(this.totalPages);
   }
 
   calculatePageOptions() {
@@ -36,6 +35,5 @@ export class PaginationComponent implements OnInit, OnChanges {
   selectPage(page: string) {
     this.currentPage = parseInt(page);
     this.onPageChange.emit(this.currentPage);
-    console.log(this.currentPage);
   }
 }

@@ -40,3 +40,15 @@
     background-color: #0069d9;
     border-color: #0062cc;
   }
+
+.div-16 {
+  display: flex;
+  gap: 20px;
+  color: #fff;
+  justify-content: space-between;
+}
+
+.divImg {
+  width: 160px;
+  height: 160px;
+}

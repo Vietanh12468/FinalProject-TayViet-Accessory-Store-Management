@@ -1,10 +1,7 @@
 <h3>Sub Product</h3>
 <div id="carouselExample" class="carousel slide">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="favicon.ico" class="d-block w-100" alt="...">
-    </div>
-    <div *ngFor="let subProduct of subProducts" class="carousel-item">
+    <div *ngFor="let subProduct of subProducts; let x = index; let first = first" class="carousel-item" [ngClass]="{'active': first}">
       <table class="table align-middle shadow">
         <tbody>
           <tr>
@@ -23,7 +20,7 @@
           </tr>
           <tr>
             <th class="col-2">
-              <label class="col-sm-2 col-form-label mx-3 text-capitalize">In Stock:</label>
+              <label class="col-sm-2 col-form-label mx-3 text-capitalize">Stock:</label>
             </th>
             <td class="col-4">
               <div class="form-floating">
@@ -39,11 +36,12 @@
             </th>
             <td class="col-4">
               <div class="form-floating">
-                <input id="{{ subProduct['state'] }}" [ngClass]="{'form-control': mode !== 'view', 'form-control-plaintext pt-2' : mode === 'view', 'is-invalid': checkValidAttribute('state') === false}" type="text" [readonly]="mode === 'view'" [value]="subProduct['state']" [(ngModel)]="subProduct['state']" placeholder="">
-                <label *ngIf="mode !== 'view'" for="subProduct['name']"> name </label>
-                <div class="position-absolute top-50 start-100 translate-middle-y badge rounded-pill text-bg-danger" *ngIf="checkValidAttribute('name') === false">
-                  invalid name
-                </div>
+                <select *ngIf="mode !== 'view'" class="form-select text-capitalize" [(ngModel)]="subProduct['state']">
+                  <option value="Available"> Available </option>
+                  <option value="Unavailable"> Unavailable </option>
+                </select>
+                <label *ngIf="mode !== 'view'" for="state">State</label>
+                <input *ngIf="mode === 'view'" id="state" class="form-control-plaintext pt-2" [ngClass]="{'is-invalid': checkValidAttribute('state') === false}" type="text" readonly [value]="subProduct['state']" [(ngModel)]="subProduct['state']" placeholder="">
               </div>
             </td>
           </tr>
@@ -92,9 +90,12 @@
               <label class="d-block col-sm-2 col-form-label mx-3 text-capitalize">Image:</label>
               <div class="container text-center ms-2">
                 <div class="row row-cols-auto">
-                  <ng-container *ngFor="let image of subProduct['listImage']">
-                    <app-small-img class="col" [img]="image"></app-small-img>
+                  <ng-container *ngFor="let image of subProduct['listImage']; let y = index">
+                    <app-small-img class="col" [img]="image" [mode]="mode" (returnImg)="handleImg($event)" [imgPosition]="[x, y]"></app-small-img>
                   </ng-container>
+                  <div class="p-2 position-relative" style="width: 160px; height: 160px;">
+                    <app-button *ngIf="mode !== 'view'" class="g-col-6 position-absolute start-50 top-50 translate-middle" color="green" label="Add" (buttonClick)="addImageSubProduct(x)"></app-button>
+                  </div>
                 </div>
               </div>
             </th>
@@ -103,12 +104,11 @@
       </table>
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
+  <div class="div-16 justify-content-center mt-4">
+    <app-button class="g-col-6" color="blue" data-bs-target="#carouselExample" [label]="'previous'" data-bs-slide="prev"></app-button>
+    <app-button class="g-col-6" color="blue" data-bs-target="#carouselExample" [label]="'next'" data-bs-slide="next"></app-button>
+  </div>
+  <div class="div-16 justify-content-center mt-4">
+    <app-button *ngIf="mode !== 'view'" class="g-col-6" color="blue" label="Add Sub Product" (buttonClick)="addSubProduct()"></app-button>
+  </div>
 </div>

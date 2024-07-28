@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from '../../Service/authentication.service';
-import { HttpClient } from '@angular/common/http';
+import { AuthenticationService } from '../../Service/Authentication/authentication.service';
 import { Router } from '@angular/router';
-import { IAccount } from '../../Interface/iaccount';
+import {APIService} from '../../Service/API/api.service';
 
 @Component({
   selector: 'app-login-view',
@@ -13,15 +12,11 @@ export class LoginViewComponent {
   username: string = '';
   password: string = '';
 
-  constructor(private authenticationService: AuthenticationService, private http: HttpClient, private router: Router) { }
+  constructor(private authenticationService: AuthenticationService, private apiService: APIService, private router: Router) { }
 
   onSubmit() {
     const loginData: any = { username: this.username, password: this.password };
-    this.loginRequest(loginData);
-  }
-
-  loginRequest(loginData: any) {
-    this.http.post<IAccount>(`/api/Admin/login`, loginData).subscribe(
+    this.apiService.loginRequest(loginData).subscribe(
       (result) => {
         console.log('POST request successful', result);
         this.authenticationService.setToken(result);

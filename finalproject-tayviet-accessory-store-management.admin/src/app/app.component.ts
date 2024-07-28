@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { AuthenticationService } from './Service/authentication.service';
+import { AuthenticationService } from './Service/Authentication/authentication.service';
 import { IAccount } from './Interface/iaccount';
 
 export interface WeatherForecast {
@@ -43,7 +43,6 @@ export class AppComponent implements OnInit, OnChanges {
     this.http.get<IAccount>(`/api/Admin/${token.userID}`).subscribe(
       (result) => {
         this.userInfo = result;
-        console.log(result);
       },
       (error) => {
         console.error(error);

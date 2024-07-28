@@ -1,1 +1,8 @@
-<p>product-manager-view works!</p>
+<div class="row">
+  <app-search class="col-8" [selectOptions]="selectOptions" (searchSubmitEvent)="searchSubmit($event)"></app-search>
+  <div class="d-flex justify-content-center col-2 align-self-center">
+    <app-button color="green" label="Create" (buttonClick)="onCreateClick()"></app-button>
+  </div>
+</div>
+<app-table [data]="data" [ignoredAttributes]="ignoredAttributes" [detailLink]="detailLink"></app-table>
+<app-pagination [total]="total" (onPageChange)="getPages($event)"></app-pagination>

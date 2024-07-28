@@ -1,3 +1,5 @@
-<div class="p-2 w-100 h-100">
-  <img loading="lazy" [src]="img" class="object-fit-contain border h-100 w-100" alt="Small Image">
+<div class="mx-auto p-2 divImg position-relative">
+  <img loading="lazy" [src]="img" class="object-fit-contain border h-100 w-100" alt="Small Image" [ngClass]="{'opacity-50': mode !== 'view'}">
+  <app-button *ngIf="mode !== 'view'" class="g-col-6 position-absolute start-50 top-50 translate-middle" color="blue" label="Change" (buttonClick)="openFileInput()"></app-button>
+  <input class="form-control" type="file" #fileInput style="display: none" (change)="handleFileInput(fileInput)">
 </div>

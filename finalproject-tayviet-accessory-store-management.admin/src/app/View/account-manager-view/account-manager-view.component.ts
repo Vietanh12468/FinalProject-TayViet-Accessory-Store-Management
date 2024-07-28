@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IAccount } from '../../Interface/iaccount';
 import { SelectOption } from '../../Interface/iselect-option';
 import { OutputSearch } from '../../Interface/ioutput-search';
 import { TableComponent } from '../../Component/table/table.component';
+import { Router } from '@angular/router';
+import { APIService } from '../../Service/API/api.service';
 
 @Component({
   selector: 'app-account-manager-view',
@@ -14,13 +15,14 @@ export class AccountManagerViewComponent implements OnInit {
   @ViewChild('tableComponent') tableComponent!: TableComponent;
   data: IAccount[] = [];
   total: number = 0;
+  objectName: string = 'Admin';
   selectOptions: SelectOption[] = [
     {
       nameOption: 'AccountType',
       options: [
-        'admin',
-        'customer',
-        'employee'
+        'Admin',
+        'Customer',
+        'Employee'
       ]
     },
     {
@@ -44,16 +46,27 @@ export class AccountManagerViewComponent implements OnInit {
   ngOnInit() {
     this.getCustomers();
   }
-  constructor(private http: HttpClient) { }
+  constructor(private apiService: APIService, private router: Router) { }
 
   CustomerList: IAccount[] = [];
 
   getCustomers(page: number = 1) {
-    this.http.get<any>(`/api/Account/page/${page}`).subscribe(
+    this.apiService.getListObjects(this.objectName, page).subscribe(
       (result) => {
         this.data = result.data;
         this.total = result.total;
-        console.log(result);
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
+  }
+
+  searchSubmit(searchInfo: OutputSearch, page: number = 1) {
+    this.apiService.searchListObjects(this.objectName, 'username', searchInfo.searchString, page).subscribe(
+      (result) => {
+        this.data = result.data;
+        this.total = result.total;
       },
       (error) => {
         console.error(error);
@@ -61,16 +74,7 @@ export class AccountManagerViewComponent implements OnInit {
     );
   }
 
-  searchSubmit(searchInfo: OutputSearch) {
-    this.http.get<any>(`/api/Account/search/username&&${searchInfo.searchString}&&${0}`).subscribe(
-      (result) => {
-        this.data = result.data;
-        this.total = result.total;
-        console.log(result);
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+  onCreateUserClick() {
+    this.router.navigate(['/account-manager/create']);
   }
 }

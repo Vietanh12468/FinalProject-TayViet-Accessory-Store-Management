@@ -1,5 +1,5 @@
 import { Component, Input, SimpleChanges, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { APIService } from '../../Service/API/api.service';
 import { IProduct } from '../../Interface/iproduct';
 import { InfoComponent } from '../../Component/info/info.component';
 import { ActivatedRoute } from '@angular/router';
@@ -63,7 +63,17 @@ export class DetailProductViewComponent implements OnInit {
     ],
     "brandID": "string"
   };
-  constructor(private http: HttpClient, private route: ActivatedRoute) { }
+
+  objectName: string = 'Product';
+
+  constructor(private route: ActivatedRoute, private apiService: APIService) {
+    this.route.queryParams.subscribe(params => {
+      this.mode = params['mode'];
+    });
+    if (this.mode === undefined || this.mode === null) {
+      this.mode = 'create';
+    }
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
@@ -71,17 +81,15 @@ export class DetailProductViewComponent implements OnInit {
       for (const key in this.product) {
         this.product[key] = null;
       }
-      console.log(this.product);
     }
     else {
       this.getDetailProduct();
     }
   }
   getDetailProduct() {
-    this.http.get<IProduct>(`/api/Product/${this.id}`).subscribe(
+    this.apiService.getDetailObject(this.objectName, this.id).subscribe(
       (result) => {
         this.product = result;
-        console.log(result);
       },
       (error) => {
         console.error(error);
@@ -111,7 +119,7 @@ export class DetailProductViewComponent implements OnInit {
       return
     }
     if (this.mode === 'change') {
-      this.http.put('/api/Product', this.product).subscribe(
+      this.apiService.changeDetailObject(this.objectName, this.product).subscribe(
         response => {
           console.log('PUT request successful', response);
         },
@@ -121,7 +129,7 @@ export class DetailProductViewComponent implements OnInit {
       );
     }
     else if (this.mode === 'create') {
-      this.http.post('/api/Product', this.product).subscribe(
+      this.apiService.createDetailObject(this.objectName, this.product).subscribe(
         response => {
           console.log('POST request successful', response);
         },
