@@ -7,4 +7,14 @@
     <!-- Folder where production build objects will be placed -->
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\finalproject-tayviet-accessory-store-management.client\</BuildOutputFolder>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="src\app\admin-page\**" />
+    <None Remove="src\app\main-adimn-page\**" />
+    <None Remove="src\app\main-admin-page\**" />
+    <None Remove="src\app\mainpage\**" />
+    <TypeScriptConfiguration Remove="src\app\admin-page\**" />
+    <TypeScriptConfiguration Remove="src\app\main-adimn-page\**" />
+    <TypeScriptConfiguration Remove="src\app\main-admin-page\**" />
+    <TypeScriptConfiguration Remove="src\app\mainpage\**" />
+  </ItemGroup>
 </Project>

@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { MessageBoxCloseComponent } from './message-box-close/message-box-close.component';
 import { MessageBoxCancelComponent } from './message-box-cancel/message-box-cancel.component';
+import { MainPageComponent } from './main-page/main-page.component';
 
 export interface WeatherForecast {
   date: string;
@@ -32,7 +33,22 @@ export class AppComponent implements OnInit {
   public forecasts: WeatherForecast[] = [];
   public orderHistory: OrderHistory[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+  activeItemIndex: number = 0;
+  sidebarItems = [
+    { label: 'Home', icon: '#home' },
+    { label: 'Dashboard', icon: '#speedometer2' },
+    { label: 'Orders', icon: '#table' },
+    { label: 'Products', icon: '#grid' },
+    { label: 'Customers', icon: '#people-circle' },
+    { label: 'Category', icon: '#home' },
+    { label: 'Settings', icon: '#home' }
+  ];
+
+  setActiveItem(index: number) {
+    this.activeItemIndex = index;
+  }
+
 
   ngOnInit() {
     this.getForecasts();

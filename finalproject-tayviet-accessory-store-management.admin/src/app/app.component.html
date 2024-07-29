@@ -3,49 +3,16 @@
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
             <span class="fs-4">Sidebar</span>
-        </a>
+        </a>    
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-                <a href="#" class="nav-link active" aria-current="page">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#home" /></svg>
-                    Home
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2" /></svg>
-                    Dashboard
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#table" /></svg>
-                    Orders
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid" /></svg>
-                    Products
-                </a>
-            </li>
-            <li>
-                <a href="#" class="nav-link link-dark">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle" /></svg>
-                    Customers
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link link-dark">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#home" /></svg>
-                    Category
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link link-dark">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#home" /></svg>
-                    Settings
+            <li class="nav-item" *ngFor="let item of sidebarItems; let i = index">
+                <a href="#"
+                   class="nav-link"
+                   [ngClass]="{'active': activeItemIndex === i}"
+                   (click)="setActiveItem(i)">
+                    <svg class="bi me-2" width="16" height="16"><use [attr.xlink:href]="item.icon" /></svg>
+                    {{ item.label }}
                 </a>
             </li>
         </ul>
@@ -149,6 +116,7 @@
         </div>
     </div>
 </div>
+<app-main-page></app-main-page>
 <app-admin-login></app-admin-login>
 <app-alert-box></app-alert-box>
 <app-table-list (message)="handleMessage($event)"> </app-table-list>
