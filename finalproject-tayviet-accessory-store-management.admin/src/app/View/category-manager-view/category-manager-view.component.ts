@@ -26,6 +26,7 @@ export class CategoryManagerViewComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
+
   }
   constructor(private apiService: APIService, private router: Router) { }
 
@@ -41,13 +42,79 @@ export class CategoryManagerViewComponent implements OnInit, OnChanges {
     )
   }
 
-  onAddCategoryClick() {
+  onAddCategorySectionClick() {
     const newCategory = new Category();
-    newCategory.id = 'qhuwehqrwuhqweh';
-    newCategory.name = 'New Category';
+    newCategory.name = 'New Category Section';
     newCategory.categoryList = ['New Category'];
-    this.data.push(newCategory);
-    console.log(this.data);
+    this.apiService.createDetailObject(this.objectName, newCategory).subscribe(
+      response => {
+        console.log('POST request successful', response);
+        this.getCategories();
+      },
+      error => {
+        console.error('Error occurred', error);
+      }
+    );
+  }
+
+  onDeleteCategorySection(index: number) {
+    const categorySectionDelete = this.data[index];
+    this.apiService.deleteDetailObject(this.objectName, categorySectionDelete.id).subscribe(
+      response => {
+        this.data.splice(index, 1);
+        console.log('DELETE request successful', response);
+      },
+      error => {
+        console.error('Error occurred', error);
+      }
+    );
+  }
+
+  onAddCategory(index: number) {
+    const categoryListTemp = this.data[index];
+    categoryListTemp.categoryList.push('new category');
+    this.apiService.changeDetailObject(this.objectName, categoryListTemp).subscribe(
+      response => {
+        this.data[index] = categoryListTemp;
+        console.log('PUT request successful', response);
+      },
+      error => {
+        console.error('Error occurred', error);
+      }
+    );
+  }
+
+  onDeleteCategory(position: any) {
+    const categoryListTemp = this.data[position.x];
+    categoryListTemp.categoryList.splice(position.y, 1);
+    this.apiService.changeDetailObject(this.objectName, categoryListTemp).subscribe(
+      response => {
+        this.data[position.x] = categoryListTemp;
+        console.log('PUT request successful', response);
+      },
+      error => {
+        console.error('Error occurred', error);
+      }
+    );
+  }
+
+  onChangeCategory(categoryInfo: any) {
+    const categoryListTemp = this.data[categoryInfo.x];
+    if (categoryListTemp.categoryList.includes(categoryInfo.categoryName)) {
+      categoryInfo.categoryName = categoryListTemp.categoryList[categoryInfo.y]
+      console.log('Category name already exists');
+    }
+    categoryListTemp.categoryList[categoryInfo.y] = categoryInfo.categoryName;
+
+    this.apiService.changeDetailObject(this.objectName, categoryListTemp).subscribe(
+      response => {
+        this.data[categoryInfo.x] = categoryListTemp;
+        console.log('PUT request successful', response);
+      },
+      error => {
+        console.error('Error occurred', error);
+      }
+    );
   }
 
   onEditClick() {
@@ -55,5 +122,19 @@ export class CategoryManagerViewComponent implements OnInit, OnChanges {
   }
   exitEditClick() {
     this.mode = 'view';
+  }
+
+  onChangecategoryName(categoryInfo: any) {
+    const categoryListTemp = this.data[categoryInfo.x];
+    categoryListTemp.name = categoryInfo.nameSection;
+    this.apiService.changeDetailObject(this.objectName, categoryListTemp).subscribe(
+      response => {
+        this.data[categoryInfo.x] = categoryListTemp;
+        console.log('PUT request successful', response);
+      },
+      error => {
+        console.error('Error occurred', error);
+      }
+    );
   }
 }

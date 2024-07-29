@@ -11,7 +11,12 @@ export class TableComponent implements OnChanges, OnInit {
   ]
   @Input() ignoredAttributes: string[] = [];
   @Input() detailLink: string = '';
-  @Input() mode='view';
+  @Input() mode = 'view';
+  @Output() addCategoryHandler: EventEmitter<any> = new EventEmitter();
+  @Output() deleteCategoryHandler: EventEmitter<any> = new EventEmitter();
+  @Output() deleteCategorySectionHandler: EventEmitter<any> = new EventEmitter();
+  @Output() changeCategoryHandler: EventEmitter<any> = new EventEmitter();
+  @Output() categoryNameHandler: EventEmitter<any> = new EventEmitter();
 
   ngOnInit(): void {
   }
@@ -50,14 +55,24 @@ export class TableComponent implements OnChanges, OnInit {
   }
 
   addCategory(x: number) {
-    this.data[x].categoryList.push('new category');
+    this.addCategoryHandler.emit(x);
   }
 
   handleCategoryDelete(x: number, y: number) {
-    this.data[x].categoryList.splice(y, 1);
+    this.deleteCategoryHandler.emit({ x, y });
   }
 
   deleteCategorySection(x: number) {
-    this.data.splice(x, 1);
+    this.deleteCategorySectionHandler.emit(x);
   }
+
+  handleCategoryChange(x: number, categoryInfo: any) {
+    categoryInfo['x'] = x
+    this.changeCategoryHandler.emit(categoryInfo);
+  }
+
+  changeCategorySectionName(x: number) {
+    this.categoryNameHandler.emit({ nameSection: this.data[x].name, x });
+  }
+
 }

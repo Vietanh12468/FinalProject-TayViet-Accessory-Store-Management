@@ -17,6 +17,9 @@ export class APIService {
   createDetailObject(nameObject: string | null, object: any) {
     return this.http.post(`/api/${nameObject}`, object);
   }
+  deleteDetailObject(nameObject: string | null, id: string | null) {
+    return this.http.delete(`/api/${nameObject}/${id}`);
+  }
 
   getListObjects(nameObject: string | null, page: number) {
     return this.http.get<any>(`/api/${nameObject}/page/${page}`);

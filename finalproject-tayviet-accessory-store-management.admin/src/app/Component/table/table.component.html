@@ -28,13 +28,16 @@
                 <div class="container text-center ms-2">
                   <div class="row row-cols-auto">
                     <ng-container *ngFor="let category of row['categoryList']; let y = index">
-                      <app-category-tag [category]="category" [mode]="mode" [index]="y" (categoryDeteleTrigger)="handleCategoryDelete($event, y)"></app-category-tag>
+                      <app-category-tag [category]="category" [mode]="mode" [index]="y" (categoryDeteleTrigger)="handleCategoryDelete(x, $event)" (categoryChangeTrigger)="handleCategoryChange(x, $event)"></app-category-tag>
                     </ng-container>
                     <div class="p-2 position-relative" *ngIf="mode !== 'view'">
                       <app-button class="g-col-6 position-absolute start-50 top-50 translate-middle" color="green" label="+" (buttonClick)="addCategory(x)"></app-button>
                     </div>
                   </div>
                 </div>
+              </ng-container>
+              <ng-container *ngSwitchCase="'name'">
+                <input [ngClass]="{'form-control': mode !== 'view', 'form-control-plaintext pt-2' : mode === 'view'}" type="text" [readonly]="mode === 'view'" [value]="row[column]" [(ngModel)]="row[column]" placeholder="" (blur)="changeCategorySectionName(x)">
               </ng-container>
               <ng-container *ngSwitchDefault>
                 {{ row[column] }}

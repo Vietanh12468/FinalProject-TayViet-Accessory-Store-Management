@@ -2,8 +2,10 @@
   <div class="row">
     <div class="col">
       <div class="badge text-bg-secondary rounded-pill default-font categoryBlock d-flex align-items-center justify-content-between">
-        <p class="m-0">{{category}}</p>
+        <input class="p-2" [ngClass]="{'form-control': editCategoryMode === true, 'form-control-plaintext pt-2 text-light' : editCategoryMode === false}" type="text" [readonly]="editCategoryMode !== true" [(ngModel)]="category" placeholder="">
         <app-button *ngIf="mode !== 'view'" class="g-col-6" color="red" label="-" (buttonClick)="deleteCategory()"></app-button>
+        <app-button *ngIf="editCategoryMode === false && mode !== 'view'" class="g-col-6" color="blue" label="e" (buttonClick)="editCategory()"></app-button>
+        <app-button *ngIf="editCategoryMode === true && mode !== 'view'" class="g-col-6" color="green" label="s" (buttonClick)="saveCategory()"></app-button>
       </div>
     </div>
   </div>
