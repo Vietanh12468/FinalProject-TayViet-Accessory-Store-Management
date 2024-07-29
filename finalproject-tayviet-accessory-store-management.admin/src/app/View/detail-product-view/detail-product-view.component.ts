@@ -1,6 +1,7 @@
 import { Component, Input, SimpleChanges, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { APIService } from '../../Service/API/api.service';
 import { IProduct } from '../../Interface/iproduct';
+import { ISubProduct, SubProduct } from '../../Interface/isub-product';
 import { InfoComponent } from '../../Component/info/info.component';
 import { ActivatedRoute } from '@angular/router';
 
@@ -13,7 +14,7 @@ export class DetailProductViewComponent implements OnInit {
   @Input() id: string|null = '';
   @Input() mode: string = 'view';
   @ViewChild('infoComponent') infoComponent!: InfoComponent;
-
+  ignoredAttributes: string[] = ['subProductList', 'image'];
   product: any = {
     "id": "668733aab060c690227b3878",
     "name": "string",
@@ -81,6 +82,9 @@ export class DetailProductViewComponent implements OnInit {
       for (const key in this.product) {
         this.product[key] = null;
       }
+      const subProduct: SubProduct = new SubProduct();
+      this.product['subProductList'] = [subProduct];
+      console.log(this.product);
     }
     else {
       this.getDetailProduct();

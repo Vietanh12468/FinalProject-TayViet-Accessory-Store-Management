@@ -1,6 +1,6 @@
 <div class="container-fluid w-50">
   <div class="div-2">
-    <app-info [mode]="mode" [object]="account" #infoComponent (returnData)="handleData($event)">></app-info>
+    <app-info [mode]="mode" [object]="account" [ignoredAttributes]="ignoredAttributes" #infoComponent (returnData)="handleData($event)">></app-info>
     <div class="div-16 justify-content-center mt-4">
       <app-button *ngIf="mode === 'view'" class="g-col-6" color="blue" label="Edit User" (buttonClick)="onEditUserClick()"></app-button>
       <ng-container *ngIf="mode === 'change'">

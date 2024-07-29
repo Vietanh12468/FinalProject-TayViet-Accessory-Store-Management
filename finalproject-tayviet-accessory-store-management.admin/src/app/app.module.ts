@@ -25,6 +25,7 @@ import { LoginViewComponent } from './View/login-view/login-view.component';
 import { SearchComponent } from './Component/search/search.component';
 import { ProductManagerViewComponent } from './View/product-manager-view/product-manager-view.component';
 import { OrderManagerViewComponent } from './View/order-manager-view/order-manager-view.component';
+import { CategoryManagerViewComponent } from './View/category-manager-view/category-manager-view.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { OrderManagerViewComponent } from './View/order-manager-view/order-manag
     LoginViewComponent,
     SearchComponent,
     ProductManagerViewComponent,
-    OrderManagerViewComponent
+    OrderManagerViewComponent,
+    CategoryManagerViewComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

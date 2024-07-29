@@ -12,8 +12,7 @@ export class InfoComponent implements OnChanges, OnInit {
   @Input() object: any;
   @ViewChild('fileInput') fileInput!: ElementRef;
   @Output() returnData = new EventEmitter<any>();
-
-  ignoredAttributes = ['username', 'image', 'state', 'subProductList', 'categoryList', 'orderList', 'description', 'brandID'];
+  @Input() ignoredAttributes: string[] = [];
 
   getInfo() {
     this.returnData.emit(this.object);
@@ -93,5 +92,14 @@ export class InfoComponent implements OnChanges, OnInit {
     if (isAccount === true) {
       this.keyAttributes = 'name';
     }
+  }
+
+  addCategory() {
+    this.object['categoryList'] = this.object['categoryList'] || [];
+    this.object['categoryList'].push('New Category');
+  }
+
+  handleCategoryDelete(index: number) {
+    this.object['categoryList'].splice(index, 1);
   }
 }

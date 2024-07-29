@@ -11,6 +11,7 @@ export class TableComponent implements OnChanges, OnInit {
   ]
   @Input() ignoredAttributes: string[] = [];
   @Input() detailLink: string = '';
+  @Input() mode='view';
 
   ngOnInit(): void {
   }
@@ -46,5 +47,17 @@ export class TableComponent implements OnChanges, OnInit {
   // add method view detail with variable id
   viewDetail(id: number) {
     console.log(this.getMessage(id));
+  }
+
+  addCategory(x: number) {
+    this.data[x].categoryList.push('new category');
+  }
+
+  handleCategoryDelete(x: number, y: number) {
+    this.data[x].categoryList.splice(y, 1);
+  }
+
+  deleteCategorySection(x: number) {
+    this.data.splice(x, 1);
   }
 }

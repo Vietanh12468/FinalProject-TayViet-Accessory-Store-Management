@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 import { IAccount } from '../../Interface/iaccount';
 import { SelectOption } from '../../Interface/iselect-option';
 import { OutputSearch } from '../../Interface/ioutput-search';
@@ -11,7 +11,7 @@ import { APIService } from '../../Service/API/api.service';
   templateUrl: './account-manager-view.component.html',
   styleUrl: './account-manager-view.component.css'
 })
-export class AccountManagerViewComponent implements OnInit {
+export class AccountManagerViewComponent implements OnInit, OnChanges {
   @ViewChild('tableComponent') tableComponent!: TableComponent;
   data: IAccount[] = [];
   total: number = 0;
@@ -43,8 +43,12 @@ export class AccountManagerViewComponent implements OnInit {
 
   ignoredAttributes: string[] = ['password'];
   detailLink = 'account-detail';
+
   ngOnInit() {
     this.getCustomers();
+  }
+
+  ngOnChanges(simpleChanges: SimpleChanges) {
   }
   constructor(private apiService: APIService, private router: Router) { }
 

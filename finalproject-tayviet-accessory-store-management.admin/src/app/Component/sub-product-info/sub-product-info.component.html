@@ -93,8 +93,8 @@
                   <ng-container *ngFor="let image of subProduct['listImage']; let y = index">
                     <app-small-img class="col" [img]="image" [mode]="mode" (returnImg)="handleImg($event)" [imgPosition]="[x, y]"></app-small-img>
                   </ng-container>
-                  <div class="p-2 position-relative" style="width: 160px; height: 160px;">
-                    <app-button *ngIf="mode !== 'view'" class="g-col-6 position-absolute start-50 top-50 translate-middle" color="green" label="Add" (buttonClick)="addImageSubProduct(x)"></app-button>
+                  <div *ngIf="mode !== 'view'" class="p-2 position-relative" style="width: 160px; height: 160px;">
+                    <app-button class="g-col-6 position-absolute start-50 top-50 translate-middle" color="green" label="Add" (buttonClick)="addImageSubProduct(x)"></app-button>
                   </div>
                 </div>
               </div>

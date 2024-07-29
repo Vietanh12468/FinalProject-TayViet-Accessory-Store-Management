@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="d-flex justify-content-center col-2 align-self-center">
+    <app-button *ngIf="mode === 'view'" color="blue" label="Edit" (buttonClick)="onEditClick()"></app-button>
+    <app-button *ngIf="mode !== 'view'" color="green" label="Exit" (buttonClick)="exitEditClick()"></app-button>
+    <app-button *ngIf="mode !== 'view'" color="blue" label="Add" (buttonClick)="onAddCategoryClick()"></app-button>
+
+  </div>
+</div>
+<app-table [data]="data" [ignoredAttributes]="ignoredAttributes" [mode]="mode"></app-table>
+<app-pagination [total]="total" (onPageChange)="getCategories($event)"></app-pagination>

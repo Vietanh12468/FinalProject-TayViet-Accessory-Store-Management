@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-category-tag',
@@ -7,4 +7,11 @@ import { Component, Input } from '@angular/core';
 })
 export class CategoryTagComponent {
   @Input() category: string = '';
+  @Input() mode: string = 'view';
+  @Input() index: number = 0;
+  @Output() categoryDeteleTrigger = new EventEmitter<number>();
+
+  deleteCategory() {
+    this.categoryDeteleTrigger.emit(this.index);
+  };
 }

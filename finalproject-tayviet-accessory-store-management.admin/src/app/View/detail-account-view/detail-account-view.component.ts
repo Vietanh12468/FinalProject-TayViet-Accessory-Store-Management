@@ -13,7 +13,7 @@ export class DetailAccountViewComponent implements OnInit, OnChanges {
   @Input() id: string|null = '';
   @Input() mode: string = 'create';
   @ViewChild('infoComponent') infoComponent!: InfoComponent;
-
+  ignoredAttributes = ['password', 'image'];
   account: any = {
     "id": "669764ba2e75b8c4f2ac2b2c",
     "name": "string",

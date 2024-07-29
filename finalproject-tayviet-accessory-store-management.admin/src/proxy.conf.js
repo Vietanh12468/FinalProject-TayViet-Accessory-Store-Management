@@ -11,7 +11,8 @@ const PROXY_CONFIG = [
       "/api/OrderHistory",
       "/api/Customer",
       "/api/Admin",
-      "/api/Product"
+      "/api/Product",
+      "/api/CategorySection",
     ],
     target,
     secure: false

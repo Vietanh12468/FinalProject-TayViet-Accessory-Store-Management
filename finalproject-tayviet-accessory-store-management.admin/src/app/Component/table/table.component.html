@@ -7,11 +7,11 @@
             {{ column }}
           </th>
         </ng-container>
-        <th> Action </th>
+        <th *ngIf="detailLink !== '' || mode !== 'view'"> Action </th>
       </tr>
     </thead>
     <tbody>
-      <tr class="table-secondary" *ngFor="let row of data">
+      <tr class="table-secondary" *ngFor="let row of data; let x = index">
         <ng-container *ngFor="let column of columns">
           <td *ngIf="!ignoredAttributes.includes(column)">
             <ng-container [ngSwitch]="column">
@@ -24,13 +24,28 @@
               <ng-container *ngSwitchCase="'history'">
                 <!-- Description content here -->
               </ng-container>
+              <ng-container *ngSwitchCase="'categoryList'">
+                <div class="container text-center ms-2">
+                  <div class="row row-cols-auto">
+                    <ng-container *ngFor="let category of row['categoryList']; let y = index">
+                      <app-category-tag [category]="category" [mode]="mode" [index]="y" (categoryDeteleTrigger)="handleCategoryDelete($event, y)"></app-category-tag>
+                    </ng-container>
+                    <div class="p-2 position-relative" *ngIf="mode !== 'view'">
+                      <app-button class="g-col-6 position-absolute start-50 top-50 translate-middle" color="green" label="+" (buttonClick)="addCategory(x)"></app-button>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
               <ng-container *ngSwitchDefault>
                 {{ row[column] }}
               </ng-container>
             </ng-container>
           </td>
         </ng-container>
-        <td> <button routerLink="/{{detailLink}}/{{row.id}}" [queryParams]="{ mode: 'view' }">Trigger</button> </td>
+        <td *ngIf="detailLink !== ''"> <button routerLink="/{{detailLink}}/{{row.id}}" [queryParams]="{ mode: 'view' }">Trigger</button> </td>
+        <td *ngIf="mode !== 'view'" class="position-relative">
+          <app-button class="g-col-6 position-absolute start-50 top-50 translate-middle" color="red" label="Delete" (buttonClick)="deleteCategorySection(x)"></app-button>
+        </td>
       </tr>
     </tbody>
   </table>

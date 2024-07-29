@@ -15,46 +15,79 @@
   <tbody>
     <tr *ngFor="let attribute of attributes">
       <ng-container *ngIf="!ignoredAttributes.includes(attribute)">
-        <th class="col-3">
-          <label class="col-sm-2 col-form-label mx-3 text-capitalize">{{ attribute }}:</label>
-        </th>
-        <td class="col-9">
-          <div class="form-floating">
-            <input id="{{ attribute }}" [ngClass]="{'form-control': mode !== 'view', 'form-control-plaintext pt-2' : mode === 'view', 'is-invalid': checkValidAttribute(attribute) === false}" type="text" [readonly]="mode === 'view' || attribute === 'id'" [value]="object[attribute]" [(ngModel)]="object[attribute]" placeholder="">
-            <label *ngIf="mode !== 'view'" for="{{ attribute }}">{{ attribute }}</label>
-            <div class="position-absolute top-50 start-100 translate-middle-y badge rounded-pill text-bg-danger" *ngIf="checkValidAttribute(attribute) === false">
-              invalid {{ attribute }}
-            </div>
-          </div>
-        </td>
-      </ng-container>
-      <ng-container *ngIf="attribute === 'state'">
-        <th class="col-3">
-          <label class="col-sm-2 col-form-label mx-3 text-capitalize">{{ attribute }}:</label>
-        </th>
-        <td class="col-9">
-          <div class="form-floating">
-            <select *ngIf="mode !== 'view'" class="form-select text-capitalize" [(ngModel)]="object['state']">
-              <option *ngFor="let option of stateOptions" [value]="option">{{ option }}</option>
-            </select>
-            <label *ngIf="mode !== 'view'" for="{{ attribute }}">{{ attribute }}</label>
-            <input *ngIf="mode === 'view'" id="state" class="form-control-plaintext pt-2" [ngClass]="{'is-invalid': checkValidAttribute(attribute) === false}" type="text" readonly [value]="object['state']" [(ngModel)]="object['state']" placeholder="">
-          </div>
-        </td>
-      </ng-container>
-      <ng-container *ngIf="attribute === 'description'">
-        <th class="col-3">
-          <label class="col-sm-2 col-form-label mx-3 text-capitalize">{{ attribute }}:</label>
-        </th>
-        <td class="col-9">
-          <div class="form-floating">
-            <textarea class="textarea" id="{{ attribute }}" [ngClass]="{'form-control': mode !== 'view', 'form-control-plaintext pt-2' : mode === 'view', 'is-invalid': checkValidAttribute(attribute) === false}" type="text" [readonly]="mode === 'view'" [value]="object[attribute]" [(ngModel)]="object[attribute]" placeholder=""></textarea>
-            <label *ngIf="mode !== 'view'" for="{{ attribute }}">{{ attribute }}</label>
-            <div class="position-absolute top-50 start-100 translate-middle-y badge rounded-pill text-bg-danger" *ngIf="checkValidAttribute(attribute) === false">
-              invalid {{ attribute }}
-            </div>
-          </div>
-        </td>
+        <ng-container [ngSwitch]="attribute">
+          <ng-container *ngSwitchCase="'image'">
+            <app-small-img [img]="object.image"></app-small-img>
+          </ng-container>
+          <ng-container *ngSwitchCase="'cart'">
+            <!-- Button content here -->
+          </ng-container>
+          <ng-container *ngSwitchCase="'history'">
+            <!-- Description content here -->
+          </ng-container>
+          <ng-container *ngSwitchCase="'categoryList'">
+            <th class="col-3">
+              <label class="col-sm-2 col-form-label mx-3 text-capitalize">{{ attribute }}:</label>
+            </th>
+            <td class="col-9">
+              <div class="container text-center ms-2">
+                <div class="row row-cols-auto">
+                  <ng-container *ngFor="let category of object['categoryList']; let x = index">
+                    <app-category-tag [category]="category" [mode]="mode" [index]="x" (categoryDeteleTrigger)="handleCategoryDelete($event)"></app-category-tag>
+                  </ng-container>
+                  <div class="p-2 position-relative" *ngIf="mode !== 'view'">
+                    <app-button class="g-col-6 position-absolute start-50 top-50 translate-middle" color="green" label="+" (buttonClick)="addCategory()"></app-button>
+                  </div>
+                  <div class="position-absolute top-50 start-100 translate-middle-y badge rounded-pill text-bg-danger" *ngIf="checkValidAttribute(attribute) === false">
+                    invalid {{ attribute }}
+                  </div>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container *ngSwitchCase="'state'">
+            <th class="col-3">
+              <label class="col-sm-2 col-form-label mx-3 text-capitalize">{{ attribute }}:</label>
+            </th>
+            <td class="col-9">
+              <div class="form-floating">
+                <select *ngIf="mode !== 'view'" class="form-select text-capitalize" [(ngModel)]="object['state']">
+                  <option *ngFor="let option of stateOptions" [value]="option">{{ option }}</option>
+                </select>
+                <label *ngIf="mode !== 'view'" for="{{ attribute }}">{{ attribute }}</label>
+                <input *ngIf="mode === 'view'" id="state" class="form-control-plaintext pt-2" [ngClass]="{'is-invalid': checkValidAttribute(attribute) === false}" type="text" readonly [value]="object['state']" [(ngModel)]="object['state']" placeholder="">
+              </div>
+            </td>
+          </ng-container>
+          <ng-container *ngSwitchCase="'description'">
+            <th class="col-3">
+              <label class="col-sm-2 col-form-label mx-3 text-capitalize">{{ attribute }}:</label>
+            </th>
+            <td class="col-9">
+              <div class="form-floating">
+                <textarea class="textarea" id="{{ attribute }}" [ngClass]="{'form-control': mode !== 'view', 'form-control-plaintext pt-2' : mode === 'view', 'is-invalid': checkValidAttribute(attribute) === false}" type="text" [readonly]="mode === 'view'" [value]="object[attribute]" [(ngModel)]="object[attribute]" placeholder=""></textarea>
+                <label *ngIf="mode !== 'view'" for="{{ attribute }}">{{ attribute }}</label>
+                <div class="position-absolute top-50 start-100 translate-middle-y badge rounded-pill text-bg-danger" *ngIf="checkValidAttribute(attribute) === false">
+                  invalid {{ attribute }}
+                </div>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container *ngSwitchDefault>
+            <th class="col-3">
+              <label class="col-sm-2 col-form-label mx-3 text-capitalize">{{ attribute }}:</label>
+            </th>
+            <td class="col-9">
+              <div class="form-floating">
+                <input id="{{ attribute }}" [ngClass]="{'form-control': mode !== 'view', 'form-control-plaintext pt-2' : mode === 'view', 'is-invalid': checkValidAttribute(attribute) === false}" type="text" [readonly]="mode === 'view' || attribute === 'id'" [value]="object[attribute]" [(ngModel)]="object[attribute]" placeholder="">
+                <label *ngIf="mode !== 'view'" for="{{ attribute }}">{{ attribute }}</label>
+                <div class="position-absolute top-50 start-100 translate-middle-y badge rounded-pill text-bg-danger" *ngIf="checkValidAttribute(attribute) === false">
+                  invalid {{ attribute }}
+                </div>
+              </div>
+            </td>
+          </ng-container>
+        </ng-container>
       </ng-container>
     </tr>
   </tbody>
