@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { AuthenticationService } from './Service/Authentication/authentication.service';
+import { APIService } from './Service/API/api.service';
 import { IAccount } from './Interface/iaccount';
 
 export interface WeatherForecast {
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit, OnChanges {
 
   userInfo: any = null;
 
-  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {}
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService, private apiService: APIService) {}
 
   ngOnInit() {
     if (this.authenticationService.isLoggedIn() === true) {
@@ -40,7 +41,7 @@ export class AppComponent implements OnInit, OnChanges {
 
   getUserInfo() {
     const token = this.authenticationService.getToken();
-    this.http.get<IAccount>(`/api/Admin/${token.userID}`).subscribe(
+    this.apiService.getDetailObject('Admin', token.userID).subscribe(
       (result) => {
         this.userInfo = result;
       },
