@@ -78,7 +78,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
                 }
 
                 // Assuming login() is a method in the result object
-                result.login();
+/*                result.login();*/
 
                 // Assuming id is a property of the result object
                 return result;

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IAccount } from '../../Interface/iaccount';
+import { IProduct } from '../../Interface/iproduct';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,11 @@ export class APIService {
     return this.http.get<any>(`/api/${nameObject}/search/${searchAttribute}&&${keyword}&&${page}`);
   }
   loginRequest(loginData: any) {
-    return this.http.post<IAccount>(`/api/Admin/login`, loginData);
+    return this.http.post<IAccount>(`/api/Customer/login`, loginData);
+  }
+
+
+  getLatestProducts() {
+    return this.http.get<IProduct[]>(`/api/Product/Latest`);
   }
 }

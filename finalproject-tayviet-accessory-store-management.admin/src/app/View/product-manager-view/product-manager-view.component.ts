@@ -51,6 +51,7 @@ export class ProductManagerViewComponent {
         console.error(error);
       }
     )
+    console.log(this.data);
   }
 
   searchSubmit(searchInfo: OutputSearch, page: number = 1) {

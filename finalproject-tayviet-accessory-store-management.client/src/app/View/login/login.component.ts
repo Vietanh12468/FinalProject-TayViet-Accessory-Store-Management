@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../Service/Authentication/authentication.service';
+import { APIService } from '../../Service/API/api.service';
 
 @Component({
   selector: 'app-login',
@@ -11,19 +12,20 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   username: string = '';
   password: string = '';
-  error: string = '';
-  constructor(private http: HttpClient, private router: Router) { }
 
-  login() {
-    this.http.post<{ token: string }>('/api/login', { username: this.username, password: this.password })
-      .subscribe(
-        (response) => {
-          localStorage.setItem('token', response.token);
-          this.router.navigate(['/dashboard']);
-        },
-        (error) => {
-          this.error = error.error.error;
-        }
-      );
+  constructor(private authenticationService: AuthenticationService, private apiService: APIService, private router: Router) { }
+
+  onSubmit() {
+    const loginData: any = { username: this.username, password: this.password };
+    this.apiService.loginRequest(loginData).subscribe(
+      (result) => {
+        console.log('POST request successful', result);
+        this.authenticationService.setToken(result);
+        window.location.reload();
+      },
+      (error) => {
+        console.error('Error occurred', error);
+      }
+    );
   }
 }

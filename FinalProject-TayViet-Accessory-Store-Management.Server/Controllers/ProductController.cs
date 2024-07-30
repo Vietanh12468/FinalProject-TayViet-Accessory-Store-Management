@@ -2,6 +2,7 @@
 using FinalProject_TayViet_Accessory_Store_Management.Server.Interfaces;
 using FinalProject_TayViet_Accessory_Store_Management.Server.Models;
 using FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtility;
+using System.Collections.Generic;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
 {
@@ -43,6 +44,21 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("Latest")]
+        public async Task<List<Product>> LatestProducts()
+        {
+            try
+            {
+                var totalRecord = await _databaseServices.GetTotalRecordAsync();
+                if (totalRecord < 11) { return await _databaseServices.ReadAsync(); }
+                return await _databaseServices.ReadAsync((int)totalRecord - 11, 10);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }
