@@ -1,14 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { APIService } from './Service/API/api.service';
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { AuthenticationService } from './Service/Authentication/authentication.service';
-import { IAccount } from './Interface/iaccount';
+import { Account } from './Interface/iaccount';
 
-export interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
-}
 export interface OrderHistory {
   id: string;
   customerID: string;
@@ -25,9 +19,9 @@ export interface OrderHistory {
 })
 export class AppComponent implements OnInit, OnChanges {
 
-  userInfo: any = null;
+  userInfo: Account | null = null;
 
-  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {}
+  constructor(private apiService: APIService, private authenticationService: AuthenticationService) {}
 
   ngOnInit() {
     if (this.authenticationService.isLoggedIn() === true) {
@@ -40,7 +34,7 @@ export class AppComponent implements OnInit, OnChanges {
 
   getUserInfo() {
     const token = this.authenticationService.getToken();
-    this.http.get<IAccount>(`/api/Admin/${token.userID}`).subscribe(
+    this.apiService.getDetailObject('Admin', token).subscribe(
       (result) => {
         this.userInfo = result;
       },

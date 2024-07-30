@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  @Input() userInfo: any;
+  @Output() signOutEvent = new EventEmitter();
 
+  signOut() {
+    this.signOutEvent.emit();
+  }
 }

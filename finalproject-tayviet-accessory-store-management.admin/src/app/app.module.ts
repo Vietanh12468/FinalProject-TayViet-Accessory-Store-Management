@@ -9,8 +9,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MessageBoxComponent } from './message-box/message-box.component';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
-import { UserInfoBoxComponent } from './user-info-box/user-info-box.component';
-import { DetailProductComponent } from './detail-product/detail-product.component';
 import { AccountManagerViewComponent } from './View/account-manager-view/account-manager-view.component';
 import { DetailAccountViewComponent } from './View/detail-account-view/detail-account-view.component';
 import { ButtonComponent } from './Component/button/button.component';
@@ -32,8 +30,6 @@ import { CategoryManagerViewComponent } from './View/category-manager-view/categ
     AppComponent,
     AlertBoxComponent,
     MessageBoxComponent,
-    UserInfoBoxComponent,
-    DetailProductComponent,
     AccountManagerViewComponent,
     DetailAccountViewComponent,
     ButtonComponent,
