@@ -9,6 +9,7 @@ import { IProduct } from '../../Interface/iproduct';
 })
 export class MainHomeComponent implements OnInit, OnChanges, AfterViewInit {
   constructor(private api: APIService) { }
+  currentSlideIndex = 0;
 
   latestProducts: IProduct[] = [];
 
@@ -26,27 +27,16 @@ export class MainHomeComponent implements OnInit, OnChanges, AfterViewInit {
         console.error('Error occurred', error);
       }
     );
-    console.log(this.latestProducts);
-
-    let items = document.querySelectorAll('.carousel .carousel-item') as NodeListOf<HTMLElement>;
-
-    items.forEach((el: HTMLElement) => {
-      const minPerSlide: number = 4;
-      let next: HTMLElement | null = el.nextElementSibling as HTMLElement | null;
-
-      for (let i = 1; i < minPerSlide; i++) {
-        if (!next) {
-          // wrap carousel by using first child
-          next = items[0];
-        }
-
-        let cloneChild = next.cloneNode(true) as HTMLElement;
-        el.appendChild(cloneChild.children[0]);
-        next = next.nextElementSibling as HTMLElement | null;
-      }
-    });
   }
 
   ngAfterViewInit(): void {
+  }
+
+  calculateT(T: number): number {
+    let calculatedT = T;
+    while (calculatedT >= 6) {
+      calculatedT = calculatedT - 6;
+    }
+    return calculatedT;
   }
 }
