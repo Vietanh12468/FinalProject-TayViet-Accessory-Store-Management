@@ -26,7 +26,6 @@ import { SearchComponent } from './Component/search/search.component';
 import { ProductManagerViewComponent } from './View/product-manager-view/product-manager-view.component';
 import { OrderManagerViewComponent } from './View/order-manager-view/order-manager-view.component';
 import { CategoryManagerViewComponent } from './View/category-manager-view/category-manager-view.component';
-import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { MessageBoxCloseComponent } from './message-box-close/message-box-close.component';
 import { MessageBoxCancelComponent } from './message-box-cancel/message-box-cancel.component';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -52,10 +51,9 @@ import { MainPageComponent } from './main-page/main-page.component';
     SearchComponent,
     ProductManagerViewComponent,
     OrderManagerViewComponent,
-    CategoryManagerViewComponent
-    AdminLoginComponent,
+    CategoryManagerViewComponent,
     MessageBoxCloseComponent,
-    MessageBoxCancelComponent,
+    MessageBoxCancelComponent,  
     MainPageComponent
   ],
   imports: [
