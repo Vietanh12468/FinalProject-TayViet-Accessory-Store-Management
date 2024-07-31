@@ -41,12 +41,12 @@ export class AppComponent implements OnInit, OnChanges {
 
   activeItemIndex: number = 0;
   sidebarItems = [
-    { label: 'Home', icon: '#home' },
-    { label: 'Dashboard', icon: '#speedometer2' },
-    { label: 'Orders', icon: '#table' },
-    { label: 'Products', icon: '#grid' },
-    { label: 'Customers', icon: '#people-circle' },
-    { label: 'Category', icon: '#home' },
+    { label: 'Home', icon: '#home', link: 'home' },
+    { label: 'Dashboard', icon: '#speedometer2',  },
+    { label: 'Orders', icon: '#table', link: 'order-manager' },
+    { label: 'Products', icon: '#grid', link: 'product-manager' },
+    { label: 'Customers', icon: '#people-circle', link: 'account-manager' },
+    { label: 'Category', icon: '#home', link: 'category-manager' },
     { label: 'Settings', icon: '#home' }
   ];
 

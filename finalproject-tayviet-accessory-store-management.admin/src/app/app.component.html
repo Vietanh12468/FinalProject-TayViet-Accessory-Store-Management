@@ -8,7 +8,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item" *ngFor="let item of sidebarItems; let i = index">
-        <a href="#"
+        <a routerLink="/{{ item.link }}"
            class="nav-link"
            [ngClass]="{'active': activeItemIndex === i}"
            (click)="setActiveItem(i)">
