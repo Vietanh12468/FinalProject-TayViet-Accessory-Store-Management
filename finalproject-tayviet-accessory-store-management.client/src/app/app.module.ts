@@ -16,6 +16,7 @@ import { ProfileManagerComponent } from './profile-manager/profile-manager.compo
 import { PaymentComponent } from './payment/payment.component';
 import { VoucherComponent } from './voucher/voucher.component';
 import { LoginComponent } from './View/login/login.component';
+import { PagenotFoundComponent } from './pagenot-found/pagenot-found.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LoginComponent } from './View/login/login.component';
     ProfileManagerComponent,
     PaymentComponent,
     VoucherComponent,
-    LoginComponent
+    LoginComponent,
+    PagenotFoundComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

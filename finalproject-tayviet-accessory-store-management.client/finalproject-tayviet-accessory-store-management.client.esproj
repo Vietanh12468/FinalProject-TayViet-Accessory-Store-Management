@@ -8,10 +8,9 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist\finalproject-tayviet-accessory-store-management.client\</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="src\app\Component\**" />
     <None Remove="src\assets\**" />
+    <TypeScriptConfiguration Remove="src\app\Component\**" />
     <TypeScriptConfiguration Remove="src\assets\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\app\Component\" />
   </ItemGroup>
 </Project>

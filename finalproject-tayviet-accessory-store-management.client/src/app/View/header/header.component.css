@@ -1,11 +1,14 @@
 .header {
-  display: flex;
   justify-content: center;
   border-bottom: 1px solid #000;
   font-size: 20px;
   color: #000;
   font-weight: 400;
   padding: 24px 43px;
+  display: flex font-family: system-ui;
+  line-height: 30px;
+  padding: 24px 43px;
+  height: 120px;
 }
 
 @media (max-width: 991px) {
