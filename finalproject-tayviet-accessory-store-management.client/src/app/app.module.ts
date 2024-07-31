@@ -16,6 +16,7 @@ import { ProfileManagerComponent } from './profile-manager/profile-manager.compo
 import { PaymentComponent } from './payment/payment.component';
 import { VoucherComponent } from './voucher/voucher.component';
 import { LoginComponent } from './View/login/login.component';
+import { SubProductCarouselComponent } from './Component/sub-product-carousel/sub-product-carousel.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { LoginComponent } from './View/login/login.component';
     ProfileManagerComponent,
     PaymentComponent,
     VoucherComponent,
-    LoginComponent
+    LoginComponent,
+    SubProductCarouselComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
