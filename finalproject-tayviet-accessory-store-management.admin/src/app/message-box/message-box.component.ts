@@ -7,15 +7,28 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class MessageBoxComponent {
   @Input() message: string = "";
-  @Output() close = new EventEmitter();
+  @Output() yes = new EventEmitter<void>();
+  @Output() no = new EventEmitter<void>();
 
-  constructor() {
+  isVisible: boolean = false;
+
+  openModal(message: string) {
+    this.message = message;
+    this.isVisible = true;
   }
 
-  ngOnInit() {
+  closeModal() {
+    this.isVisible = false;
   }
 
-  closeAction() {
-    this.close.emit();
+  handleYes() {
+    this.yes.emit();
+    this.closeModal();
+  }
+
+  handleNo() {
+    this.no.emit();
+    this.closeModal();
   }
 }
+
