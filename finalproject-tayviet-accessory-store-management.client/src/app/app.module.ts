@@ -1,21 +1,21 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { ReactiveFormsModule } from '@angular/forms';
+import { AboutUsComponent } from './about-us/about-us.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './View/header/header.component';
-import { FooterComponent } from './View/footer/footer.component';
-import { MainHomeComponent } from './View/main-home/main-home.component';
-import { ProductComponent } from './View/product/product.component';
-import { AboutUsComponent } from './View/about-us/about-us.component';
-import { ProductDetailComponent } from './View/product-detail/product-detail.component';
 import { CartComponent } from './cart/cart.component';
-import { ProfileManagerComponent } from './profile-manager/profile-manager.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './login/login.component';
+import { MainHomeComponent } from './main-home/main-home.component';
 import { PaymentComponent } from './payment/payment.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductComponent } from './product/product.component';
+import { ProfileManagerComponent } from './profile-manager/profile-manager.component';
 import { VoucherComponent } from './voucher/voucher.component';
-import { LoginComponent } from './View/login/login.component';
 
 @NgModule({
   declarations: [
@@ -30,13 +30,15 @@ import { LoginComponent } from './View/login/login.component';
     ProfileManagerComponent,
     PaymentComponent,
     VoucherComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
-    BrowserModule, HttpClientModule,
-    AppRoutingModule, ReactiveFormsModule, FormsModule
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

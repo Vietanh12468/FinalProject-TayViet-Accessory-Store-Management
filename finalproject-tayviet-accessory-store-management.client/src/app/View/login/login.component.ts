@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../Service/Authentication/authentication.service';
-import { APIService } from '../../Service/API/api.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -10,22 +10,43 @@ import { APIService } from '../../Service/API/api.service';
 })
 
 export class LoginComponent {
-  username: string = '';
-  password: string = '';
+  error: string = '';
 
-  constructor(private authenticationService: AuthenticationService, private apiService: APIService, private router: Router) { }
+  loginForm = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl(''),
+    email: new FormControl('')
+  });
 
-  onSubmit() {
-    const loginData: any = { username: this.username, password: this.password };
-    this.apiService.loginRequest(loginData).subscribe(
-      (result) => {
-        console.log('POST request successful', result);
-        this.authenticationService.setToken(result);
-        window.location.reload();
-      },
-      (error) => {
-        console.error('Error occurred', error);
-      }
-    );
+  registerForm = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl(''),
+  });
+  constructor(private http: HttpClient, private router: Router) { }
+
+  login() {
+    this.http.post<{ token: string }>('/api/login', this.loginForm.getRawValue())
+      .subscribe(
+        (response) => {
+          localStorage.setItem('token', response.token);
+          this.router.navigate(['/dashboard']);
+        },
+        (error) => {
+          this.error = error.error.error;
+        }
+      );
+  }
+
+  register() {
+    this.http.post<{ token: string }>('/api/register', this.registerForm.getRawValue())
+      .subscribe(
+        (response) => {
+          localStorage.setItem('token', response.token);
+          this.router.navigate(['/dashboard']);
+        },
+        (error) => {
+          this.error = error.error.error;
+        }
+      );
   }
 }
