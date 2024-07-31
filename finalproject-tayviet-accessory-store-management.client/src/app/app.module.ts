@@ -17,6 +17,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { VoucherComponent } from './voucher/voucher.component';
 import { LoginComponent } from './View/login/login.component';
 import { SubProductCarouselComponent } from './Component/sub-product-carousel/sub-product-carousel.component';
+import { PagenotFoundComponent } from './pagenot-found/pagenot-found.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,8 @@ import { SubProductCarouselComponent } from './Component/sub-product-carousel/su
     ProfileManagerComponent,
     PaymentComponent,
     VoucherComponent,
+    LoginComponent,
+    PagenotFoundComponent
     LoginComponent,
     SubProductCarouselComponent
   ],
