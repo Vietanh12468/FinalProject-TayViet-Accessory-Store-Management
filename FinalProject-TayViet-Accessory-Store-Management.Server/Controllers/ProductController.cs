@@ -14,7 +14,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             _databaseServices = productDatabaseService;
         }
 
-        [HttpGet("Buy/{productId}, {subProductIndex}, {quantity}")]
+        [HttpGet("Buy/{productId}/{subProductIndex}/{quantity}")]
         public async Task<IActionResult> Buy(string productId, int subProductIndex, int quantity)
         {
             try
