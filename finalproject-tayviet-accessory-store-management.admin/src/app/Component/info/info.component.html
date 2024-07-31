@@ -2,6 +2,9 @@
   <img loading="lazy" class="rounded-circle img my-5" [src]="object.image" alt="Preview Image" [ngClass]="{'opacity-50': mode !== 'view'}" />
   <app-button *ngIf="mode !== 'view'" class="g-col-6 position-absolute start-50 top-50 translate-middle" color="blue" label="Change" (buttonClick)="openFileInput()"></app-button>
   <input class="form-control" type="file" #fileInput style="display: none" (change)="handleFileInput(fileInput)">
+  <div class="position-absolute top-50 start-100 translate-middle-y badge rounded-pill text-bg-danger" *ngIf="checkValidAttribute('image') === false">
+    invalid image
+  </div>
 </div>
   <div class="form-floating mb-4 w-50 mx-auto">
     <h3 *ngIf="mode !== 'create'">{{ object[keyAttributes]}}</h3>
@@ -31,12 +34,14 @@
             </th>
             <td class="col-9">
               <div class="container text-center ms-2">
-                <div class="row row-cols-auto">
-                  <ng-container *ngFor="let category of object['categoryList']; let x = index">
-                    <app-category-tag [category]="category" [mode]="mode" [index]="x" (categoryDeteleTrigger)="handleCategoryDelete($event)"></app-category-tag>
-                  </ng-container>
-                  <div class="p-2 position-relative" *ngIf="mode !== 'view'">
-                    <app-button class="g-col-6 position-absolute start-50 top-50 translate-middle" color="green" label="+" (buttonClick)="addCategory()"></app-button>
+                <div class="form-floating">
+                  <div class="row row-cols-auto">
+                    <ng-container *ngFor="let category of object['categoryList']; let x = index">
+                      <app-category-tag [category]="category" [mode]="mode" [index]="x" (categoryDeteleTrigger)="handleCategoryDelete($event)" (categoryChangeTrigger)="handleCategoryChange($event)"></app-category-tag>
+                    </ng-container>
+                    <div class="p-2 position-relative" *ngIf="mode !== 'view'">
+                      <app-button class="g-col-6 position-absolute start-50 top-50 translate-middle" color="green" label="+" (buttonClick)="addCategory()"></app-button>
+                    </div>
                   </div>
                   <div class="position-absolute top-50 start-100 translate-middle-y badge rounded-pill text-bg-danger" *ngIf="checkValidAttribute(attribute) === false">
                     invalid {{ attribute }}

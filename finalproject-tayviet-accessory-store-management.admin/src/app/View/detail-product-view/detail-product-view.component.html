@@ -7,6 +7,7 @@
       <ng-container *ngIf="mode === 'change'">
         <app-button class="g-col-6" color="blue" label="Back" (buttonClick)="onBackClick()"></app-button>
         <app-button class="g-col-6" color="green" label="{{ mode }}" (buttonClick)="onSubmit()"></app-button>
+        <app-button class="g-col-6" color="red" label="Delete" (buttonClick)="onDetete()"></app-button>
       </ng-container>
       <app-button *ngIf="mode === 'create'" class="g-col-6" color="green" label="{{ mode }}" (buttonClick)="onSubmit()"></app-button>
     </div>

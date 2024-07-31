@@ -52,7 +52,6 @@ export class OrderManagerViewComponent implements OnInit {
       (result) => {
         this.data = result.data;
         this.total = result.total;
-        console.log(result);
       },
       (error) => {
         console.error(error);

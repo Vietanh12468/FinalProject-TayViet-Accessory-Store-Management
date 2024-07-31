@@ -19,11 +19,11 @@ export class InfoComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
+    this.readDataAttributes();
+    this.getObjectType()
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.readDataAttributes();
-    this.getObjectType()
   }
 
   openFileInput() {
@@ -101,5 +101,10 @@ export class InfoComponent implements OnChanges, OnInit {
 
   handleCategoryDelete(index: number) {
     this.object['categoryList'].splice(index, 1);
+  }
+
+  handleCategoryChange(categoryInfo: any) {
+    this.object['categoryList'][categoryInfo.y] = categoryInfo['categoryName'];
+
   }
 }

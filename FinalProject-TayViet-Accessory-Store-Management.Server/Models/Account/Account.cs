@@ -13,7 +13,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
         public string? id { get; set; }
         public string name { get; set; } = null!;
         public string email { get; set; } = null!;
-        public string password { get; set; } = null!;
+        public string? password { get; set; }
         public string phoneNumber { get; set; } = null!;
         public string username { get; set; } = null!;
         public string? state { get; set; } = "Inactive";

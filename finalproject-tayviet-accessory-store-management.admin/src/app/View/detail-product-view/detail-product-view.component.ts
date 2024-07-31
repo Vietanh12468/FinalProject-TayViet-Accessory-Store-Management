@@ -4,6 +4,7 @@ import { IProduct } from '../../Interface/iproduct';
 import { ISubProduct, SubProduct } from '../../Interface/isub-product';
 import { InfoComponent } from '../../Component/info/info.component';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-detail-product-view',
@@ -67,7 +68,7 @@ export class DetailProductViewComponent implements OnInit {
 
   objectName: string = 'Product';
 
-  constructor(private route: ActivatedRoute, private apiService: APIService) {
+  constructor(private route: ActivatedRoute, private apiService: APIService, private location: Location) {
     this.route.queryParams.subscribe(params => {
       this.mode = params['mode'];
     });
@@ -114,12 +115,12 @@ export class DetailProductViewComponent implements OnInit {
     // Check If Valid account
     const invalidAttribute: string[] = [];
     for (const key in this.product) {
-      if ((this.product[key] === null || this.product[key] === '') && key !== 'id' && key !== 'image') {
+      if ((this.product[key] === null || this.product[key] === '') && key !== 'id') {
         invalidAttribute.push(key);
       }
     }
+    this.infoComponent.handleInvalidAttributes(invalidAttribute)
     if (invalidAttribute.length > 0) {
-      this.infoComponent.handleInvalidAttributes(invalidAttribute)
       return
     }
     if (this.mode === 'change') {
@@ -152,6 +153,18 @@ export class DetailProductViewComponent implements OnInit {
   onBackClick() {
     this.mode = 'view';
     this.getDetailProduct();
+  }
+
+  onDetete() {
+    this.apiService.deleteDetailObject(this.objectName, this.id).subscribe(
+      response => {
+        console.log('DELETE request successful', response);
+        this.location.back();
+      },
+      error => {
+        console.error('Error occurred', error);
+      }
+    );
   }
 
 }
