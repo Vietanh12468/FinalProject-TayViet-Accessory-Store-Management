@@ -5,6 +5,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 {
     public class Product
     {
+
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string? id { get; set; }

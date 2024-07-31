@@ -98,7 +98,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             catch (Exception) { throw new UnknownException(); }
         }
 
-        [HttpGet("search/attribute={attribute}&&key={key}&&page={page:int}")]
+        [HttpGet("search/attribute={attribute}&key={key}&page={page:int}")]
         public async Task<ActionResult<Dictionary<string, object>>> Search(string attribute, string key, int page = 1)
         {
             try

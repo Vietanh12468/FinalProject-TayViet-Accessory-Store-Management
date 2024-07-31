@@ -17,7 +17,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             this.productDatabaseServices = productDatabaseServices;
         }
 
-        [HttpPut("{customerId}/addProductInCart/{productId}, {subProductName}, {quantity}")]
+        [HttpPut("{customerId}/addProductInCart/{productId}/{subProductName}/{quantity}")]
         public async Task<IActionResult> AddProductInCart(string customerId, string productId, string subProductName, int quantity)
         {
             try
