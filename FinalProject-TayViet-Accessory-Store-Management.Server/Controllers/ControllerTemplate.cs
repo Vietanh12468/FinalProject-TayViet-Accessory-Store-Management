@@ -9,7 +9,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
         protected IDatabaseServices<T> _databaseServices;
         public ControllerTemplate(IDatabaseServices<T> databaseServices) => _databaseServices = databaseServices;
 
-        // Get all brands Api
         [HttpGet]
         public virtual async Task<ActionResult<Dictionary<string, object>>> Get()
         {
@@ -27,9 +26,8 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             catch (Exception) { throw new UnknownException(); }
         }
 
-        // Get brand by id
         [HttpGet("{id}")]
-        public async Task<ActionResult<T>> Get(string id)
+        public async Task<ActionResult<T>> GetById(string id)
         {
             try
             {
@@ -40,15 +38,13 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             catch (Exception) { throw new UnknownException(); }
         }
 
-        // Update brand by id
-        [HttpPut]
-        public async Task<ActionResult> Update([FromBody] T obj)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateById(string id, [FromBody] T obj)
         {
             try
             {
-                var objectId = obj.GetType().GetProperty("id")?.GetValue(obj)?.ToString();
-                var objChange = await _databaseServices.ReadAsync("id", objectId);
-                await _databaseServices.UpdateAsync(obj, "id", objectId);
+                var objChange = await _databaseServices.ReadAsync("id", id);
+                await _databaseServices.UpdateAsync(obj, "id", id);
                 return Ok();
             }
             catch (FormatException) { return BadRequest("Invalid Id"); }
@@ -56,23 +52,20 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             catch (Exception) { throw new UnknownException(); }
         }
 
-        // Create brand
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] T obj)
+        public async Task<IActionResult> Create([FromBody] T obj)
         {
             await _databaseServices.CreateAsync(obj);
             return Ok();
         }
 
-        // Delete brand
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> DeleteById(string id)
         {
             await _databaseServices.DeleteAsync("id", id);
             return NoContent();
         }
 
-        // Get brand by name
         [HttpGet("name/{name}")]
         public async Task<ActionResult<T>> GetByName(string name)
         {
@@ -85,7 +78,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
         }
 
         [HttpGet("page/{page:int}")]
-        public async Task<ActionResult<Dictionary<string, object>>> Get(int page)
+        public async Task<ActionResult<Dictionary<string, object>>> GetByPage(int page)
         {
             try
             {
@@ -110,7 +103,6 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
         {
             try
             {
-                // Check if attribute is valid
                 var property = typeof(T).GetProperty(attribute);
                 if (property == null)
                 {

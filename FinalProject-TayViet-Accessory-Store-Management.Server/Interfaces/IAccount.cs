@@ -12,7 +12,7 @@
         string? role { get; set; }
         string? image { get; set; }
 
-        void login();
-        void logout();
+        void Login();
+        void Logout();
     }
 }

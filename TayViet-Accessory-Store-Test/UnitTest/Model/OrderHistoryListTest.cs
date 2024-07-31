@@ -22,7 +22,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
             _productService = productService;
         }
 
-        [HttpPut("{id}/{newState}")]
+        [HttpPut("{id}, {newState}")]
         public async Task<IActionResult> UpdateOrderHistory(string id, string newState)
         {
             if (!OrderValidateState.CheckState(newState))

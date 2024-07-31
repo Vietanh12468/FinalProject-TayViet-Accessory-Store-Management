@@ -7,47 +7,16 @@ using System.Security.Authentication;
 
 namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
 {
-    /*    [Controller]
-        [Route("api/[controller]")]
-        public class AccountController : Controller
-        {
-
-            private readonly AccountDatabaseServices<Account> _accountDatabaseServices;
-            public AccountController(AccountDatabaseServices<Account> accountDatabaseServices) => _accountDatabaseServices = accountDatabaseServices;
-
-            [HttpGet]
-            public async Task<List<Account>> Get()
-            {
-                return await _accountDatabaseServices.ReadAsync();
-            }
-
-            [HttpGet("{id}")]
-            public async Task<Account> Get(string id)
-            {
-                return await _accountDatabaseServices.ReadAsync("id", id);
-            }
-
-            [HttpPost]
-            public async Task<IActionResult> Post([FromBody] Account account)
-            {
-                await _accountDatabaseServices.CreateAsync(account);
-                return Ok();
-            }
-
-            [HttpDelete("{id}")]
-            public async Task<IActionResult> Delete(string id)
-            {
-                await _accountDatabaseServices.DeleteAsync("id", id);
-                return NoContent();
-            }*/
-    /*    }*/
-
     [ApiController]
     [Route("api/[controller]")]
     public class AccountControllerTemplate<T> : ControllerTemplate<T> where T : IAccount
     {
         private new readonly AccountDatabaseServiceTemplate<T> _databaseServices;
-        public AccountControllerTemplate(AccountDatabaseServiceTemplate<T> accountDatabaseServices) : base(databaseServices: accountDatabaseServices) => _databaseServices = accountDatabaseServices;
+        public AccountControllerTemplate(AccountDatabaseServiceTemplate<T> accountDatabaseServices)
+            : base(databaseServices: accountDatabaseServices)
+        {
+            _databaseServices = accountDatabaseServices;
+        }
 
         public override async Task<ActionResult<Dictionary<string, object>>> Get()
         {
@@ -77,10 +46,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
                     throw new AuthenticationException();
                 }
 
-                // Assuming login() is a method in the result object
-                result.login();
-
-                // Assuming id is a property of the result object
+                result.Login();
                 return result;
             }
             catch (Exception ex)
@@ -100,7 +66,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
                 {
                     return NotFound();
                 }
-                result.logout();
+                result.Logout();
                 return Ok("Logout successful.");
             }
             catch (Exception ex)
@@ -120,5 +86,4 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
     {
         public string Username { get; set; }
     }
-
 }
