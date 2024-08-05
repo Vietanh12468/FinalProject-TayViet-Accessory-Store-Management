@@ -280,7 +280,6 @@
   display: flex;
   flex-direction: column;
   line-height: normal;
-  width: 69%;
   margin-left: 0;
 }
 
@@ -416,12 +415,8 @@
   border-radius: 4px;
   border: 1px solid #1cd8d2;
   background: linear-gradient(180deg, #1cd8d2 0%, #93edc7 100%);
-  display: flex;
   flex-direction: column;
   justify-content: center;
-  flex-grow: 1;
-  flex-basis: 0;
-  width: fit-content;
 }
 
 @media (max-width: 991px) {
@@ -487,9 +482,16 @@
 .size-chart-link {
   align-self: start;
   display: flex;
-  margin-left: 17px;
   gap: 8px;
   color: #424551;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--gray-800, #424551);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 44px;    
+  text-decoration: none;
 }
 
 @media (max-width: 991px) {
@@ -856,18 +858,6 @@
 .dropdown-icon {
   width: 16px;
   height: 16px;
-}
-
-.size-chart-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--gray-800, #424551);
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  line-height: 44px;
-  padding: 3px 20px 0;
-  text-decoration: none;
 }
 
 .chart-icon {

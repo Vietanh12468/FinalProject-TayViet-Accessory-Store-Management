@@ -6,35 +6,25 @@
   </div>
 </div>
 
-<div class="text-bg-secondary row">
-  <div class="btn p-3 w-auto" *ngFor="let img of imgs; let x = index" data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="x" aria-current="true" (click)="ChangeCurrentTriggered(x)">
-    <app-small-img [img]="img"></app-small-img>
-  </div>
-</div>
-
 <div id="carouselExample" class="carousel slide">
   <div class="carousel-inner">
     <ng-container *ngFor="let img of imgs; let x = index; let i = index">
       <div class="carousel-item" [ngClass]="{ 'active': i === 0 }" *ngIf="x % 3 === 0">
-        <div class="row">
-          <div class="col">
-            <img class="d-block w-100" [src]="imgs[x]">
-          </div>
-          <div class="col">
-            <img class="d-block w-100" [src]="imgs[x + 1]">
-          </div>
-          <div class="col">
-            <img class="d-block w-100" [src]="imgs[x + 2]">
-          </div>
+        <div class="row text-bg-secondary justify-content-center">
+          <ng-container *ngFor="let y of [0, 1, 2]">
+            <div class="btn p-2 w-auto" data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="x + y">
+              <app-small-img [img]="imgs[x + y]"></app-small-img>
+            </div>
+          </ng-container>
         </div>
       </div>
     </ng-container>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+  <button class="carousel-control-prev text-bg-secondary" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+  <button class="carousel-control-next text-bg-secondary" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>

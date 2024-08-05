@@ -14,17 +14,22 @@
   <div class="product-details">
     <div class="details-container">
       <div class="product-image-column">
-        <app-sub-product-carousel></app-sub-product-carousel>
+        <app-sub-product-carousel [subProduct]="currentSubProduct"></app-sub-product-carousel>
       </div>
       <div class="product-info-column">
         <div class="product-info">
           <div class="price-review-container">
-            <div class="price-container">
+            <div class="price-container" *ngIf="currentSubProduct.discount !== 0">
               <div class="price-wrapper">
-                <span class="current-price"> $999.50</span>
-                <span class="original-price"> $1999.00</span>
+                <span class="current-price"> ${{currentSubProduct.sellCost - currentSubProduct.discount * 0.01}}</span>
+                <span class="original-price"> ${{currentSubProduct.sellCost}}</span>
               </div>
-              <span class="discount-badge"> -50%</span>
+              <span class="discount-badge"> -{{currentSubProduct.discount}}%</span>
+            </div>
+            <div class="price-container" *ngIf="currentSubProduct.discount === 0">
+              <div class="price-wrapper">
+                <span class="current-price"> ${{currentSubProduct.sellCost}}</span>
+              </div>
             </div>
             <div class="rating-container">
               <div class="star-rating">
@@ -38,63 +43,36 @@
             </div>
           </div>
           <div class="product-options">
-            <div class="options-container">
-              <div class="color-size-column">
-                <div class="color-size-wrapper">
-                  <div class="color-selector">
-                    <label class="color-label"> Color</label>
-                    <div class="color-options">
-                      <div class="color-option">
-                        <div class="color-circle">
-                          <div class="color-circle-inner" style="background-color: #000;"> </div>
-                        </div>
-                      </div>
-                      <div class="color-option">
-                        <div class="color-circle">
-                          <div class="color-circle-inner" style="background-color: #c47530;"> </div>
-                        </div>
-                      </div>
-                      <div class="color-option">
-                        <div class="color-circle">
-                          <div class="color-circle-inner" style="background-color: #e08cff;"> </div>
-                        </div>
-                      </div>
-                    </div>
-                    <span class="color-name"> Black</span>
-                  </div>
-                  <div class="size-selector">
-                    <label for="size-select" class="size-label"> Size</label>
-                    <div class="size-dropdown">
-                      <span class="size-placeholder"> Please select</span>
-                      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/d6303c43a528a6a9a0930fd57dcca4eee4e3eb7d95cb6173b9dcf5aaab8e820c?apiKey=1badbc3564ac4e7182b84891783ee2cd&" alt="Dropdown" class="dropdown-icon" loading="lazy">
-                    </div>
-                    <a href="#" class="size-chart-link">
-                      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/237c41929bd156b51e1e4288687abec070ac4ae8d095044b2d4cca9d01a34e94?apiKey=1badbc3564ac4e7182b84891783ee2cd&" alt="Size Chart" class="chart-icon" loading="lazy">
-                      <span class="chart-text"> Size chart</span>
-                    </a>
-                  </div>
-                  <div class="action-buttons">
-                    <input type="number" class="quantity-selector align-self-center" min="1" value="1" aria-label="Quantity">
-                    <button class="btn add-to-cart-btn">
-                      <div class="btn-content">
-                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1c4992fd43853cddb5dd5e3cbfffe952043ba13f6a016a2bd92128fb754a7b7f?apiKey=1badbc3564ac4e7182b84891783ee2cd&" alt="Cart" class="cart-icon" loading="lazy">
-                        <span class="btn-text"> Add to cart</span>
-                      </div>
-                    </button>
-                    <button class="favorite-btn">
-                      <div class="favorite-content">
-                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5f110bec4fe0f91d3608ec940aa3206c08d29f2a364a5a44f8ba96fae9c3ebc9?apiKey=1badbc3564ac4e7182b84891783ee2cd&" alt="Favorite" class="heart-icon" loading="lazy">
-                        <span class="favorite-text"> Favourite</span>
-                      </div>
-                    </button>
+            <div class="color-size-column">
+              <label class="color-label"> Color</label>
+              <div class="container text-center">
+                <div class="row row-cols-auto">
+                  <div class="col btn text-bg-secondary p-2 m-1 position-relative" *ngFor="let subProduct of product.subProductList, let x = index" (click)="changeCurrentSubProduct(x)">
+                    {{subProduct.name}}
+                    <span *ngIf="subProduct === currentSubProduct" class="position-absolute top-100 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"><span class="visually-hidden">unread messages</span></span>
                   </div>
                 </div>
               </div>
-              <div class="actions-column">
-                <div class="actions-wrapper">
-                  
-                  
+              <div class="size-selector">
+                <div class="size-chart-link">
+                  <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/237c41929bd156b51e1e4288687abec070ac4ae8d095044b2d4cca9d01a34e94?apiKey=1badbc3564ac4e7182b84891783ee2cd&" alt="Size Chart" class="chart-icon" loading="lazy">
+                  <span class="chart-text">Current In Stock: {{currentSubProduct.inStock}}</span>
                 </div>
+              </div>
+              <div class="action-buttons">
+                <input type="number" class="quantity-selector align-self-center" min="1" value="1" aria-label="Quantity">
+                <button class="add-to-cart-btn">
+                  <div class="btn-content">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1c4992fd43853cddb5dd5e3cbfffe952043ba13f6a016a2bd92128fb754a7b7f?apiKey=1badbc3564ac4e7182b84891783ee2cd&" alt="Cart" class="cart-icon" loading="lazy">
+                    <span class="btn-text"> Add to cart</span>
+                  </div>
+                </button>
+                <button class="favorite-btn">
+                  <div class="favorite-content">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/5f110bec4fe0f91d3608ec940aa3206c08d29f2a364a5a44f8ba96fae9c3ebc9?apiKey=1badbc3564ac4e7182b84891783ee2cd&" alt="Favorite" class="heart-icon" loading="lazy">
+                    <span class="favorite-text"> Favourite</span>
+                  </div>
+                </button>
               </div>
             </div>
           </div>

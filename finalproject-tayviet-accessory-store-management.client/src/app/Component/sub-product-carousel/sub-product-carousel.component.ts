@@ -1,12 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, Input, NgIterable, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { SubProduct } from '../../Interface/isub-product';
 
 @Component({
   selector: 'app-sub-product-carousel',
   templateUrl: './sub-product-carousel.component.html',
   styleUrl: './sub-product-carousel.component.css'
 })
-export class SubProductCarouselComponent {
-  imgs: string[] = ['assets/image/COD.jpg', 'assets/image/Back.jpg', 'assets/image/Wallet.jpg', 'assets/image/COD.jpg', 'assets/image/Back.jpg'];
+export class SubProductCarouselComponent implements OnInit, OnChanges {
+  @Input() subProduct: any;
+  imgs: (string | ArrayBuffer | null)[] = [];
+
+  constructor() {
+
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.imgs = this.subProduct.listImage;
+  }
+
+  ngOnInit(): void {
+  }
 
   CurrentTriggered = 0;
 
