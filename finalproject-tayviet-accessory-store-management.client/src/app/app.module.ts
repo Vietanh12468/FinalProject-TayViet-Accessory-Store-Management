@@ -18,6 +18,7 @@ import { VoucherComponent } from './voucher/voucher.component';
 import { LoginComponent } from './View/login/login.component';
 import { SubProductCarouselComponent } from './Component/sub-product-carousel/sub-product-carousel.component';
 import { PagenotFoundComponent } from './pagenot-found/pagenot-found.component';
+import { SmallImgComponent } from './Component/small-img/small-img.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +34,10 @@ import { PagenotFoundComponent } from './pagenot-found/pagenot-found.component';
     PaymentComponent,
     VoucherComponent,
     LoginComponent,
-    PagenotFoundComponent
+    PagenotFoundComponent,
     LoginComponent,
-    SubProductCarouselComponent
+    SubProductCarouselComponent,
+    SmallImgComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

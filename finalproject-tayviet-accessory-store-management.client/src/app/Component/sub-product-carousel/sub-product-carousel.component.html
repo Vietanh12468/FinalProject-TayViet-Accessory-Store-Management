@@ -1,29 +1,41 @@
 <div id="carouselExampleIndicators" class="carousel slide">
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="assets/image/COD.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="assets/image/COD.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="assets/image/COD.jpg" class="d-block w-100" alt="...">
+    <div *ngFor="let img of imgs; let x = index" class="carousel-item main-img-container" [ngClass]="{'active': x === CurrentTriggered}">
+      <img [src]="img" class="object-fit-contain border h-100 w-100 main-img" alt="...">
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+</div>
+
+<div class="text-bg-secondary row">
+  <div class="btn p-3 w-auto" *ngFor="let img of imgs; let x = index" data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="x" aria-current="true" (click)="ChangeCurrentTriggered(x)">
+    <app-small-img [img]="img"></app-small-img>
+  </div>
+</div>
+
+<div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    <ng-container *ngFor="let img of imgs; let x = index; let i = index">
+      <div class="carousel-item" [ngClass]="{ 'active': i === 0 }" *ngIf="x % 3 === 0">
+        <div class="row">
+          <div class="col">
+            <img class="d-block w-100" [src]="imgs[x]">
+          </div>
+          <div class="col">
+            <img class="d-block w-100" [src]="imgs[x + 1]">
+          </div>
+          <div class="col">
+            <img class="d-block w-100" [src]="imgs[x + 2]">
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
-</div>
-
-<div class="text-bg-secondary">
-  <div>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
 </div>

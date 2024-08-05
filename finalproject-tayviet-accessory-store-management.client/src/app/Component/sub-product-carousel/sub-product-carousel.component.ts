@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrl: './sub-product-carousel.component.css'
 })
 export class SubProductCarouselComponent {
+  imgs: string[] = ['assets/image/COD.jpg', 'assets/image/Back.jpg', 'assets/image/Wallet.jpg', 'assets/image/COD.jpg', 'assets/image/Back.jpg'];
 
+  CurrentTriggered = 0;
+
+  ChangeCurrentTriggered(x: number) {
+    console.log(x);
+  }
 }
