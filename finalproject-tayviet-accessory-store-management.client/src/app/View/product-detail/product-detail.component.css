@@ -409,6 +409,7 @@
   border-radius: 4px;
   border: 1px solid #d7dadd;
   align-self: start;
+  text-align: center;
 }
 
 .add-to-cart-btn {
@@ -612,7 +613,6 @@
   display: flex;
   flex-direction: column;
   line-height: normal;
-  width: 40%;
   margin-left: 0;
 }
 
@@ -653,7 +653,6 @@
   display: flex;
   flex-direction: column;
   line-height: normal;
-  width: 19%;
   margin-left: 20px;
 }
 
@@ -865,3 +864,20 @@
   height: 16px;
 }
 
+
+
+
+
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

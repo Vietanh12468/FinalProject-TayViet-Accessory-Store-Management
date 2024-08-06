@@ -1,74 +1,26 @@
-<!--<form>-->
-<!-- Email input -->
-<!--<mdb-form-control class="mb-4">
-  <input mdbInput type="email" id="form1Example1" class="form-control" />
-  <label mdbLabel class="form-label" for="form1Example1">Email address</label>
-</mdb-form-control>-->
-<!-- Password input -->
-<!--<mdb-form-control class="mb-4">
-  <input mdbInput type="password" id="form1Example2" class="form-control" />
-  <label mdbLabel class="form-label" for="form1Example2">Password</label>
-</mdb-form-control>-->
-<!-- 2 column grid layout for inline styling -->
-<!--<div class="row mb-4">
-  <div class="col d-flex justify-content-center">-->
-<!-- Checkbox -->
-<!--<div class="form-check">
-    <input mdbCheckbox
-           class="form-check-input"
-           type="checkbox"
-           value=""
-           id="form1Example3"
-           checked />
-    <label class="form-check-label" for="form1Example3"> Remember me </label>
-  </div>
-</div>
-
-<div class="col">-->
-<!-- Simple link -->
-<!--<a href="#!">Forgot password?</a>
-  </div>
-</div>-->
-<!-- Submit button -->
-<!--<button mdbRipple type="button" class="btn btn-primary btn-block">Sign in</button>
-</form>-->
-<!--<div class="login-container">
-  <h2>Login</h2>
-  <form (ngSubmit)="onSubmit()">
-    <div>
-      <label for="username">Username:</label>
-      <input type="text" id="username" [(ngModel)]="username" name="username" required>
-    </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" id="password" [(ngModel)]="password" name="password" required>
-    </div>
-    <button type="submit">Login</button>
-  </form>
-</div>-->
-
-<body>
+<div class="out-main">
   <div class="main">
     <input type="checkbox" id="chk" aria-hidden="true">
 
     <div class="signup">
       <form>
         <label for="chk" aria-hidden="true">Sign up</label>
-        <input type="text" name="txt" placeholder="User name" required="">
-        <input type="email" name="email" placeholder="Email" required="">
-        <input type="number" name="broj" placeholder="BrojTelefona" required="">
-        <input type="password" name="pswd" placeholder="Password" required="">
-        <button>Sign up</button>
+        <input type="text" [(ngModel)]="registerData.username" name="username" placeholder="Username" required>
+        <input type="text" [(ngModel)]="registerData.name" name="fullname" placeholder="Fullname" required>
+        <input type="email" [(ngModel)]="registerData.email" name="email" placeholder="Email" required>
+        <input type="" [(ngModel)]="registerData.phoneNumber" name="phone" placeholder="Phone Number" required>
+        <input type="password" [(ngModel)]="registerData.password" name="password" placeholder="Password" required>
+        <button (click)="onSignUp()">Sign up</button>
       </form>
     </div>
 
     <div class="login">
       <form>
         <label for="chk" aria-hidden="true">Login</label>
-        <input type="email" name="email" placeholder="Email" required="">
-        <input type="password" name="pswd" placeholder="Password" required="">
-        <button>Login</button>
+        <input type="text" id="username" [(ngModel)]="loginData.username" name="username" placeholder="Username" required>
+        <input type="password" id="password" [(ngModel)]="loginData.password" name="password" placeholder="Password" required>
+        <button (click)="onLogin()">Login</button>
       </form>
     </div>
   </div>
-</body>
+</div>

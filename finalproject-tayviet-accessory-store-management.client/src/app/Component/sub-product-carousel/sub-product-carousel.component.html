@@ -1,6 +1,6 @@
 <div id="carouselExampleIndicators" class="carousel slide">
   <div class="carousel-inner">
-    <div *ngFor="let img of imgs; let x = index" class="carousel-item main-img-container" [ngClass]="{'active': x === CurrentTriggered}">
+    <div *ngFor="let img of imgs; let fir = first" class="carousel-item main-img-container" [ngClass]="{'active': fir}">
       <img [src]="img" class="object-fit-contain border h-100 w-100 main-img" alt="...">
     </div>
   </div>
@@ -8,8 +8,8 @@
 
 <div id="carouselExample" class="carousel slide">
   <div class="carousel-inner">
-    <ng-container *ngFor="let img of imgs; let x = index; let i = index">
-      <div class="carousel-item" [ngClass]="{ 'active': i === 0 }" *ngIf="x % 3 === 0">
+    <ng-container *ngFor="let img of imgs; let x = index">
+      <div class="carousel-item" [ngClass]="{ 'active': x === 0 }" *ngIf="x % 3 === 0">
         <div class="row text-bg-secondary justify-content-center">
           <ng-container *ngFor="let y of [0, 1, 2]">
             <div class="btn p-2 w-auto" data-bs-target="#carouselExampleIndicators" [attr.data-bs-slide-to]="x + y">

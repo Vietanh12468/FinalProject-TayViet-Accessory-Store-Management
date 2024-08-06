@@ -1,9 +1,9 @@
 <section class="product-container">
   <h1 class="product-title"> LV Trainer Sports Shoes</h1>
   <nav class="product-nav">
-    <button class="nav-item nav-item-active"> General info</button>
-    <button class="nav-item"> Product details </button>
-    <button class="nav-item">
+    <button class="nav-item" [ngClass]="{'nav-item-active': mode === 'general-info'}" (click)="changeMode('general-info')">General info</button>
+    <button class="nav-item" [ngClass]="{'nav-item-active': mode === 'product-detail'}" (click)="changeMode('product-detail')"> Product details </button>
+    <button class="nav-item" [ngClass]="{'nav-item-active': mode === 'review'}" (click)="changeMode('review')">
       <div class="review-count">
         <span class="review-text"> Reviews</span>
         <span class="review-number"> 12</span>
@@ -11,10 +11,12 @@
     </button>
   </nav>
   <hr class="divider">
-  <div class="product-details">
+  <div class="product-details" *ngIf="mode === 'general-info'">
     <div class="details-container">
       <div class="product-image-column">
-        <app-sub-product-carousel [subProduct]="currentSubProduct"></app-sub-product-carousel>
+        <ng-container *ngFor="let subProduct of product.subProductList, let x = index">
+          <app-sub-product-carousel *ngIf="subProduct === currentSubProduct" [subProduct]="subProduct"></app-sub-product-carousel>
+        </ng-container>
       </div>
       <div class="product-info-column">
         <div class="product-info">
@@ -44,7 +46,7 @@
           </div>
           <div class="product-options">
             <div class="color-size-column">
-              <label class="color-label"> Color</label>
+              <label class="color-label"> Option </label>
               <div class="container text-center">
                 <div class="row row-cols-auto">
                   <div class="col btn text-bg-secondary p-2 m-1 position-relative" *ngFor="let subProduct of product.subProductList, let x = index" (click)="changeCurrentSubProduct(x)">
@@ -59,8 +61,19 @@
                   <span class="chart-text">Current In Stock: {{currentSubProduct.inStock}}</span>
                 </div>
               </div>
+              <div class="size-selector">
+                <div class="size-chart-link">
+                  <span class="chart-text">Description: {{currentSubProduct.description}}</span>
+                </div>
+              </div>
               <div class="action-buttons">
-                <input type="number" class="quantity-selector align-self-center" min="1" value="1" aria-label="Quantity">
+                <div class="row justify-content-center">
+                  <div class="btn-group bg-secondary p-2" role="group" aria-label="Basic mixed styles example">
+                    <button type="button" class="btn btn-danger" (click)="changeNumberAdd(-1)">-</button>
+                    <input type="number" class="quantity-selector align-self-center" min="1" value="1" aria-label="Quantity" [(ngModel)]="numberAdd">
+                    <button type="button" class="btn btn-success" (click)="changeNumberAdd(1)">+</button>
+                  </div>
+                </div>
                 <button class="add-to-cart-btn">
                   <div class="btn-content">
                     <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1c4992fd43853cddb5dd5e3cbfffe952043ba13f6a016a2bd92128fb754a7b7f?apiKey=1badbc3564ac4e7182b84891783ee2cd&" alt="Cart" class="cart-icon" loading="lazy">
@@ -78,9 +91,9 @@
           </div>
           <h2 class="delivery-title"> Delivery</h2>
           <p class="delivery-info"> Free standard shipping on orders <strong> over $35</strong> before tax, plus free returns.</p>
-          <div class="delivery-table">
+          <div class="">
             <div class="table-row">
-              <div class="table-column">
+              <div class="table-column col-4">
                 <div class="table-content">
                   <span class="table-header"> TYPE</span>
                   <span class="table-cell"> Standard delivery</span>
@@ -88,7 +101,7 @@
                   <span class="table-cell"> Pick up in store</span>
                 </div>
               </div>
-              <div class="table-column">
+              <div class="table-column col-4">
                 <div class="table-content">
                   <span class="table-header"> HOW LONG</span>
                   <span class="table-cell"> 1-4 business days</span>
@@ -96,7 +109,7 @@
                   <span class="table-cell"> 1-3 business days</span>
                 </div>
               </div>
-              <div class="table-column-narrow">
+              <div class="table-column-narrow col-2">
                 <div class="table-content">
                   <span class="table-header"> HOW MUCH</span>
                   <span class="table-cell"> $4.50</span>
@@ -135,4 +148,34 @@
       </div>
     </div>
   </div>
+  <div class="product-details" *ngIf="mode === 'product-detail'">
+    <div class="mx-auto p-2" style="width: 500px;">
+      <img [src]="product.image" class="object-fit-contain border h-100 w-100 main-img" alt="...">
+    </div>
+    <div style="width:800px" class="mx-auto p-2">
+      <div class="table-row p-3">
+        <div class="table-column col-3">
+          <div class="table-content">
+            <span class="table-header">Attribute</span>
+            <span class="table-cell"> Name</span>
+            <span class="table-cell"> Category</span>
+            <span class="table-cell"> Brand</span>
+            <span class="table-cell"> Description</span>
+          </div>
+        </div>
+        <div class="table-column col-9">
+          <div class="table-content">
+            <span class="table-header">Info</span>
+            <span class="table-cell"> {{product.name}}</span>
+            <span class="table-cell">
+              <a *ngFor="let category of product.categoryList">
+                {{category}}
+              </a>
+            </span>
+            <span class="table-cell"> {{product.brandID}}</span>
+            <span class="table-cell"> {{product.description}}</span>
+          </div>
+        </div>
+      </div>
+    </div></div>
 </section>

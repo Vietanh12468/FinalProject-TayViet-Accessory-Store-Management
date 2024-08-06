@@ -12,7 +12,8 @@ import { SubProduct } from '../../Interface/isub-product';
 export class ProductDetailComponent implements OnInit {
   product: Product = new Product();
   currentSubProduct: SubProduct = new SubProduct();
-
+  mode: string = 'general-info';
+  numberAdd = 1;
   constructor(private route: ActivatedRoute, private apiService: APIService) {
   }
   ngOnInit() {
@@ -27,5 +28,16 @@ export class ProductDetailComponent implements OnInit {
   }
   changeCurrentSubProduct(x: number) {
     this.currentSubProduct = this.product.subProductList[x];
+  }
+
+  changeMode(mode: string) {
+    this.mode = mode;
+  }
+
+  changeNumberAdd(number: number) {
+    this.numberAdd += number;
+    if (this.numberAdd < 1) {
+      this.numberAdd = 1;
+    }
   }
 }
