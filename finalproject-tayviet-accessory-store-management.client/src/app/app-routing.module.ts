@@ -16,8 +16,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [UnAuthenticationGuardService] },
   { path: 'about-us', component: AboutUsComponent },
+  { path: 'product', component: ProductComponent },
   { path: 'product-detail/:id', component: ProductDetailComponent },
-  // Các tuyến đường khác
   { path: 'pagenotfound', component: PagenotFoundComponent },
   { path: '**', redirectTo: '/pagenotfound' },
 ];

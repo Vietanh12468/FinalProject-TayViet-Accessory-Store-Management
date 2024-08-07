@@ -19,6 +19,9 @@ import { LoginComponent } from './View/login/login.component';
 import { SubProductCarouselComponent } from './Component/sub-product-carousel/sub-product-carousel.component';
 import { PagenotFoundComponent } from './pagenot-found/pagenot-found.component';
 import { SmallImgComponent } from './Component/small-img/small-img.component';
+import { CategoryOptionComponent } from './Component/category-option/category-option.component';
+import { SearchBarComponent } from './Component/search-bar/search-bar.component';
+import { ProductListComponent } from './Component/product-list/product-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import { SmallImgComponent } from './Component/small-img/small-img.component';
     PagenotFoundComponent,
     LoginComponent,
     SubProductCarouselComponent,
-    SmallImgComponent
+    SmallImgComponent,
+    CategoryOptionComponent,
+    SearchBarComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
