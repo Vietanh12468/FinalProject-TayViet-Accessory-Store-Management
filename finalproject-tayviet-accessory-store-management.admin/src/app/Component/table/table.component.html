@@ -37,7 +37,7 @@
                 </div>
               </ng-container>
               <ng-container *ngSwitchCase="'name'">
-                <input [ngClass]="{'form-control': mode !== 'view', 'form-control-plaintext pt-2' : mode === 'view'}" type="text" [readonly]="mode === 'view'" [value]="row[column]" [(ngModel)]="row[column]" placeholder="" (blur)="changeCategorySectionName(x)">
+                <input class="align-text-center m-0 p-0" [ngClass]="{'form-control': mode !== 'view', 'form-control-plaintext' : mode === 'view'}" type="text" [readonly]="mode === 'view'" [value]="row[column]" [(ngModel)]="row[column]" placeholder="" (blur)="changeCategorySectionName(x)">
               </ng-container>
               <ng-container *ngSwitchDefault>
                 {{ row[column] }}

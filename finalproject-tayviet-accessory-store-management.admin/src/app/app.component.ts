@@ -58,6 +58,7 @@ export class AppComponent implements OnInit, OnChanges {
     if (this.authenticationService.isLoggedIn() === true) {
       this.getUserInfo();
     }
+/*    this.authenticationService.removeToken();*/
   }
 
   ngOnChanges() {
