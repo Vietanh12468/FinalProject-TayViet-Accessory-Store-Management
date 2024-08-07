@@ -11,7 +11,7 @@
 
 .main {
   width: 350px;
-  height: 500px;
+  height: 600px;
   background: red;
   overflow: hidden;
   background-color:aquamarine;
@@ -76,7 +76,7 @@ button {
   }
 
 .login {
-  height: 460px;
+  height: 560px;
   background: #eee;
   border-radius: 60% / 10%;
   transform: translateY(-180px);
@@ -89,7 +89,7 @@ button {
   }
 
 #chk:checked ~ .login {
-  transform: translateY(-500px);
+  transform: translateY(-600px);
 }
 
   #chk:checked ~ .login label {

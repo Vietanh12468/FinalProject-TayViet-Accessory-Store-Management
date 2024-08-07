@@ -8,7 +8,7 @@ export class AuthenticationService {
 
   constructor() { }
 
-  setToken(user : IAccount): void {
+  setToken(user: IAccount): void {
     localStorage.setItem(this.token, user.id);
   }
 
@@ -16,7 +16,7 @@ export class AuthenticationService {
     if (localStorage.getItem(this.token) === null) {
       return null;
     }
-    return { userID: localStorage.getItem(this.token) } 
+    return { userID: localStorage.getItem(this.token) }
   }
 
   removeToken(): void {
@@ -24,7 +24,7 @@ export class AuthenticationService {
   }
 
   isLoggedIn(): boolean {
-    if (localStorage.getItem(this.token) === null ){
+    if (localStorage.getItem(this.token) === null) {
       return false;
     }
     return true;

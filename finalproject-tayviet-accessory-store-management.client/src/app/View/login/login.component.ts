@@ -22,6 +22,8 @@ export class LoginComponent {
     "phoneNumber": "",
     "username": ""
   }
+
+  repassword: string = '';
   constructor(private authenticationService: AuthenticationService, private apiService: APIService, private router: Router) { }
 
   onLogin() {
@@ -29,6 +31,7 @@ export class LoginComponent {
     this.apiService.loginRequest(this.loginData).subscribe(
       (result) => {
         console.log('POST request successful', result);
+        alert('login successful');
         this.authenticationService.setToken(result);
         window.location.reload();
       },
@@ -38,11 +41,10 @@ export class LoginComponent {
     );
   }
   onSignUp() {
-/*    if (this.password !== this.repassword) {
+    if (this.registerData.password !== this.repassword) {
       alert('Password does not match');
       return;
-    }*/
-    console.log(this.registerData);  
+    }
     if (this.registerData.name === '' || this.registerData.email === '' || this.registerData.password === '' || this.registerData.phoneNumber === '' || this.registerData.username === '') {
       alert('Please fill in all fields');
       return;
@@ -50,6 +52,7 @@ export class LoginComponent {
     this.apiService.createDetailObject('Customer', this.registerData).subscribe(
       (result) => {
         console.log('POST request successful', result);
+        alert('register successful');
         window.location.reload();
       },
       (error) => {
