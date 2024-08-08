@@ -52,18 +52,16 @@
 }
 
 .see-more-button {
+  background: linear-gradient(180deg, #1cd8d2 0%, #93edc7 100%);
   align-self: center;
   border-radius: 30px;
-  margin-top: 196px;
-  min-height: 49px;
-  width: 126px;
+  width: 100px;
   max-width: 100%;
   gap: 10px;
   font-family: Roboto, sans-serif;
   color: rgba(0, 0, 0, 1);
   font-weight: 400;
   text-align: center;
-  padding: 13px 20px;
 }
 
 @media (max-width: 991px) {

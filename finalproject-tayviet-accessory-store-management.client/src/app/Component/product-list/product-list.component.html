@@ -1,64 +1,16 @@
 <section class="product-showcase">
   <div class="row row-cols-5 mx-auto justify-content-center">
-    <article class="col-3 card p-3 m-3">
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/5e3dfc26ca5eeec8d1f40283a9629123cb64bfa401af6090d1cd9eee7d4c2303?apiKey=e51cda157a3647efb6a362a799ee758d&&apiKey=e51cda157a3647efb6a362a799ee758d" class="product-image" alt="Product 1" />
+    <article class="col-3 card p-3 m-3" *ngFor="let product of products">
+      <img loading="lazy" [src]="product.image" class="product-image" alt="Product 1" />
       <div class="product-details">
-        <h3>Product 1</h3>
-        <p class="product-description">Body text for first product</p>
-        <p class="product-price">$10.99</p>
-      </div>
-    </article>
-    <article class="col-3 card p-3 m-3">
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/5e3dfc26ca5eeec8d1f40283a9629123cb64bfa401af6090d1cd9eee7d4c2303?apiKey=e51cda157a3647efb6a362a799ee758d&&apiKey=e51cda157a3647efb6a362a799ee758d" class="product-image" alt="Product 1" />
-      <div class="product-details">
-        <h3>Product 1</h3>
-        <p class="product-description">Body text for first product</p>
-        <p class="product-price">$10.99</p>
-      </div>
-    </article>
-    <article class="col-3 card p-3 m-3">
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/9f60e26032e6ebb0560b6e013efb72957f3fade92a5b48348ce26e1160d27985?apiKey=e51cda157a3647efb6a362a799ee758d&&apiKey=e51cda157a3647efb6a362a799ee758d" class="product-image" alt="Product 2" />
-      <div class="product-details">
-        <h3>Product 1</h3>
-        <p class="product-description">Body text for first product</p>
+        <h3>{{product.name}}</h3>
+        <p class="product-description">{{product.description}}</p>
         <div class="row">
-          <div class="align-self-center col">$10.99</div>
-          <button class="btn buy-button col"> Buy</button>
+          <div class="align-self-center col">{{product.subProductList[0].sellCost}}$</div>
+          <button class="btn buy-button col" (click)="navigateToDetail(product.id)"> Buy</button>
         </div>
       </div>
     </article>
-    <article class="col-3 card p-3 m-3">
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c7ba7ccda51344a51e0a76aa1e0a177a0316d3f022c8514aaec9743f134b900c?apiKey=e51cda157a3647efb6a362a799ee758d&&apiKey=e51cda157a3647efb6a362a799ee758d" class="product-image" alt="Product 3" />
-      <div class="product-details">
-        <h3>Product 1</h3>
-        <p class="product-description">Body text for first product</p>
-        <p class="product-price">$10.99</p>
-      </div>
-    </article>
-    <article class="col-3 card p-3 m-3">
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/5e3dfc26ca5eeec8d1f40283a9629123cb64bfa401af6090d1cd9eee7d4c2303?apiKey=e51cda157a3647efb6a362a799ee758d&&apiKey=e51cda157a3647efb6a362a799ee758d" class="product-image" alt="Product 1" />
-      <div class="product-details">
-        <h3>Product 1</h3>
-        <p class="product-description">Body text for first product</p>
-        <p class="product-price">$10.99</p>
-      </div>
-    </article>
-    <article class="col-3 card p-3 m-3">
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/9f60e26032e6ebb0560b6e013efb72957f3fade92a5b48348ce26e1160d27985?apiKey=e51cda157a3647efb6a362a799ee758d&&apiKey=e51cda157a3647efb6a362a799ee758d" class="product-image" alt="Product 2" />
-      <div class="product-details">
-        <h3>Product 1</h3>
-        <p class="product-description">Body text for first product</p>
-        <p class="product-price">$10.99</p>
-      </div>
-    </article>
-    <article class="col-3 card p-3 m-3">
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/c7ba7ccda51344a51e0a76aa1e0a177a0316d3f022c8514aaec9743f134b900c?apiKey=e51cda157a3647efb6a362a799ee758d&&apiKey=e51cda157a3647efb6a362a799ee758d" class="product-image" alt="Product 3" />
-      <div class="product-details">
-        <h3>Product 1</h3>
-        <p class="product-description">Body text for first product</p>
-        <p class="product-price">$10.99</p>
-      </div>
-    </article>
   </div>
-  <button class="see-more-button" tabindex="0">See more</button>
+  <button class="see-more-button p-2 mt-2 mb-4" tabindex="0" (click)="ShowMoreProduct()">More</button>
 </section>

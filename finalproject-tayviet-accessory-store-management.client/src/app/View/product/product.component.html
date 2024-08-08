@@ -14,11 +14,12 @@
 <div class="container">
   <div class="row">
     <div class="col-2 border-end">
-      <app-category-option></app-category-option>
+      <app-category-option [categorySections]="categorySections"></app-category-option>
     </div>
     <div class="col-10">
-      <app-search-bar></app-search-bar>
-      <app-product-list></app-product-list>
+      <app-search-bar (searchSubmitEvent)="searchProductPage($event)"></app-search-bar>
+      <h3 class="m-3">Total: {{total}}</h3>
+      <app-product-list [products]="products" (onShowMore)="getProductPage($event)"></app-product-list>
     </div>
   </div>
 </div>

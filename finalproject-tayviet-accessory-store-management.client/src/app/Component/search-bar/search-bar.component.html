@@ -1,18 +1,16 @@
 <section class="search-container p-3">
-  <form class="search-bar" role="search">
-    <div class="search-input-wrapper">
-      <div class="icon-wrapper">
-        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/3703b04b0a0844ca7cba240a5a9ae59c1e218d73ed59f3954ccc3dcfe723066e?apiKey=e51cda157a3647efb6a362a799ee758d&&apiKey=e51cda157a3647efb6a362a799ee758d" class="icon" alt="" />
-      </div>
-      <label for="search-input" class="visually-hidden">Search</label>
-      <input type="search" id="search-input" class="search-input" placeholder="Search ..." aria-label="Search" />
-      <div class="icon-wrapper">
-        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/03fdbbc723022ad5bb1bce16754f71145c61301349c857f0ad565b89fe312546?apiKey=e51cda157a3647efb6a362a799ee758d&&apiKey=e51cda157a3647efb6a362a799ee758d" class="icon" alt="" />
-      </div>
-      <button type="submit" class="search-button" aria-label="Submit search">
-        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/cb88517f81a768a049c516130b0bc206f05e7bb00eb615a8a1b132e6dfd49d73?apiKey=e51cda157a3647efb6a362a799ee758d&&apiKey=e51cda157a3647efb6a362a799ee758d" class="icon" alt="" />
-      </button>
+  <div class="search-input-wrapper">
+    <div class="icon-wrapper">
+      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/3703b04b0a0844ca7cba240a5a9ae59c1e218d73ed59f3954ccc3dcfe723066e?apiKey=e51cda157a3647efb6a362a799ee758d&&apiKey=e51cda157a3647efb6a362a799ee758d" class="icon" alt="" />
     </div>
-  </form>
+    <label for="search-input" class="visually-hidden">Search</label>
+    <input type="search" id="search-input" class="search-input" placeholder="Search ..." aria-label="Search" [(ngModel)]="outputSearch.searchString"/>
+    <div class="icon-wrapper">
+      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/03fdbbc723022ad5bb1bce16754f71145c61301349c857f0ad565b89fe312546?apiKey=e51cda157a3647efb6a362a799ee758d&&apiKey=e51cda157a3647efb6a362a799ee758d" class="icon" alt="" />
+    </div>
+    <button type="submit" class="search-button" aria-label="Submit search" (click)="searchSubmit()">
+      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/cb88517f81a768a049c516130b0bc206f05e7bb00eb615a8a1b132e6dfd49d73?apiKey=e51cda157a3647efb6a362a799ee758d&&apiKey=e51cda157a3647efb6a362a799ee758d" class="icon" alt="" />
+    </button>
+  </div>
   <div class="spacer"></div>
 </section>

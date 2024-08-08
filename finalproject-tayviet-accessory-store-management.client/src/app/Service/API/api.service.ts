@@ -37,4 +37,7 @@ export class APIService {
   getLatestProducts() {
     return this.http.get<IProduct[]>(`/api/Product/Latest`);
   }
+  getAllCategories() {
+    return this.http.get<any>(`/api/CategorySection`);
+  }
 }
