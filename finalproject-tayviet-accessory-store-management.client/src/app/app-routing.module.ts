@@ -14,6 +14,8 @@ import { UnAuthenticationGuardService } from './Service/Authentication/un-authen
 const routes: Routes = [
   { path: 'home', component: MainHomeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  // Router product
+  { path: 'product', component: ProductComponent },
   { path: 'login', component: LoginComponent, canActivate: [UnAuthenticationGuardService] },
   { path: 'about-us', component: AboutUsComponent },
   { path: 'product-detail/:id', component: ProductDetailComponent },

@@ -17,6 +17,8 @@ import { PaymentComponent } from './payment/payment.component';
 import { VoucherComponent } from './voucher/voucher.component';
 import { LoginComponent } from './View/login/login.component';
 import { PagenotFoundComponent } from './pagenot-found/pagenot-found.component';
+import { OrderhistoryComponent } from './view/orderhistory/orderhistory.component';
+import { OrdertrackingComponent } from './view/ordertracking/ordertracking.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { PagenotFoundComponent } from './pagenot-found/pagenot-found.component';
     PaymentComponent,
     VoucherComponent,
     LoginComponent,
-    PagenotFoundComponent
+    PagenotFoundComponent,
+    OrderhistoryComponent,
+    OrdertrackingComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

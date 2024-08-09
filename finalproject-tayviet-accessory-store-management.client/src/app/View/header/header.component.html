@@ -1,6 +1,9 @@
 <header class="header">
   <div class="header-content">
-    <h1 class="logo">TayViet Leather</h1>
+    <div style="width: 310px">
+      <span style="color: #1CD8D2; font-size: 36px; font-family: Poppins; font-weight: 600; word-wrap: break-word">TayViet</span>
+      <span style="color: black; font-size: 36px; font-family: Poppins; font-weight: 600; word-wrap: break-word"> Leather</span>
+    </div>
     <nav class="nav">
       <a routerLink="/home" class="nav-item nav-item-active">Home</a>
       <a href="#" class="nav-item">Product</a>
@@ -14,9 +17,9 @@
       <img src="../../../public/assets/image/COD.jpg" alt="notication" class="icon" />
       <div class="divider">
       </div>
-<!--      <button class="login-button" hef="login">
-        Login
-      </button>-->
+      <!--      <button class="login-button" hef="login">
+            Login
+          </button>-->
       <ul class="nav justify-content-end mb-3">
         <li class="nav-item" *ngIf="userInfo === null">
           <a class="nav-link active" routerLink="/login">Login</a>
