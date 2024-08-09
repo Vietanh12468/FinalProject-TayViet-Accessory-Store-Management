@@ -4,31 +4,33 @@ import { SelectOption } from '../../Interface/iselect-option';
 import { TableComponent } from '../../Component/table/table.component';
 import { Router } from '@angular/router';
 import { APIService } from '../../Service/API/api.service';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
 
 @Component({
   selector: 'app-category-manager-view',
   templateUrl: './category-manager-view.component.html',
-  styleUrl: './category-manager-view.component.css'
+  styleUrls: ['./category-manager-view.component.css'] // Corrected the typo here
 })
 export class CategoryManagerViewComponent implements OnInit, OnChanges {
   @ViewChild('tableComponent') tableComponent!: TableComponent;
   data: ICategory[] = [];
   total: number = 0;
   objectName: string = 'CategorySection';
-  selectOptions: SelectOption[] = [
-  ]
-
+  selectOptions: SelectOption[] = [];
   ignoredAttributes: string[] = [];
   mode = 'view';
+
+  constructor(
+    private apiService: APIService,
+    private router: Router,
+    private snackBar: MatSnackBar // Inject MatSnackBar
+  ) { }
 
   ngOnInit() {
     this.getCategories();
   }
 
-  ngOnChanges(simpleChanges: SimpleChanges) {
-
-  }
-  constructor(private apiService: APIService, private router: Router) { }
+  ngOnChanges(simpleChanges: SimpleChanges) { }
 
   getCategories(page: number = 1) {
     this.apiService.getListObjects(this.objectName, page).subscribe(
@@ -39,7 +41,7 @@ export class CategoryManagerViewComponent implements OnInit, OnChanges {
       (error) => {
         console.error(error);
       }
-    )
+    );
   }
 
   onAddCategorySectionClick() {
@@ -50,6 +52,13 @@ export class CategoryManagerViewComponent implements OnInit, OnChanges {
       response => {
         console.log('POST request successful', response);
         this.getCategories();
+
+        // Show success notification
+        this.snackBar.open('Add successful!', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
       },
       error => {
         console.error('Error occurred', error);
@@ -63,6 +72,13 @@ export class CategoryManagerViewComponent implements OnInit, OnChanges {
       response => {
         this.data.splice(index, 1);
         console.log('DELETE request successful', response);
+
+        // Show success notification
+        this.snackBar.open('Delete successful!', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
       },
       error => {
         console.error('Error occurred', error);
@@ -77,6 +93,13 @@ export class CategoryManagerViewComponent implements OnInit, OnChanges {
       response => {
         this.data[index] = categoryListTemp;
         console.log('PUT request successful', response);
+
+        // Show success notification
+        this.snackBar.open('Save successful!', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
       },
       error => {
         console.error('Error occurred', error);
@@ -91,6 +114,13 @@ export class CategoryManagerViewComponent implements OnInit, OnChanges {
       response => {
         this.data[position.x] = categoryListTemp;
         console.log('PUT request successful', response);
+
+        // Show success notification
+        this.snackBar.open('Save successful!', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
       },
       error => {
         console.error('Error occurred', error);
@@ -101,7 +131,7 @@ export class CategoryManagerViewComponent implements OnInit, OnChanges {
   onChangeCategory(categoryInfo: any) {
     const categoryListTemp = this.data[categoryInfo.x];
     if (categoryListTemp.categoryList.includes(categoryInfo.categoryName)) {
-      categoryInfo.categoryName = categoryListTemp.categoryList[categoryInfo.y]
+      categoryInfo.categoryName = categoryListTemp.categoryList[categoryInfo.y];
       console.log('Category name already exists');
     }
     categoryListTemp.categoryList[categoryInfo.y] = categoryInfo.categoryName;
@@ -110,6 +140,13 @@ export class CategoryManagerViewComponent implements OnInit, OnChanges {
       response => {
         this.data[categoryInfo.x] = categoryListTemp;
         console.log('PUT request successful', response);
+
+        // Show success notification
+        this.snackBar.open('Save successful!', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
       },
       error => {
         console.error('Error occurred', error);
@@ -120,6 +157,7 @@ export class CategoryManagerViewComponent implements OnInit, OnChanges {
   onEditClick() {
     this.mode = 'change';
   }
+
   exitEditClick() {
     this.mode = 'view';
   }
@@ -131,6 +169,13 @@ export class CategoryManagerViewComponent implements OnInit, OnChanges {
       response => {
         this.data[categoryInfo.x] = categoryListTemp;
         console.log('PUT request successful', response);
+
+        // Show success notification
+        this.snackBar.open('Save successful!', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
       },
       error => {
         console.error('Error occurred', error);

@@ -6,6 +6,7 @@ import { TableComponent } from '../../Component/table/table.component';
 import { Router } from '@angular/router';
 import { APIService } from '../../Service/API/api.service';
 
+
 @Component({
   selector: 'app-account-manager-view',
   templateUrl: './account-manager-view.component.html',
