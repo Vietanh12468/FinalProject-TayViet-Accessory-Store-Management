@@ -11,7 +11,7 @@ import { MainHomeComponent } from './View/main-home/main-home.component';
 import { ProductComponent } from './View/product/product.component';
 import { AboutUsComponent } from './View/about-us/about-us.component';
 import { ProductDetailComponent } from './View/product-detail/product-detail.component';
-import { CartComponent } from './cart/cart.component';
+import { CartComponent } from './View/cart/cart.component';
 import { ProfileManagerComponent } from './profile-manager/profile-manager.component';
 import { PaymentComponent } from './payment/payment.component';
 import { VoucherComponent } from './voucher/voucher.component';

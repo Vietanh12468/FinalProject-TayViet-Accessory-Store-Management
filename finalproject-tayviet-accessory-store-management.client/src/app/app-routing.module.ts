@@ -6,6 +6,7 @@ import { AboutUsComponent } from './View/about-us/about-us.component';
 import { ProductComponent } from './View/product/product.component';
 import { ProductDetailComponent } from './View/product-detail/product-detail.component';
 import { PagenotFoundComponent } from './pagenot-found/pagenot-found.component';
+import { CartComponent } from './View/cart/cart.component';
 
 
 import { AuthenticationGuardService } from './Service/Authentication/authentication-guard.service';
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'product', component: ProductComponent },
   { path: 'product-detail/:id', component: ProductDetailComponent },
   { path: 'pagenotfound', component: PagenotFoundComponent },
-  { path: '**', redirectTo: '/pagenotfound' },
+  { path: 'cart', component: CartComponent, canActivate: [AuthenticationGuardService] },
+  { path: '**', redirectTo: '/pagenotfound', },
 ];
 
 @NgModule({

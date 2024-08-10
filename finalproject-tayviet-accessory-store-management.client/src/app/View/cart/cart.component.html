@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="mt-2 p-2">
+    <h1 class="cart-title"> Shopping cart</h1>
+    <p class="cart-summary"> You have 3 item in your cart</p>
+  </div>
+  <div class="row">
+    <div class="col-8 border-end">
+      <ul class="cart-items">
+        <li *ngFor="let item of cartItems" class="cart-item">
+          <img [src]="item.image" [alt]="item.name" class="item-image" />
+          <div class="item-details">
+            <h3 class="item-name">{{ item.name }}</h3>
+            <p class="item-description">{{ item.description }}</p>
+          </div>
+          <div class="item-quantity">
+            <span>{{ item.quantity }}</span>
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e2396ede0fb30a9a73553193bae56bb69da86c35bafd2db9e77fb30086f8055c?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Increase quantity" class="quantity-icon" />
+          </div>
+          <div class="item-price">
+            <span>${{ item.price }}</span>
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/ff2e534310e3316d1dbe416bf559780e14d0ab70b49eb42f06d904a9b1012feb?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Remove item" class="remove-icon" />
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="col-4">
+      <section class="payment-container">
+        <h2 class="payment-title">Payment Methods</h2>
+        <div class="payment-option form-check" role="button" (click)="paymentOption = 'PayOnDelivery'">
+          <span class="payment-option-text">Cost on Delivery</span>
+          <input class="form-check-input" type="radio" name="flexRadioDefault" [checked]="paymentOption === 'PayOnDelivery'">
+        </div>
+        <div class="payment-option form-check" role="button" (click)="paymentOption = 'BankTransfer'">
+          <span class="payment-option-text">Bank transfer</span>
+          <input class="form-check-input" type="radio" name="flexRadioDefault" [checked]="paymentOption === 'BankTransfer'">
+        </div>
+        <div class="payment-option form-check" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+          <span class="payment-option-text">Credit Cards</span>
+          <div class="payment-option-controls">
+            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/88b86678521e84bc6fa462ccac18d4fe5b8165adc947c3ddb256b5c49f05e44f?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="" class="credit-card-icon" />
+          </div>
+        </div>
+        <div class="collapse" id="collapseExample">
+          <div class="credit-card-item">
+            <div class="credit-card-info ms-3">
+              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1e94bfbb4546a1ba1af74e288aca09cc84dec2df646a48cd9ee76a4b537189c5?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Vietcombank logo" class="credit-card-logo" />
+              <span class="credit-card-number">Vietcombank xxxx68</span>
+            </div>
+            <input class="form-check-input align-self-center" type="radio" name="flexRadioDefault">
+          </div>
+          <div class="credit-card-item">
+            <div class="credit-card-info">
+              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1e94bfbb4546a1ba1af74e288aca09cc84dec2df646a48cd9ee76a4b537189c5?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Techcombank logo" class="credit-card-logo" />
+              <span class="credit-card-number">Techcombank xxxx54</span>
+            </div>
+            <input class="form-check-input align-self-center" type="radio" name="flexRadioDefault">
+          </div>
+          <div class="credit-card-item">
+            <div class="credit-card-info ms-3">
+              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1665dee33590c5442e178b1695be03ee0286c8ac3867076e4ec1565639406d5c?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="" class="add-method-icon m-2" />
+              <span class="credit-card-number">Add New Card</span>
+            </div>
+          </div>
+          <button class="pay-now-button">
+            <span class="pay-now-text">Pay Now</span>
+          </button>
+        </div>
+        <button class="order-button">Order</button>
+      </section>
+
+    </div>
+  </div>
+</div>
