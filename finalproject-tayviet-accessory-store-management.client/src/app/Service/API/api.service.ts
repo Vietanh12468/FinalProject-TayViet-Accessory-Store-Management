@@ -27,7 +27,7 @@ export class APIService {
   }
 
   searchListObjects(nameObject: string | null, searchAttribute: string | null, keyword: string | null, page: number) {
-    return this.http.get<any>(`/api/${nameObject}/search/${searchAttribute}&&${keyword}&&${page}`);
+    return this.http.get<any>(`/api/${nameObject}/search/attribute=${searchAttribute}&key=${keyword}&page=${page}`);
   }
   loginRequest(loginData: any) {
     return this.http.post<IAccount>(`/api/Customer/login`, loginData);
@@ -39,5 +39,9 @@ export class APIService {
   }
   getAllCategories() {
     return this.http.get<any>(`/api/CategorySection`);
+  }
+
+  addToCart(customerId: string, productId: string | undefined, subProductName: string, quantity: number) {
+    return this.http.put(`/api/Customer/${customerId}/addProductInCart/productId=${productId}&subProductName=${subProductName}&quantity=${quantity}`, null);
   }
 }

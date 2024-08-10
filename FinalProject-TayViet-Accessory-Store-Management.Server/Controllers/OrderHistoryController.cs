@@ -12,7 +12,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
     {
         public OrderHistoryController(OrderHistoryDatabaseService orderHistoryDatabaseService) : base(databaseServices: orderHistoryDatabaseService) { }
 
-        [HttpPut("{id}, {newState}")]
+        [HttpPut("{id}/newState={newState}")]
         public async Task<IActionResult> UpdateOrderHistory(string id, string newState)
         {
             if (!OrderValidateState.CheckState(newState))

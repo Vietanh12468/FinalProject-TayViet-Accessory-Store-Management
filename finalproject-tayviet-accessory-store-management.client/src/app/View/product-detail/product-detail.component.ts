@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from '../../Service/API/api.service';
+import { AuthenticationService } from '../../Service/Authentication/authentication.service';
 import { Product } from '../../Interface/iproduct';
 import { SubProduct } from '../../Interface/isub-product';
 
@@ -14,7 +15,7 @@ export class ProductDetailComponent implements OnInit {
   currentSubProduct: SubProduct = new SubProduct();
   mode: string = 'general-info';
   numberAdd = 1;
-  constructor(private route: ActivatedRoute, private apiService: APIService) {
+  constructor(private route: ActivatedRoute, private apiService: APIService, private authenticationService: AuthenticationService) {
   }
   ngOnInit() {
     this.getDetailProduct();
@@ -39,5 +40,17 @@ export class ProductDetailComponent implements OnInit {
     if (this.numberAdd < 1) {
       this.numberAdd = 1;
     }
+  }
+
+  addToCart() {
+    const token = this.authenticationService.getToken();
+    this.apiService.addToCart(token.userID, this.product.id, this.currentSubProduct.name, this.numberAdd).subscribe(
+      (result) => {
+        console.log("Add to cart successfully");
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }

@@ -68,13 +68,13 @@
               </div>
               <div class="action-buttons">
                 <div class="row justify-content-center">
-                  <div class="btn-group bg-secondary p-2" role="group" aria-label="Basic mixed styles example">
+                  <div class="p-2" role="group" aria-label="Basic mixed styles example">
                     <button type="button" class="btn btn-danger" (click)="changeNumberAdd(-1)">-</button>
                     <input type="number" class="quantity-selector align-self-center" min="1" value="1" aria-label="Quantity" [(ngModel)]="numberAdd">
                     <button type="button" class="btn btn-success" (click)="changeNumberAdd(1)">+</button>
                   </div>
                 </div>
-                <button class="add-to-cart-btn">
+                <button class="add-to-cart-btn" (click)="addToCart()">
                   <div class="btn-content">
                     <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1c4992fd43853cddb5dd5e3cbfffe952043ba13f6a016a2bd92128fb754a7b7f?apiKey=1badbc3564ac4e7182b84891783ee2cd&" alt="Cart" class="cart-icon" loading="lazy">
                     <span class="btn-text"> Add to cart</span>
