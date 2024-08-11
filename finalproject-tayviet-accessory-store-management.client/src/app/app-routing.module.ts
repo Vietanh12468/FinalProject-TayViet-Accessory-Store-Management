@@ -7,6 +7,7 @@ import { ProductComponent } from './View/product/product.component';
 import { ProductDetailComponent } from './View/product-detail/product-detail.component';
 import { PagenotFoundComponent } from './pagenot-found/pagenot-found.component';
 import { CartComponent } from './View/cart/cart.component';
+import { ProfileManagerComponent } from './View/profile-manager/profile-manager.component';
 
 
 import { AuthenticationGuardService } from './Service/Authentication/authentication-guard.service';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'product-detail/:id', component: ProductDetailComponent },
   { path: 'pagenotfound', component: PagenotFoundComponent },
   { path: 'cart', component: CartComponent, canActivate: [AuthenticationGuardService] },
+  { path: 'profile', component: ProfileManagerComponent, canActivate: [AuthenticationGuardService] },
   { path: '**', redirectTo: '/pagenotfound', },
 ];
 

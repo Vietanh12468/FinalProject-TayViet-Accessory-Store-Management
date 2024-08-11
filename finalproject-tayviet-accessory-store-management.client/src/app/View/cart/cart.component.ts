@@ -18,6 +18,13 @@ export class CartComponent implements OnInit, OnChanges {
   ];
   productDisplayList: CartProductDisplay[] = [];
   paymentOption = 'PayOnDelivery'
+  summary: any = {
+    order: 0,
+    delivery: 0,
+    discount: 0,
+    total: 0
+  };
+  userInfo: any
 
   constructor(private apiService: APIService, private authenticationService: AuthenticationService) { }
 
@@ -29,6 +36,9 @@ export class CartComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    for (let productDisplay of this.productDisplayList) {
+      this.summary.total += productDisplay.total;
+    }
   }
 
   getUserCart() {
@@ -36,6 +46,7 @@ export class CartComponent implements OnInit, OnChanges {
     this.apiService.getDetailObject('Customer', token.userID).subscribe(
       (result) => {
         this.cartList = result.cartList;
+        this.userInfo = result;
         this.getProductDisplayList();
       },
       (error) => {
@@ -49,21 +60,24 @@ export class CartComponent implements OnInit, OnChanges {
       this.apiService.getDetailObject('Product', this.cartList[i].productID).subscribe(
         (result) => {
           let productDisplay: CartProductDisplay = {
+            productID: result.id,
             name: result.name,
             image: result.image,
             description: result.description,
             subProductList: [],
+            total: 0
           }
           for (let subProduct of this.cartList[i].subProductList) {
             const item: SubProduct = result.subProductList.find((item: SubProduct) => item.name === subProduct.subProductName);
             if (!item) {
               throw new Error('Item not found');
             }
-            let subProductInCart: SubProductInCart = { subProductName: item.name, cost: item.sellCost, sale: item.discount, quantity: 0 }
+            let subProductInCart: SubProductInCart = { subProductName: item.name, cost: item.sellCost, sale: item.discount, quantity: subProduct.quantity };
             productDisplay.subProductList.push(subProductInCart);
+            productDisplay.total += item.sellCost * subProduct.quantity * (1 - item.discount / 100);
           }
           this.productDisplayList.push(productDisplay);
-          console.log(this.productDisplayList);
+          this.caculateTotal();
         },
         (error) => {
           console.error(error);
@@ -71,11 +85,58 @@ export class CartComponent implements OnInit, OnChanges {
       );
     }
   }
+
+  deleteSubProduct(productID: string, subProductName: string) {
+    this.productDisplayList.forEach((productDisplay) => {
+      if (productDisplay.productID === productID) {
+        productDisplay.subProductList = productDisplay.subProductList.filter((subProduct) => subProduct.subProductName !== subProductName);
+        this.cartList.forEach((product) => {
+          if (product.productID === productID) {
+            product.subProductList = product.subProductList.filter((subProduct) => subProduct.subProductName !== subProductName);
+          }
+        });
+      }
+      if (productDisplay.subProductList.length === 0) {
+        this.productDisplayList = this.productDisplayList.filter((productDisplay) => productDisplay.productID !== productID);
+        this.cartList = this.cartList.filter((product) => product.productID !== productID);
+      }
+    });
+    this.caculateTotal();
+    this.userInfo = { ...this.userInfo, cartList: this.cartList };
+    console.log(this.userInfo);
+    this.apiService.changeDetailObject('Customer', this.userInfo).subscribe(
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  caculateTotal() {
+    this.summary = {
+      order: 0,
+      delivery: 0,
+      discount: 0,
+      total: 0
+    }
+    for (let productDisplay of this.productDisplayList) {
+      for (let subProduct of productDisplay.subProductList) {
+        this.summary.total += ((subProduct.cost * subProduct.quantity) - (subProduct.cost * subProduct.quantity * subProduct.sale / 100)) + 1;
+        this.summary.order += subProduct.cost * subProduct.quantity;
+        this.summary.delivery += 1;
+        this.summary.discount += subProduct.cost * subProduct.quantity * subProduct.sale / 100;
+      }
+    }
+  }
 }
 
 interface CartProductDisplay {
+  productID: string;
   name: string;
   image: string;
   description: string;
   subProductList: SubProductInCart[]
+  total: number
 }

@@ -37,6 +37,18 @@
   margin-left: 18px;
 }
 
+.item-view-button {
+  font: 500 20px Poppins, sans-serif;
+  justify-content: center;
+  border-radius: 100px;
+  border: 1px solid #e08cff;
+  align-self: stretch;
+  color: #e08cff;
+  text-transform: uppercase;
+  letter-spacing: -0.4px;
+  padding: 10px 24px;
+}
+
 .item-name {
   color: #1e1e1e;
   font: 18px Poppins, sans-serif;
@@ -316,7 +328,7 @@
 .order-button {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-  background-color: #000;
+  background-color: #e08cff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
   margin-top: 24px;
   color: #fff;

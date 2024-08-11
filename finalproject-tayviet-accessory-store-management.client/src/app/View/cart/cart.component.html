@@ -1,35 +1,82 @@
 <div class="container">
   <div class="mt-2">
-    <h1 class="cart-title"> Shopping cart</h1>
-    <p class="cart-summary"> You have 3 item in your cart</p>
+    <h2> Shopping cart</h2>
+    <p class="cart-summary">You have {{ productDisplayList.length }} items in your cart</p>
   </div>
   <div class="row">
     <div class="col-8 border-end">
       <ul class="cart-items">
-        <ng-container *ngFor="let item of productDisplayList">
-          <li class="cart-item" data-bs-toggle="collapse" [attr.href]="'#'+item.name" role="button" aria-expanded="false" [attr.aria-controls]="item.name">
-            <img [src]="item.image" [alt]="item.name" class="item-image col-3" />
-            <div class="item-details">
-              <h3 class="item-name">{{ item.name }}</h3>
-              <p class="item-description">{{ item.description }}</p>
+        <ng-container *ngFor="let product of productDisplayList">
+          <li class="cart-item" data-bs-toggle="collapse" [attr.href]="'#'+product.name" role="button" aria-expanded="false" [attr.aria-controls]="product.name">
+            <img [src]="product.image" [alt]="product.name" class="item-image col-3" />
+            <div class="item-details col-4">
+              <h3 class="item-name">Name: {{ product.name }}</h3>
+              <p class="item-description">Description: {{ product.description }}</p>
             </div>
-            <!--          <div class="item-quantity">
-            <span>{{ item.quantity }}</span>
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e2396ede0fb30a9a73553193bae56bb69da86c35bafd2db9e77fb30086f8055c?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Increase quantity" class="quantity-icon" />
-          </div>-->
+            <div class="item-details col-3">
+              <h3 class="item-name">total: {{product.total}}</h3>
+            </div>
+            <div class="item-details col-2" type="button" routerLink="/product-detail/{{product.productID}}">
+              <button class="item-view-button">view</button>
+            </div>
+            <div class="d-flex justify-content-end col-1">
+              <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/88b86678521e84bc6fa462ccac18d4fe5b8165adc947c3ddb256b5c49f05e44f?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="" class="credit-card-icon" />
+            </div>            <!--          <div class="item-quantity">
+    <span>{{ product.quantity }}</span>
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e2396ede0fb30a9a73553193bae56bb69da86c35bafd2db9e77fb30086f8055c?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Increase quantity" class="quantity-icon" />
+  </div>-->
             <!--          <div class="item-price">
-            <span>${{ item.cost }}</span>
-            <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/ff2e534310e3316d1dbe416bf559780e14d0ab70b49eb42f06d904a9b1012feb?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Remove item" class="remove-icon" />
-          </div>-->
+    <span>${{ product.cost }}</span>
+    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/ff2e534310e3316d1dbe416bf559780e14d0ab70b49eb42f06d904a9b1012feb?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Remove item" class="remove-icon" />
+  </div>-->
           </li>
-          <li>
-            <div class="collapse" [attr.id]="item.name">
-              <div class="d-flex align-items-end flex-column">
-                <div class="card card-body col-10 me-3">
-                  Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+          <li class="collapse" [attr.id]="product.name">
+            <div class="d-flex align-items-end flex-column">
+              <div class="card card-body col-10 me-3">
+                <div class="row border-bottom my-2 p-1">
+                  <div class="item-details col-3 d-flex justify-content-center">
+                    <h3 class="item-name">Product Name</h3>
+                  </div>
+                  <div class="item-details col-1 d-flex justify-content-center">
+                    <h3 class="item-name">Quantity</h3>
+                  </div>
+                  <div class="item-details col-1 d-flex justify-content-center">
+                    <h3 class="item-name">Price</h3>
+                  </div>
+                  <div class="item-details col-1 d-flex justify-content-center">
+                    <h3 class="item-name">Sale</h3>
+                  </div>
+                  <div class="item-details col-1 d-flex justify-content-center">
+                    <h3 class="item-name">Total</h3>
+                  </div>
+                  <div class="item-details col-1 d-flex justify-content-center">
+                    <h3 class="item-name">Action</h3>
+                  </div>
+                </div>
+
+                <div class="row border-bottom my-2 p-1 align-items-center" *ngFor="let subProduct of product.subProductList">
+                  <div class="item-details col-3 d-flex justify-content-center">
+                    <h3 class="item-name">{{ subProduct.subProductName }}</h3>
+                  </div>
+                  <div class="item-details col-1 d-flex justify-content-center">
+                    <h3 class="item-name">{{ subProduct.quantity }}</h3>
+                  </div>
+                  <div class="item-details col-1 d-flex justify-content-center">
+                    <h3 class="item-name">{{ subProduct.cost }}</h3>
+                  </div>
+                  <div class="item-details col-1 d-flex justify-content-center">
+                    <h3 class="item-name">{{ subProduct.sale }}</h3>
+                  </div>
+                  <div class="item-details col-1 d-flex justify-content-center">
+                    <h3 class="item-name">{{ (1-subProduct.sale/ 100) * subProduct.cost * subProduct.quantity }}</h3>
+                  </div>
+                  <div class="item-details col-1 d-flex justify-content-center">
+                    <button class="btn bg-danger" (click)="deleteSubProduct(product.productID, subProduct.subProductName)">Delete</button>
+                  </div>
                 </div>
               </div>
             </div>
+
           </li>
         </ng-container>
       </ul>
@@ -53,7 +100,7 @@
             </div>
             <div class="phone-container d-flex">
               <h3 class="phone-title d-inline">Recipient phone</h3>
-              <p class="phone-number d-inline ms-auto">0987654321</p>
+              <p class="phone-number d-inline ms-auto">{{userInfo.phoneNumber}}</p>
             </div>
             <div class="voucher-container d-flex">
               <h3 class="voucher-title d-inline align-self-center">Voucher</h3>
@@ -77,10 +124,12 @@
                   <p>Total</p>
                 </div>
                 <div class="summary-values">
-                  <p>$2997</p>
-                  <p>$6</p>
-                  <p>$0</p>
-                  <p class="total-value fw-bold">$3018</p>
+                  <p>${{ summary.order }}</p>
+                  <p>${{ summary.delivery }}</p>
+                  <p>${{ summary.discount }}</p>
+                  <p class="total-value fw-bold">
+                    Total: ${{ summary.total }}
+                  </p>
                 </div>
               </div>
             </div>

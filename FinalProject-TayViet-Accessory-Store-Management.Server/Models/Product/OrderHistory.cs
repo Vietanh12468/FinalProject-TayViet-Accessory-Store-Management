@@ -110,6 +110,11 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models
 
         public int quantity { get; set; }
 
+        public SubProductInCart()
+        {
+            // Parameterless constructor
+        }
+
         public SubProductInCart(string subProductName, int cost, int sale, int quantity)
         {
             this.subProductName = subProductName;
