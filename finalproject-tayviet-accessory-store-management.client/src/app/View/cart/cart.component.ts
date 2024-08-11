@@ -1,33 +1,81 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { APIService } from '../../Service/API/api.service';
+import { AuthenticationService } from '../../Service/Authentication/authentication.service';
+import { ProductInCart, SubProductInCart } from '../../Interface/iorder-history';
+import { SubProduct } from '../../Interface/isub-product';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
-export class CartComponent {
-  cartItems = [
+export class CartComponent implements OnInit, OnChanges {
+  cartList: ProductInCart[] = [
     {
-      name: "Italy Pizza",
-      description: "Extra cheese and toping",
-      image: "https://cdn.builder.io/api/v1/image/assets/TEMP/3e24cbed2ab206e70822774ac2eb87c9756cc6b3ffa7c702c9572d6400f58569?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d",
-      quantity: 1,
-      price: 999
-    },
-    {
-      name: "Combo Plate",
-      description: "Extra cheese and toping",
-      image: "https://cdn.builder.io/api/v1/image/assets/TEMP/2fd0884298bf943476303043f2f321eeb620fd69befdb1d5230981dc104bccd0?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d",
-      quantity: 1,
-      price: 999
-    },
-    {
-      name: "Spanish Rice",
-      description: "Extra garllic",
-      image: "https://cdn.builder.io/api/v1/image/assets/TEMP/55c8d629e48534e5d021a4e1588a15eb219d6c69802bfd76887cd20a1a8084b6?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d",
-      quantity: 1,
-      price: 999
+      productID: '',
+      subProductList: []
     }
   ];
+  productDisplayList: CartProductDisplay[] = [];
   paymentOption = 'PayOnDelivery'
+
+  constructor(private apiService: APIService, private authenticationService: AuthenticationService) { }
+
+  ngOnInit() {
+    if (this.authenticationService.isLoggedIn() === true) {
+      this.getUserCart();
+
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+  }
+
+  getUserCart() {
+    const token = this.authenticationService.getToken();
+    this.apiService.getDetailObject('Customer', token.userID).subscribe(
+      (result) => {
+        this.cartList = result.cartList;
+        this.getProductDisplayList();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  getProductDisplayList() {
+    for (let i = 0; i < this.cartList.length; i++) {
+      this.apiService.getDetailObject('Product', this.cartList[i].productID).subscribe(
+        (result) => {
+          let productDisplay: CartProductDisplay = {
+            name: result.name,
+            image: result.image,
+            description: result.description,
+            subProductList: [],
+          }
+          for (let subProduct of this.cartList[i].subProductList) {
+            const item: SubProduct = result.subProductList.find((item: SubProduct) => item.name === subProduct.subProductName);
+            if (!item) {
+              throw new Error('Item not found');
+            }
+            let subProductInCart: SubProductInCart = { subProductName: item.name, cost: item.sellCost, sale: item.discount, quantity: 0 }
+            productDisplay.subProductList.push(subProductInCart);
+          }
+          this.productDisplayList.push(productDisplay);
+          console.log(this.productDisplayList);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+  }
+}
+
+interface CartProductDisplay {
+  name: string;
+  image: string;
+  description: string;
+  subProductList: SubProductInCart[]
 }

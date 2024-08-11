@@ -6,20 +6,20 @@
   <div class="row">
     <div class="col-8 border-end">
       <ul class="cart-items">
-        <li *ngFor="let item of cartItems" class="cart-item">
+        <li *ngFor="let item of productDisplayList" class="cart-item">
           <img [src]="item.image" [alt]="item.name" class="item-image" />
           <div class="item-details">
             <h3 class="item-name">{{ item.name }}</h3>
             <p class="item-description">{{ item.description }}</p>
           </div>
-          <div class="item-quantity">
+<!--          <div class="item-quantity">
             <span>{{ item.quantity }}</span>
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e2396ede0fb30a9a73553193bae56bb69da86c35bafd2db9e77fb30086f8055c?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Increase quantity" class="quantity-icon" />
-          </div>
-          <div class="item-price">
-            <span>${{ item.price }}</span>
+          </div>-->
+<!--          <div class="item-price">
+            <span>${{ item.cost }}</span>
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/ff2e534310e3316d1dbe416bf559780e14d0ab70b49eb42f06d904a9b1012feb?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Remove item" class="remove-icon" />
-          </div>
+          </div>-->
         </li>
       </ul>
     </div>

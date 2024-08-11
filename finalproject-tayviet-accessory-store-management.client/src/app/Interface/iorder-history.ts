@@ -6,17 +6,17 @@ export interface IOrderHistory {
   history: OrderHistoryMomento[];
 }
 
-interface OrderHistoryMomento {
+export interface OrderHistoryMomento {
   state: string;
   orderTime?: Date;
 }
 
-interface ProductInCart {
+export interface ProductInCart {
   productID: string;
-  subProductList?: SubProductInCart[];
+  subProductList: SubProductInCart[];
 }
 
-interface SubProductInCart {
+export interface SubProductInCart {
   subProductName: string;
   cost: number;
   sale: number;
