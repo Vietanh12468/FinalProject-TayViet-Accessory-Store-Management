@@ -1,27 +1,92 @@
 <div class="container">
-  <div class="mt-2 p-2">
+  <div class="mt-2">
     <h1 class="cart-title"> Shopping cart</h1>
     <p class="cart-summary"> You have 3 item in your cart</p>
   </div>
   <div class="row">
     <div class="col-8 border-end">
       <ul class="cart-items">
-        <li *ngFor="let item of productDisplayList" class="cart-item">
-          <img [src]="item.image" [alt]="item.name" class="item-image" />
-          <div class="item-details">
-            <h3 class="item-name">{{ item.name }}</h3>
-            <p class="item-description">{{ item.description }}</p>
-          </div>
-<!--          <div class="item-quantity">
+        <ng-container *ngFor="let item of productDisplayList">
+          <li class="cart-item" data-bs-toggle="collapse" [attr.href]="'#'+item.name" role="button" aria-expanded="false" [attr.aria-controls]="item.name">
+            <img [src]="item.image" [alt]="item.name" class="item-image col-3" />
+            <div class="item-details">
+              <h3 class="item-name">{{ item.name }}</h3>
+              <p class="item-description">{{ item.description }}</p>
+            </div>
+            <!--          <div class="item-quantity">
             <span>{{ item.quantity }}</span>
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e2396ede0fb30a9a73553193bae56bb69da86c35bafd2db9e77fb30086f8055c?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Increase quantity" class="quantity-icon" />
           </div>-->
-<!--          <div class="item-price">
+            <!--          <div class="item-price">
             <span>${{ item.cost }}</span>
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/ff2e534310e3316d1dbe416bf559780e14d0ab70b49eb42f06d904a9b1012feb?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Remove item" class="remove-icon" />
           </div>-->
-        </li>
+          </li>
+          <li>
+            <div class="collapse" [attr.id]="item.name">
+              <div class="d-flex align-items-end flex-column">
+                <div class="card card-body col-10 me-3">
+                  Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                </div>
+              </div>
+            </div>
+          </li>
+        </ng-container>
       </ul>
+      <div class="checkout-content">
+        <div class="row">
+          <section class="delivery-section col-6">
+            <div class="address-container">
+              <div class="address-header">
+                <h2 class="address-title">Delivery address</h2>
+                <div class="address-select">
+                  <span class="select-text">Select</span>
+                  <div class="select-icon">
+                    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/7add40eb39598ace6db3b9db1d1d8bd10de14d648b916ed9f9f53fbb545c84b0?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="" class="dropdown-icon" />
+                  </div>
+                </div>
+              </div>
+              <div class="address-input">
+                <label for="streetAddress" class="visually-hidden">Street name, building, house number</label>
+                <input type="text" id="streetAddress" class="address-field" placeholder="Street name, building, house number" />
+              </div>
+            </div>
+            <div class="phone-container d-flex">
+              <h3 class="phone-title d-inline">Recipient phone</h3>
+              <p class="phone-number d-inline ms-auto">0987654321</p>
+            </div>
+            <div class="voucher-container d-flex">
+              <h3 class="voucher-title d-inline align-self-center">Voucher</h3>
+              <div class="voucher-input d-inline ms-auto">
+                <label for="voucherCode" class="visually-hidden">Add code</label>
+                <input type="text" id="voucherCode" class="voucher-field" placeholder="Add code" />
+              </div>
+            </div>
+          </section>
+
+
+          <section class="col-6">
+            <div class="summary-section">
+              <h2 class="summary-title">Order Summary</h2>
+              <hr class="summary-divider" />
+              <div class="summary-details">
+                <div class="summary-labels">
+                  <p>Order</p>
+                  <p>Delivery</p>
+                  <p>Discount</p>
+                  <p>Total</p>
+                </div>
+                <div class="summary-values">
+                  <p>$2997</p>
+                  <p>$6</p>
+                  <p>$0</p>
+                  <p class="total-value fw-bold">$3018</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
     <div class="col-4">
       <section class="payment-container">
@@ -34,13 +99,13 @@
           <span class="payment-option-text">Bank transfer</span>
           <input class="form-check-input" type="radio" name="flexRadioDefault" [checked]="paymentOption === 'BankTransfer'">
         </div>
-        <div class="payment-option form-check" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <div class="payment-option form-check" data-bs-toggle="collapse" href="#cardOption" role="button" aria-expanded="false" aria-controls="cardOption">
           <span class="payment-option-text">Credit Cards</span>
           <div class="payment-option-controls">
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/88b86678521e84bc6fa462ccac18d4fe5b8165adc947c3ddb256b5c49f05e44f?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="" class="credit-card-icon" />
           </div>
         </div>
-        <div class="collapse" id="collapseExample">
+        <div class="collapse" id="cardOption">
           <div class="credit-card-item">
             <div class="credit-card-info ms-3">
               <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1e94bfbb4546a1ba1af74e288aca09cc84dec2df646a48cd9ee76a4b537189c5?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Vietcombank logo" class="credit-card-logo" />
