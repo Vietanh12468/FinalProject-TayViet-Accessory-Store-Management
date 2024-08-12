@@ -22,6 +22,7 @@ import { SmallImgComponent } from './Component/small-img/small-img.component';
 import { CategoryOptionComponent } from './Component/category-option/category-option.component';
 import { SearchBarComponent } from './Component/search-bar/search-bar.component';
 import { ProductListComponent } from './Component/product-list/product-list.component';
+import { HistoryComponent } from './View/history/history.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ProductListComponent } from './Component/product-list/product-list.comp
     SmallImgComponent,
     CategoryOptionComponent,
     SearchBarComponent,
-    ProductListComponent
+    ProductListComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
