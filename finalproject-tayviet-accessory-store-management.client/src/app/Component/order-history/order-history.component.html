@@ -1,0 +1,95 @@
+<div class="order-list">
+  <ng-container *ngFor="let order of orderHistoryList">
+    <div class="order-item" data-bs-toggle="collapse" [attr.href]="'#'+order.orderID" role="button" aria-expanded="false" [attr.aria-controls]="order.orderID">
+      <div class="order-details align-items-center py-2">
+        <div class="col-6 fw-bold">
+          ID: {{order.orderID}}
+        </div>
+      </div>
+      <div class="order-item-content">
+        <div class="order-details align-items-center col-9">
+          <div class="col-3">
+            Price: {{order.total}}
+          </div>
+          <div class="col-3">
+            State: sldka,olsd
+          </div>
+          <div class="col-4">
+            Last Update: dsjaujshuda
+          </div>
+        </div>
+        <div class="order-actions col-3">
+          <button class="cancel-btn">Cancel</button>
+          <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7add40eb39598ace6db3b9db1d1d8bd10de14d648b916ed9f9f53fbb545c84b0?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Order status icon" class="order-icon me-5" />
+        </div>
+      </div>
+    </div>
+    <div class="collapse" [attr.id]="order.orderID">
+      <div class="d-flex align-items-end flex-column bg-secondary">
+        <div class="col-11">
+          <ul class="cart-items">
+            <ng-container *ngFor="let product of order.cartList, let x = index">
+              <li class="cart-item mx-3" data-bs-toggle="collapse" [attr.href]="'#'+order.orderID+x" role="button" aria-expanded="false" [attr.aria-controls]="order.orderID+x">
+                <img [src]="product.image" [alt]="product.name" class="item-image col-3" />
+                <div class="item-details col-4">
+                  <h3 class="item-name">Name: {{ product.name }}</h3>
+                  <p class="item-description">Description: {{ product.description }}</p>
+                </div>
+                <div class="item-details col-3">
+                  <h3 class="item-name">total: {{product.total}}</h3>
+                </div>
+                <div class="item-details col-2" type="button" routerLink="/product-detail/{{product.productID}}">
+                  <button class="item-view-button">view</button>
+                </div>
+                <div class="d-flex justify-content-end col-1">
+                  <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/88b86678521e84bc6fa462ccac18d4fe5b8165adc947c3ddb256b5c49f05e44f?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="" class="credit-card-icon" />
+                </div>
+              </li>
+              <li class="collapse" [attr.id]="order.orderID+x">
+                <div class="d-flex align-items-end flex-column">
+                  <div class="card card-body col-10 me-3">
+                    <div class="row border-bottom my-2 p-1">
+                      <div class="item-details col-3 d-flex justify-content-center">
+                        <h3 class="item-name">Product Name</h3>
+                      </div>
+                      <div class="item-details col-1 d-flex justify-content-center">
+                        <h3 class="item-name">Quantity</h3>
+                      </div>
+                      <div class="item-details col-1 d-flex justify-content-center">
+                        <h3 class="item-name">Price</h3>
+                      </div>
+                      <div class="item-details col-1 d-flex justify-content-center">
+                        <h3 class="item-name">Sale</h3>
+                      </div>
+                      <div class="item-details col-1 d-flex justify-content-center">
+                        <h3 class="item-name">Total</h3>
+                      </div>
+                    </div>
+
+                    <div class="row border-bottom my-2 p-1 align-items-center" *ngFor="let subProduct of product.subProductList">
+                      <div class="item-details col-3 d-flex justify-content-center">
+                        <h3 class="item-name">{{ subProduct.subProductName }}</h3>
+                      </div>
+                      <div class="item-details col-1 d-flex justify-content-center">
+                        <h3 class="item-name">{{ subProduct.quantity }}</h3>
+                      </div>
+                      <div class="item-details col-1 d-flex justify-content-center">
+                        <h3 class="item-name">{{ subProduct.cost }}</h3>
+                      </div>
+                      <div class="item-details col-1 d-flex justify-content-center">
+                        <h3 class="item-name">{{ subProduct.sale }}</h3>
+                      </div>
+                      <div class="item-details col-1 d-flex justify-content-center">
+                        <h3 class="item-name">{{ (1-subProduct.sale/ 100) * subProduct.cost * subProduct.quantity }}</h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

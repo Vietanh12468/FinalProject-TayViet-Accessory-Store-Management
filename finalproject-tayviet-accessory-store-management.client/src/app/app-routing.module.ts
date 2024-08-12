@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'pagenotfound', component: PagenotFoundComponent },
   { path: 'cart', component: CartComponent, canActivate: [AuthenticationGuardService] },
   { path: 'profile', component: ProfileManagerComponent, canActivate: [AuthenticationGuardService] },
-  { path: 'history', component: HistoryComponent},
+  { path: 'history', component: HistoryComponent, canActivate: [AuthenticationGuardService] },
   { path: '**', redirectTo: '/pagenotfound', },
 ];
 

@@ -4,103 +4,39 @@
   </div>
   <section class="ordered-section">
     <article class="order-card">
-      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1f3ce80ed948205081a60bbcf80f6fa0c257c64371be61c883a3e722b0571547?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="" class="order-card-bg" />
-      <div class="order-header">
+      <div class="order-header" data-bs-toggle="collapse" href="#ordered" role="button" aria-expanded="false" aria-controls="ordered">
         <h3 class="m-0">Ordered</h3>
         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7add40eb39598ace6db3b9db1d1d8bd10de14d648b916ed9f9f53fbb545c84b0?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Order status icon" class="order-icon" />
       </div>
-      <div class="order-list">
-        <ng-container *ngFor="let order of orderHistoryList">
-          <div class="order-item" data-bs-toggle="collapse" [attr.href]="'#'+order.orderID" role="button" aria-expanded="false" [attr.aria-controls]="order.orderID">
-            <div class="order-item-content">
-              <div class="order-details align-items-center col-9">
-                <div class="col-3">
-                  ID: {{order.orderID}}
-                </div>
-                <div class="col-2">
-                  Price: {{order.price}}
-                </div>
-                <div class="col-2">
-                  State: {{order.state}}
-                </div>
-                <div class="col-3">
-                  Last Update: {{order.lastUpdate}}
-                </div>
-              </div>
-              <div class="order-actions col-3">
-                <button class="cancel-btn">Cancel</button>
-                <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/39c9c5f2d1c28cd9884e1cfc05cfd538d490c4af3f2bade900f8f79f1908971a?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Action icon" class="action-icon me-3" />
-              </div>
-            </div>
-          </div>
-          <div class="collapse" [attr.id]="order.orderID">
-            <div class="d-flex align-items-end flex-column bg-secondary">
-              <div class="col-11">
-                <ul class="cart-items">
-                  <ng-container *ngFor="let product of productDisplayList">
-                    <li class="cart-item mx-3" data-bs-toggle="collapse" [attr.href]="'#'+product.name" role="button" aria-expanded="false" [attr.aria-controls]="product.name">
-                      <img [src]="product.image" [alt]="product.name" class="item-image col-3" />
-                      <div class="item-details col-4">
-                        <h3 class="item-name">Name: {{ product.name }}</h3>
-                        <p class="item-description">Description: {{ product.description }}</p>
-                      </div>
-                      <div class="item-details col-3">
-                        <h3 class="item-name">total: {{product.total}}</h3>
-                      </div>
-                      <div class="item-details col-2" type="button" routerLink="/product-detail/{{product.productID}}">
-                        <button class="item-view-button">view</button>
-                      </div>
-                      <div class="d-flex justify-content-end col-1">
-                        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/88b86678521e84bc6fa462ccac18d4fe5b8165adc947c3ddb256b5c49f05e44f?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="" class="credit-card-icon" />
-                      </div>
-                    </li>
-                    <li class="collapse" [attr.id]="product.name">
-                      <div class="d-flex align-items-end flex-column">
-                        <div class="card card-body col-10 me-3">
-                          <div class="row border-bottom my-2 p-1">
-                            <div class="item-details col-3 d-flex justify-content-center">
-                              <h3 class="item-name">Product Name</h3>
-                            </div>
-                            <div class="item-details col-1 d-flex justify-content-center">
-                              <h3 class="item-name">Quantity</h3>
-                            </div>
-                            <div class="item-details col-1 d-flex justify-content-center">
-                              <h3 class="item-name">Price</h3>
-                            </div>
-                            <div class="item-details col-1 d-flex justify-content-center">
-                              <h3 class="item-name">Sale</h3>
-                            </div>
-                            <div class="item-details col-1 d-flex justify-content-center">
-                              <h3 class="item-name">Total</h3>
-                            </div>
-                          </div>
-
-                          <div class="row border-bottom my-2 p-1 align-items-center" *ngFor="let subProduct of product.subProductList">
-                            <div class="item-details col-3 d-flex justify-content-center">
-                              <h3 class="item-name">{{ subProduct.subProductName }}</h3>
-                            </div>
-                            <div class="item-details col-1 d-flex justify-content-center">
-                              <h3 class="item-name">{{ subProduct.quantity }}</h3>
-                            </div>
-                            <div class="item-details col-1 d-flex justify-content-center">
-                              <h3 class="item-name">{{ subProduct.cost }}</h3>
-                            </div>
-                            <div class="item-details col-1 d-flex justify-content-center">
-                              <h3 class="item-name">{{ subProduct.sale }}</h3>
-                            </div>
-                            <div class="item-details col-1 d-flex justify-content-center">
-                              <h3 class="item-name">{{ (1-subProduct.sale/ 100) * subProduct.cost * subProduct.quantity }}</h3>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                  </ng-container>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </ng-container>
+      <div class="collapse show" id="ordered">
+        <app-order-history [orderHistoryList]="ordredOrderListDisplay"></app-order-history>
+      </div>
+    </article>
+    <article class="order-card">
+      <div class="order-header" data-bs-toggle="collapse" href="#prepraring" role="button" aria-expanded="false" aria-controls="prepraring">
+        <h3 class="m-0">Prepraring</h3>
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7add40eb39598ace6db3b9db1d1d8bd10de14d648b916ed9f9f53fbb545c84b0?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Order status icon" class="order-icon" />
+      </div>
+      <div class="collapse show" id="prepraring">
+        <app-order-history [orderHistoryList]="preparingOrderListDisplay"></app-order-history>
+      </div>
+    </article>
+    <article class="order-card">
+      <div class="order-header" data-bs-toggle="collapse" href="#completed" role="button" aria-expanded="false" aria-controls="completed">
+        <h3 class="m-0">Completed</h3>
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7add40eb39598ace6db3b9db1d1d8bd10de14d648b916ed9f9f53fbb545c84b0?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Order status icon" class="order-icon" />
+      </div>
+      <div class="collapse show" id="completed">
+        <app-order-history [orderHistoryList]="completedOrderListDisplay"></app-order-history>
+      </div>
+    </article>
+    <article class="order-card">
+      <div class="order-header" data-bs-toggle="collapse" href="#other" role="button" aria-expanded="false" aria-controls="other">
+        <h3 class="m-0">Other</h3>
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/7add40eb39598ace6db3b9db1d1d8bd10de14d648b916ed9f9f53fbb545c84b0?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="Order status icon" class="order-icon" />
+      </div>
+      <div class="collapse show" id="other">
+        <app-order-history [orderHistoryList]="otherOrderListDisplay"></app-order-history>
       </div>
     </article>
   </section>

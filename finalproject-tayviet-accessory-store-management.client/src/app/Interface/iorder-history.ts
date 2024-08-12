@@ -1,5 +1,5 @@
 export interface IOrderHistory {
-  id: string;
+  id?: string;
   customerID: string;
   shipLocation: string;
   cart: ProductInCart[];

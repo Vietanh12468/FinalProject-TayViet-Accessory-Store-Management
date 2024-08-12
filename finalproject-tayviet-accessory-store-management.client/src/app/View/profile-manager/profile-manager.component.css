@@ -197,3 +197,91 @@ label {
     padding: 11px 20px;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+.address-container {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: flex-start;
+  color: #1c1c1c;
+  font: 600 26px Roboto, sans-serif;
+}
+.address-title {
+  color: #000;
+  font-size: 45px;
+  z-index: 10;
+  margin-top: -8px;
+}
+.decorative-image {
+  aspect-ratio: 250;
+  object-fit: contain;
+  width: 517px;
+  margin-top: 18px;
+  max-width: 100%;
+}
+.contact-list {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+}
+.contact-item {
+  margin-top: 15px;
+}
+.contact-info {
+  margin: 0 0 0 33px;
+}
+.address-box {
+  border-radius: 5px;
+  background-color: #fff;
+  display: flex;
+  margin-top: 6px;
+  gap: 8px;
+  font-size: 24px;
+  color: #858585;
+  font-weight: 500;
+  flex-wrap: wrap;
+  padding: 22px 28px;
+  border: 2px solid #858585;
+}
+.address-text {
+  flex-grow: 1;
+  flex-basis: auto;
+  margin: 0;
+}
+.location-icon {
+  aspect-ratio: 0.93;
+  object-fit: contain;
+  width: 28px;
+}
+.location-indicator {
+  border-radius: 5px;
+  background-color: #1cd8d2;
+  display: flex;
+  width: 28px;
+  height: 30px;
+}
+@media (max-width: 991px) {
+  .address-title {
+    margin-left: 2px;
+    font-size: 40px;
+  }
+  .contact-info,
+  .address-text {
+    max-width: 100%;
+  }
+  .address-box {
+    padding: 22px 20px;
+  }
+}

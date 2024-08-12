@@ -4,6 +4,7 @@ import { APIService } from '../../Service/API/api.service';
 import { AuthenticationService } from '../../Service/Authentication/authentication.service';
 import { Product } from '../../Interface/iproduct';
 import { SubProduct } from '../../Interface/isub-product';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-detail',
@@ -15,7 +16,7 @@ export class ProductDetailComponent implements OnInit {
   currentSubProduct: SubProduct = new SubProduct();
   mode: string = 'general-info';
   numberAdd = 1;
-  constructor(private route: ActivatedRoute, private apiService: APIService, private authenticationService: AuthenticationService) {
+  constructor(private route: ActivatedRoute, private apiService: APIService, private authenticationService: AuthenticationService, private snackBar: MatSnackBar) {
   }
   ngOnInit() {
     this.getDetailProduct();
@@ -47,6 +48,11 @@ export class ProductDetailComponent implements OnInit {
     this.apiService.addToCart(token.userID, this.product.id, this.currentSubProduct.name, this.numberAdd).subscribe(
       (result) => {
         console.log("Add to cart successfully");
+        this.snackBar.open('Add to cart successfully', 'Close', {
+          duration: 10000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
       },
       (error) => {
         console.error(error);

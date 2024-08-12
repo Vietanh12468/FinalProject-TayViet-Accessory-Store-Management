@@ -25,6 +25,7 @@ import { SearchBarComponent } from './Component/search-bar/search-bar.component'
 import { ProductListComponent } from './Component/product-list/product-list.component';
 import { HistoryComponent } from './View/history/history.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { OrderHistoryComponent } from './Component/order-history/order-history.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     CategoryOptionComponent,
     SearchBarComponent,
     ProductListComponent,
-    HistoryComponent
+    HistoryComponent,
+    OrderHistoryComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, MatSnackBarModule,

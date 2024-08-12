@@ -1,8 +1,9 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { APIService } from '../../Service/API/api.service';
 import { AuthenticationService } from '../../Service/Authentication/authentication.service';
-import { ProductInCart, SubProductInCart } from '../../Interface/iorder-history';
+import { ProductInCart, SubProductInCart, IOrderHistory } from '../../Interface/iorder-history';
 import { SubProduct } from '../../Interface/isub-product';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-cart',
@@ -25,8 +26,9 @@ export class CartComponent implements OnInit, OnChanges {
     total: 0
   };
   userInfo: any
+  shipLocation: string = 'ghost address';
 
-  constructor(private apiService: APIService, private authenticationService: AuthenticationService) { }
+  constructor(private apiService: APIService, private authenticationService: AuthenticationService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     if (this.authenticationService.isLoggedIn() === true) {
@@ -129,6 +131,42 @@ export class CartComponent implements OnInit, OnChanges {
         this.summary.discount += subProduct.cost * subProduct.quantity * subProduct.sale / 100;
       }
     }
+  }
+
+  orderSubmit() {
+
+    const orderHistory: IOrderHistory = {
+      customerID: this.userInfo.id,
+      shipLocation: this.shipLocation,
+      cart: this.cartList,
+      history: [
+        {
+          state: 'Ordered'
+        }
+      ],
+    }
+    this.apiService.createDetailObject('OrderHistory', orderHistory).subscribe(
+      (result) => {
+        this.userInfo.cartList = [];
+        this.apiService.changeDetailObject('Customer', this.userInfo).subscribe(
+          (result) => {
+            this.snackBar.open('Order Successful', 'Close', {
+              duration: 10000,
+              verticalPosition: 'top',
+              horizontalPosition: 'right',
+            });
+          },
+          (error) => {
+            console.error(error);
+          }
+        );
+        console.log(result);
+
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }
 

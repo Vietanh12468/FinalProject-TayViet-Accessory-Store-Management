@@ -24,7 +24,7 @@ export class MainHomeComponent implements OnInit, OnChanges {
       (result) => {
         this.latestProducts = result;
         this.snackBar.open('Shop opened', 'Close', {
-          duration: 3000,
+          duration: 10000,
           verticalPosition: 'top',
           horizontalPosition: 'right',
         });

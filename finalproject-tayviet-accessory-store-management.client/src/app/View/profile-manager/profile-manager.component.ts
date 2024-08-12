@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { APIService } from '../../Service/API/api.service';
 import { AuthenticationService } from '../../Service/Authentication/authentication.service';
+import { ICustomer } from '../../Interface/iaccount';
 
 @Component({
   selector: 'app-profile-manager',
@@ -9,7 +10,8 @@ import { AuthenticationService } from '../../Service/Authentication/authenticati
 })
 export class ProfileManagerComponent implements OnInit, OnChanges {
   @ViewChild('fileInput') fileInput!: ElementRef;
-
+  view: string = 'profile';
+  addressList: string[] = [];
   constructor(private apiService: APIService, private authenticationService: AuthenticationService) {
   }
 
@@ -26,7 +28,7 @@ export class ProfileManagerComponent implements OnInit, OnChanges {
   }
 
   onSave(): void {
-    console.log(this.userInfo);
+    this.userInfo.addressList = this.addressList;
     this.apiService.changeDetailObject('Customer', this.userInfo).subscribe(
       (result) => {
         this.getUserInfo();
@@ -42,8 +44,7 @@ export class ProfileManagerComponent implements OnInit, OnChanges {
     this.mode = 'edit';
   }
 
-  userInfo: any = {
-  };
+  userInfo: ICustomer = {} as ICustomer;
 
   mode: 'view' | 'edit' = 'view';
 
@@ -78,11 +79,24 @@ export class ProfileManagerComponent implements OnInit, OnChanges {
     this.apiService.getDetailObject('Customer', token.userID).subscribe(
       (result) => {
         this.userInfo = result;
+        this.addressList = result.addressList;
       },
       (error) => {
         console.error(error);
       }
     );
   }
+  setView(view: string) {
+    this.view = view;
+  }
 
+  addNewAddress() {
+    this.userInfo.addressList.push('new address');
+  }
+
+  onSaveAddress(event: any, index: number) {
+    // Set a variable in TypeScript to the value of the input
+    this.addressList[index] = event.target.value;
+    // You can now use this.inputValue in your component
+  }
 }

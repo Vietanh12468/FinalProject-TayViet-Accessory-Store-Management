@@ -6,15 +6,15 @@
   <div class="row">
     <div class="col-8 border-end">
       <ul class="cart-items">
-        <ng-container *ngFor="let product of productDisplayList">
-          <li class="cart-item" data-bs-toggle="collapse" [attr.href]="'#'+product.name" role="button" aria-expanded="false" [attr.aria-controls]="product.name">
+        <ng-container *ngFor="let product of productDisplayList, let x = index">
+          <li class="cart-item" data-bs-toggle="collapse" [attr.href]="'#'+'p'+x" role="button" aria-expanded="false" [attr.aria-controls]="'p'+x">
             <img [src]="product.image" [alt]="product.name" class="item-image col-3" />
             <div class="item-details col-4">
               <h3 class="item-name">Name: {{ product.name }}</h3>
               <p class="item-description">Description: {{ product.description }}</p>
             </div>
             <div class="item-details col-3">
-              <h3 class="item-name">total: {{product.total}}</h3>
+              <h3 class="item-name">total: {{product.total.toFixed(2)}}</h3>
             </div>
             <div class="item-details col-2" type="button" routerLink="/product-detail/{{product.productID}}">
               <button class="item-view-button">view</button>
@@ -23,7 +23,7 @@
               <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/88b86678521e84bc6fa462ccac18d4fe5b8165adc947c3ddb256b5c49f05e44f?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="" class="credit-card-icon" />
             </div>       
           </li>
-          <li class="collapse" [attr.id]="product.name">
+          <li class="collapse" [attr.id]="'p'+x">
             <div class="d-flex align-items-end flex-column">
               <div class="card card-body col-10 me-3">
                 <div class="row border-bottom my-2 p-1">
@@ -55,13 +55,13 @@
                     <h3 class="item-name">{{ subProduct.quantity }}</h3>
                   </div>
                   <div class="item-details col-1 d-flex justify-content-center">
-                    <h3 class="item-name">{{ subProduct.cost }}</h3>
+                    <h3 class="item-name">{{ subProduct.cost.toFixed(2) }}</h3>
                   </div>
                   <div class="item-details col-1 d-flex justify-content-center">
-                    <h3 class="item-name">{{ subProduct.sale }}</h3>
+                    <h3 class="item-name">{{ subProduct.sale.toFixed(2) }}</h3>
                   </div>
                   <div class="item-details col-1 d-flex justify-content-center">
-                    <h3 class="item-name">{{ (1-subProduct.sale/ 100) * subProduct.cost * subProduct.quantity }}</h3>
+                    <h3 class="item-name">{{ ((1-subProduct.sale/ 100) * subProduct.cost * subProduct.quantity).toFixed(2) }}</h3>
                   </div>
                   <div class="item-details col-1 d-flex justify-content-center">
                     <button class="btn bg-danger" (click)="deleteSubProduct(product.productID, subProduct.subProductName)">Delete</button>
@@ -117,11 +117,11 @@
                   <p>Total</p>
                 </div>
                 <div class="summary-values">
-                  <p>${{ summary.order }}</p>
-                  <p>${{ summary.delivery }}</p>
-                  <p>${{ summary.discount }}</p>
+                  <p>${{ summary.order.toFixed(2) }}</p>
+                  <p>${{ summary.delivery.toFixed(2) }}</p>
+                  <p>${{ summary.discount.toFixed(2) }}</p>
                   <p class="total-value fw-bold">
-                    Total: ${{ summary.total }}
+                    Total: ${{ summary.total.toFixed(2) }}
                   </p>
                 </div>
               </div>
@@ -172,7 +172,7 @@
             <span class="pay-now-text">Pay Now</span>
           </button>
         </div>
-        <button class="order-button">Order</button>
+        <button class="order-button" (click)="orderSubmit()">Order</button>
       </section>
 
     </div>
