@@ -53,7 +53,7 @@ export class CategoryManagerViewComponent implements OnInit, OnChanges {
         console.log('POST request successful', response);
         this.getCategories();
 
-        // Show success notification
+        
         this.snackBar.open('Add successful!', 'Close', {
           duration: 3000,
           verticalPosition: 'top',

@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,7 @@ import { VoucherComponent } from './voucher/voucher.component';
 import { LoginComponent } from './View/login/login.component';
 import { SubProductCarouselComponent } from './Component/sub-product-carousel/sub-product-carousel.component';
 import { PagenotFoundComponent } from './pagenot-found/pagenot-found.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -33,15 +35,17 @@ import { PagenotFoundComponent } from './pagenot-found/pagenot-found.component';
     PaymentComponent,
     VoucherComponent,
     LoginComponent,
-    PagenotFoundComponent
+    PagenotFoundComponent,
     LoginComponent,
     SubProductCarouselComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule,
+    BrowserModule, HttpClientModule, MatSnackBarModule,
     AppRoutingModule, ReactiveFormsModule, FormsModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
