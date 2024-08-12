@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import { CategoryOptionComponent } from './Component/category-option/category-op
 import { SearchBarComponent } from './Component/search-bar/search-bar.component';
 import { ProductListComponent } from './Component/product-list/product-list.component';
 import { HistoryComponent } from './View/history/history.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -48,10 +50,12 @@ import { HistoryComponent } from './View/history/history.component';
     HistoryComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule,
+    BrowserModule, HttpClientModule, MatSnackBarModule,
     AppRoutingModule, ReactiveFormsModule, FormsModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

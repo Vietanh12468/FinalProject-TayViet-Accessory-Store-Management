@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import { APIService } from '../../Service/API/api.service';
 import { IProduct } from '../../Interface/iproduct';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-main-home',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrl: './main-home.component.css'
 })
 export class MainHomeComponent implements OnInit, OnChanges {
-  constructor(private api: APIService, private router: Router) { }
+  constructor(private api: APIService, private router: Router, private snackBar: MatSnackBar) { }
   currentSlideIndex = 0;
 
   latestProducts: IProduct[] = [];
@@ -22,6 +23,11 @@ export class MainHomeComponent implements OnInit, OnChanges {
     this.api.getLatestProducts().subscribe(
       (result) => {
         this.latestProducts = result;
+        this.snackBar.open('Shop opened', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
       },
       (error) => {
         console.error('Error occurred', error);

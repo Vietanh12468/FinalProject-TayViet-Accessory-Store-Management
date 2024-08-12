@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -29,6 +30,7 @@ import { CategoryManagerViewComponent } from './View/category-manager-view/categ
 import { MessageBoxCloseComponent } from './message-box-close/message-box-close.component';
 import { MessageBoxCancelComponent } from './message-box-cancel/message-box-cancel.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
@@ -57,10 +59,12 @@ import { MainPageComponent } from './main-page/main-page.component';
     MainPageComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule,
+    BrowserModule, HttpClientModule, MatSnackBarModule,
     AppRoutingModule, BrowserAnimationsModule, ReactiveFormsModule, FormsModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

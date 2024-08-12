@@ -2,6 +2,7 @@
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../Service/Authentication/authentication.service';
 import { APIService } from '../../Service/API/api.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -25,13 +26,19 @@ export class LoginComponent {
 
   repassword: string = '';
   constructor(private authenticationService: AuthenticationService, private apiService: APIService, private router: Router) { }
+  constructor(private authenticationService: AuthenticationService, private apiService: APIService, private router: Router, private snackBar: MatSnackBar) { }
 
   onLogin() {
     console.log(this.loginData);  
     this.apiService.loginRequest(this.loginData).subscribe(
       (result) => {
         console.log('POST request successful', result);
-        alert('login successful');
+        this.snackBar.open('Save successful!', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
+      
         this.authenticationService.setToken(result);
         window.location.reload();
       },

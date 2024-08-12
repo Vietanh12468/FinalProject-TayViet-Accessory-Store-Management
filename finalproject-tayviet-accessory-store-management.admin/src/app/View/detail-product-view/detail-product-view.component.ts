@@ -1,18 +1,19 @@
-import { Component, Input, SimpleChanges, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, SimpleChanges, OnInit, ViewChild } from '@angular/core';
 import { APIService } from '../../Service/API/api.service';
 import { IProduct } from '../../Interface/iproduct';
 import { ISubProduct, SubProduct } from '../../Interface/isub-product';
 import { InfoComponent } from '../../Component/info/info.component';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Import MatSnackBar
 
 @Component({
   selector: 'app-detail-product-view',
   templateUrl: './detail-product-view.component.html',
-  styleUrl: './detail-product-view.component.css'
+  styleUrls: ['./detail-product-view.component.css'] // Corrected 'styleUrl' to 'styleUrls'
 })
 export class DetailProductViewComponent implements OnInit {
-  @Input() id: string|null = '';
+  @Input() id: string | null = '';
   @Input() mode: string = 'view';
   @ViewChild('infoComponent') infoComponent!: InfoComponent;
   ignoredAttributes: string[] = ['subProductList', 'image'];
@@ -21,9 +22,7 @@ export class DetailProductViewComponent implements OnInit {
     "name": "string",
     "description": "string",
     "image": "string",
-    "categoryList": [
-      "string"
-    ],
+    "categoryList": ["string"],
     "subProductList": [
       {
         "name": "string",
@@ -41,21 +40,7 @@ export class DetailProductViewComponent implements OnInit {
       {
         "name": "string",
         "description": "string",
-        "listImage": [
-          "string"
-        ],
-        "inStock": 0,
-        "state": 'null',
-        "buyCost": 0,
-        "sellCost": 0,
-        "discount": 0
-      },
-      {
-        "name": "string",
-        "description": "string",
-        "listImage": [
-          "string"
-        ],
+        "listImage": ["string"],
         "inStock": 0,
         "state": null,
         "buyCost": 0,
@@ -68,7 +53,12 @@ export class DetailProductViewComponent implements OnInit {
 
   objectName: string = 'Product';
 
-  constructor(private route: ActivatedRoute, private apiService: APIService, private location: Location) {
+  constructor(
+    private route: ActivatedRoute,
+    private apiService: APIService,
+    private location: Location,
+    private snackBar: MatSnackBar 
+  ) {
     this.route.queryParams.subscribe(params => {
       this.mode = params['mode'];
     });
@@ -86,11 +76,11 @@ export class DetailProductViewComponent implements OnInit {
       const subProduct: SubProduct = new SubProduct();
       this.product['subProductList'] = [subProduct];
       console.log(this.product);
-    }
-    else {
+    } else {
       this.getDetailProduct();
     }
   }
+
   getDetailProduct() {
     this.apiService.getDetailObject(this.objectName, this.id).subscribe(
       (result) => {
@@ -103,7 +93,6 @@ export class DetailProductViewComponent implements OnInit {
   }
 
   handleData(data: any) {
-    // Handle the emitted event data here
     this.product = data;
   }
 
@@ -112,31 +101,32 @@ export class DetailProductViewComponent implements OnInit {
       return;
     }
     this.infoComponent.getInfo();
-    // Check If Valid account
     const invalidAttribute: string[] = [];
     for (const key in this.product) {
       if ((this.product[key] === null || this.product[key] === '') && key !== 'id') {
         invalidAttribute.push(key);
       }
     }
-    this.infoComponent.handleInvalidAttributes(invalidAttribute)
+    this.infoComponent.handleInvalidAttributes(invalidAttribute);
     if (invalidAttribute.length > 0) {
-      return
+      return;
     }
     if (this.mode === 'change') {
       this.apiService.changeDetailObject(this.objectName, this.product).subscribe(
         response => {
           console.log('PUT request successful', response);
+          this.showChangeSuccessNotification(); 
         },
         error => {
           console.error('Error occurred', error);
         }
       );
-    }
-    else if (this.mode === 'create') {
+    } else if (this.mode === 'create') {
       this.apiService.createDetailObject(this.objectName, this.product).subscribe(
         response => {
           console.log('POST request successful', response);
+          this.showCreateSuccessNotification();
+
         },
         error => {
           console.error('Error occurred', error);
@@ -159,6 +149,7 @@ export class DetailProductViewComponent implements OnInit {
     this.apiService.deleteDetailObject(this.objectName, this.id).subscribe(
       response => {
         console.log('DELETE request successful', response);
+        this.showDeleteSuccessNotification(); // Show success message for delete
         this.location.back();
       },
       error => {
@@ -167,4 +158,28 @@ export class DetailProductViewComponent implements OnInit {
     );
   }
 
+  // Show success message for change
+  showChangeSuccessNotification() {
+    this.snackBar.open('Change successful!', 'Close', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+    });
+  }
+
+  // Show success message for delete
+  showDeleteSuccessNotification() {
+    this.snackBar.open('Delete successful!', 'Close', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+    });
+  }
+  showCreateSuccessNotification() {
+    this.snackBar.open('Create successful!', 'Close', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+    });
+  }
 }
