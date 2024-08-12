@@ -67,7 +67,7 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
   width: 100%;
   padding: 24px 30px;
-  margin-bottom: 24px;
+  margin-top: 24px;
 }
 
 .order-item-content {
@@ -77,7 +77,6 @@
 
 .order-details {
   display: flex;
-  gap: 40px 100px;
   align-self: stretch;
   color: #1E1E1E;
   margin: auto 0;
@@ -86,7 +85,6 @@
 
 .order-actions {
   display: flex;
-  width: 100%;
   align-items: start;
   gap: 20px;
   color: #FFF;
@@ -172,5 +170,103 @@
   .cancel-btn {
     white-space: initial;
     padding: 0 20px;
+  }
+}
+
+
+
+
+
+.cart-items {
+  list-style-type: none;
+  padding: 0;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  padding: 9px 80px 9px 10px;
+  margin-top: 24px;
+}
+
+.item-image {
+  width: 80px;
+  aspect-ratio: 0.98;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.item-details {
+  flex-grow: 1;
+  margin-left: 18px;
+}
+
+.item-view-button {
+  font: 500 20px Poppins, sans-serif;
+  justify-content: center;
+  border-radius: 100px;
+  border: 1px solid #e08cff;
+  align-self: stretch;
+  color: #e08cff;
+  text-transform: uppercase;
+  letter-spacing: -0.4px;
+  padding: 10px 24px;
+}
+
+.item-name {
+  color: #1e1e1e;
+  font: 18px Poppins, sans-serif;
+  margin: 0;
+}
+
+.item-description {
+  color: #1e1e1e;
+  font: 14px Nunito, sans-serif;
+  margin: 0;
+}
+
+.item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font: 600 22px/1 Raleway, sans-serif;
+}
+
+.quantity-icon {
+  width: 20px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.item-price {
+  display: flex;
+  align-items: center;
+  gap: 38px;
+  font: 14px Poppins, sans-serif;
+}
+
+.remove-icon {
+  width: 25px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+@media (max-width: 991px) {
+  .cart-content,
+  .cart-item {
+    max-width: 100%;
+  }
+
+  .cart-item {
+    padding-right: 20px;
+  }
+
+  .item-quantity,
+  .item-price {
+    white-space: normal;
   }
 }

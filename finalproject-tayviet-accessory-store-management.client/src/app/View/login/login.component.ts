@@ -25,7 +25,6 @@ export class LoginComponent {
   }
 
   repassword: string = '';
-  constructor(private authenticationService: AuthenticationService, private apiService: APIService, private router: Router) { }
   constructor(private authenticationService: AuthenticationService, private apiService: APIService, private router: Router, private snackBar: MatSnackBar) { }
 
   onLogin() {
