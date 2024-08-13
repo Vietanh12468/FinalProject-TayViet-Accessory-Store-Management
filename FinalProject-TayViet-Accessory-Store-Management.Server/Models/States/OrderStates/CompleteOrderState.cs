@@ -4,7 +4,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models.States.O
 {
     public class CompleteOrderState : IOrderState
     {
-        private static readonly string[] ALLOW_TO_UPDATE_STATE = { "Cancelled", "Refund Requested" };
+        private static readonly string[] ALLOW_TO_UPDATE_STATE = { "Cancelled", "RefundRequested" };
         public void RequestRefund(OrderHistory order)
         {
             OrderHistoryMomento newOrderHistoryMomento = new OrderHistoryMomento("Refund Requested");

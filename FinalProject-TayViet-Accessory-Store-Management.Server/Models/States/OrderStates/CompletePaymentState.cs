@@ -4,7 +4,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models.States.O
 {
     public class CompletePaymentState : IOrderState
     {
-        private static readonly string[] ALLOW_TO_UPDATE_STATE = { "Complete Order", "Cancelled" };
+        private static readonly string[] ALLOW_TO_UPDATE_STATE = { "CompleteOrder", "Cancelled" };
 
         public void RequestRefund(OrderHistory order)
         {

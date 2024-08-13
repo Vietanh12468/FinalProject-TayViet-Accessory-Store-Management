@@ -4,7 +4,8 @@ import { IOrderHistory } from '../../Interface/iorder-history';
 import { SelectOption } from '../../Interface/iselect-option';
 import { OutputSearch } from '../../Interface/ioutput-search';
 import { TableComponent } from '../../Component/table/table.component';
-
+import { APIService } from '../../Service/API/api.service';
+import { OrderHistoryMomento, ProductInCart, SubProductInCart } from '../../Interface/iorder-history';
 
 @Component({
   selector: 'app-order-manager-view',
@@ -12,9 +13,11 @@ import { TableComponent } from '../../Component/table/table.component';
   styleUrl: './order-manager-view.component.css'
 })
 export class OrderManagerViewComponent implements OnInit {
+
   @ViewChild('tableComponent') tableComponent!: TableComponent;
   data: IOrderHistory[] = [];
   total: number = 0;
+  mode = 'view';
   selectOptions: SelectOption[] = [
     {
       nameOption: 'OrderState',
@@ -25,17 +28,43 @@ export class OrderManagerViewComponent implements OnInit {
       ]
     }
   ]
-  ignoredAttributes: string[] = [];
-  detailLink = 'order-detail';
+  ignoredAttributes: string[] = ['Action', 'cart'];
+  detailLink = '';
   ngOnInit() {
     this.getCustomers();
   }
-  constructor(private http: HttpClient) { }
+  constructor(private api: APIService, private http: HttpClient) { }
 
   CustomerList: IOrderHistory[] = [];
 
   getCustomers(page: number = 1) {
     this.http.get<any>(`/api/OrderHistory/page/${page}`).subscribe(
+      (result) => {
+        this.data = result.data;
+        this.total = result.total;
+        this.getOrderHistoryDisplay();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  addOrderState(orderData: any) {
+    console.log(orderData);
+    this.api.addNewStateOrder(this.data[orderData.index].id, orderData.orderState).subscribe(
+      (result) => {
+        console.log(result);
+        this.getCustomers();
+      },
+      (error) => {
+        console.error(error);
+      });
+
+  }
+
+  searchSubmit(searchInfo: OutputSearch) {
+    this.http.get<any>(`/api/OrderHistory/search/username&&${searchInfo.searchString}&&${0}`).subscribe(
       (result) => {
         this.data = result.data;
         this.total = result.total;
@@ -47,15 +76,63 @@ export class OrderManagerViewComponent implements OnInit {
     );
   }
 
-  searchSubmit(searchInfo: OutputSearch) {
-    this.http.get<any>(`/api/OrderHistory/search/username&&${searchInfo.searchString}&&${0}`).subscribe(
-      (result) => {
-        this.data = result.data;
-        this.total = result.total;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+  onEditClick() {
+    this.mode = 'change';
   }
+
+  exitEditClick() {
+    this.mode = 'view';
+  }
+
+  getOrderHistoryDisplay() {
+    for (let order of this.data) {
+      let orderHistoryDisplay: OrderHistoryDisplay = {
+        orderID: order.id,
+        total: 0,
+        cartList: [],
+        history: order.history
+      }
+      for (let product of order.cart) {
+        this.api.getDetailObject('Product', product.productID).subscribe(
+          (result) => {
+            let productDisplay: CartProductDisplay = {
+              productID: result.id,
+              name: result.name,
+              image: result.image,
+              description: result.description,
+              subProductList: product.subProductList,
+              total: 0
+            }
+            for (let subProduct of product.subProductList) {
+              productDisplay.total += (subProduct.quantity * subProduct.cost) - (subProduct.quantity * subProduct.cost * subProduct.sale / 100);
+              orderHistoryDisplay.total += (subProduct.quantity * subProduct.cost) - (subProduct.quantity * subProduct.cost * subProduct.sale / 100);
+            }
+            orderHistoryDisplay.cartList.push(productDisplay);
+          },
+          (error) => {
+            console.error(error);
+          }
+        );
+
+      }
+      this.OrderListDisplay.push(orderHistoryDisplay);
+    }
+    console.log(this.OrderListDisplay);
+  }
+  OrderListDisplay: OrderHistoryDisplay[] = []
+}
+interface CartProductDisplay {
+  productID: string;
+  name: string;
+  image: string;
+  description: string;
+  subProductList: SubProductInCart[];
+  total: number;
+}
+
+interface OrderHistoryDisplay {
+  orderID: string | undefined;
+  total: number;
+  cartList: CartProductDisplay[];
+  history: OrderHistoryMomento[];
 }

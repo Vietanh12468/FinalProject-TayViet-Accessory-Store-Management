@@ -19,10 +19,23 @@
                 <app-small-img [img]="row.image"></app-small-img>
               </ng-container>
               <ng-container *ngSwitchCase="'cart'">
-                <!-- Button content here -->
+                <div class="row" *ngFor="let product of row.cart">
+                  <div>
+                    <app-small-img [img]="product.image"></app-small-img>
+                    {{product.productID}}
+                  </div>
+                </div>
               </ng-container>
               <ng-container *ngSwitchCase="'history'">
-                <!-- Description content here -->
+                <div class="form-floating">
+                  <select *ngIf="mode !== 'view'" class="form-select text-capitalize" [value]="row.history[0].state" [(ngModel)]="row.history[0].state" (change)="newOrderState(x, $event)">
+                    <option *ngFor="let option of orderStateOptions" [value]="option">{{ option }}</option>
+                  </select>
+                  <label *ngIf="mode !== 'view'" for="{{ column }}">{{ column }}</label>
+                  <div *ngIf="mode === 'view'">
+                    {{row.history[0].state}}
+                  </div>
+                </div>
               </ng-container>
               <ng-container *ngSwitchCase="'categoryList'">
                 <div class="container text-center ms-2">

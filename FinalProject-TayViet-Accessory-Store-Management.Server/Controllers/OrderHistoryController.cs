@@ -31,6 +31,12 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Controllers
 
             orderHistory.UpdateState(newState);
 
+            try
+            {
+                await _databaseServices.UpdateAsync(orderHistory, "id", id);
+            }
+            catch (Exception) { throw new UnknownException(); }
+
             return Ok();
         }
     }

@@ -4,7 +4,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models.States.O
 {
     public class ProcessingState : IOrderState
     {
-        private static readonly string[] ALLOW_TO_UPDATE_STATE = { "Out For Delivery", "Cancelled" };
+        private static readonly string[] ALLOW_TO_UPDATE_STATE = { "OutForDelivery", "Cancelled" };
 
         public void RequestRefund(OrderHistory order)
         {

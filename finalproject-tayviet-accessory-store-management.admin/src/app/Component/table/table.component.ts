@@ -12,11 +12,13 @@ export class TableComponent implements OnChanges, OnInit {
   @Input() ignoredAttributes: string[] = [];
   @Input() detailLink: string = '';
   @Input() mode = 'view';
+  @Input() orderDisplay: any[] = [];
   @Output() addCategoryHandler: EventEmitter<any> = new EventEmitter();
   @Output() deleteCategoryHandler: EventEmitter<any> = new EventEmitter();
   @Output() deleteCategorySectionHandler: EventEmitter<any> = new EventEmitter();
   @Output() changeCategoryHandler: EventEmitter<any> = new EventEmitter();
   @Output() categoryNameHandler: EventEmitter<any> = new EventEmitter();
+  @Output() newOrderStateHandler: EventEmitter<any> = new EventEmitter();
 
   ngOnInit(): void {
   }
@@ -75,4 +77,10 @@ export class TableComponent implements OnChanges, OnInit {
     this.categoryNameHandler.emit({ nameSection: this.data[x].name, x });
   }
 
+  newOrderState(index: number, event: any) {
+    const orderState = event.target.value;
+    this.newOrderStateHandler.emit({ index, orderState });
+  }
+
+  orderStateOptions = ['Ordered', 'Processing', 'OutForDelivery', 'Delivered', 'CompletePayment', 'CompleteOrder', 'Cancelled', 'Refunded'];
 }

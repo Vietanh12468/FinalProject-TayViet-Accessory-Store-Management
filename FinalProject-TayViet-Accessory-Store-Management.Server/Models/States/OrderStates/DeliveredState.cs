@@ -4,7 +4,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Server.Models.States.O
 {
     public class DeliveredState : IOrderState
     {
-        private static readonly string[] ALLOW_TO_UPDATE_STATE = { "Complete Order", "Complete Payment" };
+        private static readonly string[] ALLOW_TO_UPDATE_STATE = { "CompleteOrder", "CompletePayment" };
 
         public void HandleOrder(OrderHistory order)
         {

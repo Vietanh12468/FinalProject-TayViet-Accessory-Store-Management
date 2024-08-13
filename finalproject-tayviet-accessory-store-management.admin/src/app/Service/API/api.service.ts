@@ -31,4 +31,8 @@ export class APIService {
   loginRequest(loginData: any) {
     return this.http.post<IAccount>(`/api/Admin/login`, loginData);
   }
+
+  addNewStateOrder(id: string | null, stateOrder: string | null) {
+    return this.http.put(`/api/OrderHistory/${id}/newState=${stateOrder}`, {});
+  }
 }
