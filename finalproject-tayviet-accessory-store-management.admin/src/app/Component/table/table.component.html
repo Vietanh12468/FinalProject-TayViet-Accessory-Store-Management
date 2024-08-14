@@ -19,10 +19,18 @@
                 <app-small-img [img]="row.image"></app-small-img>
               </ng-container>
               <ng-container *ngSwitchCase="'cart'">
-                <div class="row" *ngFor="let product of row.cart">
-                  <div>
-                    <app-small-img [img]="product.image"></app-small-img>
-                    {{product.productID}}
+                <div class="row" *ngFor="let product of row.cart; let y = index">
+                  <div class="border-bottom">
+                    <app-small-img [img]="orderDisplay[x].cartList[y].image"></app-small-img>
+                    <p>ProductID: {{orderDisplay[x].cartList[y].productID}}</p>
+                    <p>ProductName: {{orderDisplay[x].cartList[y].name}}</p>
+                    <p>Total: {{orderDisplay[x].cartList[y].total}}</p>
+                    <p>
+                      SubProduct:
+                      <ng-container *ngFor="let subProduct of orderDisplay[x].cartList[y].subProductList">
+                        {{subProduct.subProductName}} x {{subProduct.quantity}},
+                      </ng-container>
+                    </p>
                   </div>
                 </div>
               </ng-container>

@@ -28,7 +28,7 @@ export class OrderManagerViewComponent implements OnInit {
       ]
     }
   ]
-  ignoredAttributes: string[] = ['Action', 'cart'];
+  ignoredAttributes: string[] = ['Action'];
   detailLink = '';
   ngOnInit() {
     this.getCustomers();
