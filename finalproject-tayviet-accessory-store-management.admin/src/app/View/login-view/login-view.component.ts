@@ -7,7 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-login-view',
   templateUrl: './login-view.component.html',
-  styleUrls: ['./login-view.component.css']  
+  styleUrls: ['./login-view.component.css']
 })
 export class LoginViewComponent {
   username: string = '';
@@ -17,7 +17,7 @@ export class LoginViewComponent {
     private authenticationService: AuthenticationService,
     private apiService: APIService,
     private router: Router,
-    private snackBar: MatSnackBar  
+    private snackBar: MatSnackBar
   ) { }
 
   onSubmit() {
@@ -28,20 +28,20 @@ export class LoginViewComponent {
 
         this.authenticationService.setToken(result);
 
-        
+
         this.snackBar.open('Login successful!', 'Close', {
           duration: 3000,
           verticalPosition: 'top',
           horizontalPosition: 'right',
         });
 
-        
+
         window.location.reload();
       },
       (error) => {
         console.error('Error occurred', error);
 
-        
+
         this.snackBar.open('Login failed. Please try again.', 'Close', {
           duration: 3000,
           verticalPosition: 'top',

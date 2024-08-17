@@ -7,10 +7,12 @@ import { LoginViewComponent } from './View/login-view/login-view.component';
 import { ProductManagerViewComponent } from './View/product-manager-view/product-manager-view.component';
 import { OrderManagerViewComponent } from './View/order-manager-view/order-manager-view.component';
 import { CategoryManagerViewComponent } from './View/category-manager-view/category-manager-view.component';
+import { MainPageComponent } from './main-page/main-page.component';
 
 import { AuthenticationGuardService } from './Service/Authentication/authentication-guard.service';
 import { UnAuthenticationGuardService } from './Service/Authentication/un-authentication-guard.service';
 const routes: Routes = [
+  { path: '', component: MainPageComponent}, 
   { path: 'account-manager', component: AccountManagerViewComponent, canActivate: [AuthenticationGuardService] },
   { path: 'account-manager/create', component: DetailAccountViewComponent, canActivate: [AuthenticationGuardService], data: { some_data: 'some value' } },
   { path: 'account-detail/:id', component: DetailAccountViewComponent, canActivate: [AuthenticationGuardService], }, 

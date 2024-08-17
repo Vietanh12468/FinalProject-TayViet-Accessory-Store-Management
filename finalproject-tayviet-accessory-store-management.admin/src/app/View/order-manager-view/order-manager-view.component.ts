@@ -4,12 +4,12 @@ import { IOrderHistory } from '../../Interface/iorder-history';
 import { SelectOption } from '../../Interface/iselect-option';
 import { OutputSearch } from '../../Interface/ioutput-search';
 import { TableComponent } from '../../Component/table/table.component';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-order-manager-view',
   templateUrl: './order-manager-view.component.html',
-  styleUrl: './order-manager-view.component.css'
+  styleUrls: ['./order-manager-view.component.css']
 })
 export class OrderManagerViewComponent implements OnInit {
   @ViewChild('tableComponent') tableComponent!: TableComponent;
@@ -24,15 +24,15 @@ export class OrderManagerViewComponent implements OnInit {
         'Completed'
       ]
     }
-  ]
+  ];
   ignoredAttributes: string[] = [];
   detailLink = 'order-detail';
+
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
+
   ngOnInit() {
     this.getCustomers();
   }
-  constructor(private http: HttpClient) { }
-
-  CustomerList: IOrderHistory[] = [];
 
   getCustomers(page: number = 1) {
     this.http.get<any>(`/api/OrderHistory/page/${page}`).subscribe(
@@ -57,5 +57,17 @@ export class OrderManagerViewComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  // Method to show save successful notification
+  showSaveSuccessNotification() {
+    this.snackBar.open('Save successful!', 'Close', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+    });
+  }
+  onSaveClick() {
+    this.showSaveSuccessNotification();
   }
 }

@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './detail-account-view.component.css'
 })
 export class DetailAccountViewComponent implements OnInit, OnChanges {
-  @Input() id: string|null = '';
+  @Input() id: string | null = '';
   @Input() mode: string = 'create';
   @ViewChild('infoComponent') infoComponent!: InfoComponent;
   ignoredAttributes = ['password', 'image'];
@@ -84,7 +84,7 @@ export class DetailAccountViewComponent implements OnInit, OnChanges {
             horizontalPosition: 'right',
           });
         },
-        
+
         error => {
           console.error('Error occurred', error);
         }
@@ -114,9 +114,8 @@ export class DetailAccountViewComponent implements OnInit, OnChanges {
     );
   }
 
-  onResetPasswordClick(){
+  onResetPasswordClick() {
     console.log('Submit button clicked!');
-    // Add your logic here for the submit button click event
   }
 
   onEditUserClick() {

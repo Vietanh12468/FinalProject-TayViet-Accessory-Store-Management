@@ -53,7 +53,7 @@ export class CategoryManagerViewComponent implements OnInit, OnChanges {
         console.log('POST request successful', response);
         this.getCategories();
 
-        
+
         this.snackBar.open('Add successful!', 'Close', {
           duration: 3000,
           verticalPosition: 'top',
@@ -169,8 +169,6 @@ export class CategoryManagerViewComponent implements OnInit, OnChanges {
       response => {
         this.data[categoryInfo.x] = categoryListTemp;
         console.log('PUT request successful', response);
-
-        // Show success notification
         this.snackBar.open('Save successful!', 'Close', {
           duration: 3000,
           verticalPosition: 'top',
