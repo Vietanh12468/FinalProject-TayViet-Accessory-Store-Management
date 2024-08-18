@@ -56,7 +56,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     OrderManagerViewComponent,
     CategoryManagerViewComponent,
     MessageBoxCloseComponent,
-    MessageBoxCancelComponent,  
+    MessageBoxCancelComponent,
     MainPageComponent
   ],
   imports: [

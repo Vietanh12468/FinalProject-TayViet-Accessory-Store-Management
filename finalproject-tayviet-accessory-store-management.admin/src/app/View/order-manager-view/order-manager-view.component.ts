@@ -6,11 +6,12 @@ import { OutputSearch } from '../../Interface/ioutput-search';
 import { TableComponent } from '../../Component/table/table.component';
 import { APIService } from '../../Service/API/api.service';
 import { OrderHistoryMomento, ProductInCart, SubProductInCart } from '../../Interface/iorder-history';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-order-manager-view',
   templateUrl: './order-manager-view.component.html',
-  styleUrl: './order-manager-view.component.css'
+  styleUrls: ['./order-manager-view.component.css']
 })
 export class OrderManagerViewComponent implements OnInit {
 
@@ -30,12 +31,16 @@ export class OrderManagerViewComponent implements OnInit {
   ]
   ignoredAttributes: string[] = ['Action'];
   detailLink = '';
+  ];
+  ignoredAttributes: string[] = [];
+  detailLink = 'order-detail';
+
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
+
   ngOnInit() {
     this.getCustomers();
   }
   constructor(private api: APIService, private http: HttpClient) { }
-
-  CustomerList: IOrderHistory[] = [];
 
   getCustomers(page: number = 1) {
     this.http.get<any>(`/api/OrderHistory/page/${page}`).subscribe(
@@ -135,4 +140,16 @@ interface OrderHistoryDisplay {
   total: number;
   cartList: CartProductDisplay[];
   history: OrderHistoryMomento[];
+
+  // Method to show save successful notification
+  showSaveSuccessNotification() {
+    this.snackBar.open('Save successful!', 'Close', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+    });
+  }
+  onSaveClick() {
+    this.showSaveSuccessNotification();
+  }
 }

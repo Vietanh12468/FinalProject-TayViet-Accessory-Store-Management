@@ -57,7 +57,7 @@ export class DetailProductViewComponent implements OnInit {
     private route: ActivatedRoute,
     private apiService: APIService,
     private location: Location,
-    private snackBar: MatSnackBar 
+    private snackBar: MatSnackBar
   ) {
     this.route.queryParams.subscribe(params => {
       this.mode = params['mode'];
@@ -115,7 +115,7 @@ export class DetailProductViewComponent implements OnInit {
       this.apiService.changeDetailObject(this.objectName, this.product).subscribe(
         response => {
           console.log('PUT request successful', response);
-          this.showChangeSuccessNotification(); 
+          this.showChangeSuccessNotification();
         },
         error => {
           console.error('Error occurred', error);
