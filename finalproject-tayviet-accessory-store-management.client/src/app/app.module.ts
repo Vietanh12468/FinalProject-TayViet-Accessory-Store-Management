@@ -1,4 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common'
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -56,7 +57,7 @@ import { OrderHistoryComponent } from './Component/order-history/order-history.c
     AppRoutingModule, ReactiveFormsModule, FormsModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(), DatePipe
   ],
   bootstrap: [AppComponent]
 })

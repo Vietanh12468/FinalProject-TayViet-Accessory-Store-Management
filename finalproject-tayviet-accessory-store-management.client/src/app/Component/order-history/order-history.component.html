@@ -12,10 +12,10 @@
             Price: {{order.total}}
           </div>
           <div class="col-3">
-            State: sldka,olsd
+            State: {{order.history[0].state}}
           </div>
           <div class="col-4">
-            Last Update: dsjaujshuda
+            Last Update: {{formatDate(order.history[0].orderTime)}}
           </div>
         </div>
         <div class="order-actions col-3">
@@ -32,9 +32,10 @@
               <li class="cart-item mx-3" data-bs-toggle="collapse" [attr.href]="'#'+order.orderID+x" role="button" aria-expanded="false" [attr.aria-controls]="order.orderID+x">
                 <img [src]="product.image" [alt]="product.name" class="item-image col-3" />
                 <div class="item-details col-4">
-                  <h3 class="item-name">Name: {{ product.name }}</h3>
-                  <p class="item-description">Description: {{ product.description }}</p>
-                </div>
+                  <h3 class="item-name">Name: {{ product.name
+            }}</h3>
+            <p class="item-description">Description: {{ product.description }}</p>
+          </div>
                 <div class="item-details col-3">
                   <h3 class="item-name">total: {{product.total}}</h3>
                 </div>
@@ -80,7 +81,7 @@
                         <h3 class="item-name">{{ subProduct.sale }}</h3>
                       </div>
                       <div class="item-details col-1 d-flex justify-content-center">
-                        <h3 class="item-name">{{ (1-subProduct.sale/ 100) * subProduct.cost * subProduct.quantity }}</h3>
+                        <h3 class="item-name">{{ ((1-subProduct.sale/ 100) * subProduct.cost * subProduct.quantity).toFixed(2) }}</h3>
                       </div>
                     </div>
                   </div>

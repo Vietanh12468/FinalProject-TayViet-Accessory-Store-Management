@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, SimpleChanges, Output, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-table',
@@ -19,6 +20,8 @@ export class TableComponent implements OnChanges, OnInit {
   @Output() changeCategoryHandler: EventEmitter<any> = new EventEmitter();
   @Output() categoryNameHandler: EventEmitter<any> = new EventEmitter();
   @Output() newOrderStateHandler: EventEmitter<any> = new EventEmitter();
+
+  constructor(private datePipe: DatePipe) { }
 
   ngOnInit(): void {
   }
@@ -83,4 +86,9 @@ export class TableComponent implements OnChanges, OnInit {
   }
 
   orderStateOptions = ['Ordered', 'Processing', 'OutForDelivery', 'Delivered', 'CompletePayment', 'CompleteOrder', 'Cancelled', 'Refunded'];
+
+
+  formatDate(date: Date): string | null {
+    return this.datePipe.transform(date, 'dd-MM-yyyy');
+  }
 }

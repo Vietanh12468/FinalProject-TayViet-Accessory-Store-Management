@@ -6,7 +6,7 @@
         <h3>{{product.name}}</h3>
         <p class="product-description">{{product.description}}</p>
         <div class="row">
-          <div class="align-self-center col">{{product.subProductList[0].sellCost}}$</div>
+          <div class="align-self-center col">{{(product.subProductList[0].sellCost * (1 - product.subProductList[0].discount * 0.01)).toFixed(2)}}$</div>
           <button class="btn buy-button col" (click)="navigateToDetail(product.id)"> Buy</button>
         </div>
       </div>

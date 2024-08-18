@@ -34,7 +34,9 @@
                     </div>
                     <h4 class="product-title" style="height: 100px"> {{latestProducts[calculateT(x+y)].name}} </h4>
                     <div class="product-details">
-                      <p class="product-description"> {{latestProducts[calculateT(x+y)].description}} </p>
+                      <p class="product-description">
+                        {{ latestProducts[calculateT(x+y)].description.length > 20 ? latestProducts[calculateT(x+y)].description.slice(0, 20) + '...' : latestProducts[calculateT(x+y)].description }}
+                      </p>
                       <div class="product-footer">
                         <span class="product-price"> {{latestProducts[calculateT(x+y)].subProductList[0].sellCost}} $ </span>
                         <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/d0d1f8c4f6245b5bf6901157468db19f6d3eb68c91bbb90aef5c2265628d453d?apiKey=1badbc3564ac4e7182b84891783ee2cd&" class="cart-icon" alt="Add to cart" />

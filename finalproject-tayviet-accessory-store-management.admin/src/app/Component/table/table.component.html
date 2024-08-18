@@ -36,12 +36,15 @@
               </ng-container>
               <ng-container *ngSwitchCase="'history'">
                 <div class="form-floating">
-                  <select *ngIf="mode !== 'view'" class="form-select text-capitalize" [value]="row.history[0].state" [(ngModel)]="row.history[0].state" (change)="newOrderState(x, $event)">
+                  <select *ngIf="mode !== 'view'" class="form-select text-capitalize mb-2" [value]="row.history[0].state" [(ngModel)]="row.history[0].state" (change)="newOrderState(x, $event)">
                     <option *ngFor="let option of orderStateOptions" [value]="option">{{ option }}</option>
                   </select>
                   <label *ngIf="mode !== 'view'" for="{{ column }}">{{ column }}</label>
-                  <div *ngIf="mode === 'view'">
-                    {{row.history[0].state}}
+                  <div>
+                    <p *ngFor="let historyState of row.history">
+                      {{historyState.state}}: {{formatDate(historyState.orderTime)}}
+
+                    </p>
                   </div>
                 </div>
               </ng-container>
@@ -61,8 +64,9 @@
                 <input class="align-text-center m-0 p-0" [ngClass]="{'form-control': mode !== 'view', 'form-control-plaintext' : mode === 'view'}" type="text" [readonly]="mode === 'view'" [value]="row[column]" [(ngModel)]="row[column]" placeholder="" (blur)="changeCategorySectionName(x)">
               </ng-container>
               <ng-container *ngSwitchDefault>
-                {{ row[column] }}
-              </ng-container>
+                {{ row[column]
+                    }}
+</ng-container>
             </ng-container>
           </td>
         </ng-container>

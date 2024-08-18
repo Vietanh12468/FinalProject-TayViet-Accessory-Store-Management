@@ -23,7 +23,7 @@
           <div class="price-review-container">
             <div class="price-container" *ngIf="currentSubProduct.discount !== 0">
               <div class="price-wrapper">
-                <span class="current-price"> ${{currentSubProduct.sellCost - currentSubProduct.discount * 0.01}}</span>
+                <span class="current-price"> ${{(currentSubProduct.sellCost * ( 1 - currentSubProduct.discount * 0.01)).toFixed(2) }}</span>
                 <span class="original-price"> ${{currentSubProduct.sellCost}}</span>
               </div>
               <span class="discount-badge"> -{{currentSubProduct.discount}}%</span>

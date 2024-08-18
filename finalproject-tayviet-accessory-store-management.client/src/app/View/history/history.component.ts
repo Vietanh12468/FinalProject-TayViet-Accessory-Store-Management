@@ -72,16 +72,16 @@ export class HistoryComponent implements OnInit, OnChanges {
                 console.error(error);
               }
             );
-
           }
-          let state = order.history[order.history.length - 1].state
-          if (state === 'Ordered' || state === 'Complete Payment') {
+          console.log(orderHistoryDisplay);
+          let state = order.history[0].state
+          if (state === 'Ordered' || state === 'CompletePayment') {
             this.ordredOrderListDisplay.push(orderHistoryDisplay);
           }
-          else if (state === 'Processing' || state === 'Out For Delivery') {
+          else if (state === 'Processing' || state === 'OutForDelivery') {
             this.preparingOrderListDisplay.push(orderHistoryDisplay);
           }
-          else if (state === 'Delivered' || state === 'Complete Order') {
+          else if (state === 'Delivered' || state === 'CompleteOrder') {
             this.completedOrderListDisplay.push(orderHistoryDisplay);
           }
           else{
