@@ -23,11 +23,6 @@ export class MainHomeComponent implements OnInit, OnChanges {
     this.api.getLatestProducts().subscribe(
       (result) => {
         this.latestProducts = result;
-        this.snackBar.open('Shop opened', 'Close', {
-          duration: 10000,
-          verticalPosition: 'top',
-          horizontalPosition: 'right',
-        });
       },
       (error) => {
         console.error('Error occurred', error);

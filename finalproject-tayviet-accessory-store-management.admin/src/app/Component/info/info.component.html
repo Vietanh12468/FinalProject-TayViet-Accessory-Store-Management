@@ -64,6 +64,22 @@
               </div>
             </td>
           </ng-container>
+          <ng-container *ngSwitchCase="'role'">
+            <th class="col-3">
+              <label class="col-sm-2 col-form-label mx-3 text-capitalize">{{ attribute }}:</label>
+            </th>
+            <td class="col-9">
+              <div class="form-floating">
+                <select *ngIf="mode !== 'view'" class="form-select text-capitalize" [(ngModel)]="object['role']">
+                  <option value="Admin">Admin</option>
+                  <option value="Seller">Seller</option>
+                  <option value="Customer">Customer</option>
+                </select>
+                <label *ngIf="mode !== 'view'" for="{{ attribute }}">{{ attribute }}</label>
+                <input *ngIf="mode === 'view'" id="role" class="form-control-plaintext pt-2" [ngClass]="{'is-invalid': checkValidAttribute(attribute) === false}" type="text" readonly [value]="object['role']" [(ngModel)]="object['role']" placeholder="">
+              </div>
+            </td>
+          </ng-container>
           <ng-container *ngSwitchCase="'description'">
             <th class="col-3">
               <label class="col-sm-2 col-form-label mx-3 text-capitalize">{{ attribute }}:</label>

@@ -80,15 +80,14 @@
               <div class="address-header">
                 <h2 class="address-title">Delivery address</h2>
                 <div class="address-select">
-                  <span class="select-text">Select</span>
-                  <div class="select-icon">
-                    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/7add40eb39598ace6db3b9db1d1d8bd10de14d648b916ed9f9f53fbb545c84b0?placeholderIfAbsent=true&apiKey=e51cda157a3647efb6a362a799ee758d" alt="" class="dropdown-icon" />
-                  </div>
+                  <select class="form-select" [(ngModel)]="addressChoose">
+                    <option *ngFor="let address of userInfo.addressList" [value]="address" [selected]="address === addressChoose">{{ address }}</option>
+                  </select>
                 </div>
               </div>
               <div class="address-input">
                 <label for="streetAddress" class="visually-hidden">Street name, building, house number</label>
-                <input type="text" id="streetAddress" class="address-field" placeholder="Street name, building, house number" />
+                <input type="text" id="streetAddress" class="address-field" [value]="addressChoose"/>
               </div>
             </div>
             <div class="phone-container d-flex">

@@ -15,11 +15,9 @@ import { AboutUsComponent } from './View/about-us/about-us.component';
 import { ProductDetailComponent } from './View/product-detail/product-detail.component';
 import { CartComponent } from './View/cart/cart.component';
 import { ProfileManagerComponent } from './View/profile-manager/profile-manager.component';
-import { PaymentComponent } from './payment/payment.component';
-import { VoucherComponent } from './voucher/voucher.component';
 import { LoginComponent } from './View/login/login.component';
 import { SubProductCarouselComponent } from './Component/sub-product-carousel/sub-product-carousel.component';
-import { PagenotFoundComponent } from './pagenot-found/pagenot-found.component';
+import { PagenotFoundComponent } from './View/pagenot-found/pagenot-found.component';
 import { SmallImgComponent } from './Component/small-img/small-img.component';
 import { CategoryOptionComponent } from './Component/category-option/category-option.component';
 import { SearchBarComponent } from './Component/search-bar/search-bar.component';
@@ -39,8 +37,6 @@ import { OrderHistoryComponent } from './Component/order-history/order-history.c
     ProductDetailComponent,
     CartComponent,
     ProfileManagerComponent,
-    PaymentComponent,
-    VoucherComponent,
     LoginComponent,
     PagenotFoundComponent,
     LoginComponent,

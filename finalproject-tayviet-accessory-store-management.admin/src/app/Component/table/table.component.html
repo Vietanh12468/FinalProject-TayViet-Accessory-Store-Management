@@ -66,11 +66,11 @@
               <ng-container *ngSwitchDefault>
                 {{ row[column]
                     }}
-</ng-container>
+              </ng-container>
             </ng-container>
           </td>
         </ng-container>
-        <td *ngIf="detailLink !== ''"> <button routerLink="/{{detailLink}}/{{row.id}}" [queryParams]="{ mode: 'view' }">Trigger</button> </td>
+        <td *ngIf="detailLink !== ''"> <button routerLink="/{{detailLink}}/{{row.id}}" class="btn btn-primary" [queryParams]="{ mode: 'view' }">Edit</button> </td>
         <td *ngIf="mode !== 'view'" class="position-relative">
           <app-button class="g-col-6 position-absolute start-50 top-50 translate-middle" color="red" label="Delete" (buttonClick)="deleteCategorySection(x)"></app-button>
         </td>

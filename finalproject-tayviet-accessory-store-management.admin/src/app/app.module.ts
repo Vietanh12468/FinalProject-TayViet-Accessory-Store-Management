@@ -9,10 +9,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MessageBoxComponent } from './message-box/message-box.component';
-import { AlertBoxComponent } from './alert-box/alert-box.component';
-import { UserInfoBoxComponent } from './user-info-box/user-info-box.component';
-import { DetailProductComponent } from './detail-product/detail-product.component';
 import { AccountManagerViewComponent } from './View/account-manager-view/account-manager-view.component';
 import { DetailAccountViewComponent } from './View/detail-account-view/detail-account-view.component';
 import { ButtonComponent } from './Component/button/button.component';
@@ -28,18 +24,13 @@ import { SearchComponent } from './Component/search/search.component';
 import { ProductManagerViewComponent } from './View/product-manager-view/product-manager-view.component';
 import { OrderManagerViewComponent } from './View/order-manager-view/order-manager-view.component';
 import { CategoryManagerViewComponent } from './View/category-manager-view/category-manager-view.component';
-import { MessageBoxCloseComponent } from './message-box-close/message-box-close.component';
-import { MessageBoxCancelComponent } from './message-box-cancel/message-box-cancel.component';
-import { MainPageComponent } from './main-page/main-page.component';
+import { MainPageComponent } from './View/main-page/main-page.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { HomePageComponent } from './View/home-page/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlertBoxComponent,
-    MessageBoxComponent,
-    UserInfoBoxComponent,
-    DetailProductComponent,
     AccountManagerViewComponent,
     DetailAccountViewComponent,
     ButtonComponent,
@@ -55,9 +46,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
     ProductManagerViewComponent,
     OrderManagerViewComponent,
     CategoryManagerViewComponent,
-    MessageBoxCloseComponent,
-    MessageBoxCancelComponent,
-    MainPageComponent
+    MainPageComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, MatSnackBarModule,

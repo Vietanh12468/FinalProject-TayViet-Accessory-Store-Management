@@ -44,6 +44,22 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart() {
+    if (this.numberAdd < 1) {
+      this.snackBar.open('Quantity must be greater than 0', 'Close', {
+        duration: 10000,
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+      });
+      return;
+    }
+    if (this.currentSubProduct.inStock < this.numberAdd) {
+      this.snackBar.open('Not enough in stock', 'Close', {
+        duration: 10000,
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+      });
+      return;
+    }
     const token = this.authenticationService.getToken();
     this.apiService.addToCart(token.userID, this.product.id, this.currentSubProduct.name, this.numberAdd).subscribe(
       (result) => {
@@ -56,6 +72,11 @@ export class ProductDetailComponent implements OnInit {
       },
       (error) => {
         console.error(error);
+        this.snackBar.open('Cannot add to cart', 'Close', {
+          duration: 10000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
       }
     );
   }

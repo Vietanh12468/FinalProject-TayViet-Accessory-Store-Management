@@ -28,19 +28,13 @@ export class OrderManagerViewComponent implements OnInit {
         'Completed'
       ]
     }
-  ]
-  ignoredAttributes: string[] = ['Action'];
-  detailLink = '';
   ];
   ignoredAttributes: string[] = [];
-  detailLink = 'order-detail';
-
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getCustomers();
   }
-  constructor(private api: APIService, private http: HttpClient) { }
+  constructor(private api: APIService, private http: HttpClient, private snackBar: MatSnackBar) { }
 
   getCustomers(page: number = 1) {
     this.http.get<any>(`/api/OrderHistory/page/${page}`).subscribe(
@@ -59,26 +53,36 @@ export class OrderManagerViewComponent implements OnInit {
     console.log(orderData);
     this.api.addNewStateOrder(this.data[orderData.index].id, orderData.orderState).subscribe(
       (result) => {
-        console.log(result);
+        this.snackBar.open('Save successful!', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
         this.getCustomers();
       },
       (error) => {
         console.error(error);
+        this.snackBar.open('Cannot do this action!', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
+        this.getCustomers();
       });
 
   }
 
   searchSubmit(searchInfo: OutputSearch) {
-    this.http.get<any>(`/api/OrderHistory/search/username&&${searchInfo.searchString}&&${0}`).subscribe(
+    this.api.searchListObjects('OrderHistory', 'customerID', searchInfo.searchString).subscribe(
       (result) => {
-        this.data = result.data;
-        this.total = result.total;
         console.log(result);
+        this.data = result;
+        this.total = result.length;
+        this.getOrderHistoryDisplay();
       },
       (error) => {
         console.error(error);
-      }
-    );
+      });
   }
 
   onEditClick() {
@@ -125,7 +129,9 @@ export class OrderManagerViewComponent implements OnInit {
     console.log(this.OrderListDisplay);
   }
   OrderListDisplay: OrderHistoryDisplay[] = []
+
 }
+
 interface CartProductDisplay {
   productID: string;
   name: string;
@@ -140,16 +146,5 @@ interface OrderHistoryDisplay {
   total: number;
   cartList: CartProductDisplay[];
   history: OrderHistoryMomento[];
-
-  // Method to show save successful notification
-  showSaveSuccessNotification() {
-    this.snackBar.open('Save successful!', 'Close', {
-      duration: 3000,
-      verticalPosition: 'top',
-      horizontalPosition: 'right',
-    });
-  }
-  onSaveClick() {
-    this.showSaveSuccessNotification();
-  }
 }
+  // Method to show save successful notification

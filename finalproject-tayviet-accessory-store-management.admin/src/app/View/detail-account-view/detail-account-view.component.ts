@@ -94,6 +94,11 @@ export class DetailAccountViewComponent implements OnInit, OnChanges {
       this.apiService.createDetailObject(this.objectName, this.account).subscribe(
         response => {
           console.log('POST request successful', response);
+          this.snackBar.open('Create successful!', 'Close', {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+          });
         },
         error => {
           console.error('Error occurred', error);
@@ -131,7 +136,11 @@ export class DetailAccountViewComponent implements OnInit, OnChanges {
     this.apiService.deleteDetailObject(this.objectName, this.id).subscribe(
       response => {
         console.log('DELETE request successful', response);
-        this.location.back();
+        this.snackBar.open('Delete successful!', 'Close', {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+        });
       },
       error => {
         console.error('Error occurred', error);

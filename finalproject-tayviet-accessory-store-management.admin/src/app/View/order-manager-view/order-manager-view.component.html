@@ -1,8 +1,9 @@
 <div class="row">
+  <app-search class="col-8" [selectOptions]="selectOptions" (searchSubmitEvent)="searchSubmit($event)"></app-search>
   <div class="d-flex justify-content-center col-2 align-self-center">
     <app-button *ngIf="mode === 'view'" color="blue" label="Edit" (buttonClick)="onEditClick()"></app-button>
     <app-button *ngIf="mode !== 'view'" color="green" label="Exit" (buttonClick)="exitEditClick()"></app-button>
   </div>
 </div>
-<app-table [data]="data" [mode]="mode" [ignoredAttributes]="ignoredAttributes" [detailLink]="detailLink" (newOrderStateHandler)="addOrderState($event)" [orderDisplay]="OrderListDisplay"></app-table>
+<app-table [data]="data" [mode]="mode" [ignoredAttributes]="ignoredAttributes" (newOrderStateHandler)="addOrderState($event)" [orderDisplay]="OrderListDisplay"></app-table>
 <app-pagination [total]="total" (onPageChange)="getCustomers($event)"></app-pagination>

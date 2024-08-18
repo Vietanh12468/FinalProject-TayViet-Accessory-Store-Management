@@ -17,6 +17,8 @@ export class CartComponent implements OnInit, OnChanges {
       subProductList: []
     }
   ];
+
+  addressChoose = '';
   productDisplayList: CartProductDisplay[] = [];
   paymentOption = 'PayOnDelivery'
   summary: any = {
@@ -26,7 +28,6 @@ export class CartComponent implements OnInit, OnChanges {
     total: 0
   };
   userInfo: any
-  shipLocation: string = 'ghost address';
 
   constructor(private apiService: APIService, private authenticationService: AuthenticationService, private snackBar: MatSnackBar) { }
 
@@ -134,10 +135,26 @@ export class CartComponent implements OnInit, OnChanges {
   }
 
   orderSubmit() {
+    if (this.cartList.length === 0) {
+      this.snackBar.open('Cart is empty', 'Close', {
+        duration: 10000,
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+      });
+      return;
+    }
+    if (this.addressChoose === '') {
+      this.snackBar.open('Please choose address', 'Close', {
+        duration: 10000,
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+      });
+      return;
+    }
 
     const orderHistory: IOrderHistory = {
       customerID: this.userInfo.id,
-      shipLocation: this.shipLocation,
+      shipLocation: this.addressChoose,
       cart: this.cartList,
       history: [
         {
@@ -167,6 +184,7 @@ export class CartComponent implements OnInit, OnChanges {
         console.error(error);
       }
     );
+    this.getUserCart();
   }
 }
 

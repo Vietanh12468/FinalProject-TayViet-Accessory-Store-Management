@@ -13,7 +13,7 @@ export class UnAuthenticationGuardService implements CanActivate {
     if (!this.authenticationService.isLoggedIn()) {
       return true; // User is logged in, allow access
     } else {
-      this.router.navigate(['']); // Redirect to login page if not logged in
+      this.router.navigate(['home']); // Redirect to login page if not logged in
       return false;
     }
   }

@@ -3,10 +3,6 @@ import { Component, OnInit, OnChanges, ViewChild } from '@angular/core';
 import { AuthenticationService } from './Service/Authentication/authentication.service';
 import { APIService } from './Service/API/api.service';
 import { IAccount } from './Interface/iaccount';
-import { MessageBoxComponent } from './message-box/message-box.component';
-import { MessageBoxCloseComponent } from './message-box-close/message-box-close.component';
-import { MessageBoxCancelComponent } from './message-box-cancel/message-box-cancel.component';
-
 
 export interface WeatherForecast {
   date: string;
@@ -29,9 +25,6 @@ export interface OrderHistory {
   ]
 })
 export class AppComponent implements OnInit, OnChanges {
-  @ViewChild(MessageBoxComponent) yesNoBox!: MessageBoxComponent;
-  @ViewChild(MessageBoxCloseComponent) closeBox!: MessageBoxCloseComponent;
-  @ViewChild(MessageBoxCancelComponent) cancelBox!: MessageBoxCancelComponent;
   userInfo: any = null;
   public messageBox = true;
   public focus = true;
@@ -76,9 +69,6 @@ export class AppComponent implements OnInit, OnChanges {
     );
   }
 
-  openYesNoModal() {
-    this.yesNoBox.openModal('Do you want to proceed?');
-  }
 
   onYes() {
     console.log('Yes clicked');
@@ -88,16 +78,9 @@ export class AppComponent implements OnInit, OnChanges {
     console.log('No clicked');
   }
 
-  openCloseModal() {
-    this.closeBox.openModal('Action completed!');
-  }
 
   onClose() {
     console.log('Close clicked');
-  }
-
-  openCancelModal() {
-    this.cancelBox.openModal('Cannot be done!');
   }
 
   onCancel() {

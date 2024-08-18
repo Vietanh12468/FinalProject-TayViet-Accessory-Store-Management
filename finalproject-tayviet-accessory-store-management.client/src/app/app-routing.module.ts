@@ -5,7 +5,7 @@ import { MainHomeComponent } from './View/main-home/main-home.component';
 import { AboutUsComponent } from './View/about-us/about-us.component';
 import { ProductComponent } from './View/product/product.component';
 import { ProductDetailComponent } from './View/product-detail/product-detail.component';
-import { PagenotFoundComponent } from './pagenot-found/pagenot-found.component';
+import { PagenotFoundComponent } from './View/pagenot-found/pagenot-found.component';
 import { CartComponent } from './View/cart/cart.component';
 import { ProfileManagerComponent } from './View/profile-manager/profile-manager.component';
 import { HistoryComponent } from './View/history/history.component';

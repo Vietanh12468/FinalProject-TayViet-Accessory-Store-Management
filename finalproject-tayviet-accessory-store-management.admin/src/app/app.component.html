@@ -3,7 +3,7 @@
   <div class="d-flex flex-column col-md-2 flex-shrink-0 p-3">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
       <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap" /></svg>
-      <span class="fs-4">Sidebar</span>
+      <span class="fs-4">TayViet</span>
     </a>
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
@@ -30,19 +30,13 @@
       <li class="nav-item" *ngIf="userInfo === null">
         <a class="nav-link active" routerLink="/login">Login</a>
       </li>
-      <li class="nav-item" *ngIf="userInfo !== null">
-        <div class="dropdown">
-          <a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-            <img [src]="userInfo.image" alt="profile pic" width="32" height="32" class="rounded-circle me-2">
-            <strong>{{userInfo.username}}</strong>
-          </a>
-          <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-            <li><a class="dropdown-item" href="#">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" (click)="signOut()">Sign out</a></li>
-          </ul>
-        </div>
+      <li type="button" class="nav-item" *ngIf="userInfo !== null">
+        <a class="d-flex nav-link link-dark text-decoration-none">
+          <img [src]="userInfo.image" alt="profile pic" width="32" height="32" class="rounded-circle me-2">
+          <strong>{{userInfo.username}}</strong>
+        </a>
+      <li class="nav-item" *ngIf="userInfo !== null" type="button">
+        <a class="nav-link active" (click)="signOut()">Sign out</a>
       </li>
     </ul>
     

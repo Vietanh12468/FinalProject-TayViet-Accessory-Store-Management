@@ -23,7 +23,7 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
 
         public virtual async Task<List<T>> ReadAsync()
         {
-            List<T> result = await _collection.Find(_ => true).ToListAsync();
+            List<T> result = await _collection.Find(_ => true).Sort(Builders<T>.Sort.Descending("id")).ToListAsync();
 
             if (result == null)
             {
@@ -67,16 +67,14 @@ namespace FinalProject_TayViet_Accessory_Store_Management.Utility.DatabaseUtilit
 
         public virtual async Task<List<T>> ReadAsync(int skip = 0, int limit = 20)
         {
-            IMongoQueryable<T> queryableCollection = _collection.AsQueryable();
-            return await queryableCollection.Skip(skip).Take(limit).ToListAsync();
-
-/*            return await _collection.Find(_ => true).Skip(skip).Limit(limit).ToListAsync();*/
+            return await _collection.Find(_ => true).Sort(Builders<T>.Sort.Descending("id")).Skip(skip).Limit(limit).ToListAsync();
         }
         public virtual async Task<List<T>> SearchAsync(string attribute, string value, int skip = 0, int limit = 20)
         {
-            var pattern = new BsonRegularExpression(value, "i"); 
-            var filter = Builders<T>.Filter.Regex(attribute, pattern); 
-            return await _collection.Find(filter).Skip(skip).Limit(limit).ToListAsync();
+            var pattern = new BsonRegularExpression(value, "i");
+            var filter = Builders<T>.Filter.Regex(attribute, pattern);
+
+            return await _collection.Find(filter).Sort(Builders<T>.Sort.Descending("id")).Skip(skip).Limit(limit).ToListAsync();
         }
 
         public virtual async Task<long> GetTotalSearchRecordAsync(string attribute, string value)

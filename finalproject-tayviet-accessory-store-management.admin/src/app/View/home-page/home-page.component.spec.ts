@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VoucherComponent } from './voucher.component';
+import { HomePageComponent } from './home-page.component';
 
-describe('VoucherComponent', () => {
-  let component: VoucherComponent;
-  let fixture: ComponentFixture<VoucherComponent>;
+describe('HomePageComponent', () => {
+  let component: HomePageComponent;
+  let fixture: ComponentFixture<HomePageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [VoucherComponent]
+      declarations: [HomePageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(VoucherComponent);
+    fixture = TestBed.createComponent(HomePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

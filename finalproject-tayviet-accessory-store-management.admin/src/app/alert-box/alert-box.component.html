@@ -1,6 +1,0 @@
-<div class="container-fluid d-flex justify-content-center align-items-center">
-  <div [@openClose]="isOpen ? 'open' : 'closed'"  (@openClose.done)="resetAnimation()" class="open-close-container">
-    <p>The box is now {{ isOpen ? 'Open' : 'Closed' }}!</p>
-  </div>
-  <button type="button" (click)="toggle()">Toggle Open/Close</button>
-</div>

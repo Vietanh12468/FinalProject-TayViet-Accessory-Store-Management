@@ -25,8 +25,8 @@ export class APIService {
     return this.http.get<any>(`/api/${nameObject}/page/${page}`);
   }
 
-  searchListObjects(nameObject: string | null, searchAttribute: string | null, keyword: string | null, page: number) {
-    return this.http.get<any>(`/api/${nameObject}/search/${searchAttribute}&&${keyword}&&${page}`);
+  searchListObjects(nameObject: string | null, searchAttribute: string | null, keyword: string | null, page: number = 1) {
+    return this.http.get<any>(`/api/${nameObject}/search/attribute=${searchAttribute}&key=${keyword}&page=${page}`);
   }
   loginRequest(loginData: any) {
     return this.http.post<IAccount>(`/api/Admin/login`, loginData);
