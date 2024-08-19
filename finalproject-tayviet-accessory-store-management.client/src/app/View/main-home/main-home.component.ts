@@ -33,8 +33,8 @@ export class MainHomeComponent implements OnInit, OnChanges {
 
   calculateT(T: number): number {
     let calculatedT = T;
-    while (calculatedT >= 6) {
-      calculatedT = calculatedT - 6;
+    if (calculatedT >= this.latestProducts.length) {
+      calculatedT = calculatedT - this.latestProducts.length;
     }
     return calculatedT;
   }

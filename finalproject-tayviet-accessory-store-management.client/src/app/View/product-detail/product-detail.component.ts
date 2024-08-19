@@ -44,6 +44,14 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart() {
+    if (this.authenticationService.isLoggedIn() !== true) {
+      this.snackBar.open('Please login first', 'Close', {
+        duration: 10000,
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+      });
+      return;
+    }
     if (this.numberAdd < 1) {
       this.snackBar.open('Quantity must be greater than 0', 'Close', {
         duration: 10000,
